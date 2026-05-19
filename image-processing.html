@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>B4: 醫學影像處理與 AI — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html" class="active">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER B4 · BLOCK B SIGNALS &amp; IMAGES</div>
+<h1 data-zh="醫學影像處理與 AI" data-en="Medical Image Processing &amp; AI">醫學影像處理與 AI</h1>
+<p class="subtitle" data-lang="zh">從 DICOM 標準、前處理、分割、分類，到 U-Net、SAM 2、放射 foundation model 與 FDA 法規（2025 年 295 件新核可）。</p>
+<p class="subtitle" data-lang="en">From DICOM, preprocessing, segmentation, classification to U-Net, SAM 2, imaging foundation models, and FDA AI/ML clearance (295 new in 2025).</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="DICOM 標準" data-en="DICOM STANDARD">DICOM 標準</div>
+<h2 data-zh="一、DICOM：醫學影像的通用語言" data-en="I. DICOM: The Lingua Franca of Medical Imaging">一、DICOM 標準</h2>
+<div data-lang="zh">
+<p><strong>DICOM (Digital Imaging and Communications in Medicine)</strong> 由 ACR + NEMA 自 1985 年制定，是所有 CT/MRI/X-ray/US/PET 共用的影像 + 通訊標準。一個 DICOM 檔案 = <em>檔案 meta-info + 一組 (Group, Element) 標籤資料 + 像素資料</em>。</p>
+<ul>
+<li><strong>檔案 meta-information</strong>：transfer syntax、preamble (DICM)、Implicit/Explicit VR Little Endian。</li>
+<li><strong>Patient / Study / Series / Instance 階層</strong>：一個病人 → 多個 Study（檢查），一個 Study → 多個 Series（同模態的序列），一個 Series → 多個 Instance（單張影像）。</li>
+<li><strong>必要標籤</strong>：(0010,0010) Patient Name；(0008,0060) Modality；(0028,0010/0011) Rows/Columns；(0028,0030) Pixel Spacing；(7FE0,0010) Pixel Data。</li>
+<li><strong>DICOM Networking (DIMSE-C)</strong>：C-STORE（傳輸）、C-FIND（查詢）、C-MOVE（搬移）；現代 PACS 與 RIS 之間通訊。</li>
+<li><strong>DICOMweb (RESTful)</strong>：QIDO-RS（查）、WADO-RS（取）、STOW-RS（存）；雲端醫療影像必備。</li>
+<li><strong>DICOM SR (Structured Report)</strong>：結構化報告；AI 推論結果回寫 PACS 的標準載體（如 mammography CAD 結果）。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p><strong>DICOM (Digital Imaging and Communications in Medicine)</strong>, jointly developed by ACR + NEMA since 1985, is the universal imaging + communication standard for CT/MRI/X-ray/US/PET. One DICOM file = <em>file meta + (Group, Element) tag dataset + pixel data</em>.</p>
+<ul>
+<li><strong>File meta-info</strong>: transfer syntax, preamble (DICM), Implicit/Explicit VR Little Endian.</li>
+<li><strong>Patient / Study / Series / Instance hierarchy</strong>: 1 patient → many studies (exams), 1 study → many series (same modality sequences), 1 series → many instances (slices).</li>
+<li><strong>Key tags</strong>: (0010,0010) Patient Name; (0008,0060) Modality; (0028,0010/0011) Rows/Columns; (0028,0030) Pixel Spacing; (7FE0,0010) Pixel Data.</li>
+<li><strong>DICOM Networking (DIMSE-C)</strong>: C-STORE / C-FIND / C-MOVE — used between PACS and RIS.</li>
+<li><strong>DICOMweb (RESTful)</strong>: QIDO-RS / WADO-RS / STOW-RS — cloud medical imaging.</li>
+<li><strong>DICOM SR (Structured Report)</strong>: the standard carrier for AI inference results written back to PACS (e.g., mammography CAD output).</li>
+</ul>
+</div>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>常見陷阱：</strong>(1) Pixel Spacing 不是 mm/像素恆定，需讀標籤而非假設。(2) Rescale Slope/Intercept 必須套用後才能正確顯示 HU。(3) Photometric Interpretation = MONOCHROME1 時黑白要反轉。(4) 去識別化必須移除 (0010,xxxx) 與 burnt-in pixel text，符合 HIPAA Safe Harbor 18 識別字段。</span>
+<span data-lang="en"><strong>Common pitfalls:</strong> (1) Pixel Spacing varies — read the tag, don't assume mm/pixel. (2) Rescale Slope/Intercept must be applied for correct HU display. (3) MONOCHROME1 needs B/W inversion. (4) De-identification must remove (0010,xxxx) tags and burnt-in pixel text per HIPAA Safe Harbor's 18 identifiers.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="前處理" data-en="PRE-PROCESSING">前處理</div>
+<h2 data-zh="二、影像前處理流程" data-en="II. Image Pre-processing Pipeline">二、前處理</h2>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">🪟</div><h4 data-zh="① Windowing（窗位/窗寬）" data-en="① Windowing (Center / Width)">① Windowing</h4>
+<div data-lang="zh"><p>CT 像素為 12–16 bit (HU) 但顯示器只有 8 bit；用「窗位 WL + 窗寬 WW」線性映射子範圍：肺窗 (WL −600, WW 1500)、骨窗 (300, 1500)、腦窗 (40, 80)、軟組織 (50, 350)。</p></div>
+<div data-lang="en"><p>CT pixels are 12–16-bit HU but displays are 8-bit; "window level + width" linearly maps a sub-range — lung (WL −600, WW 1500), bone (300, 1500), brain (40, 80), soft tissue (50, 350).</p></div></div>
+<div class="card"><div class="card-icon">🌀</div><h4 data-zh="② Bias-field 校正（N4ITK）" data-en="② Bias-field Correction (N4ITK)">② Bias-field 校正</h4>
+<div data-lang="zh"><p>MRI 受 RF 線圈不均勻導致亮度低頻偏移；N4ITK 用 B-spline 估計乘性偏壓場後除去，是 nnU-Net 預處理預設步驟。</p></div>
+<div data-lang="en"><p>MRI suffers a smooth multiplicative intensity bias from RF coil non-uniformity; N4ITK fits a B-spline bias field and divides it out — a default step in nnU-Net preprocessing.</p></div></div>
+<div class="card"><div class="card-icon">📊</div><h4 data-zh="③ Intensity 正規化" data-en="③ Intensity Normalization">③ Intensity 正規化</h4>
+<div data-lang="zh"><p>不同機台/協定的 MRI 像素並無物理單位；常做 z-score（(x−μ)/σ）、histogram-matching（Nyúl）、percentile clipping (1–99%)。</p></div>
+<div data-lang="en"><p>MRI pixels lack physical units; normalize by z-score ((x−μ)/σ), histogram matching (Nyúl), or percentile clipping (1–99%).</p></div></div>
+<div class="card"><div class="card-icon">📌</div><h4 data-zh="④ Registration（影像對位）" data-en="④ Registration">④ Registration 對位</h4>
+<div data-lang="zh"><p>剛體 (rigid) → 仿射 (affine) → 變形 (deformable, B-spline / Diffeomorphic SyN)。工具：<strong>ANTs SyN</strong>、<strong>elastix</strong>、<strong>SimpleITK</strong>；DL 對位：VoxelMorph、TransMorph。</p></div>
+<div data-lang="en"><p>Rigid → affine → deformable (B-spline / Diffeomorphic SyN). Tools: <strong>ANTs SyN</strong>, <strong>elastix</strong>, <strong>SimpleITK</strong>; DL alternatives: VoxelMorph, TransMorph.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="分割演算法" data-en="SEGMENTATION">分割演算法</div>
+<h2 data-zh="三、分割：從 Otsu 到 SAM 2" data-en="III. Segmentation: From Otsu to SAM 2">三、分割演算法</h2>
+<table class="comp-table"><thead><tr><th data-zh="方法" data-en="Method">方法</th><th data-zh="年代" data-en="Year">年代</th><th data-zh="核心想法" data-en="Core idea">核心想法</th><th data-zh="優缺點" data-en="Pros / Cons">優缺點</th></tr></thead><tbody>
+<tr><td><strong>Otsu</strong></td><td>1979</td><td data-zh="自動選最大化類間變異的閾值" data-en="Threshold maximizing between-class variance">最大類間變異閾值</td><td data-zh="✓ 簡單、單峰雙峰直方圖適用；✗ 雜訊敏感" data-en="✓ Simple, bimodal histograms; ✗ noise-sensitive">✓簡單 ✗雜訊敏感</td></tr>
+<tr><td><strong data-zh="區域成長" data-en="Region growing">區域成長</strong></td><td>1990s</td><td data-zh="從 seed 點往相似鄰居擴展" data-en="Expand from seed to similar neighbors">seed → neighbor</td><td data-zh="✓ 形狀任意；✗ 需 seed、易洩漏" data-en="✓ Arbitrary shape; ✗ needs seed, leaks">✓任意 ✗洩漏</td></tr>
+<tr><td><strong data-zh="水準集 Level set" data-en="Level set">水準集</strong></td><td>1988 (Osher)</td><td data-zh="把曲線視作高維函數零等高線" data-en="Curve = zero level-set of a high-dim function">曲線 = 0 等高線</td><td data-zh="✓ 拓樸變化（合併分裂）；✗ 慢" data-en="✓ Topology change; ✗ slow">✓拓樸 ✗慢</td></tr>
+<tr><td><strong>Watershed</strong></td><td>1991</td><td data-zh="梯度影像「分水嶺」" data-en="Watershed of gradient image">梯度分水嶺</td><td data-zh="✓ 細胞邊界清楚；✗ 過分割" data-en="✓ Clear cell borders; ✗ over-segments">✓細胞 ✗過分</td></tr>
+<tr><td><strong>U-Net</strong></td><td>2015 (Ronneberger)</td><td data-zh="encoder-decoder + skip connection" data-en="Encoder-decoder + skip">encoder + skip</td><td data-zh="✓ 醫療影像分割黃金基準；訓練資料中等量即可" data-en="✓ Medical-imaging gold standard; modest data needed">黃金基準</td></tr>
+<tr><td><strong>nnU-Net</strong></td><td>2021 (Isensee)</td><td data-zh="自動配置 U-Net（patch size、stride、loss）" data-en="Auto-configures U-Net (patch, stride, loss)">自動 U-Net</td><td data-zh="✓ 多項挑戰賽冠軍；幾乎零調參" data-en="✓ Tops many challenges; near-zero tuning">通用、零調參</td></tr>
+<tr><td><strong>TransUNet</strong></td><td>2021</td><td data-zh="ViT encoder + U-Net decoder" data-en="ViT encoder + U-Net decoder">ViT + U-Net</td><td data-zh="✓ 長距離 context；✗ 資料需求大" data-en="✓ Long-range context; ✗ data-hungry">長距離 context</td></tr>
+<tr><td><strong>SAM 2</strong></td><td>2024 (Meta)</td><td data-zh="prompt-based foundation model；影像 + 影片" data-en="Prompt-based foundation model; images + video">提示式基礎模型</td><td data-zh="✓ zero-shot；點/框 prompt；通用" data-en="✓ Zero-shot; point/box prompts; generic">zero-shot prompt</td></tr>
+<tr><td><strong>MedSAM-2</strong></td><td>2024</td><td data-zh="SAM-2 在醫療影像微調；支援 2D/3D/影片" data-en="SAM-2 fine-tuned on medical 2D/3D/video">醫療微調 SAM</td><td data-zh="✓ 跨模態 zero-shot；✗ 仍需驗證" data-en="✓ Cross-modality zero-shot; ✗ still validating">跨模態 zero-shot</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="分類與基礎模型" data-en="CLASSIFICATION &amp; FOUNDATION MODELS">分類 + 基礎模型</div>
+<h2 data-zh="四、分類：從 ImageNet 到醫學影像 Foundation Model" data-en="IV. Classification: ImageNet to Imaging Foundation Models">四、分類與基礎模型</h2>
+<div data-lang="zh">
+<p>影像分類演進：<strong>AlexNet (2012)</strong> → <strong>VGG/Inception/ResNet (2014–15)</strong> → <strong>EfficientNet (2019)</strong> → <strong>ViT (2020)</strong> → <strong>Foundation Models (2023–2025)</strong>。醫療影像分類的轉折點：(1) <em>ImageNet 預訓練 → 微調</em>（典範至 2022）；(2) <em>大規模醫療影像自監督預訓練</em>（DINOv2、SimCLR）；(3) <em>領域基礎模型</em>（病理 / 放射 / 眼底各有專屬 FM）。</p>
+</div>
+<div data-lang="en">
+<p>Imaging classification evolution: <strong>AlexNet (2012)</strong> → <strong>VGG/Inception/ResNet (2014–15)</strong> → <strong>EfficientNet (2019)</strong> → <strong>ViT (2020)</strong> → <strong>Foundation Models (2023–2025)</strong>. Two inflection points: (1) <em>ImageNet pre-train + fine-tune</em> (the dominant pattern through 2022); (2) <em>large-scale medical self-supervised pretrain</em> (DINOv2, SimCLR); (3) <em>domain foundation models</em> (pathology / radiology / fundus each have their own).</p>
+</div>
+<table class="comp-table"><thead><tr><th data-zh="模型" data-en="Model">模型</th><th data-zh="領域" data-en="Domain">領域</th><th data-zh="預訓練資料" data-en="Pretrain data">預訓練資料</th><th data-zh="特色" data-en="Notes">特色</th></tr></thead><tbody>
+<tr><td><strong>Virchow / Virchow 2</strong></td><td data-zh="病理 (WSI)" data-en="Pathology (WSI)">病理</td><td>1.5–3.1 M slides (Paige)</td><td data-zh="2024 ViT-H/14 自監督 DINOv2；多癌種" data-en="2024 ViT-H/14 DINOv2; multi-cancer">DINOv2 ViT-H</td></tr>
+<tr><td><strong>UNI / UNI 2</strong></td><td data-zh="病理" data-en="Pathology">病理</td><td>100 M+ patches (MGB)</td><td data-zh="2024 MGB-Harvard Mahmood Lab；高 throughput" data-en="2024 MGB-Harvard Mahmood Lab; high throughput">病理 SOTA</td></tr>
+<tr><td><strong>CONCH</strong></td><td data-zh="病理 + 語言" data-en="Pathology + language">病理+語言</td><td>1.17 M image-text pairs</td><td data-zh="圖文對齊 CLIP-style；報告生成" data-en="CLIP-style image-text; report generation">CLIP 病理版</td></tr>
+<tr><td><strong>RETFound</strong></td><td data-zh="眼底/OCT" data-en="Fundus/OCT">眼底</td><td>1.6 M retinal images</td><td data-zh="2023 Nature Moorfields；MAE 自監督" data-en="2023 Nature Moorfields; MAE">MAE 眼底</td></tr>
+<tr><td><strong>CARE1</strong></td><td data-zh="放射影像 (CT/MR)" data-en="Radiology (CT/MR)">放射</td><td data-zh="多中心 CT/MR/X-ray" data-en="Multi-center CT/MR/X-ray">多中心</td><td data-zh="2025/2 首件 FDA cleared 影像 Foundation Model（Tempus）" data-en="2025/2 first FDA-cleared imaging foundation model (Tempus)">首件 FDA-cleared FM</td></tr>
+<tr><td><strong>MedGemma</strong></td><td data-zh="多模態醫療 (影像+文字)" data-en="Multimodal medical">多模態</td><td data-zh="Google 醫療 corpus" data-en="Google medical corpus">Google</td><td data-zh="2024 開源；4B/27B；放射報告、VQA" data-en="2024 open-source; 4B/27B; radiology reports, VQA">Google 開源</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="FDA 法規" data-en="FDA REGULATION">FDA 法規</div>
+<h2 data-zh="五、FDA AI/ML 醫療裝置全景（2025–2026）" data-en="V. FDA AI/ML Medical Device Landscape (2025–2026)">五、FDA AI/ML 法規</h2>
+<div data-lang="zh">
+<p>關鍵數字（截至 2025/12）：</p>
+<ul>
+<li>FDA 累計核可 <strong>1,451 件</strong> AI/ML 啟用醫療裝置。</li>
+<li>2025 年單年新增 <strong>295 件</strong>，創歷史紀錄。</li>
+<li><strong>76% 為放射影像</strong>（CT/MR/X-ray/mammography/PET）；其次心血管 (9%)、神經 (3%)。</li>
+<li>絕大多數透過 <strong>510(k)</strong>（實質等同）；少數 De Novo 與 PMA。</li>
+<li>2025/2 通過首件「影像 Foundation Model」：<strong>Tempus CARE1</strong>。</li>
+</ul>
+<p><strong>SaMD 框架</strong>（Software as a Medical Device）依「healthcare situation × healthcare decision」分四級 I–IV；AI 影像辨識多落在 II–III。</p>
+<p><strong>PCCP（Predetermined Change Control Plan）</strong>：FDA 2024/12 終版指引，允許 AI/ML 廠商在事前聲明的範圍內，無需每次重送 510(k) 即可更新模型（如重新訓練、加入新族群、改 hyperparameter）；2025 已有 50+ 件採用 PCCP。</p>
+<p><strong>GMLP（Good Machine Learning Practice）</strong>：FDA + Health Canada + UK MHRA 聯合 10 條原則（2021）；2024 補充 GMLP 透明度 7 條原則、2025 進一步收緊資料倫理與後市監測。</p>
+</div>
+<div data-lang="en">
+<p>Key numbers (as of Dec 2025):</p>
+<ul>
+<li>Cumulative FDA-authorized AI/ML medical devices: <strong>1,451</strong>.</li>
+<li>2025 added <strong>295</strong> in one year — record.</li>
+<li><strong>76% are radiology</strong> (CT/MR/X-ray/mammography/PET); cardiovascular (9%), neurology (3%) follow.</li>
+<li>Most cleared via <strong>510(k)</strong>; few De Novo or PMA.</li>
+<li>Feb 2025: first "imaging foundation model" cleared — <strong>Tempus CARE1</strong>.</li>
+</ul>
+<p>The <strong>SaMD framework</strong> categorizes software by "healthcare situation × healthcare decision" into Class I–IV; AI imaging typically lands in II–III.</p>
+<p><strong>PCCP (Predetermined Change Control Plan)</strong>: final FDA guidance Dec 2024 — vendors can pre-declare allowable model updates (retraining, new populations, hyperparameter changes) without re-submitting a 510(k). 50+ submissions in 2025 used PCCP.</p>
+<p><strong>GMLP (Good Machine Learning Practice)</strong>: 10 joint principles from FDA + Health Canada + UK MHRA (2021); 2024 added 7 transparency principles; 2025 tightened data ethics and post-market surveillance.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖表" data-en="INTERACTIVE">互動圖表</div>
+<h2 data-zh="六、FDA AI/ML 核可數量（2015–2025）" data-en="VI. FDA AI/ML Clearances Per Year (2015–2025)">六、FDA AI 裝置年度趨勢</h2>
+<div data-lang="zh"><p>下圖為 2015–2025 年 FDA 累計核可的 AI/ML 醫療裝置每年新增數量與累計數。注意 2024–2025 的加速段。</p></div>
+<div data-lang="en"><p>The chart below shows annual new and cumulative FDA-authorized AI/ML medical devices, 2015–2025. Note the steep 2024–2025 acceleration.</p></div>
+<div class="interactive-panel">
+<div class="toggle-row">
+  <button class="toggle-btn active" data-view="annual" data-zh="每年新增" data-en="Annual new">每年新增</button>
+  <button class="toggle-btn" data-view="cumulative" data-zh="累計" data-en="Cumulative">累計</button>
+</div>
+<div class="chart-container"><canvas id="fdaChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">資料來源：FDA Center for Devices and Radiological Health（CDRH）「AI/ML-Enabled Medical Devices」公開列表（2025-12 更新）。</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Source: FDA CDRH "AI/ML-Enabled Medical Devices" public list (updated Dec 2025).</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="七、分割：U-Net、nnU-Net 或 SAM 2？" data-en="VII. Segmentation: U-Net, nnU-Net, or SAM 2?">七、分割演算法決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="分割演算法選擇決策樹" data-en="Segmentation Algorithm Decision Tree">分割演算法 → 選擇</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">是否有標註資料 ≥ 200 例？<span class="dt-arrow">→</span> <strong>否</strong>：先試 <strong>SAM 2 / MedSAM-2 zero-shot</strong>（點/框 prompt）；標註幾十例後微調。</span><span data-lang="en">Labeled data ≥ 200? <span class="dt-arrow">→</span> <strong>No</strong>: try <strong>SAM 2 / MedSAM-2 zero-shot</strong> (point/box prompts); fine-tune after labeling dozens.</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">有 200–2000 例、單一明確任務（單器官 / 病灶）？<span class="dt-arrow">→</span> <strong>nnU-Net</strong>（自動配置，幾乎不用調參）。</span><span data-lang="en">200–2000 cases, single well-defined task (one organ/lesion)? <span class="dt-arrow">→</span> <strong>nnU-Net</strong> (auto-configures, near-zero tuning).</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">資料量 &gt; 5000 例 + 多任務 + 算力充足？<span class="dt-arrow">→</span> <strong>TransUNet / Swin-UNet</strong> 或 ViT 骨幹，獲取長距離 context。</span><span data-lang="en">&gt; 5000 cases + multi-task + ample compute? <span class="dt-arrow">→</span> <strong>TransUNet / Swin-UNet</strong> or ViT-based, for long-range context.</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">需要互動式分割（放射師在 PACS 上點幾下）？<span class="dt-arrow">→</span> <strong>SAM 2 + GUI 整合</strong>（如 3D Slicer SAM extension、MONAI Label）。</span><span data-lang="en">Interactive segmentation (radiologist clicks in PACS)? <span class="dt-arrow">→</span> <strong>SAM 2 + GUI integration</strong> (3D Slicer SAM extension, MONAI Label).</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">超快/低算力、邊緣裝置？<span class="dt-arrow">→</span> <strong>輕量 U-Net</strong>（MobileNet 骨幹）或經典 Otsu + 形態學。</span><span data-lang="en">Ultra-fast / edge device? <span class="dt-arrow">→</span> <strong>Lightweight U-Net</strong> (MobileNet backbone) or classical Otsu + morphology.</span></div>
+<div class="dt-node"><span class="dt-q">Q6.</span><span data-lang="zh">CT/MR 三維體積？<span class="dt-arrow">→</span> 用 <strong>3D nnU-Net</strong>，並啟用 patch-based 訓練、cascade（粗 → 細）。</span><span data-lang="en">3D CT/MR volume? <span class="dt-arrow">→</span> <strong>3D nnU-Net</strong> with patch-based training and cascade (coarse → fine).</span></div>
+<div class="dt-node"><span class="dt-q">Q7.</span><span data-lang="zh">要符合 FDA 510(k)？<span class="dt-arrow">→</span> 選擇<strong>可解釋、可驗證</strong>的模型；準備 GMLP 文件 + PCCP；驗證資料須包含 site/scanner 變異。</span><span data-lang="en">Aiming for FDA 510(k)? <span class="dt-arrow">→</span> Pick <strong>explainable, validatable</strong> models; prepare GMLP docs + PCCP; validation must span sites/scanners.</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="八、讀取 DICOM + Otsu 自動分割" data-en="VIII. Read DICOM + Otsu Segmentation">八、DICOM 讀取與 Otsu</h2>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> pydicom, numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">from</span> skimage.filters <span class="kw">import</span> threshold_otsu
+<span class="kw">from</span> skimage <span class="kw">import</span> morphology, measure
+
+<span class="comment"># 1) Load DICOM and apply HU rescale</span>
+ds  = pydicom.<span class="func">dcmread</span>(<span class="str">"chest_ct.dcm"</span>)
+img = ds.pixel_array.<span class="func">astype</span>(np.float32)
+slope     = <span class="func">float</span>(ds.<span class="func">get</span>(<span class="str">"RescaleSlope"</span>, <span class="num">1</span>))
+intercept = <span class="func">float</span>(ds.<span class="func">get</span>(<span class="str">"RescaleIntercept"</span>, <span class="num">0</span>))
+hu  = img * slope + intercept                <span class="comment"># now in Hounsfield Units</span>
+
+<span class="func">print</span>(<span class="str">"Patient ID:"</span>, ds.PatientID,
+      <span class="str">"Modality:"</span>, ds.Modality,
+      <span class="str">"Shape:"</span>, hu.shape,
+      <span class="str">"Pixel spacing (mm):"</span>, ds.PixelSpacing)
+
+<span class="comment"># 2) Window for soft tissue (WL 50, WW 350)</span>
+wl, ww = <span class="num">50</span>, <span class="num">350</span>
+win    = np.<span class="func">clip</span>((hu - (wl - ww/<span class="num">2</span>)) / ww, <span class="num">0</span>, <span class="num">1</span>)
+
+<span class="comment"># 3) Otsu auto-segment, clean with morphology, label</span>
+thr  = threshold_otsu(win)
+mask = win &gt; thr
+mask = morphology.<span class="func">remove_small_objects</span>(mask, min_size=<span class="num">256</span>)
+mask = morphology.<span class="func">binary_closing</span>(mask, morphology.<span class="func">disk</span>(<span class="num">3</span>))
+lbl  = measure.<span class="func">label</span>(mask)
+<span class="func">print</span>(<span class="str">"Detected objects:"</span>, lbl.<span class="func">max</span>())
+
+fig, ax = plt.<span class="func">subplots</span>(<span class="num">1</span>, <span class="num">3</span>, figsize=(<span class="num">10</span>,<span class="num">3.5</span>))
+ax[<span class="num">0</span>].<span class="func">imshow</span>(win, cmap=<span class="str">'gray'</span>);  ax[<span class="num">0</span>].<span class="func">set_title</span>(<span class="str">'Windowed'</span>)
+ax[<span class="num">1</span>].<span class="func">imshow</span>(mask, cmap=<span class="str">'gray'</span>); ax[<span class="num">1</span>].<span class="func">set_title</span>(<span class="str">f'Otsu (thr={thr:.2f})'</span>)
+ax[<span class="num">2</span>].<span class="func">imshow</span>(lbl,  cmap=<span class="str">'tab20'</span>); ax[<span class="num">2</span>].<span class="func">set_title</span>(<span class="str">'Labeled'</span>)
+plt.<span class="func">tight_layout</span>(); plt.<span class="func">show</span>()</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% Requires Image Processing Toolbox</span>
+info = <span class="func">dicominfo</span>(<span class="str">'chest_ct.dcm'</span>);
+img  = double(<span class="func">dicomread</span>(info));
+
+<span class="comment">% Rescale to Hounsfield Units</span>
+slope = info.RescaleSlope;  intercept = info.RescaleIntercept;
+hu    = img*slope + intercept;
+fprintf(<span class="str">'PatientID: %s  Modality: %s  Spacing: %.2f mm\n'</span>, ...
+        info.PatientID, info.Modality, info.PixelSpacing(<span class="num">1</span>));
+
+<span class="comment">% Soft-tissue window (WL 50, WW 350)</span>
+WL = <span class="num">50</span>; WW = <span class="num">350</span>;
+win = (hu - (WL - WW/<span class="num">2</span>)) / WW;
+win(win&lt;<span class="num">0</span>) = <span class="num">0</span>; win(win&gt;<span class="num">1</span>) = <span class="num">1</span>;
+
+<span class="comment">% Otsu + morphology + connected components</span>
+thr  = <span class="func">graythresh</span>(win);            <span class="comment">% Otsu in MATLAB</span>
+mask = <span class="func">imbinarize</span>(win, thr);
+mask = <span class="func">bwareaopen</span>(mask, <span class="num">256</span>);     <span class="comment">% remove tiny objects</span>
+mask = <span class="func">imclose</span>(mask, <span class="func">strel</span>(<span class="str">'disk'</span>,<span class="num">3</span>));
+lbl  = <span class="func">bwlabel</span>(mask);
+fprintf(<span class="str">'Detected objects: %d\n'</span>, max(lbl(:)));
+
+subplot(<span class="num">1</span>,<span class="num">3</span>,<span class="num">1</span>); imshow(win,[]);    title(<span class="str">'Windowed'</span>);
+subplot(<span class="num">1</span>,<span class="num">3</span>,<span class="num">2</span>); imshow(mask);      title(sprintf(<span class="str">'Otsu thr=%.2f'</span>,thr));
+subplot(<span class="num">1</span>,<span class="num">3</span>,<span class="num">3</span>); imagesc(lbl);      title(<span class="str">'Labeled'</span>); axis image;</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="九、本章關鍵術語" data-en="IX. Key Terms">九、關鍵術語</h2>
+<p><span class="term">DICOM<span class="term-tip">Digital Imaging and Communications in Medicine — 醫療影像通用標準。</span></span> &nbsp;
+<span class="term">PACS<span class="term-tip">Picture Archiving and Communication System — 醫院影像儲存/查閱系統。</span></span> &nbsp;
+<span class="term">WL / WW<span class="term-tip">Window Level / Width — CT 顯示時的中心與寬度。</span></span> &nbsp;
+<span class="term">N4ITK<span class="term-tip">改良 N3 的 MRI bias-field 校正；nnU-Net 預設步驟。</span></span> &nbsp;
+<span class="term">U-Net<span class="term-tip">2015 Ronneberger 提出；encoder-decoder + skip；醫療影像分割黃金基準。</span></span> &nbsp;
+<span class="term">nnU-Net<span class="term-tip">2021 Isensee 提出；自動配置的 U-Net 框架。</span></span> &nbsp;
+<span class="term">SAM 2<span class="term-tip">Segment Anything Model 2（Meta 2024）；prompt-based、可處理影像+影片。</span></span> &nbsp;
+<span class="term">Otsu<span class="term-tip">1979 提出；自動選最大化類間變異的閾值。</span></span> &nbsp;
+<span class="term">Dice<span class="term-tip">2|A∩B|/(|A|+|B|)；分割評估標準指標，0–1。</span></span> &nbsp;
+<span class="term">Foundation model<span class="term-tip">大規模自監督預訓練、可下游 zero-shot / few-shot 的通用模型。</span></span> &nbsp;
+<span class="term">SaMD<span class="term-tip">Software as a Medical Device — 軟體本身即醫療器材；FDA 與 IMDRF 框架。</span></span> &nbsp;
+<span class="term">PCCP<span class="term-tip">Predetermined Change Control Plan — 預先載明 AI 模型更新範圍，免重送 510(k)；FDA 2024/12 終版指引。</span></span> &nbsp;
+<span class="term">GMLP<span class="term-tip">Good Machine Learning Practice — FDA + Health Canada + UK MHRA 聯合 10 條原則 (2021)。</span></span> &nbsp;
+<span class="term">DICOM SR<span class="term-tip">Structured Report；AI 推論結果寫回 PACS 的標準。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check (3 questions)">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2">
+<p><span data-lang="zh">Q1. 截至 2025 年底，FDA 累計核可的 AI/ML 醫療裝置中放射影像占比約為？</span><span data-lang="en">Q1. By end-2025, the share of radiology among FDA-cleared AI/ML medical devices is approximately:</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0">A. ~ 20%</div>
+<div class="quiz-opt" data-opt="1">B. ~ 45%</div>
+<div class="quiz-opt" data-opt="2">C. ~ 76%</div>
+<div class="quiz-opt" data-opt="3">D. ~ 95%</div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+<div class="quiz-q" data-correct="1">
+<p><span data-lang="zh">Q2. 一個 CT DICOM 像素數值為 1500，DICOM 標籤 Rescale Slope=1, Intercept=−1024。其對應的 Hounsfield Unit (HU) 為？</span><span data-lang="en">Q2. A CT DICOM pixel = 1500, Rescale Slope = 1, Intercept = −1024. The HU is:</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0">A. 1500</div>
+<div class="quiz-opt" data-opt="1">B. 476 <span data-zh="（骨頭範圍）" data-en="(bone range)">（骨頭範圍）</span></div>
+<div class="quiz-opt" data-opt="2">C. −1024</div>
+<div class="quiz-opt" data-opt="3">D. 2524</div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+<div class="quiz-q" data-correct="0">
+<p><span data-lang="zh">Q3. 標註資料只有 30 例，但需要快速產生「肝臟分割」工具給放射師互動使用。最務實的選擇是？</span><span data-lang="en">Q3. Only 30 labeled cases, but you need a fast interactive liver-seg tool for radiologists. Most pragmatic choice?</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0"><span data-lang="zh">A. SAM 2 / MedSAM-2，搭配 prompt（點/框）並少量微調</span><span data-lang="en">A. SAM 2 / MedSAM-2 with prompts (point/box) + light fine-tune</span></div>
+<div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 從頭訓練 3D nnU-Net</span><span data-lang="en">B. Train 3D nnU-Net from scratch</span></div>
+<div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 直接做 Otsu 閾值法</span><span data-lang="en">C. Plain Otsu thresholding</span></div>
+<div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 訓練 ViT-Huge from scratch</span><span data-lang="en">D. Train ViT-Huge from scratch</span></div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+</section>
+
+<div class="page-nav">
+<a href="medical-imaging.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="B3 · 醫學影像" data-en="B3 · Medical Imaging">B3 · 醫學影像</span></a>
+<a href="biomechanics.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="C1 · 生物力學" data-en="C1 · Biomechanics">C1 · 生物力學</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · B4 Image Processing &amp; AI</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// FDA AI/ML clearance chart (approximate annual counts based on FDA public list as of Dec 2025)
+const years   = ['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'];
+const annual  = [   3,   6,   12,   24,   76,   80,  120,  178,  221,  254,  295];
+const cumul   = annual.reduce((a,v,i)=>{a.push(i===0?v:a[i-1]+v);return a;},[]);
+let fdaChart=null;
+function drawFDA(view){
+  const lang=I18n.get();
+  const isAnnual = view==='annual';
+  const series   = isAnnual? annual : cumul;
+  const label    = isAnnual? (lang==='zh'?'每年新增':'New per year') : (lang==='zh'?'累計核可':'Cumulative');
+  if(fdaChart) fdaChart.destroy();
+  fdaChart = new Chart(document.getElementById('fdaChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:years,datasets:[{label,data:series,backgroundColor:'rgba(131,24,67,.75)',borderColor:'#500724',borderWidth:1}]},
+    options:{plugins:{legend:{display:true}},
+      scales:{y:{beginAtZero:true,title:{display:true,text:lang==='zh'?'件數':'count'}},
+              x:{title:{display:true,text:lang==='zh'?'年度':'year'}}}}
+  });
+}
+drawFDA('annual');
+document.querySelectorAll('.toggle-btn[data-view]').forEach(b=>{
+  b.addEventListener('click',()=>{document.querySelectorAll('.toggle-btn[data-view]').forEach(x=>x.classList.remove('active'));b.classList.add('active');drawFDA(b.dataset.view);});
+});
+document.addEventListener('langchange',()=>{const cur=document.querySelector('.toggle-btn[data-view].active').dataset.view;drawFDA(cur);});
+</script>
+</body></html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>D4: 生醫光電 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html" class="active">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER D4 · BLOCK D DEVICES &amp; INTERFACES</div>
+<h1 data-zh="生醫光電" data-en="Biophotonics">生醫光電</h1>
+<p class="subtitle" data-lang="zh">從 Beer-Lambert 定律到 LASIK、從 OCT 視網膜到 ICG 螢光導引手術、從 STED 超解析到 channelrhodopsin 光遺傳——光是現代生醫工程最強的「無創探針」。</p>
+<p class="subtitle" data-lang="en">From Beer-Lambert to LASIK, OCT retina to ICG-guided surgery, STED super-resolution to channelrhodopsin optogenetics — light is the most versatile non-invasive probe in modern BME.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="光-組織交互" data-en="LIGHT-TISSUE">光-組織交互</div>
+<h2 data-zh="一、光與組織的四種交互作用" data-en="I. Four Light-Tissue Interactions">一、光與組織的交互作用</h2>
+<div data-lang="zh">
+<p>光打到組織會發生四種同時並存的物理事件，其相對強度決定了「能否成像」「能否治療」「能否傷害」：</p>
+<ol>
+<li><strong>吸收（Absorption）</strong> — 光子能量被組織分子（水、血紅蛋白、黑色素、膠原蛋白）轉換為熱、化學鍵斷裂或螢光。遵循 <strong>Beer-Lambert 定律</strong>：</li>
+</ol>
+<div style="background:#0e7490;color:white;padding:.6rem 1rem;border-radius:.5rem;font-family:monospace;text-align:center;font-size:.95rem;margin:.5rem 0;">
+I = I₀ &middot; e<sup>−α·x</sup> &nbsp; 或 &nbsp; A = ε &middot; c &middot; L &nbsp; (μ<sub>a</sub> = α 為吸收係數，cm⁻¹)
+</div>
+<ol start="2">
+<li><strong>散射（Scattering）</strong> — 光子方向被組織不均勻性偏折。<strong>Rayleigh</strong>（粒徑 ≪ λ，∝ 1/λ⁴，例：細胞器微結構）；<strong>Mie</strong>（粒徑 ~ λ，弱波長相依，例：細胞、粒線體）。散射係數 μ<sub>s</sub> 與 anisotropy g（前向 vs 等向）合稱「reduced scattering coefficient μ<sub>s</sub>' = μ<sub>s</sub>(1−g)」。</li>
+<li><strong>反射（Reflection / Reflectance）</strong> — 界面（空氣/角質層、組織/血管）造成 Fresnel 反射。</li>
+<li><strong>螢光（Fluorescence）</strong> — 吸收光子後分子激發到 S<sub>1</sub>，經 vibrational relaxation 後輻射出較長波長光子（<strong>Stokes shift</strong>，10-50 nm）。是分子成像、ICG 手術導引、PDT 與 FRET 的物理基礎。</li>
+</ol>
+<p><strong>組織光學窗（Therapeutic / Optical window，650-1350 nm）：</strong>在這個波段，水吸收尚未上升、血紅蛋白吸收已下降、黑色素吸收較弱，光可穿透 1-5 mm 組織。是 NIRS、Pulse oximeter、ICG、photodynamic therapy、optogenetic 神經刺激的「能用」波段。</p>
+</div>
+<div data-lang="en">
+<p>Light striking tissue undergoes four simultaneous physical processes; their relative strengths decide whether we can image, treat, or harm:</p>
+<ol>
+<li><strong>Absorption</strong> — photon energy is converted by molecules (water, hemoglobin, melanin, collagen) into heat, bond breakage, or fluorescence. Governed by the <strong>Beer-Lambert law</strong>:</li>
+</ol>
+<div style="background:#0e7490;color:white;padding:.6rem 1rem;border-radius:.5rem;font-family:monospace;text-align:center;font-size:.95rem;margin:.5rem 0;">
+I = I₀ &middot; e<sup>−α·x</sup> &nbsp; or &nbsp; A = ε &middot; c &middot; L &nbsp; (μ<sub>a</sub> = α is the absorption coefficient, cm⁻¹)
+</div>
+<ol start="2">
+<li><strong>Scattering</strong> — photon direction deflected by tissue inhomogeneities. <strong>Rayleigh</strong> (particle ≪ λ, ∝ 1/λ⁴, e.g. organelle substructure); <strong>Mie</strong> (particle ~ λ, weak λ-dependence, e.g. cells, mitochondria). Scattering coefficient μ<sub>s</sub> + anisotropy g combine into the reduced scattering coefficient μ<sub>s</sub>' = μ<sub>s</sub>(1−g).</li>
+<li><strong>Reflection / reflectance</strong> — Fresnel reflection at boundaries (air/stratum corneum, tissue/vessel wall).</li>
+<li><strong>Fluorescence</strong> — after photon absorption, molecules excite to S<sub>1</sub>, vibrationally relax, then emit a longer-λ photon (<strong>Stokes shift</strong>, 10-50 nm). Physical basis of molecular imaging, ICG surgery, PDT, FRET.</li>
+</ol>
+<p><strong>Optical / therapeutic window (650-1350 nm):</strong> water absorption has not yet risen, hemoglobin absorption has dropped, melanin absorption is weaker — light penetrates 1-5 mm. The "usable" band for NIRS, pulse oximetry, ICG, PDT, and optogenetic neural stimulation.</p>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>核心數字：</strong>在 600 nm 處，皮膚 μ<sub>a</sub> ≈ 0.3 cm⁻¹、μ<sub>s</sub>' ≈ 20 cm⁻¹（即「散射主導」）；穿透深度（1/e 衰減）約 1.5-3 mm。在 800 nm（光學窗）處可加深至 5 mm。在 2.9 μm（Er:YAG 雷射，水吸收峰）處吸收係數突增至 ~12000 cm⁻¹，故 Er:YAG 雷射切除 ~1 μm 即停——這是<strong>「為什麼 Er:YAG 適合精細表皮」</strong>的物理根源。</span>
+<span data-lang="en"><strong>Key numbers:</strong> at 600 nm, skin μ<sub>a</sub> ≈ 0.3 cm⁻¹ and μ<sub>s</sub>' ≈ 20 cm⁻¹ ("scattering-dominant"); penetration (1/e) ~1.5-3 mm. At 800 nm (window) it deepens to ~5 mm. At 2.9 μm (Er:YAG, water absorption peak), μ<sub>a</sub> jumps to ~12,000 cm⁻¹ — so Er:YAG ablates only ~1 μm per pulse, which is <strong>physically why Er:YAG suits delicate skin work</strong>.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="雷射光源" data-en="LASER SOURCES">雷射光源</div>
+<h2 data-zh="二、臨床雷射光源全景" data-en="II. Clinical Laser Sources Overview">二、臨床雷射光源</h2>
+<table class="comp-table"><thead><tr><th data-zh="雷射" data-en="Laser">雷射</th><th data-zh="波長 / 介質" data-en="λ / Medium">波長 / 介質</th><th data-zh="目標發色團" data-en="Target chromophore">目標發色團</th><th data-zh="臨床應用" data-en="Clinical use">臨床應用</th></tr></thead><tbody>
+<tr><td><strong>He-Ne</strong></td><td>633 nm 氣體</td><td data-zh="可見光（治療性弱）" data-en="Visible (weak therapy)">可見光</td><td data-zh="瞄準光、低能量雷射治療（LLLT）" data-en="Aiming beam, low-level laser therapy (LLLT)">瞄準、LLLT</td></tr>
+<tr><td><strong>Argon</strong></td><td>488 / 514 nm 氣體</td><td data-zh="HbO₂, melanin" data-en="HbO₂, melanin">HbO₂, melanin</td><td data-zh="視網膜光凝固（糖尿病黃斑水腫早期）；今多被 532 nm 取代" data-en="Retinal photocoagulation (early DME); largely replaced by 532 nm">視網膜光凝（早期）</td></tr>
+<tr><td><strong>532 nm KTP / Nd:YAG 倍頻</strong></td><td>532 nm 固體</td><td>HbO₂</td><td data-zh="port-wine stain、酒糟、視網膜光凝" data-en="Port-wine stain, rosacea, retinal photocoagulation">皮膚血管病變、視網膜</td></tr>
+<tr><td><strong>CO₂</strong></td><td>10.6 μm 氣體</td><td data-zh="水（吸收係數極高）" data-en="Water (very high μa)">水</td><td data-zh="軟組織切除、皮膚換膚（fractional CO₂）、子宮頸 LEEP" data-en="Soft-tissue cutting, fractional CO₂ resurfacing, LEEP">切除、換膚、LEEP</td></tr>
+<tr><td><strong>Nd:YAG</strong></td><td>1064 nm 固體</td><td data-zh="深層血管、色素（深穿透）" data-en="Deeper vessels, pigment (deep penetration)">深部血管</td><td data-zh="腿部血管、後囊膜混濁 (YAG capsulotomy)" data-en="Leg vessels, posterior capsule opacity (YAG capsulotomy)">腿部血管、YAG capsulotomy</td></tr>
+<tr><td><strong>Ho:YAG</strong></td><td>2.1 μm 固體</td><td data-zh="水（中等高吸收）" data-en="Water (high)">水</td><td data-zh="泌尿科結石碎石（內視鏡下）、攝護腺 HoLEP" data-en="Urology stone lithotripsy (endoscopic), HoLEP prostate">泌尿科結石、HoLEP</td></tr>
+<tr><td><strong>Er:YAG</strong></td><td>2.94 μm 固體</td><td data-zh="水（吸收峰）" data-en="Water (peak)">水（吸收峰）</td><td data-zh="皮膚換膚（極淺）、牙科去蛀" data-en="Skin resurfacing (very shallow), dental caries removal">皮膚換膚、牙科</td></tr>
+<tr><td><strong>Excimer (ArF)</strong></td><td>193 nm 氣體</td><td data-zh="蛋白質、DNA" data-en="Protein, DNA">蛋白質、DNA</td><td data-zh="LASIK / PRK 屈光手術；冠脈鈣化斑塊 (Shockwave/Excimer)" data-en="LASIK / PRK refractive surgery; coronary calcium plaque ablation">LASIK / PRK / 冠脈鈣化</td></tr>
+<tr><td><strong>Femtosecond (Ti:Sapphire / Yb)</strong></td><td>800 / 1030 nm 脈衝</td><td data-zh="光致電離（plasma）" data-en="Photo-ionization (plasma)">電漿</td><td data-zh="LASIK flap (IntraLase, Femto-LASIK)、白內障 FLACS" data-en="LASIK flap (IntraLase, Femto-LASIK), cataract FLACS">LASIK flap、白內障 FLACS</td></tr>
+<tr><td><strong>Diode</strong></td><td>800-980 nm 半導體</td><td data-zh="HbO₂, melanin（中等）" data-en="HbO₂, melanin (moderate)">HbO₂, melanin</td><td data-zh="除毛、PDT 光源、血管病變" data-en="Hair removal, PDT light source, vascular lesions">除毛、PDT</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="雷射手術" data-en="LASER SURGERY">雷射手術</div>
+<h2 data-zh="三、雷射手術四大典範" data-en="III. Four Paradigms of Laser Surgery">三、雷射手術四典範</h2>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">👁️</div><h4>① <span data-zh="LASIK 屈光手術" data-en="LASIK refractive surgery">LASIK 屈光手術</span></h4>
+<div data-lang="zh"><p>原理：femtosecond laser（IntraLase, 2002 FDA）切出 100 μm 厚 corneal flap，掀開後 excimer 193 nm laser 燒蝕角膜基質（每脈衝 ~0.25 μm，無熱損傷的<strong>「光分解 photoablation」</strong>），改變角膜曲率矯正屈光不正。今主流為 Femto-LASIK（IntraLase + WaveLight EX500）與 SMILE（small-incision lenticule extraction，只用 femtosecond 不用 excimer）。並發症：dry eye、ectasia、higher-order aberrations。</p></div>
+<div data-lang="en"><p>How it works: a femtosecond laser (IntraLase, FDA 2002) cuts a ~100 μm corneal flap; an excimer laser at 193 nm ablates the underlying stroma (~0.25 μm per pulse — non-thermal <strong>photoablation</strong>) to reshape corneal curvature and correct refractive error. Today's mainstream: Femto-LASIK (IntraLase + WaveLight EX500) and SMILE (small-incision lenticule extraction; femtosecond only, no excimer). Complications: dry eye, ectasia, higher-order aberrations.</p></div></div>
+
+<div class="card"><div class="card-icon">🔥</div><h4>② <span data-zh="光熱凝固（photocoagulation）" data-en="Photocoagulation">光熱凝固</span></h4>
+<div data-lang="zh"><p>原理：將組織加熱至 60-100 ℃ 蛋白變性。<strong>視網膜光凝</strong>（532 nm 或 577 nm）治療糖尿病視網膜病變、視網膜剝離、黃斑水腫；<strong>panretinal photocoagulation (PRP)</strong> 在周邊視網膜燒出數千點以減少 VEGF 釋放。<strong>軟組織止血</strong>：CO₂ 雷射切除同時封閉小血管。</p></div>
+<div data-lang="en"><p>Tissue heated to 60-100 °C → protein denaturation. <strong>Retinal photocoagulation</strong> (532 / 577 nm) treats diabetic retinopathy, retinal detachment, macular edema; <strong>panretinal photocoagulation (PRP)</strong> places thousands of spots peripherally to reduce VEGF. <strong>Soft-tissue hemostasis</strong>: CO₂ laser cuts while sealing small vessels.</p></div></div>
+
+<div class="card"><div class="card-icon">💊</div><h4>③ <span data-zh="光動力治療（PDT）" data-en="Photodynamic therapy (PDT)">光動力治療 (PDT)</span></h4>
+<div data-lang="zh"><p>原理：「<strong>光敏劑 (photosensitizer) + 光 + 氧</strong>」生成單線態氧 ¹O₂ 與自由基，破壞癌細胞或新生血管。臨床批准光敏劑：</p>
+<ul style="margin-top:.3rem">
+<li><strong>Porfimer sodium (Photofrin)</strong>：食道癌、Barrett's 食道高度異生（用 630 nm 紅光）。</li>
+<li><strong>5-ALA (aminolevulinic acid, Levulan)</strong>：皮膚 actinic keratosis；前體式光敏劑（被組織轉化為 PpIX）。</li>
+<li><strong>Verteporfin (Visudyne)</strong>：濕性 AMD（已多被 anti-VEGF 取代）。</li>
+<li><strong>5-ALA / Gliolan</strong>：膠質瘤螢光導引切除（見下節 fluorescence-guided）。</li>
+</ul></div>
+<div data-lang="en"><p><strong>Photosensitizer + light + oxygen</strong> → singlet oxygen ¹O₂ and radicals → destroy tumor cells or neovasculature. Clinically approved sensitizers:</p>
+<ul style="margin-top:.3rem">
+<li><strong>Porfimer sodium (Photofrin)</strong>: esophageal cancer, high-grade Barrett's (630 nm red light).</li>
+<li><strong>5-ALA (Levulan)</strong>: skin actinic keratosis; pro-drug converted to PpIX in tissue.</li>
+<li><strong>Verteporfin (Visudyne)</strong>: wet AMD (mostly displaced by anti-VEGF).</li>
+<li><strong>5-ALA / Gliolan</strong>: fluorescence-guided glioma resection (next section).</li>
+</ul></div></div>
+
+<div class="card"><div class="card-icon">💥</div><h4>④ <span data-zh="光致電離與光衝擊（photodisruption）" data-en="Photodisruption">光致電離 / 光衝擊</span></h4>
+<div data-lang="zh"><p>原理：超短脈衝（fs/ps）雷射在組織內聚焦達 ~10¹⁰ W/cm²，產生 plasma → 衝擊波 → 機械切割。<strong>應用：</strong>YAG capsulotomy（後囊膜混濁）、femtosecond LASIK flap、FLACS 白內障手術（IntraLase iFS、LenSx、Catalys）。優勢：對周邊組織熱影響極小（&lt; 1 μm）。</p></div>
+<div data-lang="en"><p>Ultrashort pulses (fs/ps) focused to ~10¹⁰ W/cm² generate plasma → shockwave → mechanical cleavage. <strong>Apps:</strong> YAG capsulotomy (posterior capsule opacification), femtosecond LASIK flap, FLACS cataract (IntraLase iFS, LenSx, Catalys). Pro: thermal damage to adjacent tissue is &lt;1 μm.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="光學成像" data-en="OPTICAL IMAGING">光學成像</div>
+<h2 data-zh="四、光學顯微成像的層級" data-en="IV. Optical Microscopy Hierarchy">四、光學顯微成像</h2>
+<div data-lang="zh">
+<p>光學顯微鏡受 <strong>Abbe 繞射極限</strong>限制：d ≈ λ/(2·NA) ≈ 200 nm（可見光、NA 1.4）。整個現代光學顯微鏡發展史，就是「如何穿透 Abbe 極限」的歷史：</p>
+<ul>
+<li><strong>共軛焦顯微鏡（Confocal, Minsky 1955 patent / Zeiss 1980s 商品化）：</strong>pinhole 排除焦面外散射光，提升軸向解析力；可做光學切片。</li>
+<li><strong>雙光子顯微鏡（Two-photon, Denk &amp; Webb 1990 Cornell）：</strong>用 ~800 nm fs laser 同時吸收兩光子（局部高光通量處才有），等效於 ~400 nm 激發，但用近紅外光穿透更深（~ 1 mm 腦皮質）；無焦面外漂白。已成神經科學標配。</li>
+<li><strong>光片照明顯微鏡（Light-sheet, SPIM, Huisken 2004）：</strong>從側面打出薄片光、垂直方向拍攝；對 zebrafish 胚胎、清明組織、organoid 整體成像極快、漂白少。</li>
+<li><strong>超解析（Super-Resolution）：</strong>
+  <ul>
+    <li><strong>STED</strong>（Hell 1994, 2014 Nobel）：用環狀「stimulated emission」光抹掉激發點周邊螢光，解析 30-70 nm。</li>
+    <li><strong>PALM / STORM</strong>（Betzig / Hess / Zhuang, 2014 Nobel）：螢光分子隨機開關，定位到 10-30 nm 後重建。</li>
+    <li><strong>MINFLUX</strong>（Hell 2017）：結合 STED 環狀光與單分子定位，~1-3 nm 解析（目前光學顯微極限）。</li>
+  </ul>
+</li>
+</ul>
+</div>
+<div data-lang="en">
+<p>Light microscopy is bounded by <strong>Abbe's diffraction limit</strong>: d ≈ λ/(2·NA) ≈ 200 nm (visible, NA 1.4). Modern microscopy history is the story of breaking that limit:</p>
+<ul>
+<li><strong>Confocal (Minsky 1955 patent / Zeiss commercial 1980s):</strong> a pinhole rejects out-of-focus scatter, sharpens axial resolution, enables optical sectioning.</li>
+<li><strong>Two-photon (Denk &amp; Webb 1990 Cornell):</strong> simultaneous absorption of two ~800 nm fs photons (only at the focal point's high flux), equivalent to ~400 nm excitation but with NIR penetration (~1 mm in cortex); no out-of-focus bleaching. The neuroscience workhorse.</li>
+<li><strong>Light-sheet (SPIM, Huisken 2004):</strong> illuminate a thin orthogonal sheet, image perpendicular — extremely fast and low-bleach whole-embryo/organoid imaging.</li>
+<li><strong>Super-resolution:</strong>
+  <ul>
+    <li><strong>STED</strong> (Hell 1994; Nobel 2014): a donut-shaped stimulated-emission beam erases peripheral fluorescence, yielding 30-70 nm.</li>
+    <li><strong>PALM / STORM</strong> (Betzig / Hess / Zhuang; Nobel 2014): stochastic on-off blinking lets you localize each molecule to 10-30 nm, then reconstruct.</li>
+    <li><strong>MINFLUX</strong> (Hell 2017): combines STED's donut with single-molecule localization — ~1-3 nm resolution (current optical frontier).</li>
+  </ul>
+</li>
+</ul>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="OCT" data-en="OCT">OCT</div>
+<h2 data-zh="五、光學同調斷層 (OCT)：眼科的 CT 革命" data-en="V. Optical Coherence Tomography (OCT): Ophthalmology's CT Revolution">五、OCT 光學同調斷層</h2>
+<div data-lang="zh">
+<p><strong>OCT（Optical Coherence Tomography）</strong>由 Huang, Fujimoto, Puliafito 等於 MIT 1991 提出。原理：用<strong>低同調寬頻光源（superluminescent diode, SLD，~50-100 nm bandwidth）</strong>+ Michelson 干涉儀；只有「光程差等於 reference arm」的反射光會在偵測器產生干涉訊號——這就決定了「Z 軸解析」能達到 ~ 1-15 μm（取決於 bandwidth）。</p>
+<p>OCT 演進：</p>
+<ul>
+<li><strong>Time-Domain OCT (TD-OCT)：</strong>1991-2005 主流，移動 reference mirror 機械掃描；軸向 ~10-15 μm；速度慢（每幀數秒）。</li>
+<li><strong>Spectral-Domain OCT (SD-OCT)：</strong>2003+ 用光譜儀 + 傅立葉轉換；速度提升 50-100 倍（每秒 25,000 A-scans），軸向 ~5-7 μm。</li>
+<li><strong>Swept-Source OCT (SS-OCT)：</strong>1050 nm 可調波長雷射，A-scan rate 100,000-400,000 Hz，深度可達 6 mm（穿透視網膜進入 choroid 與 vitreous）。</li>
+<li><strong>OCT-Angiography (OCTA)：</strong>2014+，用連續多幀的「decorrelation」偵測血流，不需打顯影劑就能成像視網膜微血管網（FAZ、糖尿病視網膜病變）。</li>
+</ul>
+<p><strong>臨床應用：</strong></p>
+<ul>
+<li><strong>視網膜 OCT</strong>（Heidelberg Spectralis、Zeiss Cirrus、Topcon Maestro2、Optos Silverstone）：DR/AMD/glaucoma/macular hole 黃金標準；每年全球做 &gt; 3 千萬次掃描。</li>
+<li><strong>心血管 OCT（intravascular, IV-OCT）</strong>：Abbott Optis / Dragonfly OPTIS imaging catheter，3 mm 視野、10 μm 解析；冠脈支架 apposition、新生內膜、易碎斑塊評估。</li>
+<li><strong>皮膚 OCT</strong>：VivoSight Dx 用於基底細胞癌（BCC）邊界判斷。</li>
+<li><strong>食道 / 子宮頸 OCT</strong>：研究階段 + 部分臨床應用。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p><strong>OCT</strong> was proposed by Huang, Fujimoto, Puliafito at MIT in 1991. Principle: a <strong>low-coherence broadband source (superluminescent diode, ~50-100 nm bandwidth)</strong> in a Michelson interferometer — only reflections whose path-length matches the reference arm produce interference. That sets Z-axis resolution at ~1-15 μm (bandwidth-dependent).</p>
+<p>OCT generations:</p>
+<ul>
+<li><strong>Time-Domain (TD-OCT):</strong> 1991-2005 mainstream; mechanically scanning reference mirror; ~10-15 μm axial; slow (seconds/frame).</li>
+<li><strong>Spectral-Domain (SD-OCT):</strong> 2003+ uses spectrometer + FFT; 50-100× faster (25,000 A-scans/s), ~5-7 μm axial.</li>
+<li><strong>Swept-Source (SS-OCT):</strong> tunable 1050 nm laser, 100,000-400,000 Hz A-scans, 6 mm depth (penetrates retina into choroid/vitreous).</li>
+<li><strong>OCT-Angiography (OCTA, 2014+):</strong> decorrelation between consecutive frames maps blood flow without contrast dye — visualizes retinal capillary plexus (FAZ, diabetic retinopathy).</li>
+</ul>
+<p><strong>Clinical apps:</strong></p>
+<ul>
+<li><strong>Retinal OCT</strong> (Heidelberg Spectralis, Zeiss Cirrus, Topcon Maestro2, Optos Silverstone): gold standard for DR/AMD/glaucoma/macular hole; &gt;30 M scans/year globally.</li>
+<li><strong>Intravascular OCT (IV-OCT):</strong> Abbott Optis / Dragonfly OPTIS catheter, 3 mm field, 10 μm resolution; coronary stent apposition, neointima, vulnerable plaque.</li>
+<li><strong>Skin OCT:</strong> VivoSight Dx for basal cell carcinoma margins.</li>
+<li><strong>Esophageal / cervical OCT:</strong> research with some clinical use.</li>
+</ul>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="螢光導引手術" data-en="FLUORESCENCE-GUIDED SURGERY">螢光導引</div>
+<h2 data-zh="六、螢光導引手術：ICG 與 5-ALA" data-en="VI. Fluorescence-Guided Surgery: ICG and 5-ALA">六、螢光導引手術</h2>
+<div data-lang="zh">
+<p>手術中的螢光成像讓外科醫師「在組織裡看見看不見的東西」：</p>
+<ul>
+<li><strong>ICG（Indocyanine green）：</strong>FDA 1959 核可，激發 ~ 805 nm、發射 ~ 830 nm（NIR）。靜脈注射後 2-3 分鐘進入循環，受白蛋白結合、由肝臟排出（半衰期 3-4 min）。臨床用途：(1) <strong>前哨淋巴結</strong>（乳癌、黑色素瘤、子宮頸癌）— Stryker SPY-PHI、Novadaq Pinpoint；(2) <strong>膽道解剖</strong>（達文西 Firefly mode 顯示總膽管）；(3) <strong>組織灌流</strong>（皮瓣、腸吻合存活性）；(4) <strong>肝臟腫瘤</strong>（蓄積於 HCC 與肝細胞）。</li>
+<li><strong>5-ALA / Gliolan（5-aminolevulinic acid）：</strong>口服前體 → 在膠質瘤細胞內代謝為 PpIX（protoporphyrin IX）→ 405 nm 藍光下發出紅色螢光。<strong>2017 FDA 核可</strong>用於 high-grade glioma 切除導引；歐洲已使用十餘年。ALA-Glioma Study（Stummer 2006 Lancet Oncol）顯示完整切除率自 36% 提升至 65%、6 個月無進展存活率提升。</li>
+<li><strong>FITC / GFP / mCherry：</strong>研究用螢光蛋白。</li>
+<li><strong>Tumor-targeted NIR probes（OTL38 pafolacianine, ON-101）：</strong>葉酸受體靶向螢光劑；OTL38 2021 FDA 核可用於卵巢癌、2022 核可用於肺癌螢光導引切除。</li>
+</ul>
+<p>外科設備整合：Stryker SPY Elite/PHI/Q、Karl Storz NIR/ICG、Olympus VISERA ELITE NIR、Intuitive da Vinci Xi/SP Firefly。</p>
+</div>
+<div data-lang="en">
+<p>Intraoperative fluorescence lets surgeons "see the invisible in tissue":</p>
+<ul>
+<li><strong>ICG (indocyanine green):</strong> FDA-approved 1959, excitation ~805 nm, emission ~830 nm (NIR). IV-injected, binds albumin, hepatic clearance (t½ 3-4 min). Uses: (1) <strong>sentinel lymph node</strong> (breast, melanoma, cervical) — Stryker SPY-PHI, Novadaq Pinpoint; (2) <strong>biliary anatomy</strong> (da Vinci Firefly highlights common bile duct); (3) <strong>tissue perfusion</strong> (flap, bowel anastomosis viability); (4) <strong>liver tumors</strong> (HCC accumulation).</li>
+<li><strong>5-ALA / Gliolan:</strong> oral prodrug → metabolized to PpIX in glioma cells → red fluorescence under 405 nm blue light. <strong>FDA-approved 2017</strong> for high-grade glioma resection guidance; widely used in Europe for over a decade. The ALA-Glioma Study (Stummer 2006 Lancet Oncol) raised complete resection from 36% to 65% with improved 6-month PFS.</li>
+<li><strong>FITC / GFP / mCherry:</strong> research fluorescent reporters.</li>
+<li><strong>Tumor-targeted NIR probes (OTL38 pafolacianine, ON-101):</strong> folate-receptor-targeted; OTL38 FDA-approved 2021 (ovarian cancer) and 2022 (lung cancer) for fluorescence-guided resection.</li>
+</ul>
+<p>Surgical platforms: Stryker SPY Elite/PHI/Q, Karl Storz NIR/ICG, Olympus VISERA ELITE NIR, Intuitive da Vinci Xi/SP Firefly.</p>
+</div>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>螢光導引不是「魔法」：</strong>ICG 的特異性來自<strong>血管動力學</strong>（不是分子靶向），所以「ICG 亮 = 腫瘤」其實只在<strong>HCC、blood-rich tumor、灌流活性</strong>等特定情境正確。5-ALA 不在低惡性度膠質瘤（low-grade glioma）發出強訊號。Tumor-targeted probes（OTL38）是下一代「分子靶向」螢光劑。</span>
+<span data-lang="en"><strong>Fluorescence guidance is not magic:</strong> ICG specificity stems from <strong>vascular dynamics</strong>, not molecular targeting — "ICG-bright = tumor" holds only in HCC, blood-rich tumors, and viable perfusion. 5-ALA fluoresces poorly in low-grade gliomas. Tumor-targeted probes (OTL38) represent the next generation of molecularly-targeted fluorescence.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="光聲與光譜" data-en="PHOTOACOUSTIC &amp; SPECTROSCOPY">光聲 / 光譜</div>
+<h2 data-zh="七、光聲成像與光譜技術" data-en="VII. Photoacoustic Imaging &amp; Spectroscopy">七、光聲成像與光譜技術</h2>
+<div class="card-grid cols-2">
+<div class="card"><h4>🔊 <span data-zh="光聲成像（Photoacoustic, PAI）" data-en="Photoacoustic imaging (PAI)">光聲成像 (PAI)</span></h4>
+<div data-lang="zh"><p>原理：奈秒級脈衝雷射照射組織 → 局部熱膨脹 → 產生超音波 → 用超音波 transducer 接收。<strong>「光的對比 + 超音波的解析與穿透」</strong>。對血紅蛋白、黑色素天然有對比，可做 3-7 cm 深度的血氧成像、黑色素瘤 staging。代表系統：iThera MSOT、Seno Imaging Imagio（首支 FDA 核可的 OA/US 乳房成像系統，2021）。</p></div>
+<div data-lang="en"><p>Nanosecond pulsed laser → local thermal expansion → ultrasound emission → US transducer. <strong>"Optical contrast + ultrasound resolution &amp; depth."</strong> Intrinsic contrast for HbO₂/Hb and melanin enables 3-7 cm-deep oxygenation imaging and melanoma staging. Systems: iThera MSOT, Seno Imaging Imagio (first FDA-cleared OA/US breast imager, 2021).</p></div></div>
+
+<div class="card"><h4>🌈 <span data-zh="拉曼光譜（Raman）" data-en="Raman spectroscopy">拉曼光譜</span></h4>
+<div data-lang="zh"><p>原理：非彈性散射 — 入射光子失去/獲得分子振動能量 → 出射光譜「指紋」即組成。<strong>無標籤、無破壞、分子特異性</strong>。SERS（Surface-Enhanced Raman Spectroscopy）以金/銀奈米結構增強 10⁶-10¹⁰。臨床應用：腦腫瘤邊界（Reichmann 2020 Neurosurgery）、stimulated Raman histology（NIO Imaging，神經外科術中組織學）。</p></div>
+<div data-lang="en"><p>Inelastic scattering — incident photons lose/gain vibrational energy → "fingerprint" spectrum. <strong>Label-free, non-destructive, molecule-specific</strong>. SERS (Surface-Enhanced Raman) enhances 10⁶-10¹⁰ with Au/Ag nanostructures. Clinical: brain tumor margins (Reichmann 2020 Neurosurgery), stimulated Raman histology (NIO Imaging, intraoperative neuropathology).</p></div></div>
+
+<div class="card"><h4>📡 <span data-zh="FTIR 光譜" data-en="FTIR spectroscopy">FTIR 光譜</span></h4>
+<div data-lang="zh"><p>傅立葉轉換紅外光譜：中紅外（4000-400 cm⁻¹）量分子振動轉動。臨床用於組織分型、生物液體分析、製藥 QC。ATR-FTIR（衰減全反射）可直接量水溶液樣品。</p></div>
+<div data-lang="en"><p>Fourier-transform infrared spectroscopy — mid-IR (4000-400 cm⁻¹) probes vibrations/rotations. Used for tissue typing, biofluid analysis, pharma QC. ATR-FTIR (attenuated total reflection) handles aqueous samples directly.</p></div></div>
+
+<div class="card"><h4>🧠 <span data-zh="NIRS 近紅外光譜" data-en="NIRS (near-infrared spectroscopy)">NIRS 近紅外</span></h4>
+<div data-lang="zh"><p>用 700-900 nm 光穿透頭骨進入腦皮質（穿透 ~ 1.5 cm），量 oxy-Hb 與 deoxy-Hb 變化估腦氧合與血流。fNIRS（functional NIRS）作為 fMRI 的可攜替代品。腦氧監測儀（Masimo O3、Medtronic INVOS）用於心臟手術 / ICU 監測 cerebral oxygenation。</p></div>
+<div data-lang="en"><p>700-900 nm light penetrates skull into cortex (~1.5 cm depth), tracking oxy-Hb and deoxy-Hb to estimate cerebral oxygenation/flow. fNIRS is a portable alternative to fMRI. Cerebral oximeters (Masimo O3, Medtronic INVOS) monitor cerebral oxygenation in cardiac surgery / ICU.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="光遺傳" data-en="OPTOGENETICS">光遺傳學</div>
+<h2 data-zh="八、光遺傳學（Optogenetics）" data-en="VIII. Optogenetics">八、光遺傳學</h2>
+<div data-lang="zh">
+<p>光遺傳學是 21 世紀神經科學的革命性技術：<strong>把光敏離子通道基因（opsin）植入特定神經元，再用光精準開關它們</strong>。三個關鍵分子：</p>
+<ul>
+<li><strong>Channelrhodopsin-2 (ChR2)：</strong>Karl Deisseroth + Ed Boyden + Feng Zhang 2005 Stanford；藍光（470 nm）開啟陽離子通道 → 神經元去極化（excitation）。源自綠藻 <em>Chlamydomonas reinhardtii</em>。</li>
+<li><strong>Halorhodopsin (NpHR)：</strong>黃光（580 nm）開啟氯離子幫浦 → 神經元超極化（inhibition）。源自 <em>Natronomonas pharaonis</em>。</li>
+<li><strong>Archaerhodopsin (Arch)：</strong>綠光開啟質子幫浦 → 強力 hyperpolarization。</li>
+</ul>
+<p><strong>臨床轉譯：</strong></p>
+<ul>
+<li><strong>GenSight Biologics GS030（CNGA2/ChrimsonR + AAV）：</strong>視網膜色素變性（retinitis pigmentosa, RP）患者。Sahel et al. <em>Nature Medicine</em> 2021 報告首例患者：注射 AAV 攜帶 ChrimsonR 後，配合特製 goggle，58 歲全盲患者可定位、計數桌上物件——<strong>首例光遺傳學人類視覺修復</strong>。</li>
+<li><strong>Bionic Sight BS01 / Nanoscope MCO-010：</strong>競爭管線，多中心 phase 2 進行中。</li>
+<li><strong>RetroSense Therapeutics（後被 Allergan 收購）RST-001：</strong>原始首例（2016 IND 啟動）的 RP optogenetic 計畫。</li>
+</ul>
+<p>挑戰：(1) 需配戴特製 goggle 把可見光轉成 channelrhodopsin 可激發的高強度單一波長；(2) opsin 對光敏度遠低於人類視紫質，需要 ~ 10⁵× 高的光強度；(3) 只能取代「在 cone 缺失但 bipolar / ganglion cell 仍存活」的患者；(4) 長期 ChrimsonR 表達穩定性仍在追蹤。</p>
+</div>
+<div data-lang="en">
+<p>Optogenetics is the 21st-century neuroscience revolution: <strong>insert light-sensitive ion-channel genes (opsins) into specific neurons, then turn them on/off with light</strong>. Three key molecules:</p>
+<ul>
+<li><strong>Channelrhodopsin-2 (ChR2):</strong> Deisseroth + Boyden + Zhang, Stanford 2005; blue light (470 nm) opens cation channel → neuronal depolarization (excitation). From the green alga <em>Chlamydomonas reinhardtii</em>.</li>
+<li><strong>Halorhodopsin (NpHR):</strong> yellow light (580 nm) drives Cl⁻ pump → hyperpolarization (inhibition). From <em>Natronomonas pharaonis</em>.</li>
+<li><strong>Archaerhodopsin (Arch):</strong> green light drives proton pump → strong hyperpolarization.</li>
+</ul>
+<p><strong>Clinical translation:</strong></p>
+<ul>
+<li><strong>GenSight Biologics GS030 (ChrimsonR via AAV):</strong> retinitis pigmentosa (RP). Sahel et al. <em>Nature Medicine</em> 2021 reported the first patient — a 58-year-old fully blind patient, after AAV-ChrimsonR injection plus a custom light-stimulating goggle, could locate and count objects on a table. <strong>The first optogenetic vision restoration in a human.</strong></li>
+<li><strong>Bionic Sight BS01 / Nanoscope MCO-010:</strong> competing pipelines in multi-center phase 2.</li>
+<li><strong>RetroSense Therapeutics (acquired by Allergan) RST-001:</strong> the original first-in-human RP optogenetic program (IND 2016).</li>
+</ul>
+<p>Challenges: (1) requires goggle to convert ambient light into high-intensity narrow-band light an opsin can absorb; (2) opsin photosensitivity is ~10⁵× lower than human rhodopsin, so high intensity is needed; (3) only works when cones are lost but bipolar/ganglion cells survive; (4) long-term ChrimsonR expression stability is still under study.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="脈搏血氧深入" data-en="PULSE OXIMETRY DEEP DIVE">脈搏血氧</div>
+<h2 data-zh="九、脈搏血氧儀深入：Beer-Lambert 的臨床應用" data-en="IX. Pulse Oximetry Deep Dive: Beer-Lambert in the Clinic">九、脈搏血氧深入解析</h2>
+<div data-lang="zh">
+<p>脈搏血氧儀是<strong>「Beer-Lambert 定律 + ratio-of-ratios」</strong>最成功的工程化案例之一。原理回顧（D2 章已建立）：兩波長（660 nm 紅光、940 nm NIR），測動脈搏動 AC / 直流 DC 比，得：</p>
+<div style="background:#831843;color:white;padding:.6rem 1rem;border-radius:.5rem;font-family:monospace;text-align:center;font-size:.95rem;margin:.5rem 0;">
+R = (AC<sub>660</sub>/DC<sub>660</sub>) / (AC<sub>940</sub>/DC<sub>940</sub>) &nbsp; → &nbsp; SpO₂ ≈ 110 − 25·R （經驗 fit）
+</div>
+<p>深入細節：</p>
+<ul>
+<li><strong>Isobestic 波長 ~ 805 nm：</strong>HbO₂ 與 Hb 的莫耳吸收係數相等，可用為 reference。NIRS（cerebral oximeter）即用此波長 + 一根 660 nm 或 730 nm。</li>
+<li><strong>Pulse oximeter 假設只有 HbO₂ + Hb 兩物種。</strong>但血液實際上還有：<strong>COHb（一氧化碳血紅蛋白）</strong>、<strong>MetHb（甲基血紅蛋白）</strong>、<strong>SulfHb</strong>。標準兩波長 pulse oximeter 把 COHb 誤判為 HbO₂（兩者在 660 nm 吸收相似），故 CO 中毒患者 SpO₂ 假性正常。</li>
+<li><strong>CO-oximetry：</strong>Masimo Rainbow 系列用 7-12 個波長，可額外量 COHb、MetHb、SpHb（總血紅蛋白）、PVI（plethysmography variability index，灌流變異度）。</li>
+<li><strong>2024 FDA 公告：</strong>修訂 pulse oximeter accuracy guidance，要求 calibration cohort 含足量深膚色受測者（≥ 25% 受試者為深膚色），以減少 occult hypoxia 偏差。多家廠商（Masimo、Nonin、Medtronic Nellcor）已發布或公告 race-neutral 校正算法。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p>The pulse oximeter is one of the most successful engineering applications of <strong>Beer-Lambert + ratio-of-ratios</strong>. Recap (built in D2): two wavelengths (660 nm red, 940 nm NIR) measure arterial AC over DC and yield:</p>
+<div style="background:#831843;color:white;padding:.6rem 1rem;border-radius:.5rem;font-family:monospace;text-align:center;font-size:.95rem;margin:.5rem 0;">
+R = (AC<sub>660</sub>/DC<sub>660</sub>) / (AC<sub>940</sub>/DC<sub>940</sub>) &nbsp; → &nbsp; SpO₂ ≈ 110 − 25·R (empirical fit)
+</div>
+<p>Deeper points:</p>
+<ul>
+<li><strong>Isobestic wavelength ~805 nm:</strong> HbO₂ and Hb have equal molar absorptivity, serving as a reference. NIRS cerebral oximeters use this + 660 or 730 nm.</li>
+<li><strong>Pulse oximeters assume only HbO₂ + Hb.</strong> Blood also contains <strong>COHb</strong>, <strong>MetHb</strong>, <strong>SulfHb</strong>. A standard 2-λ device confuses COHb with HbO₂ (similar 660 nm absorption), so SpO₂ reads falsely normal in CO poisoning.</li>
+<li><strong>CO-oximetry:</strong> Masimo Rainbow series uses 7-12 wavelengths, also measuring COHb, MetHb, SpHb (total Hb), PVI (plethysmography variability index).</li>
+<li><strong>2024 FDA action:</strong> revised pulse oximeter accuracy guidance requires calibration cohorts with sufficient dark-skin representation (≥25% of subjects), reducing occult hypoxia bias. Masimo, Nonin, and Medtronic Nellcor have released or announced race-neutral correction algorithms.</li>
+</ul>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖" data-en="INTERACTIVE">互動圖</div>
+<h2 data-zh="十、組織穿透深度 vs 波長互動圖" data-en="X. Tissue Penetration Depth vs Wavelength">十、組織穿透深度模擬</h2>
+<div data-lang="zh"><p>下圖顯示三種典型雷射波長（532 nm 綠、660 nm 紅、940 nm NIR）在皮膚 + 皮下組織中的<strong>強度衰減曲線</strong>（Beer-Lambert）。可拖曳滑桿改變初始光強度 I₀，觀察穿透深度（1/e 衰減點）變化。注意「光學窗」(660-940 nm) 在 1-5 mm 深度仍有顯著訊號。</p></div>
+<div data-lang="en"><p>The chart shows Beer-Lambert attenuation in skin + subcutaneous tissue for three typical laser wavelengths (532 nm green, 660 nm red, 940 nm NIR). Drag the slider to change initial intensity I₀ and watch the 1/e penetration depth shift. Note that the "optical window" (660-940 nm) retains significant signal at 1-5 mm depth.</p></div>
+<div class="interactive-panel">
+<div class="toggle-row" style="flex-wrap:wrap;gap:.5rem;align-items:center;">
+  <label style="font-size:.9rem;color:var(--c-ink-muted);"><span data-zh="初始光強度 I₀ (W/cm²)：" data-en="Initial intensity I₀ (W/cm²):">初始光強度 I₀ (W/cm²)：</span> <span id="i0Val" style="font-weight:600;">1.00</span></label>
+  <input type="range" id="i0Slider" min="0.1" max="5" step="0.05" value="1" style="flex:1;min-width:200px;">
+</div>
+<div class="chart-container"><canvas id="penChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">綠：532 nm（α≈3.0/mm）；紅：660 nm（α≈0.6/mm）；藍：940 nm（α≈0.4/mm）。</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Green: 532 nm (α≈3.0/mm) · Red: 660 nm (α≈0.6/mm) · Blue: 940 nm (α≈0.4/mm).</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="十一、給定臨床需求，怎麼選光學技術？" data-en="XI. Which Photonic Technology for Which Need?">十一、光電技術選擇決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="生醫光電選擇 6 問" data-en="Biophotonics Selection: 6 Questions">生醫光電選擇 6 問</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">需在水含量高的組織做極淺表 ablation（皮膚、牙）？<span class="dt-arrow">→</span> Er:YAG 2.94 μm；穿透 ~ 1 μm。</span><span data-lang="en">Need ultra-shallow ablation in water-rich tissue (skin, dental)? <span class="dt-arrow">→</span> Er:YAG 2.94 μm; ~1 μm penetration.</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">需切割並止血（軟組織手術）？<span class="dt-arrow">→</span> CO₂ 10.6 μm；切割 + 凝固。</span><span data-lang="en">Need cutting with hemostasis (soft tissue surgery)? <span class="dt-arrow">→</span> CO₂ 10.6 μm; cut + coagulate.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">需精準角膜成形（LASIK）？<span class="dt-arrow">→</span> 193 nm Excimer + 800 nm femtosecond（flap）。</span><span data-lang="en">Need precise corneal shaping (LASIK)? <span class="dt-arrow">→</span> 193 nm Excimer + 800 nm femtosecond (flap).</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">需腫瘤切除導引但 MRI 不可即時？<span class="dt-arrow">→</span> 5-ALA / Gliolan（膠質瘤）、ICG（HCC、灌流）、OTL38（卵巢、肺癌）。</span><span data-lang="en">Need intraop tumor resection guidance without realtime MRI? <span class="dt-arrow">→</span> 5-ALA/Gliolan (glioma), ICG (HCC, perfusion), OTL38 (ovarian, lung).</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">需看視網膜微結構（DR、AMD、青光眼）？<span class="dt-arrow">→</span> OCT（SD-OCT、SS-OCT、OCTA）。</span><span data-lang="en">Need to see retinal microstructure (DR, AMD, glaucoma)? <span class="dt-arrow">→</span> OCT (SD-OCT, SS-OCT, OCTA).</span></div>
+<div class="dt-node"><span class="dt-q">Q6.</span><span data-lang="zh">需腦皮質非侵入血氧監測？<span class="dt-arrow">→</span> NIRS（Masimo O3、Medtronic INVOS、fNIRS）。</span><span data-lang="en">Need non-invasive cortical oxygenation monitoring? <span class="dt-arrow">→</span> NIRS (Masimo O3, Medtronic INVOS, fNIRS).</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="十二、Beer-Lambert 衰減計算 + SpO₂ 從 R 推算" data-en="XII. Beer-Lambert Attenuation + SpO₂ from R-ratio">十二、Beer-Lambert + SpO₂ 計算</h2>
+<div data-lang="zh"><p>以下實作兩件事：(1) 給定波長吸收係數 α 與組織厚度 x，計算穿透剩餘光強 I = I₀ e^(−αx)；(2) 給定 660 / 940 nm 的 AC/DC，計算 ratio-of-ratios R 與經驗 SpO₂。</p></div>
+<div data-lang="en"><p>Two things below: (1) given α and tissue thickness x, compute I = I₀·e^(−αx); (2) given 660/940 nm AC/DC, compute R and the empirical SpO₂ estimate.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="comment"># ===== Part 1: Beer-Lambert tissue penetration =====</span>
+x = np.<span class="func">linspace</span>(<span class="num">0</span>, <span class="num">10</span>, <span class="num">500</span>)            <span class="comment"># depth in mm</span>
+alpha = {<span class="str">'532 nm (green)'</span>: <span class="num">3.0</span>,         <span class="comment"># /mm, dominated by HbO2</span>
+         <span class="str">'660 nm (red)'</span>:   <span class="num">0.6</span>,         <span class="comment"># window edge</span>
+         <span class="str">'940 nm (NIR)'</span>:   <span class="num">0.4</span>}        <span class="comment"># deep window</span>
+I0 = <span class="num">1.0</span>
+plt.<span class="func">figure</span>(figsize=(<span class="num">8</span>,<span class="num">4</span>))
+<span class="kw">for</span> name,a <span class="kw">in</span> alpha.<span class="func">items</span>():
+    I = I0 * np.<span class="func">exp</span>(-a*x)
+    plt.<span class="func">plot</span>(x, I, label=f<span class="str">'{name}, α={a}/mm'</span>)
+plt.<span class="func">axhline</span>(<span class="num">1</span>/np.<span class="func">exp</span>(<span class="num">1</span>), color=<span class="str">'gray'</span>, ls=<span class="str">'--'</span>, label=<span class="str">'1/e'</span>)
+plt.<span class="func">xlabel</span>(<span class="str">'depth (mm)'</span>); plt.<span class="func">ylabel</span>(<span class="str">'normalized intensity'</span>)
+plt.<span class="func">title</span>(<span class="str">'Beer-Lambert tissue penetration'</span>); plt.<span class="func">legend</span>(); plt.<span class="func">grid</span>(alpha=<span class="num">.3</span>)
+
+<span class="comment"># ===== Part 2: Pulse-ox SpO2 from R-ratio =====</span>
+<span class="kw">def</span> <span class="func">spo2_from_ratio</span>(ac660, dc660, ac940, dc940):
+    R = (ac660/dc660) / (ac940/dc940)
+    spo2 = <span class="num">110</span> - <span class="num">25</span>*R                   <span class="comment"># empirical, valid 0.4 &lt; R &lt; 3.4</span>
+    <span class="kw">return</span> R, <span class="func">max</span>(<span class="num">70</span>, <span class="func">min</span>(<span class="num">100</span>, spo2))
+
+<span class="comment"># Healthy normoxic example</span>
+R,sp = <span class="func">spo2_from_ratio</span>(<span class="num">0.06</span>,<span class="num">1.0</span>, <span class="num">0.10</span>,<span class="num">1.0</span>)
+<span class="func">print</span>(f<span class="str">'Normoxia : R={R:.2f}, SpO2≈{sp:.1f}%'</span>)
+<span class="comment"># Hypoxic example (less pulsatile signal at 940 nm)</span>
+R,sp = <span class="func">spo2_from_ratio</span>(<span class="num">0.10</span>,<span class="num">1.0</span>, <span class="num">0.07</span>,<span class="num">1.0</span>)
+<span class="func">print</span>(f<span class="str">'Hypoxia  : R={R:.2f}, SpO2≈{sp:.1f}%'</span>)
+
+plt.<span class="func">tight_layout</span>(); plt.<span class="func">show</span>()</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% ===== Part 1: Beer-Lambert tissue penetration =====</span>
+x = <span class="func">linspace</span>(<span class="num">0</span>, <span class="num">10</span>, <span class="num">500</span>);                  <span class="comment">% depth (mm)</span>
+alpha = [<span class="num">3.0</span> <span class="num">0.6</span> <span class="num">0.4</span>];                       <span class="comment">% /mm for 532/660/940 nm</span>
+names = {<span class="str">'532 nm'</span> <span class="str">'660 nm'</span> <span class="str">'940 nm'</span>};
+I0 = <span class="num">1.0</span>;
+
+<span class="func">figure</span>; <span class="func">hold on</span>;
+<span class="kw">for</span> k = <span class="num">1</span>:<span class="num">3</span>
+    I = I0 * <span class="func">exp</span>(-alpha(k)*x);
+    <span class="func">plot</span>(x, I, <span class="str">'LineWidth'</span>, <span class="num">1.5</span>, <span class="str">'DisplayName'</span>, names{k});
+<span class="kw">end</span>
+<span class="func">yline</span>(<span class="num">1</span>/<span class="func">exp</span>(<span class="num">1</span>), <span class="str">'--'</span>, <span class="str">'1/e'</span>);
+<span class="func">xlabel</span>(<span class="str">'depth (mm)'</span>); <span class="func">ylabel</span>(<span class="str">'normalized intensity'</span>);
+<span class="func">title</span>(<span class="str">'Beer-Lambert tissue penetration'</span>); <span class="func">legend</span>; <span class="func">grid on</span>;
+
+<span class="comment">% ===== Part 2: SpO2 from R-ratio =====</span>
+spo2 = @(ac660,dc660,ac940,dc940) <span class="func">deal</span>( ...
+        (ac660/dc660)/(ac940/dc940), ...
+        <span class="func">max</span>(<span class="num">70</span>, <span class="func">min</span>(<span class="num">100</span>, <span class="num">110</span> - <span class="num">25</span>*(ac660/dc660)/(ac940/dc940))));
+
+[R, sp] = spo2(<span class="num">0.06</span>,<span class="num">1.0</span>, <span class="num">0.10</span>,<span class="num">1.0</span>);
+<span class="func">fprintf</span>(<span class="str">'Normoxia: R=%.2f, SpO2=%.1f%%\n'</span>, R, sp);
+[R, sp] = spo2(<span class="num">0.10</span>,<span class="num">1.0</span>, <span class="num">0.07</span>,<span class="num">1.0</span>);
+<span class="func">fprintf</span>(<span class="str">'Hypoxia : R=%.2f, SpO2=%.1f%%\n'</span>, R, sp);</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十三、本章關鍵術語" data-en="XIII. Key Terms">十三、關鍵術語</h2>
+<p><span class="term">Beer-Lambert<span class="term-tip">I = I₀·e^(−αx)；α 為吸收係數，pulse oximeter 與 NIRS 的物理基礎。</span></span> &nbsp;
+<span class="term">Optical window<span class="term-tip">650-1350 nm；組織吸收與散射雙低，光可穿透 1-5 mm。</span></span> &nbsp;
+<span class="term">Stokes shift<span class="term-tip">螢光發射波長 - 激發波長（&gt;0），10-50 nm，源自 vibrational relaxation。</span></span> &nbsp;
+<span class="term">Photoablation<span class="term-tip">非熱型分子鍵斷裂；193 nm excimer LASIK 的機制。</span></span> &nbsp;
+<span class="term">Photocoagulation<span class="term-tip">把組織加熱至 60-100 ℃ 蛋白變性；視網膜光凝 PRP 的機制。</span></span> &nbsp;
+<span class="term">PDT<span class="term-tip">Photodynamic Therapy — 光敏劑 + 光 + O₂ → ¹O₂；Photofrin / 5-ALA / Visudyne。</span></span> &nbsp;
+<span class="term">OCT<span class="term-tip">Optical Coherence Tomography — 低同調寬頻光 + Michelson 干涉，1-15 μm 軸向解析。</span></span> &nbsp;
+<span class="term">OCTA<span class="term-tip">OCT-Angiography — 多幀 decorrelation 偵測血流，無需顯影劑。</span></span> &nbsp;
+<span class="term">ICG<span class="term-tip">Indocyanine green — 805/830 nm NIR 螢光劑；sentinel lymph node、灌流、膽道。</span></span> &nbsp;
+<span class="term">5-ALA<span class="term-tip">前體式光敏劑，膠質瘤代謝為 PpIX → 405 nm 藍光下紅色螢光。</span></span> &nbsp;
+<span class="term">Two-photon<span class="term-tip">同時吸收兩 ~800 nm 光子，等效 ~400 nm 激發，可深入腦皮質 ~1 mm。</span></span> &nbsp;
+<span class="term">STED<span class="term-tip">Stimulated Emission Depletion — Hell 1994，環狀光抹去周邊螢光，30-70 nm。</span></span> &nbsp;
+<span class="term">PALM / STORM<span class="term-tip">隨機開關 + 單分子定位 + 重建，10-30 nm 解析（2014 Nobel）。</span></span> &nbsp;
+<span class="term">MINFLUX<span class="term-tip">Hell 2017，STED donut + single-molecule localization，~1-3 nm 光學極限。</span></span> &nbsp;
+<span class="term">Channelrhodopsin<span class="term-tip">綠藻光敏陽離子通道，藍光開啟去極化神經元；Boyden/Deisseroth 2005。</span></span> &nbsp;
+<span class="term">Photoacoustic<span class="term-tip">脈衝光 → 熱膨脹 → 超音波；光對比 + 超音波解析 + 深度。</span></span> &nbsp;
+<span class="term">Raman<span class="term-tip">非彈性散射，分子振動指紋；無標籤、無破壞、可分子特異性鑑別。</span></span> &nbsp;
+<span class="term">Isobestic<span class="term-tip">等吸收波長 ~ 805 nm，HbO₂ 與 Hb 莫耳吸收係數相等。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q1. LASIK 屈光手術中，「燒蝕角膜基質」的雷射為？</span><span data-lang="en">Q1. In LASIK, which laser actually ablates the corneal stroma?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. CO₂ 10.6 μm</span><span data-lang="en">A. CO₂ 10.6 μm</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. Nd:YAG 1064 nm</span><span data-lang="en">B. Nd:YAG 1064 nm</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. Excimer (ArF) 193 nm</span><span data-lang="en">C. Excimer (ArF) 193 nm</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. He-Ne 633 nm</span><span data-lang="en">D. He-Ne 633 nm</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="3"><p><span data-lang="zh">Q2. ICG（indocyanine green）在手術導引中之主要激發 / 發射波長為？</span><span data-lang="en">Q2. In surgical guidance, what are ICG's primary excitation / emission wavelengths?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 405 / 635 nm</span><span data-lang="en">A. 405 / 635 nm</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 488 / 520 nm（FITC）</span><span data-lang="en">B. 488 / 520 nm (FITC)</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 660 / 940 nm</span><span data-lang="en">C. 660 / 940 nm</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 805 / 830 nm（近紅外）</span><span data-lang="en">D. 805 / 830 nm (NIR)</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q3. 下列哪一個是 channelrhodopsin-2 的關鍵特性？</span><span data-lang="en">Q3. Which is a key property of channelrhodopsin-2?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 黃光（580 nm）開啟氯離子幫浦，使神經元超極化</span><span data-lang="en">A. Yellow (580 nm) opens Cl⁻ pump, hyperpolarizes neurons</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 藍光（470 nm）開啟陽離子通道，使神經元去極化</span><span data-lang="en">B. Blue (470 nm) opens cation channel, depolarizes neurons</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 紅光（660 nm）增強組織氧合</span><span data-lang="en">C. Red (660 nm) enhances tissue oxygenation</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 紫外（193 nm）切除角膜</span><span data-lang="en">D. UV (193 nm) ablates cornea</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="wearable-digital-health.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="D3 · 穿戴式裝置與數位健康" data-en="D3 · Wearables &amp; Digital Health">D3 · 穿戴式裝置與數位健康</span></a>
+<a href="neural-engineering.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="E1 · 神經工程" data-en="E1 · Neural Engineering">E1 · 神經工程</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · D4 Biophotonics</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// Beer-Lambert penetration chart
+const NPTS=200;
+const xArr=Array.from({length:NPTS},(_,i)=>i*10/NPTS); // 0..10 mm
+const lambdas=[
+  {name:'532 nm (green)', alpha:3.0, color:'#16a34a'},
+  {name:'660 nm (red)',   alpha:0.6, color:'#dc2626'},
+  {name:'940 nm (NIR)',   alpha:0.4, color:'#1d4ed8'}
+];
+let penChart=null;
+function drawPen(I0){
+  if(penChart)penChart.destroy();
+  const lang=I18n.get();
+  const datasets = lambdas.map(L=>({
+    label:`${L.name}, α=${L.alpha}/mm`,
+    data: xArr.map(x=>I0*Math.exp(-L.alpha*x)),
+    borderColor: L.color, pointRadius:0, tension:.2, borderWidth:2
+  }));
+  // 1/e reference line
+  datasets.push({
+    label:'1/e ≈ 0.368·I₀',
+    data: xArr.map(_=>I0/Math.E),
+    borderColor:'#9ca3af', borderDash:[6,4], pointRadius:0, borderWidth:1
+  });
+  penChart=new Chart(document.getElementById('penChart').getContext('2d'),{
+    type:'line',
+    data:{labels:xArr.map(x=>x.toFixed(1)), datasets},
+    options:{
+      plugins:{legend:{display:true},title:{display:true,text:(lang==='zh'?`Beer-Lambert：I = I₀·exp(−αx)，I₀ = ${I0.toFixed(2)} W/cm²`:`Beer-Lambert: I = I₀·exp(−αx), I₀ = ${I0.toFixed(2)} W/cm²`)}},
+      scales:{
+        x:{title:{display:true,text:(lang==='zh'?'深度 depth (mm)':'depth (mm)')},ticks:{maxTicksLimit:11}},
+        y:{title:{display:true,text:(lang==='zh'?'剩餘強度 I (W/cm²)':'remaining intensity I (W/cm²)')},min:0}
+      }
+    }
+  });
+}
+const i0Slider=document.getElementById('i0Slider');
+const i0Val=document.getElementById('i0Val');
+function syncI0(){
+  const v=parseFloat(i0Slider.value);
+  i0Val.textContent=v.toFixed(2);
+  drawPen(v);
+}
+i0Slider.addEventListener('input', syncI0);
+syncI0();
+document.addEventListener('langchange', syncI0);
+</script>
+</body></html>

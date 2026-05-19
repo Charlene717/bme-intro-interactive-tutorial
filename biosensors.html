@@ -1,0 +1,371 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>D2: 生醫感測器 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html" class="active">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER D2 · BLOCK D DEVICES &amp; INTERFACES</div>
+<h1 data-zh="生醫感測器" data-en="Biosensors">生醫感測器</h1>
+<p class="subtitle" data-lang="zh">從血糖試片到 1 年期植入式 CGM、從脈搏血氧到 lab-on-chip、從酵素到 aptamer——生醫感測器把生物事件轉成電/光訊號。</p>
+<p class="subtitle" data-lang="en">From glucose strips to 1-year implantable CGMs, pulse oximeters to lab-on-chip, enzymes to aptamers — biosensors translate biology into electrical and optical signals.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="定義" data-en="DEFINITION">定義</div>
+<h2 data-zh="一、什麼是生醫感測器？" data-en="I. What is a Biosensor?">一、什麼是生醫感測器？</h2>
+<div data-lang="zh">
+<p>依 IUPAC 定義，<strong>生醫感測器（biosensor）</strong>是「一種與生物識別元件（biological recognition element）緊密耦合的分析裝置，將分析物的存在或濃度轉換為可量測的電/光/熱/質量訊號」。其基本架構由四個區塊串接：</p>
+<ol>
+<li><strong>生物識別元件（Bioreceptor）</strong> — 提供「對誰專一性」：酵素、抗體、核酸（DNA / aptamer）、細胞、分子印模高分子（MIP）。</li>
+<li><strong>轉換器（Transducer）</strong> — 把分子事件轉成物理訊號：電化學、光、壓電、熱。</li>
+<li><strong>訊號調理（Signal conditioning）</strong> — 放大、濾波、ADC、線性化。</li>
+<li><strong>輸出（Output / Display）</strong> — 數位讀值、藍牙、雲端。</li>
+</ol>
+</div>
+<div data-lang="en">
+<p>Per IUPAC, a <strong>biosensor</strong> is "an analytical device that intimately couples a biological recognition element to a transducer, converting the presence/concentration of an analyte into a measurable signal (electrical/optical/thermal/mass)." Four blocks:</p>
+<ol>
+<li><strong>Bioreceptor</strong> — specificity: enzymes, antibodies, nucleic acids (DNA / aptamer), cells, molecularly-imprinted polymers (MIP).</li>
+<li><strong>Transducer</strong> — converts a molecular event into a physical signal: electrochemical, optical, piezoelectric, thermal.</li>
+<li><strong>Signal conditioning</strong> — amplify, filter, ADC, linearize.</li>
+<li><strong>Output</strong> — display, Bluetooth, cloud.</li>
+</ol>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>歷史起點：</strong>1962 Leland C. Clark Jr.（也是 Clark 氧電極發明人）提出「酵素 + 氧電極 = 葡萄糖感測器」的概念，催生整個生醫感測器領域。今日全球年產 60 億片血糖試片，與 1500 萬名 CGM 使用者，皆源自此基本架構。</span>
+<span data-lang="en"><strong>Origin:</strong> In 1962 Leland C. Clark Jr. (inventor of the Clark oxygen electrode) proposed "enzyme + O₂ electrode = glucose sensor," birthing the field. Today's 6 B annual test strips and 15 M+ CGM users descend from this single architecture.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="識別元件" data-en="BIORECEPTORS">識別元件</div>
+<h2 data-zh="二、生物識別元件種類" data-en="II. Types of Bioreceptors">二、生物識別元件</h2>
+<table class="comp-table"><thead><tr><th data-zh="識別元件" data-en="Receptor">識別元件</th><th data-zh="作用機制" data-en="Mechanism">作用機制</th><th data-zh="代表分析物" data-en="Analyte">代表分析物</th><th data-zh="優缺點" data-en="Pros / Cons">優缺點</th></tr></thead><tbody>
+<tr><td><strong data-zh="酵素" data-en="Enzymes">酵素</strong></td><td data-zh="催化反應產生可測產物（O₂↓、H₂O₂↑、e⁻）" data-en="Catalysis → measurable product (O₂↓, H₂O₂↑, e⁻)">催化 → 產物</td><td data-zh="葡萄糖（GOx）、乳酸（LOx）、尿素、膽固醇、乙醇" data-en="Glucose (GOx), lactate (LOx), urea, cholesterol, ethanol">葡萄糖、乳酸、尿素</td><td data-zh="便宜、敏感；穩定性差、需 cofactor" data-en="Cheap, sensitive; unstable, cofactor-dependent">便宜敏感；穩定性差</td></tr>
+<tr><td><strong data-zh="抗體" data-en="Antibodies">抗體</strong></td><td data-zh="抗原-抗體專一性結合（Kd ~ pM–nM）" data-en="Antigen-antibody binding (Kd ~ pM–nM)">Ag-Ab 結合</td><td data-zh="病毒（COVID）、激素（hCG）、心臟標記（troponin）、PSA、HIV" data-en="Viruses, hormones, troponin, PSA, HIV">病毒、激素、心臟標記</td><td data-zh="極專一；昂貴、batch-to-batch 差異" data-en="Very specific; expensive, batch variability">超專一；貴</td></tr>
+<tr><td><strong data-zh="核酸 / Aptamer" data-en="Nucleic acid / Aptamer">核酸 / Aptamer</strong></td><td data-zh="序列互補配對 或 構型結合" data-en="Sequence hybridization or structural binding">配對 / 構型</td><td data-zh="DNA / RNA、抗生素、毒素、小分子" data-en="DNA/RNA, antibiotics, toxins, small molecules">DNA、毒素、小分子</td><td data-zh="化學合成、穩定；設計門檻較高" data-en="Synthetic, stable; harder to design">穩定；設計難</td></tr>
+<tr><td><strong data-zh="細胞 / 微生物" data-en="Whole cells / Microbes">細胞 / 微生物</strong></td><td data-zh="活細胞對毒性/營養物的響應" data-en="Live-cell response to toxins/nutrients">活細胞響應</td><td data-zh="水中重金屬、毒素、BOD、藥物毒性" data-en="Heavy metals, toxins, BOD, drug toxicity">水質、毒素</td><td data-zh="覆蓋複雜事件；非專一、慢" data-en="Captures complex events; nonspecific, slow">複雜事件；慢</td></tr>
+<tr><td><strong>MIP</strong></td><td data-zh="模板分子在高分子中印模出識別腔" data-en="Template molecule imprints recognition cavity in polymer">模板印模</td><td data-zh="抗生素、農藥、神經傳導物質" data-en="Antibiotics, pesticides, neurotransmitters">抗生素、農藥</td><td data-zh="便宜耐用；專一性低於抗體" data-en="Cheap, robust; less specific than Ab">耐用；專一性中等</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="轉換器" data-en="TRANSDUCERS">轉換器</div>
+<h2 data-zh="三、四大轉換器技術" data-en="III. Four Transducer Technologies">三、四大轉換器</h2>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">⚡</div><h4>① <span data-zh="電化學" data-en="Electrochemical">電化學</span></h4>
+<div data-lang="zh"><p>最主流（全球 ~75% 商業生醫感測器）。次分：<strong>amperometric</strong>（量電流，如 GOx 血糖）、<strong>potentiometric</strong>（量電位，如 pH 電極、ISE）、<strong>conductometric</strong>（量導電率）、<strong>ISFET</strong>（離子敏感場效電晶體，CMOS 製程相容、可微縮陣列；2010 Ion Torrent DNA sequencer 即用 ISFET）。</p></div>
+<div data-lang="en"><p>Dominant (~75% of commercial biosensors). Subtypes: <strong>amperometric</strong> (current, e.g. GOx glucose), <strong>potentiometric</strong> (potential, e.g. pH/ISE), <strong>conductometric</strong> (conductivity), <strong>ISFET</strong> (ion-sensitive FET, CMOS-compatible, miniaturizable — 2010 Ion Torrent DNA sequencer used ISFET arrays).</p></div></div>
+
+<div class="card"><div class="card-icon">💡</div><h4>② <span data-zh="光學" data-en="Optical">光學</span></h4>
+<div data-lang="zh"><p>SPR 表面電漿共振（Biacore 標準）、螢光（FRET、TIRF）、化學發光、比色法（LFA 試紙）、波導感測器（Fortebio Octet）。標籤式（fluorescence）與無標籤式（SPR / 干涉）並存。優：無接觸電氣干擾、適合 multiplexing。</p></div>
+<div data-lang="en"><p>SPR (Biacore standard), fluorescence (FRET, TIRF), chemiluminescence, colorimetric (lateral flow), waveguide (Fortebio Octet). Labeled (fluorescence) and label-free (SPR/interference) co-exist. Pros: no electrical interference, multiplexable.</p></div></div>
+
+<div class="card"><div class="card-icon">⚖️</div><h4>③ <span data-zh="壓電" data-en="Piezoelectric">壓電</span></h4>
+<div data-lang="zh"><p>石英晶體微平衡（QCM, Quartz Crystal Microbalance）：質量沉積 → 共振頻率下降，可量測 ng/cm² 等級。QCM-D（dissipation）可同時讀「黏彈性」。應用：抗原-抗體即時動力學、薄膜沉積監測。</p></div>
+<div data-lang="en"><p>Quartz Crystal Microbalance (QCM): mass adsorbed → resonant frequency drops; sensitivity ng/cm². QCM-D adds dissipation for "viscoelastic" readout. Apps: real-time Ag-Ab kinetics, thin-film deposition monitoring.</p></div></div>
+
+<div class="card"><div class="card-icon">🌡️</div><h4>④ <span data-zh="熱量" data-en="Thermal">熱量</span></h4>
+<div data-lang="zh"><p>Calorimetric biosensor / thermistor：催化或結合反應釋放/吸收熱（ΔH），用熱敏電阻或 microcalorimeter 量測 mK 級溫差。應用：酵素活性、抗原抗體親和力、藥物-蛋白結合（ITC）。市場最小，但研究價值高。</p></div>
+<div data-lang="en"><p>Calorimetric biosensor / thermistor: catalytic or binding event releases/absorbs heat (ΔH); thermistor or microcalorimeter measures mK-level shifts. Apps: enzyme activity, Ag-Ab affinity, drug-protein binding (ITC). Smallest market but high research value.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="CGM 個案" data-en="CGM CASE STUDY">CGM</div>
+<h2 data-zh="四、連續血糖監測器（CGM）深入解析" data-en="IV. Continuous Glucose Monitors (CGM): A Deep Dive">四、連續血糖監測器（CGM）</h2>
+<div data-lang="zh">
+<p>CGM 是 21 世紀最成功的個人化生醫感測器。原理：<strong>葡萄糖氧化酶 (GOx) + 鉑/銀電極</strong> 嵌於皮下 0.5–2 mm 的微針，感測<strong>組織液（ISF, interstitial fluid）</strong>葡萄糖（與血糖有 5–10 分鐘 lag）。</p>
+<div style="background:#0e7490;color:white;padding:.6rem 1rem;border-radius:.5rem;font-family:monospace;text-align:center;font-size:.9rem;margin:.5rem 0;">
+Glucose + O₂ <span style="opacity:.7">─ GOx →</span> Gluconic acid + H₂O₂ &nbsp; → &nbsp; H₂O₂ <span style="opacity:.7">─ +0.6 V →</span> 2H⁺ + O₂ + 2e⁻
+</div>
+<p>產生的電流與葡萄糖濃度成正比（線性範圍 40–400 mg/dL）。主要技術里程碑：</p>
+<ul>
+<li><strong>Dexcom G7</strong>（2023 上市，2024 與 Apple Watch 直連）：10 天佩戴 + 12 小時 grace，30 分鐘暖機，可選 7-day 延長；無需指尖校正（factory-calibrated）；MARD ≈ 8.2%。</li>
+<li><strong>Abbott FreeStyle Libre 3 Plus</strong>（2024 上市）：15 天佩戴，1 分鐘暖機，世界最小 CGM 感測器（5 mm × 2.9 mm）；factory-calibrated；MARD ≈ 7.9%。Libre Rio（OTC, 2024）與 Lingo（健康者 OTC, 2024）擴大用戶群。</li>
+<li><strong>Ascensia Eversense 365</strong>（2024 FDA 核可，2025 上市）：首支<strong>植入 1 年</strong> CGM；皮下植入螢光感測器 + 體外 transmitter；365 天佩戴；MARD ≈ 8.5%。</li>
+<li><strong>Medtronic Simplera</strong>（2024 FDA / 2025 EU）：與 MiniMed 780G 整合，全自動 closed-loop（hybrid AID）。</li>
+</ul>
+<p><strong>MARD (Mean Absolute Relative Difference)</strong> 是 CGM 精確度的標準指標。今日 modern CGMs 達 &lt; 10%，<strong>已被多國納入糖尿病常規處方</strong>（FDA 2024 公告 OTC CGM 路徑，Stelo + Lingo + Libre Rio 首批）。</p>
+</div>
+<div data-lang="en">
+<p>CGM is the 21st-century's biggest biosensor success. Principle: <strong>glucose oxidase (GOx) + Pt/Ag electrode</strong> on a microneedle 0.5–2 mm under skin sensing <strong>interstitial fluid (ISF)</strong> glucose (5–10 min lag vs blood).</p>
+<div style="background:#0e7490;color:white;padding:.6rem 1rem;border-radius:.5rem;font-family:monospace;text-align:center;font-size:.9rem;margin:.5rem 0;">
+Glucose + O₂ <span style="opacity:.7">─ GOx →</span> Gluconic acid + H₂O₂ &nbsp; → &nbsp; H₂O₂ <span style="opacity:.7">─ +0.6 V →</span> 2H⁺ + O₂ + 2e⁻
+</div>
+<p>The current is proportional to glucose (40–400 mg/dL linear range). Milestones:</p>
+<ul>
+<li><strong>Dexcom G7</strong> (2023; 2024 direct-to-Apple-Watch): 10-day wear + 12 h grace, 30-min warm-up, optional 7-day extension; factory-calibrated; MARD ≈ 8.2%.</li>
+<li><strong>Abbott FreeStyle Libre 3 Plus</strong> (2024): 15-day wear, 1-min warm-up, world's smallest CGM (5 mm × 2.9 mm); factory-calibrated; MARD ≈ 7.9%. Libre Rio (OTC, 2024) + Lingo (OTC, healthy users, 2024) expand the user base.</li>
+<li><strong>Ascensia Eversense 365</strong> (FDA 2024, launch 2025): first <strong>1-year</strong> implantable CGM; subdermal fluorescent sensor + external transmitter; 365-day wear; MARD ≈ 8.5%.</li>
+<li><strong>Medtronic Simplera</strong> (FDA 2024 / EU 2025): integrated with MiniMed 780G hybrid AID closed-loop.</li>
+</ul>
+<p><strong>MARD (Mean Absolute Relative Difference)</strong> is the standard CGM accuracy metric. Modern CGMs achieve &lt; 10%, and FDA opened the <strong>OTC CGM pathway in 2024</strong> (Stelo + Lingo + Libre Rio first wave).</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="脈搏血氧" data-en="PULSE OXIMETRY">脈搏血氧</div>
+<h2 data-zh="五、脈搏血氧儀（SpO₂）原理" data-en="V. Pulse Oximetry: How SpO₂ Works">五、脈搏血氧儀（SpO₂）</h2>
+<div data-lang="zh">
+<p>脈搏血氧儀以兩個波長的 LED 透射手指、耳垂、額頭：<strong>紅光 ~660 nm</strong> 與<strong>近紅外光 ~940 nm</strong>。氧合血紅蛋白 (HbO₂) 與還原血紅蛋白 (Hb) 的吸收係數在這兩個波長差異最大（HbO₂ 在 660 吸收較小、940 吸收較大；Hb 相反）。依 Beer-Lambert 定律：</p>
+<div style="background:#831843;color:white;padding:.6rem 1rem;border-radius:.5rem;font-family:monospace;text-align:center;font-size:.9rem;margin:.5rem 0;">
+A = ε &middot; c &middot; L &nbsp; → &nbsp; R = (AC<sub>660</sub>/DC<sub>660</sub>) / (AC<sub>940</sub>/DC<sub>940</sub>) &nbsp; → &nbsp; SpO₂ = f(R)
+</div>
+<p>取「pulsatile (AC, 動脈搏動)」除以「DC（穩態，組織+靜脈）」消去組織背景影響，得到 ratio-of-ratios R。校準曲線由體外實驗（healthy volunteers 暴露於低氧）建立。等吸收波長（isobestic）約 805 nm（HbO₂ 與 Hb 吸收相同），用於 reference。</p>
+</div>
+<div data-lang="en">
+<p>Pulse oximeters use two LEDs transilluminating finger/ear/forehead: <strong>red ~660 nm</strong> + <strong>NIR ~940 nm</strong>. Oxyhemoglobin (HbO₂) and deoxyhemoglobin (Hb) differ most in absorption at these wavelengths (HbO₂ low at 660 / high at 940; Hb opposite). By Beer-Lambert:</p>
+<div style="background:#831843;color:white;padding:.6rem 1rem;border-radius:.5rem;font-family:monospace;text-align:center;font-size:.9rem;margin:.5rem 0;">
+A = ε &middot; c &middot; L &nbsp; → &nbsp; R = (AC<sub>660</sub>/DC<sub>660</sub>) / (AC<sub>940</sub>/DC<sub>940</sub>) &nbsp; → &nbsp; SpO₂ = f(R)
+</div>
+<p>"Pulsatile (AC)" / "DC (tissue + venous)" removes background; "ratio-of-ratios" R maps to SpO₂ via an empirical calibration (healthy volunteers exposed to controlled hypoxia). The isobestic wavelength ~805 nm (Hb = HbO₂ absorption) serves as a reference.</p>
+</div>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>膚色偏差：</strong>Sjoding et al. NEJM 2020 顯示黑人病人血氧偽正常率（occult hypoxia, SaO₂ &lt; 88% 但 SpO₂ ≥ 92%）是白人的 3 倍。原因：melanin 在 660 nm 處強吸收，可能使 R 被低估，SpO₂ 被高估。2024 FDA 公告擬針對 pulse oximeter accuracy 修訂 guidance，要求 nominal 受試者中至少含足量深膚色受測者；多家廠商（Masimo、Nonin）發布 race-neutral 校正方法。</span>
+<span data-lang="en"><strong>Skin pigmentation bias:</strong> Sjoding et al. (NEJM 2020) showed occult hypoxia (SaO₂ &lt; 88% but SpO₂ ≥ 92%) is 3× more frequent in Black patients than White. Melanin absorbs strongly at 660 nm, potentially underestimating R and overestimating SpO₂. FDA's 2024 draft guidance requires diverse skin tones in calibration cohorts; Masimo / Nonin have released race-neutral correction algorithms.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖" data-en="INTERACTIVE">互動圖</div>
+<h2 data-zh="六、PPG 波形模擬器（含動作雜訊）" data-en="VI. PPG Waveform Simulator (with Motion Artifact)">六、PPG 波形模擬</h2>
+<div data-lang="zh"><p>下圖為模擬的紅光與紅外光 PPG（光體積描記）波形。可開啟「動作雜訊」切換，觀察 R 比值如何被破壞，導致 SpO₂ 讀數失準。</p></div>
+<div data-lang="en"><p>Simulated red + IR PPG waveforms. Toggle "motion artifact" to see how the R ratio is corrupted and SpO₂ reading degrades.</p></div>
+<div class="interactive-panel">
+<div class="toggle-row">
+  <button class="toggle-btn active" data-motion="off" data-zh="乾淨訊號" data-en="Clean">乾淨訊號</button>
+  <button class="toggle-btn" data-motion="on" data-zh="加入動作雜訊" data-en="+ Motion Artifact">加入動作雜訊</button>
+</div>
+<div class="chart-container"><canvas id="ppgChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">紅色：660 nm；藍色：940 nm；計算的 R 與 SpO₂ 顯示於圖上方。</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Red: 660 nm · Blue: 940 nm · Computed R and SpO₂ shown above the chart.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="免疫感測" data-en="IMMUNOSENSORS">免疫感測</div>
+<h2 data-zh="七、免疫感測器與側流檢測（LFA）" data-en="VII. Immunosensors &amp; Lateral Flow Assay (LFA)">七、免疫感測器與 LFA</h2>
+<div class="card-grid cols-2">
+<div class="card"><h4>🧪 <span data-zh="ELISA 酵素連結免疫吸附" data-en="ELISA">ELISA</span></h4>
+<div data-lang="zh"><p>96-well plate、抗原/抗體固定、酵素標記（HRP, AP）→ 受質顯色 → 分光光度計讀值。經典格式：sandwich ELISA、competitive ELISA。臨床敏感度可達 pg/mL；金標準。今 chemiluminescent immunoassay (CLIA) 在大型分析儀（Roche cobas、Abbott Architect、Siemens ADVIA Centaur）為主流，自動化、可達 fmol/L。</p></div>
+<div data-lang="en"><p>96-well plate, immobilized Ag/Ab, enzyme labels (HRP, AP) → substrate color → spectrophotometer. Classic formats: sandwich, competitive. Sensitivity to pg/mL; the gold standard. Today chemiluminescent immunoassay (CLIA) on large analyzers (Roche cobas, Abbott Architect, Siemens ADVIA Centaur) dominates — automated, fmol/L sensitivity.</p></div></div>
+
+<div class="card"><h4>📏 <span data-zh="LFA 側流檢測試紙" data-en="LFA Lateral Flow">LFA 側流檢測試紙</span></h4>
+<div data-lang="zh"><p>毛細作用 + 金奈米粒抗體 + 試紙條 → 15 分鐘內肉眼讀結果。最普及：<strong>驗孕棒（hCG）</strong>、<strong>COVID-19 快篩</strong>（抗原 LFA，2020-2022 全球年銷 70+ 億支）、<strong>HIV / 流感快篩、CRP、troponin</strong>。優：便宜、無需電源、room temp；缺：semi-quantitative、敏感度低於 ELISA 100-1000 倍。</p></div>
+<div data-lang="en"><p>Capillary flow + Au-NP labeled Ab + strip → naked-eye result in 15 min. Most ubiquitous: <strong>pregnancy test (hCG)</strong>, <strong>COVID-19 rapid antigen</strong> (7+ B units/yr 2020-2022), <strong>HIV / flu / CRP / troponin</strong>. Pros: cheap, no power, room temp. Cons: semi-quantitative, 100-1000× less sensitive than ELISA.</p></div></div>
+
+<div class="card"><h4>💉 <span data-zh="POCT 心臟標記" data-en="POCT Cardiac Markers">POCT 心臟標記</span></h4>
+<div data-lang="zh"><p>急診胸痛排除心肌梗塞的關鍵：高敏度心肌旋轉蛋白 (hs-cTnI/T)。Roche Elecsys hs-cTnT、Abbott ARCHITECT hs-cTnI、Siemens Atellica hs-cTnI；偵測下限 ~1-5 ng/L，於 99th percentile 處的精密度 CV ≤ 10%。可在 1 小時或 2 小時規則內排除 MI。</p></div>
+<div data-lang="en"><p>For ruling out MI in ED chest pain: high-sensitivity cardiac troponin (hs-cTnI/T). Roche Elecsys hs-cTnT, Abbott ARCHITECT hs-cTnI, Siemens Atellica hs-cTnI; LoD ~1-5 ng/L, CV ≤ 10% at 99th percentile. Enables 1-hour or 2-hour rule-out pathways.</p></div></div>
+
+<div class="card"><h4>🧬 <span data-zh="分子診斷" data-en="Molecular Diagnostics">分子診斷</span></h4>
+<div data-lang="zh"><p>qPCR / digital PCR / LAMP / CRISPR-Cas12/13-based（SHERLOCK, DETECTR）。COVID 期間 RT-qPCR 成為家喻戶曉的詞；近年 isothermal LAMP + lateral flow + CRISPR 把實驗室級敏感度搬到 POCT。Abbott ID NOW、Cepheid GeneXpert、Mammoth Biosciences DETECTR。</p></div>
+<div data-lang="en"><p>qPCR / digital PCR / LAMP / CRISPR-Cas12/13-based (SHERLOCK, DETECTR). RT-qPCR became a household term during COVID; isothermal LAMP + LFA + CRISPR brings lab-grade sensitivity to POCT. Abbott ID NOW, Cepheid GeneXpert, Mammoth Biosciences DETECTR.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="微流控與器官晶片" data-en="MICROFLUIDICS / OOC">微流控 / OOC</div>
+<h2 data-zh="八、Lab-on-Chip 與 Organ-on-Chip" data-en="VIII. Lab-on-Chip &amp; Organ-on-Chip">八、晶片實驗室與器官晶片</h2>
+<div data-lang="zh">
+<p><strong>微流控（microfluidics）</strong>：在 μm 寬度通道中精確操控 pL–μL 液體。常用 PDMS（聚二甲基矽氧烷）+ 軟微影（soft lithography）製造；玻璃、熱塑 (COC, COP) 用於量產。應用：滴式 PCR、單細胞分選 (Drop-seq, 10x Chromium)、CTC 富集 (Vortex BioSciences)、即時 PCR cartridge (Cepheid)。</p>
+<p><strong>Organ-on-Chip (OoC)</strong>：把人體器官的「最小功能單元」重建於 chip 上，整合 perfusion、機械刺激、共培養。代表：</p>
+<ul>
+<li><strong>Emulate Bio</strong>（Wyss Institute spin-off）— Lung-Chip、Liver-Chip、Brain-Chip、Intestine-Chip；2024 FDA 接受 Liver-Chip 數據作為藥物毒性 IND 提交一部分。</li>
+<li><strong>TissUse</strong>（德國）— HUMIMIC multi-organ-chip，最多 4 個器官串接，supports ADME 研究。</li>
+<li><strong>AxoSim</strong>（路易斯安那）— NerveSim 周邊神經晶片；BrainSim 用於 ALS / Alzheimer 模型。</li>
+<li><strong>CN Bio</strong> — PhysioMimix 多器官；MPS-T12（12-well）。</li>
+</ul>
+<p><strong>FDA 2022 Modernization Act 2.0</strong>：取消「動物試驗強制要求」，明文承認 OoC / 類器官 / 計算模型可作為替代證據——OoC 領域從此進入 regulatory traction 階段。</p>
+</div>
+<div data-lang="en">
+<p><strong>Microfluidics</strong>: precise control of pL–μL fluids in μm channels. Made from PDMS (polydimethylsiloxane) + soft lithography; glass and thermoplastics (COC, COP) for high-volume manufacturing. Apps: droplet PCR, single-cell sorting (Drop-seq, 10x Chromium), CTC enrichment (Vortex BioSciences), real-time PCR cartridges (Cepheid).</p>
+<p><strong>Organ-on-Chip (OoC)</strong>: reconstructs the "smallest functional unit" of an organ on-chip with perfusion, mechanical cues, co-culture. Leaders:</p>
+<ul>
+<li><strong>Emulate Bio</strong> (Wyss spinout) — Lung-Chip, Liver-Chip, Brain-Chip, Intestine-Chip; in 2024 FDA accepted Liver-Chip data as part of an IND drug-toxicity submission.</li>
+<li><strong>TissUse</strong> (Germany) — HUMIMIC multi-organ chips, up to 4 organs in series; supports ADME.</li>
+<li><strong>AxoSim</strong> (Louisiana) — NerveSim peripheral-nerve chip; BrainSim for ALS / Alzheimer's.</li>
+<li><strong>CN Bio</strong> — PhysioMimix multi-organ; MPS-T12 (12-well).</li>
+</ul>
+<p><strong>FDA Modernization Act 2.0 (2022)</strong>: removed the animal-testing mandate, formally accepts OoC / organoids / in-silico models — OoC entered the regulatory traction era.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="九、給定臨床問題，怎麼選感測器？" data-en="IX. Which Biosensor for Which Clinical Need?">九、感測器選擇決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="生醫感測器選擇 5 問" data-en="Biosensor Selection: 5 Questions">生醫感測器選擇 5 問</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">分析物是否為小分子（葡萄糖、乳酸、尿素）且需便宜量產？<span class="dt-arrow">→</span> 酵素 + 電化學（amperometric）。</span><span data-lang="en">Small molecule (glucose, lactate, urea), need cheap mass production? <span class="dt-arrow">→</span> Enzyme + amperometric.</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">分析物是大分子（蛋白、病毒），需高專一性？<span class="dt-arrow">→</span> 抗體 + ELISA / LFA / SPR。</span><span data-lang="en">Large molecule (protein, virus), need high specificity? <span class="dt-arrow">→</span> Antibody + ELISA / LFA / SPR.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">需即時、無標籤、動力學參數？<span class="dt-arrow">→</span> SPR (Biacore) / BLI (Octet) / QCM。</span><span data-lang="en">Real-time, label-free, kinetics? <span class="dt-arrow">→</span> SPR / BLI / QCM.</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">需病人連續穿戴？<span class="dt-arrow">→</span> 微針 CGM、皮膚汗液 patch、PPG 光學。</span><span data-lang="en">Continuous wearable? <span class="dt-arrow">→</span> Microneedle CGM, sweat-patch, PPG optical.</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">分析物是 DNA / RNA？<span class="dt-arrow">→</span> qPCR / dPCR / LAMP / CRISPR-Cas12/13。</span><span data-lang="en">Analyte is DNA/RNA? <span class="dt-arrow">→</span> qPCR / dPCR / LAMP / CRISPR-Cas12/13.</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="十、1D 酵素感測器穩態響應與 Lineweaver-Burk 圖" data-en="X. 1D Enzyme Sensor Steady-State Response &amp; Lineweaver-Burk Plot">十、酵素感測器穩態與 LB 圖</h2>
+<div data-lang="zh"><p>以 Michaelis-Menten 動力學模擬酵素感測器電流響應：v = V_max·[S] / (K_M + [S])。Lineweaver-Burk 反作圖（1/v vs 1/[S]）為線性，可由斜率與截距估 K_M, V_max。</p></div>
+<div data-lang="en"><p>Simulate an enzyme sensor's steady-state current via Michaelis-Menten: v = V_max·[S] / (K_M + [S]). The Lineweaver-Burk plot (1/v vs 1/[S]) is linear; slope and intercept give K_M, V_max.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="comment"># Glucose oxidase parameters (typical)</span>
+Vmax = <span class="num">120</span>      <span class="comment"># nA</span>
+Km   = <span class="num">8.0</span>      <span class="comment"># mmol/L</span>
+S    = np.<span class="func">linspace</span>(<span class="num">0.5</span>, <span class="num">30</span>, <span class="num">30</span>)   <span class="comment"># mmol/L glucose</span>
+v    = Vmax*S/(Km+S)
+v_noisy = v + np.random.<span class="func">normal</span>(<span class="num">0</span>,<span class="num">3</span>,len(S))
+
+fig,ax=plt.<span class="func">subplots</span>(<span class="num">1</span>,<span class="num">2</span>,figsize=(<span class="num">10</span>,<span class="num">4</span>))
+ax[<span class="num">0</span>].<span class="func">plot</span>(S,v,<span class="str">'k-'</span>,label=<span class="str">'M-M'</span>)
+ax[<span class="num">0</span>].<span class="func">scatter</span>(S,v_noisy,c=<span class="str">'#dc2626'</span>,s=<span class="num">22</span>,label=<span class="str">'measurement'</span>)
+ax[<span class="num">0</span>].<span class="func">set_xlabel</span>(<span class="str">'[Glucose] (mmol/L)'</span>); ax[<span class="num">0</span>].<span class="func">set_ylabel</span>(<span class="str">'current (nA)'</span>)
+ax[<span class="num">0</span>].<span class="func">legend</span>(); ax[<span class="num">0</span>].<span class="func">grid</span>(alpha=<span class="num">0.3</span>)
+
+<span class="comment"># Lineweaver-Burk</span>
+x=<span class="num">1</span>/S; y=<span class="num">1</span>/v_noisy
+slope,intercept=np.<span class="func">polyfit</span>(x,y,<span class="num">1</span>)
+Km_fit=slope/intercept; Vmax_fit=<span class="num">1</span>/intercept
+ax[<span class="num">1</span>].<span class="func">scatter</span>(x,y,c=<span class="str">'#0d9488'</span>); ax[<span class="num">1</span>].<span class="func">plot</span>(x,slope*x+intercept,<span class="str">'k--'</span>)
+ax[<span class="num">1</span>].<span class="func">set_xlabel</span>(<span class="str">'1/[S]'</span>); ax[<span class="num">1</span>].<span class="func">set_ylabel</span>(<span class="str">'1/v'</span>)
+ax[<span class="num">1</span>].<span class="func">set_title</span>(f<span class="str">'Km≈{Km_fit:.2f}, Vmax≈{Vmax_fit:.1f}'</span>)
+plt.<span class="func">tight_layout</span>(); plt.<span class="func">show</span>()</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre>Vmax=<span class="num">120</span>; Km=<span class="num">8.0</span>;
+S=<span class="func">linspace</span>(<span class="num">0.5</span>,<span class="num">30</span>,<span class="num">30</span>);
+v=Vmax*S./(Km+S);
+v_noisy=v+<span class="num">3</span>*<span class="func">randn</span>(<span class="num">1</span>,length(S));
+
+<span class="func">subplot</span>(<span class="num">1</span>,<span class="num">2</span>,<span class="num">1</span>);
+<span class="func">plot</span>(S,v,<span class="str">'k-'</span>,S,v_noisy,<span class="str">'ro'</span>);
+<span class="func">xlabel</span>(<span class="str">'[Glucose] (mmol/L)'</span>); <span class="func">ylabel</span>(<span class="str">'current (nA)'</span>);
+<span class="func">grid on</span>;
+
+x=<span class="num">1</span>./S; y=<span class="num">1</span>./v_noisy;
+p=<span class="func">polyfit</span>(x,y,<span class="num">1</span>);
+Km_fit=p(<span class="num">1</span>)/p(<span class="num">2</span>); Vmax_fit=<span class="num">1</span>/p(<span class="num">2</span>);
+<span class="func">subplot</span>(<span class="num">1</span>,<span class="num">2</span>,<span class="num">2</span>);
+<span class="func">scatter</span>(x,y); <span class="func">hold on</span>; <span class="func">plot</span>(x,<span class="func">polyval</span>(p,x),<span class="str">'k--'</span>);
+<span class="func">xlabel</span>(<span class="str">'1/[S]'</span>); <span class="func">ylabel</span>(<span class="str">'1/v'</span>);
+<span class="func">title</span>(<span class="func">sprintf</span>(<span class="str">'Km=%.2f, Vmax=%.1f'</span>,Km_fit,Vmax_fit));</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十一、本章關鍵術語" data-en="XI. Key Terms">十一、關鍵術語</h2>
+<p><span class="term">Bioreceptor<span class="term-tip">生物識別元件：酵素、抗體、核酸/aptamer、細胞、MIP。</span></span> &nbsp;
+<span class="term">Transducer<span class="term-tip">把分子事件轉成可量物理量（電/光/壓/熱）的元件。</span></span> &nbsp;
+<span class="term">GOx<span class="term-tip">Glucose oxidase — 葡萄糖氧化酶，CGM 與血糖試片的核心。</span></span> &nbsp;
+<span class="term">ISF<span class="term-tip">Interstitial fluid — 組織液，CGM 量測標的；與血糖有 5-10 分鐘 lag。</span></span> &nbsp;
+<span class="term">MARD<span class="term-tip">Mean Absolute Relative Difference — CGM 精準度標準指標，現代 CGM &lt; 10%。</span></span> &nbsp;
+<span class="term">SpO₂<span class="term-tip">血氧飽和度（peripheral oxygen saturation），由 ratio-of-ratios R 推得。</span></span> &nbsp;
+<span class="term">PPG<span class="term-tip">Photoplethysmography — 光體積描記，由 LED + 光偵測器測動脈搏動。</span></span> &nbsp;
+<span class="term">Isobestic<span class="term-tip">等吸收波長，~805 nm，Hb 與 HbO₂ 吸收相同。</span></span> &nbsp;
+<span class="term">SPR<span class="term-tip">Surface Plasmon Resonance — 表面電漿共振，無標籤即時量測分子結合。</span></span> &nbsp;
+<span class="term">QCM<span class="term-tip">Quartz Crystal Microbalance — 石英晶體微平衡，量測 ng/cm² 質量沉積。</span></span> &nbsp;
+<span class="term">ISFET<span class="term-tip">Ion-sensitive FET — 離子敏感場效電晶體，CMOS 製程相容。</span></span> &nbsp;
+<span class="term">LFA<span class="term-tip">Lateral Flow Assay — 側流試紙，毛細作用 + 金奈米抗體 + 試紙。</span></span> &nbsp;
+<span class="term">PDMS<span class="term-tip">Polydimethylsiloxane — 軟微影主要材料，氣體透過性高、生物相容。</span></span> &nbsp;
+<span class="term">OoC<span class="term-tip">Organ-on-Chip — 器官晶片，以微流控重建器官最小功能單元。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q1. 連續血糖監測器 (CGM) 量測的「葡萄糖」位於哪個體液？</span><span data-lang="en">Q1. The "glucose" measured by a CGM is in which body fluid?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 動脈全血</span><span data-lang="en">A. Arterial whole blood</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 皮下組織液（ISF），與血糖有 5–10 分鐘 lag</span><span data-lang="en">B. Subcutaneous interstitial fluid (ISF), 5–10 min lag vs blood</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 汗液</span><span data-lang="en">C. Sweat</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 唾液</span><span data-lang="en">D. Saliva</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q2. 脈搏血氧儀的「ratio-of-ratios」R 由哪兩波長計算？</span><span data-lang="en">Q2. The pulse oximeter "ratio-of-ratios" R uses which wavelengths?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 紫外 280 nm + 可見光 400 nm</span><span data-lang="en">A. UV 280 nm + visible 400 nm</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 綠光 530 nm + 黃光 580 nm</span><span data-lang="en">B. Green 530 nm + yellow 580 nm</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 紅光 ~660 nm + 近紅外 ~940 nm</span><span data-lang="en">C. Red ~660 nm + NIR ~940 nm</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 兩個紅外波段 1064 + 1310 nm</span><span data-lang="en">D. Two IR bands 1064 + 1310 nm</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="3"><p><span data-lang="zh">Q3. 哪一家 CGM 在 2024 FDA 核可，可植入皮下使用 1 年？</span><span data-lang="en">Q3. Which CGM, FDA-cleared in 2024, can be implanted for 1 year?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. Dexcom G7</span><span data-lang="en">A. Dexcom G7</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. Abbott FreeStyle Libre 3 Plus</span><span data-lang="en">B. Abbott FreeStyle Libre 3 Plus</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. Medtronic Simplera</span><span data-lang="en">C. Medtronic Simplera</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. Ascensia Eversense 365</span><span data-lang="en">D. Ascensia Eversense 365</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="medical-devices.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="D1 · 醫療器材設計" data-en="D1 · Medical Devices">D1 · 醫療器材設計</span></a>
+<a href="wearable-digital-health.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="D3 · 穿戴式裝置與數位健康" data-en="D3 · Wearables &amp; Digital Health">D3 · 穿戴式裝置與數位健康</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · D2 Biosensors</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// PPG chart
+const N=400, fs=100;
+const tArr=Array.from({length:N},(_,i)=>i/fs);
+function genPPG(motion){
+  const red=[], ir=[];
+  for(let i=0;i<N;i++){
+    const t=tArr[i];
+    // Heart-beat pulsatile component
+    const beat=Math.sin(2*Math.PI*1.2*t);
+    const ac_red=0.10*Math.max(0,beat)+0.04*Math.max(0,Math.sin(2*Math.PI*1.2*t-0.3));
+    const ac_ir =0.16*Math.max(0,beat)+0.06*Math.max(0,Math.sin(2*Math.PI*1.2*t-0.3));
+    let m=0;
+    if(motion){
+      // Add 0.3 Hz arm-swing motion artifact
+      m=0.18*Math.sin(2*Math.PI*0.3*t+1.2)+0.05*(Math.random()-0.5);
+    }
+    red.push(1.0 - ac_red + m);
+    ir.push (1.0 - ac_ir  + m*0.85);
+  }
+  return {red,ir};
+}
+function calcSpO2(red,ir){
+  const acR=Math.max(...red)-Math.min(...red);
+  const dcR=red.reduce((a,b)=>a+b,0)/red.length;
+  const acI=Math.max(...ir)-Math.min(...ir);
+  const dcI=ir.reduce((a,b)=>a+b,0)/ir.length;
+  const R=(acR/dcR)/(acI/dcI);
+  // Empirical: SpO2 ≈ 110 - 25*R
+  return {R:R.toFixed(2), spo2:(110-25*R).toFixed(1)};
+}
+let ppgChart=null;
+function drawPPG(motion){
+  if(ppgChart)ppgChart.destroy();
+  const d=genPPG(motion);
+  const lang=I18n.get();
+  const stat=calcSpO2(d.red,d.ir);
+  ppgChart=new Chart(document.getElementById('ppgChart').getContext('2d'),{
+    type:'line',
+    data:{labels:tArr.map(x=>x.toFixed(2)),
+      datasets:[
+        {label:'660 nm (red)',data:d.red,borderColor:'#dc2626',pointRadius:0,tension:.2,borderWidth:1.5},
+        {label:'940 nm (IR)', data:d.ir, borderColor:'#1d4ed8',pointRadius:0,tension:.2,borderWidth:1.5}
+      ]},
+    options:{
+      plugins:{legend:{display:true},title:{display:true,text:(lang==='zh'?`R = ${stat.R}，估計 SpO₂ = ${stat.spo2}%`:`R = ${stat.R}, est. SpO₂ = ${stat.spo2}%`)}},
+      scales:{x:{title:{display:true,text:'time (s)'},ticks:{maxTicksLimit:8}},
+              y:{title:{display:true,text:'normalized intensity'}}}
+    }
+  });
+}
+drawPPG(false);
+document.querySelectorAll('.toggle-btn[data-motion]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.toggle-btn[data-motion]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); drawPPG(b.dataset.motion==='on');
+}));
+document.addEventListener('langchange',()=>{
+  const cur=document.querySelector('.toggle-btn[data-motion].active').dataset.motion==='on';
+  drawPPG(cur);
+});
+</script>
+</body></html>

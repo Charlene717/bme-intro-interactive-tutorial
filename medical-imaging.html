@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>B3: 醫學影像 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html" class="active">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER B3 · BLOCK B SIGNALS &amp; IMAGES</div>
+<h1 data-zh="醫學影像：看見人體裡面" data-en="Medical Imaging: Seeing Inside the Body">醫學影像：看見人體裡面</h1>
+<p class="subtitle" data-lang="zh">X-ray、CT、MRI、超音波、PET/SPECT、OCT——六大模態的物理原理、解析度、對比來源、輻射劑量與臨床選擇。</p>
+<p class="subtitle" data-lang="en">X-ray, CT, MRI, ultrasound, PET/SPECT, OCT — the physics, resolution, contrast, dose, and clinical positioning of the six core modalities.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="總覽" data-en="OVERVIEW">總覽</div>
+<h2 data-zh="一、六大模態速覽" data-en="I. The Six Core Modalities at a Glance">一、六大模態速覽</h2>
+<table class="comp-table"><thead><tr><th data-zh="模態" data-en="Modality">模態</th><th data-zh="物理原理" data-en="Physics">物理原理</th><th data-zh="空間解析度" data-en="Spatial res.">空間解析度</th><th data-zh="對比來源" data-en="Contrast">對比來源</th><th data-zh="輻射 / 安全" data-en="Dose / safety">輻射 / 安全</th><th data-zh="典型臨床用途" data-en="Typical use">臨床用途</th></tr></thead><tbody>
+<tr><td><strong>X-ray</strong></td><td data-zh="X 光穿透 + 衰減" data-en="X-ray attenuation">X 光衰減</td><td>~ 0.1 mm</td><td data-zh="μ（線性衰減係數）差異" data-en="μ (linear attenuation) differences">μ 差異</td><td data-zh="0.02–0.1 mSv（胸部）" data-en="0.02–0.1 mSv (CXR)">游離輻射，低</td><td data-zh="骨折、肺炎、植入物定位" data-en="Fracture, pneumonia, implant localization">骨折、肺炎</td></tr>
+<tr><td><strong>CT</strong></td><td data-zh="多角度 X-ray 投影 → Radon 反演" data-en="Multi-angle X-ray → inverse Radon">Radon 反演</td><td>0.5–1 mm</td><td data-zh="Hounsfield units (HU)" data-en="Hounsfield units (HU)">HU</td><td data-zh="1–10 mSv（依協定）" data-en="1–10 mSv (protocol-dependent)">中—高</td><td data-zh="腦出血、肺結節、急診創傷" data-en="Hemorrhage, lung nodule, trauma">急診、肺、腫瘤</td></tr>
+<tr><td><strong>MRI</strong></td><td data-zh="核磁共振 + 梯度編碼（Bloch eq.）" data-en="NMR + gradient encoding (Bloch eq.)">NMR + 梯度</td><td>0.5–2 mm</td><td data-zh="T1 / T2 / PD / 擴散 / BOLD" data-en="T1 / T2 / PD / diffusion / BOLD">T1/T2/PD/Diffusion</td><td data-zh="無游離輻射；磁鐵 + RF" data-en="No ionizing; magnet + RF">無游離</td><td data-zh="軟組織、腦、關節、心臟、腫瘤" data-en="Soft tissue, brain, joints, cardiac, oncology">軟組織、腦</td></tr>
+<tr><td><strong>Ultrasound</strong></td><td data-zh="壓電晶體（PZT）發/收聲波" data-en="Piezo (PZT) emit/receive">壓電聲波</td><td>0.1–2 mm</td><td data-zh="聲阻抗差 + 散射" data-en="Acoustic impedance + scatter">聲阻抗 + 散射</td><td data-zh="無游離輻射；機械指數 / 熱指數" data-en="No ionizing; MI / TI safety">無游離</td><td data-zh="產科、心臟、肌肉骨骼、血管 Doppler" data-en="OB, echo, MSK, vascular Doppler">產科、心臟</td></tr>
+<tr><td><strong>PET / SPECT</strong></td><td data-zh="正子 511 keV / 單光子放射" data-en="Positron 511 keV / single photon">放射性示蹤劑</td><td>5–10 mm</td><td data-zh="代謝（FDG）、受體分布" data-en="Metabolism (FDG), receptor density">代謝、受體</td><td data-zh="3–10 mSv（依示蹤劑）" data-en="3–10 mSv (tracer-dependent)">中—高</td><td data-zh="腫瘤分期、阿茲海默、心肌灌流" data-en="Oncology staging, AD, myocardial perfusion">腫瘤、神經、心臟</td></tr>
+<tr><td><strong>OCT</strong></td><td data-zh="低同調光干涉（time / spectral / SS）" data-en="Low-coherence interferometry">低同調干涉</td><td>~ 10 μm</td><td data-zh="反射率深度剖面" data-en="Reflectivity depth profile">反射率</td><td data-zh="無游離；近紅外光低能量" data-en="No ionizing; near-IR low power">無游離</td><td data-zh="眼科視網膜、冠狀動脈內膜" data-en="Retina, intracoronary plaque">眼科、心血管</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="X-ray 與 CT" data-en="X-RAY &amp; CT">X-ray 與 CT</div>
+<h2 data-zh="二、X-ray 與電腦斷層（CT）" data-en="II. X-ray and Computed Tomography (CT)">二、X-ray 與 CT</h2>
+<div data-lang="zh">
+<p>X-ray 是 1895 年 Röntgen 發現的高能電磁波（10–150 keV）。當 X-ray 通過組織時，依 Beer-Lambert 律衰減：<strong>I = I₀·exp(−∫μ(x)dx)</strong>，其中線性衰減係數 μ 與組織密度、原子序、光子能量有關。骨頭（Ca, Z=20）衰減強、肺部空氣最弱。</p>
+<p>CT 把人體切片：旋轉的 X-ray 球管 + 偵測器陣列收集多角度投影（sinogram），再用 <strong>Radon 反變換</strong>（filtered back-projection, FBP）或迭代法（ART、SART、MBIR）或 AI 重建（DLR）重建剖面影像。Hounsfield Units：水 = 0、空氣 = −1000、骨 ≈ +1000、脂 ≈ −100、血 ≈ +30–70。</p>
+<p>2024–2025 趨勢：<strong>photon-counting CT (PCCT)</strong> 商用化（Siemens NAEOTOM Alpha、GE Revolution Apex）能分能譜成像、降低劑量；<strong>AI 低劑量重建（DLR）</strong>普及，劑量可下降 25–50% 維持診斷品質。</p>
+</div>
+<div data-lang="en">
+<p>X-rays are 10–150 keV electromagnetic waves discovered by Röntgen in 1895. Through tissue they attenuate per Beer-Lambert: <strong>I = I₀·exp(−∫μ(x)dx)</strong>, where the linear attenuation μ depends on density, atomic number, and photon energy. Bone (Ca, Z=20) attenuates strongly; air weakly.</p>
+<p>CT slices the body: a rotating X-ray tube + detector array collect multi-angle projections (sinogram); the cross-section is reconstructed by the <strong>inverse Radon transform</strong> (filtered back-projection, FBP), iterative methods (ART, SART, MBIR), or AI reconstruction (DLR). Hounsfield Units: water = 0, air = −1000, bone ≈ +1000, fat ≈ −100, blood ≈ +30–70.</p>
+<p>2024–2025 trends: <strong>photon-counting CT (PCCT)</strong> is commercial (Siemens NAEOTOM Alpha, GE Revolution Apex) — spectral imaging at lower dose. <strong>AI low-dose reconstruction (DLR)</strong> is now widespread, cutting dose 25–50% while preserving diagnostic quality.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="MRI" data-en="MRI">MRI</div>
+<h2 data-zh="三、磁振造影 MRI" data-en="III. Magnetic Resonance Imaging (MRI)">三、磁振造影 MRI</h2>
+<div data-lang="zh">
+<p>原理：人體 ~ 70% 水，每個 ¹H 質子在 B₀ 主磁場下以 Larmor 頻率 ω = γ·B₀ 進動（1.5 T 約 64 MHz、3 T 約 128 MHz）。RF 射頻脈衝把磁化向量翻轉到橫平面，產生可量測訊號；隨後依 <strong>T1 縱向弛豫</strong>、<strong>T2 橫向弛豫</strong>各自衰減/恢復。</p>
+<p><strong>梯度磁場（G<sub>x</sub>, G<sub>y</sub>, G<sub>z</sub>）</strong>為訊號編碼空間位置：頻率編碼 + 相位編碼 + 切片選擇。資料儲存在 <strong>k-space</strong>；影像 = 2D 反 Fourier transform 重建。對比類型：T1 加權（脂亮、水暗）、T2 加權（水亮）、PD、DWI（擴散）、fMRI（BOLD）、MRA（血管）、MRE（彈性）。</p>
+<p>加速技術：<strong>並行成像（SENSE、GRAPPA）</strong>用多接收線圈降低 k-space 取樣；<strong>壓縮感知（CS）</strong>利用稀疏性 + 隨機欠採；<strong>fastMRI</strong>（Meta + NYU 開源資料集 2018-）促成 DL 重建：4×–8× 加速可維持診斷品質。</p>
+</div>
+<div data-lang="en">
+<p>Physics: the body is ~70% water; each ¹H proton precesses at the Larmor frequency ω = γ·B₀ in the main field (1.5 T ≈ 64 MHz, 3 T ≈ 128 MHz). An RF pulse flips magnetization into the transverse plane producing a measurable signal; the signal then decays/recovers per <strong>T1 longitudinal</strong> and <strong>T2 transverse</strong> relaxation.</p>
+<p><strong>Gradient fields (G<sub>x</sub>, G<sub>y</sub>, G<sub>z</sub>)</strong> spatially encode the signal: frequency encoding + phase encoding + slice selection. Data live in <strong>k-space</strong>; the image is recovered by 2D inverse Fourier transform. Contrast types: T1-weighted (fat bright, water dark), T2-weighted (water bright), PD, DWI, fMRI (BOLD), MRA, MR elastography.</p>
+<p>Acceleration: <strong>parallel imaging (SENSE, GRAPPA)</strong> uses multi-coil arrays to undersample k-space; <strong>compressed sensing (CS)</strong> exploits sparsity with random undersampling; <strong>fastMRI</strong> (Meta + NYU open data 2018–) enabled DL reconstruction with 4×–8× acceleration at diagnostic quality.</p>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>核心數學：</strong>MRI 影像 m(x,y) 與其量測訊號 s(k<sub>x</sub>,k<sub>y</sub>) 互為 2D Fourier transform。這就是為什麼線性代數的 SVD、傅立葉、壓縮感知都直接落地在 MRI 加速。</span>
+<span data-lang="en"><strong>Key math:</strong> the MRI image m(x,y) and acquired signal s(k<sub>x</sub>,k<sub>y</sub>) are 2D Fourier transforms of each other — which is exactly why SVD, Fourier, and compressed sensing translate directly into MRI acceleration.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="超音波" data-en="ULTRASOUND">超音波</div>
+<h2 data-zh="四、超音波 Ultrasound" data-en="IV. Ultrasound">四、超音波</h2>
+<div data-lang="zh">
+<p>原理：壓電晶體（PZT 或 CMUT）將電脈衝轉成 1–15 MHz 機械聲波發射入組織；遇到聲阻抗 Z = ρ·c 不同的界面會反射；接收回波計算深度 d = c·t/2（聲速 c ≈ 1540 m/s）。</p>
+<p>模式：<strong>B-mode</strong>（亮度模式，2D 影像）、<strong>M-mode</strong>（單線時間模式，心臟瓣膜）、<strong>Doppler</strong>（多普勒頻移測血流速度 Δf = 2·v·f₀·cosθ/c）、<strong>3D/4D</strong>（產科）、<strong>elastography</strong>（剪切波量組織彈性，肝纖維化）、<strong>contrast-enhanced US（CEUS）</strong>（微泡 microbubbles）。</p>
+<p>解析度權衡：高頻 → 解析高但穿透淺（線陣 7–15 MHz 用於淺層血管；凸陣 2–5 MHz 用於腹部）。即時、低成本、可攜（POCUS、手持 Butterfly iQ³ 用 CMUT 矽晶片）。</p>
+</div>
+<div data-lang="en">
+<p>Physics: piezo crystals (PZT or CMUT) convert electrical pulses to 1–15 MHz acoustic waves; reflections occur at interfaces of differing acoustic impedance Z = ρ·c; echo timing gives depth d = c·t/2 (c ≈ 1540 m/s).</p>
+<p>Modes: <strong>B-mode</strong> (2D brightness), <strong>M-mode</strong> (single-line time, cardiac valves), <strong>Doppler</strong> (frequency-shift flow Δf = 2·v·f₀·cosθ/c), <strong>3D/4D</strong> (OB), <strong>elastography</strong> (shear-wave tissue stiffness; liver fibrosis), <strong>CEUS</strong> (microbubble contrast).</p>
+<p>Resolution trade-off: high frequency → better resolution, less penetration (linear 7–15 MHz for superficial vessels; curvilinear 2–5 MHz for abdomen). Real-time, low cost, portable (POCUS, Butterfly iQ³ handheld with CMUT silicon).</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="PET / SPECT / OCT" data-en="PET / SPECT / OCT">PET / SPECT / OCT</div>
+<h2 data-zh="五、核醫造影與光學斷層" data-en="V. Nuclear &amp; Optical Tomography">五、核醫造影與 OCT</h2>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">☢️</div><h4 data-zh="PET（正子放射）" data-en="PET (Positron Emission)">PET（正子放射）</h4>
+<div data-lang="zh"><p>注入 ¹⁸F-FDG（葡萄糖類似物，t<sub>1/2</sub> 110 min），β⁺ 衰變產生正子，正子與電子湮滅放出兩個 511 keV γ 光子背對背發射；環形偵測器以「符合計數（coincidence detection）」定位。代謝越旺盛（腫瘤、心肌、腦皮質）越亮。</p><p>新進展：<strong>EXPLORER total-body PET</strong>（UC Davis 2019, 2 m 視野、敏感度 ↑ 40×、劑量 ↓）；<strong>amyloid / tau PET</strong>（Aβ-Florbetapir、tau-Flortaucipir）用於 AD 診斷。</p></div>
+<div data-lang="en"><p>Inject ¹⁸F-FDG (glucose analog, t<sub>1/2</sub> 110 min); β⁺ decay → positron annihilates with an electron → two back-to-back 511 keV γ photons; ring detector localizes via coincidence counting. High metabolism (tumor, myocardium, cortex) appears bright.</p><p>Advances: <strong>EXPLORER total-body PET</strong> (UC Davis 2019, 2 m FOV, 40× sensitivity); <strong>amyloid / tau PET</strong> for AD diagnosis.</p></div></div>
+<div class="card"><div class="card-icon">⚛️</div><h4 data-zh="SPECT（單光子）" data-en="SPECT (Single-Photon)">SPECT（單光子）</h4>
+<div data-lang="zh"><p>注入單光子放射核種（⁹⁹ᵐTc, t<sub>1/2</sub> 6 h；²⁰¹Tl；¹²³I），γ 相機旋轉拍多角度投影 → FBP / OSEM 重建。空間解析度比 PET 差（~10 mm），但成本低、半衰期長、應用廣（心肌灌流、骨閃爍、甲狀腺）。</p></div>
+<div data-lang="en"><p>Single-photon isotopes (⁹⁹ᵐTc t<sub>1/2</sub> 6 h, ²⁰¹Tl, ¹²³I); rotating γ camera captures projections → FBP / OSEM reconstruction. Lower resolution (~10 mm) than PET but cheaper, longer half-life — myocardial perfusion, bone scan, thyroid.</p></div></div>
+<div class="card"><div class="card-icon">👁️</div><h4 data-zh="OCT（光學同調斷層）" data-en="OCT (Optical Coherence Tomography)">OCT（光學同調斷層）</h4>
+<div data-lang="zh"><p>原理：Michelson 干涉儀 + 低同調光源（SLD 或 swept-source 1300 nm）。樣本反射與參考臂干涉 → 深度剖面。軸向解析度 1–10 μm，穿透 1–2 mm。眼科黃斑部金標準（OCT-A 加上血流）；冠狀動脈內 IVOCT（intravascular 100 μm 探頭）。</p></div>
+<div data-lang="en"><p>Michelson interferometer + low-coherence source (SLD or swept-source 1300 nm). Sample/reference arm interference yields depth profile. Axial resolution 1–10 μm, penetration 1–2 mm. Gold standard for retinal macula (OCT-A adds flow); intravascular IVOCT (100 μm catheter) for coronary plaque.</p></div></div>
+<div class="card"><div class="card-icon">🌈</div><h4 data-zh="光聲、螢光、近紅外" data-en="Photoacoustic, Fluorescence, NIR">光聲、螢光、NIR</h4>
+<div data-lang="zh"><p>研究熱點：<strong>光聲造影（PAT）</strong>結合光吸收 + 超音波偵測，可看到血氧（HbO₂/Hb）；<strong>近紅外螢光（NIRF, ICG）</strong>術中導航；<strong>diffuse optical tomography</strong> 用於乳房、新生兒腦部監測。</p></div>
+<div data-lang="en"><p>Active research: <strong>photoacoustic (PAT)</strong> combines optical absorption + ultrasound detection — images blood oxygenation. <strong>NIR fluorescence (ICG)</strong> for intra-operative guidance. <strong>Diffuse optical tomography</strong> for breast, neonatal brain.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="對比劑與 AI" data-en="CONTRAST &amp; AI">對比劑與 AI</div>
+<h2 data-zh="六、對比劑與 AI 重建" data-en="VI. Contrast Agents &amp; AI Reconstruction">六、對比劑與 AI</h2>
+<table class="comp-table"><thead><tr><th data-zh="模態" data-en="Modality">模態</th><th data-zh="對比劑" data-en="Agent">對比劑</th><th data-zh="機制" data-en="Mechanism">機制</th><th data-zh="風險" data-en="Risk">風險</th></tr></thead><tbody>
+<tr><td>X-ray / CT</td><td data-zh="碘對比劑（iohexol, iopamidol）" data-en="Iodinated (iohexol, iopamidol)">碘對比劑</td><td data-zh="高原子序 Z 增加 X-ray 衰減" data-en="High-Z increases X-ray attenuation">↑ μ</td><td data-zh="對比劑誘發腎病、過敏" data-en="CI-AKI, allergy">腎病、過敏</td></tr>
+<tr><td>MRI</td><td data-zh="釓螯合物（gadolinium chelates）" data-en="Gadolinium chelates">Gd 螯合物</td><td data-zh="縮短 T1 → 亮（T1WI 增強）" data-en="Shortens T1 → bright on T1W">縮短 T1</td><td data-zh="腎源性系統性纖維化（NSF）、組織沉積" data-en="NSF, tissue retention">NSF、沉積</td></tr>
+<tr><td>Ultrasound</td><td data-zh="微泡（SonoVue, Definity）" data-en="Microbubbles (SonoVue, Definity)">微泡</td><td data-zh="氣體微泡共振強散射" data-en="Gas-filled, resonant strong scatter">強散射</td><td data-zh="極少；過敏可能" data-en="Very rare allergy">極少</td></tr>
+<tr><td>PET</td><td>¹⁸F-FDG, ⁶⁸Ga-DOTATATE, ¹⁸F-Florbetapir</td><td data-zh="代謝 / 受體結合" data-en="Metabolism / receptor binding">代謝、受體</td><td data-zh="輻射劑量、生物半衰期" data-en="Radiation dose, biological half-life">輻射</td></tr>
+</tbody></table>
+<div data-lang="zh">
+<p><strong>AI 影像重建（2024–2026）：</strong></p>
+<ul>
+<li><strong>CT DLR（Deep Learning Reconstruction）</strong>：GE TrueFidelity、Canon AiCE、Siemens DLR；同等品質下劑量 ↓ 25–50%。</li>
+<li><strong>MRI fastMRI 後續</strong>：DL prior 取代 CS 稀疏假設；4×–8× 加速；商用：GE AIR Recon DL、Siemens Deep Resolve、Philips SmartSpeed。</li>
+<li><strong>低劑量 PET</strong>：Subtle Medical SubtlePET（FDA-cleared）用 GAN/diffusion 從 1/4 劑量恢復全劑量品質。</li>
+<li><strong>超音波 AI</strong>：心臟自動分割（Ultromics EchoGo）、產科自動測徑。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p><strong>AI Image Reconstruction (2024–2026):</strong></p>
+<ul>
+<li><strong>CT DLR (Deep Learning Reconstruction)</strong>: GE TrueFidelity, Canon AiCE, Siemens DLR — equal quality at 25–50% lower dose.</li>
+<li><strong>MRI post-fastMRI</strong>: DL prior replaces CS sparsity; 4×–8× acceleration. Commercial: GE AIR Recon DL, Siemens Deep Resolve, Philips SmartSpeed.</li>
+<li><strong>Low-dose PET</strong>: Subtle Medical SubtlePET (FDA-cleared) restores full-dose quality from 1/4 dose via GAN/diffusion priors.</li>
+<li><strong>Ultrasound AI</strong>: auto cardiac segmentation (Ultromics EchoGo), automated OB biometry.</li>
+</ul>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動工具" data-en="INTERACTIVE">互動工具</div>
+<h2 data-zh="七、模態比較互動圖" data-en="VII. Modality Comparison Tool">七、模態比較互動圖</h2>
+<div data-lang="zh"><p>下面比較六大模態於不同維度：解析度、輻射劑量、檢查時間、單次成本。切換視角觀察折衷。</p></div>
+<div data-lang="en"><p>Compare the six modalities across resolution, dose, time, and cost. Switch perspective to see trade-offs.</p></div>
+<div class="interactive-panel">
+<div class="toggle-row">
+  <button class="toggle-btn active" data-view="res" data-zh="空間解析度 (mm)" data-en="Spatial res (mm)">解析度 (mm)</button>
+  <button class="toggle-btn" data-view="dose" data-zh="輻射劑量 (mSv)" data-en="Dose (mSv)">劑量 (mSv)</button>
+  <button class="toggle-btn" data-view="time" data-zh="檢查時間 (min)" data-en="Scan time (min)">時間 (min)</button>
+  <button class="toggle-btn" data-view="cost" data-zh="相對成本" data-en="Relative cost">成本</button>
+</div>
+<div class="chart-container"><canvas id="modChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">數值為典型範圍中位數；實際依機型與協定差異甚大。</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Values are typical-range midpoints; actual numbers vary by vendor and protocol.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="八、急性腦中風：CT 還是 MRI？" data-en="VIII. Acute Stroke: CT or MRI?">八、模態選擇決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="臨床問題 → 影像模態" data-en="Clinical Question → Modality">臨床問題 → 模態</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh"><strong>急性中風</strong>需先排除腦出血？<span class="dt-arrow">→</span> <strong>非顯影 CT</strong>（5 分鐘、可看出血、廣泛可用）；其後 CTA 或 MR-DWI 看缺血核心。</span><span data-lang="en"><strong>Acute stroke</strong>, rule out hemorrhage? <span class="dt-arrow">→</span> <strong>Non-contrast CT</strong> (5 min, detects bleed, widely available). Then CTA or MR-DWI for ischemic core.</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh"><strong>缺血早期（&lt; 6 h）</strong>需精準時間窗評估？<span class="dt-arrow">→</span> <strong>MR DWI + PWI mismatch</strong>（penumbra）；或 CT perfusion。</span><span data-lang="en"><strong>Early ischemia</strong>, accurate time-window assessment? <span class="dt-arrow">→</span> <strong>MR DWI + PWI mismatch</strong> (penumbra); or CT perfusion.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh"><strong>骨折</strong> / 異物 / 植入物定位？<span class="dt-arrow">→</span> <strong>X-ray</strong>（首選），複雜骨折再 CT。</span><span data-lang="en"><strong>Fracture</strong> / foreign body / implant? <span class="dt-arrow">→</span> <strong>X-ray</strong> first; complex fracture → CT.</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh"><strong>軟組織</strong>（韌帶、半月板、肌腱、腦軸突束）？<span class="dt-arrow">→</span> <strong>MRI</strong>（T2WI / DTI）。</span><span data-lang="en"><strong>Soft tissue</strong> (ligament, meniscus, tendon, white-matter tracts)? <span class="dt-arrow">→</span> <strong>MRI</strong> (T2W / DTI).</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh"><strong>產科 / 心臟瓣膜</strong> / 床邊評估？<span class="dt-arrow">→</span> <strong>超音波</strong>（無輻射、即時、可攜）。</span><span data-lang="en"><strong>Obstetrics / cardiac valves / bedside</strong>? <span class="dt-arrow">→</span> <strong>Ultrasound</strong> (no radiation, real-time, portable).</span></div>
+<div class="dt-node"><span class="dt-q">Q6.</span><span data-lang="zh"><strong>腫瘤分期 / 遠端轉移</strong>？<span class="dt-arrow">→</span> <strong>PET-CT</strong>（¹⁸F-FDG）；前列腺癌用 ⁶⁸Ga-PSMA PET。</span><span data-lang="en"><strong>Oncology staging / distant mets</strong>? <span class="dt-arrow">→</span> <strong>PET-CT</strong> (¹⁸F-FDG); prostate uses ⁶⁸Ga-PSMA PET.</span></div>
+<div class="dt-node"><span class="dt-q">Q7.</span><span data-lang="zh"><strong>視網膜病變</strong> / 黃斑水腫 / 青光眼？<span class="dt-arrow">→</span> <strong>OCT</strong>（眼底斷層，金標準）。</span><span data-lang="en"><strong>Retinal disease</strong> / macular edema / glaucoma? <span class="dt-arrow">→</span> <strong>OCT</strong> (gold standard).</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="九、CT 重建：Radon 正向 + iRadon 反向" data-en="IX. CT Reconstruction: Radon + iRadon">九、CT FBP 重建</h2>
+<div data-lang="zh"><p>下面用 Shepp-Logan phantom 演示「物體 → sinogram（多角度投影） → 濾波反投影重建」。Python 用 scikit-image；MATLAB 用 Image Processing Toolbox。</p></div>
+<div data-lang="en"><p>Demonstrates "object → sinogram (multi-angle projections) → filtered back-projection" on the Shepp-Logan phantom. Python uses scikit-image; MATLAB uses Image Processing Toolbox.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">from</span> skimage.data <span class="kw">import</span> shepp_logan_phantom
+<span class="kw">from</span> skimage.transform <span class="kw">import</span> radon, iradon, rescale
+
+phantom = rescale(shepp_logan_phantom(), scale=<span class="num">0.4</span>, mode=<span class="str">'reflect'</span>)
+theta   = np.<span class="func">linspace</span>(<span class="num">0.</span>, <span class="num">180.</span>, max(phantom.shape), endpoint=<span class="kw">False</span>)
+
+<span class="comment"># Forward Radon transform → sinogram</span>
+sinogram = radon(phantom, theta=theta, circle=<span class="kw">True</span>)
+
+<span class="comment"># Filtered back-projection (ramp filter)</span>
+recon_fbp = iradon(sinogram, theta=theta, filter_name=<span class="str">'ramp'</span>, circle=<span class="kw">True</span>)
+<span class="comment"># Try Shepp-Logan filter to reduce noise</span>
+recon_sl  = iradon(sinogram, theta=theta, filter_name=<span class="str">'shepp-logan'</span>, circle=<span class="kw">True</span>)
+
+fig, ax = plt.<span class="func">subplots</span>(<span class="num">1</span>, <span class="num">3</span>, figsize=(<span class="num">10</span>,<span class="num">3.5</span>))
+ax[<span class="num">0</span>].<span class="func">imshow</span>(phantom, cmap=<span class="str">'gray'</span>);  ax[<span class="num">0</span>].<span class="func">set_title</span>(<span class="str">'Phantom'</span>)
+ax[<span class="num">1</span>].<span class="func">imshow</span>(sinogram.T, cmap=<span class="str">'gray'</span>, aspect=<span class="str">'auto'</span>); ax[<span class="num">1</span>].<span class="func">set_title</span>(<span class="str">'Sinogram'</span>)
+ax[<span class="num">2</span>].<span class="func">imshow</span>(recon_fbp, cmap=<span class="str">'gray'</span>); ax[<span class="num">2</span>].<span class="func">set_title</span>(<span class="str">'FBP recon'</span>)
+plt.<span class="func">tight_layout</span>(); plt.<span class="func">show</span>()</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% Requires Image Processing Toolbox</span>
+P     = <span class="func">phantom</span>(<span class="num">256</span>);                  <span class="comment">% Shepp-Logan</span>
+theta = <span class="num">0</span>:<span class="num">1</span>:<span class="num">179</span>;
+[R, xp] = <span class="func">radon</span>(P, theta);             <span class="comment">% sinogram</span>
+
+<span class="comment">% Filtered back-projection (ramp filter)</span>
+I_fbp = <span class="func">iradon</span>(R, theta, <span class="str">'linear'</span>, <span class="str">'Ram-Lak'</span>, <span class="num">256</span>);
+<span class="comment">% Try Shepp-Logan filter (smoother)</span>
+I_sl  = <span class="func">iradon</span>(R, theta, <span class="str">'linear'</span>, <span class="str">'Shepp-Logan'</span>, <span class="num">256</span>);
+
+subplot(<span class="num">1</span>,<span class="num">3</span>,<span class="num">1</span>); imshow(P,[]);     title(<span class="str">'Phantom'</span>);
+subplot(<span class="num">1</span>,<span class="num">3</span>,<span class="num">2</span>); imagesc(R);      title(<span class="str">'Sinogram'</span>); axis tight;
+subplot(<span class="num">1</span>,<span class="num">3</span>,<span class="num">3</span>); imshow(I_fbp,[]);title(<span class="str">'FBP reconstruction'</span>);</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十、本章關鍵術語" data-en="X. Key Terms">十、關鍵術語</h2>
+<p><span class="term">Hounsfield Unit (HU)<span class="term-tip">CT 衰減值標準化：水 0，空氣 −1000，骨 +1000。</span></span> &nbsp;
+<span class="term">Radon transform<span class="term-tip">把 2D 物體沿不同角度線積分；CT 投影即 Radon。</span></span> &nbsp;
+<span class="term">FBP<span class="term-tip">Filtered Back-Projection — 經典 CT 重建：投影 → ramp filter → back-project。</span></span> &nbsp;
+<span class="term">k-space<span class="term-tip">MRI 空間頻率域；2D iFFT 重建影像。</span></span> &nbsp;
+<span class="term">T1 / T2<span class="term-tip">縱向 / 橫向弛豫時間；不同組織與病灶的 T1/T2 形成 MRI 對比。</span></span> &nbsp;
+<span class="term">DWI<span class="term-tip">擴散加權成像；水分子擴散受限時亮（急性梗塞、腫瘤）。</span></span> &nbsp;
+<span class="term">Larmor<span class="term-tip">ω = γB₀；質子於外場下進動頻率。</span></span> &nbsp;
+<span class="term">Doppler<span class="term-tip">頻移 Δf = 2vf₀cosθ/c，量測血流速度。</span></span> &nbsp;
+<span class="term">SUV<span class="term-tip">Standardized Uptake Value — PET 量化指標：濃度 / 體重×注射劑量。</span></span> &nbsp;
+<span class="term">PCCT<span class="term-tip">Photon-Counting CT — 計數每顆光子的能量；分能譜、低劑量、2021– 商用。</span></span> &nbsp;
+<span class="term">DLR<span class="term-tip">Deep Learning Reconstruction — 取代 FBP/IR 的 AI 重建。</span></span> &nbsp;
+<span class="term">CMUT<span class="term-tip">Capacitive Micromachined Ultrasonic Transducer — 矽晶片超音波換能器（Butterfly iQ）。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check (3 questions)">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2">
+<p><span data-lang="zh">Q1. 急診懷疑腦中風但無法分辨「梗塞」還是「出血」，首選影像？</span><span data-lang="en">Q1. ED suspected stroke, cannot distinguish infarct vs hemorrhage — first-line imaging?</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0">A. <span data-zh="MRI T1W" data-en="MRI T1W">MRI T1W</span></div>
+<div class="quiz-opt" data-opt="1">B. <span data-zh="PET-CT" data-en="PET-CT">PET-CT</span></div>
+<div class="quiz-opt" data-opt="2">C. <span data-zh="非顯影 CT" data-en="Non-contrast CT">非顯影 CT</span></div>
+<div class="quiz-opt" data-opt="3">D. <span data-zh="頸動脈超音波" data-en="Carotid US">頸動脈超音波</span></div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+<div class="quiz-q" data-correct="1">
+<p><span data-lang="zh">Q2. MRI 中 k-space 與影像的數學關係是？</span><span data-lang="en">Q2. The relationship between MRI k-space and image is:</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0">A. <span data-zh="Radon 變換" data-en="Radon transform">Radon 變換</span></div>
+<div class="quiz-opt" data-opt="1">B. <span data-zh="2D Fourier transform" data-en="2D Fourier transform">2D Fourier 變換</span></div>
+<div class="quiz-opt" data-opt="2">C. <span data-zh="Hilbert transform" data-en="Hilbert transform">Hilbert 變換</span></div>
+<div class="quiz-opt" data-opt="3">D. <span data-zh="Z transform" data-en="Z transform">Z 變換</span></div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+<div class="quiz-q" data-correct="0">
+<p><span data-lang="zh">Q3. 下列哪一項<strong>不使用游離輻射</strong>？</span><span data-lang="en">Q3. Which modality is <strong>non-ionizing</strong>?</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0">A. MRI <span data-zh="與" data-en="and">與</span> Ultrasound</div>
+<div class="quiz-opt" data-opt="1">B. CT <span data-zh="與" data-en="and">與</span> PET</div>
+<div class="quiz-opt" data-opt="2">C. X-ray <span data-zh="與" data-en="and">與</span> SPECT</div>
+<div class="quiz-opt" data-opt="3">D. CT <span data-zh="與" data-en="and">與</span> X-ray</div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+</section>
+
+<div class="page-nav">
+<a href="signal-processing.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="B2 · 訊號處理" data-en="B2 · Signal Processing">B2 · 訊號處理</span></a>
+<a href="image-processing.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="B4 · 醫學影像處理與 AI" data-en="B4 · Image Processing &amp; AI">B4 · 醫學影像處理與 AI</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · B3 Medical Imaging</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// Modality comparison chart
+const labelsZH=['X-ray','CT','MRI','Ultrasound','PET/SPECT','OCT'];
+const labelsEN={'X-ray':'X-ray','CT':'CT','MRI':'MRI','Ultrasound':'Ultrasound','PET/SPECT':'PET/SPECT','OCT':'OCT'};
+const data={
+  res :{values:[0.1, 0.7, 1.2, 0.5, 7.0, 0.01], unit:'mm',  log:true,
+        labelZH:'空間解析度 (mm, log)', labelEN:'Spatial resolution (mm, log)'},
+  dose:{values:[0.05, 5, 0, 0, 6, 0],          unit:'mSv', log:false,
+        labelZH:'平均輻射劑量 (mSv)',  labelEN:'Average dose (mSv)'},
+  time:{values:[5, 10, 30, 20, 30, 5],         unit:'min', log:false,
+        labelZH:'檢查時間 (min)',      labelEN:'Scan time (min)'},
+  cost:{values:[1, 8, 25, 4, 30, 6],           unit:'rel', log:false,
+        labelZH:'相對成本（X-ray = 1）',labelEN:'Relative cost (X-ray = 1)'}
+};
+let modChart=null;
+function drawMod(view){
+  const d=data[view];
+  const lang=I18n.get();
+  const labs=labelsZH.map(l=>lang==='zh'?l:labelsEN[l]);
+  if(modChart) modChart.destroy();
+  modChart=new Chart(document.getElementById('modChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:labs,datasets:[{label:lang==='zh'?d.labelZH:d.labelEN,data:d.values,backgroundColor:'rgba(131,24,67,.75)',borderColor:'#500724',borderWidth:1}]},
+    options:{plugins:{legend:{display:true}},
+      scales:{y:{type:d.log?'logarithmic':'linear',beginAtZero:!d.log,title:{display:true,text:d.unit}}}}
+  });
+}
+drawMod('res');
+document.querySelectorAll('.toggle-btn[data-view]').forEach(b=>{
+  b.addEventListener('click',()=>{document.querySelectorAll('.toggle-btn[data-view]').forEach(x=>x.classList.remove('active'));b.classList.add('active');drawMod(b.dataset.view);});
+});
+document.addEventListener('langchange',()=>{const cur=document.querySelector('.toggle-btn[data-view].active').dataset.view;drawMod(cur);});
+</script>
+</body></html>

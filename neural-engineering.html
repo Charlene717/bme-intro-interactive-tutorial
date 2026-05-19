@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>E1: 神經工程與腦機介面 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html" class="active">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER E1 · BLOCK E EMERGING &amp; REGULATION</div>
+<h1 data-zh="神經工程與腦機介面" data-en="Neural Engineering &amp; Brain-Computer Interfaces">神經工程與腦機介面</h1>
+<p class="subtitle" data-lang="zh">從人工耳蝸到 Neuralink、從 DBS 到 Stentrode——神經工程把工程方法接到神經系統，用以「恢復、增強、治療」。本章帶你看遍記錄與刺激模態、BCI 解碼管線，以及 2024–2026 最新臨床進展。</p>
+<p class="subtitle" data-lang="en">From cochlear implants to Neuralink, from DBS to Stentrode — neural engineering interfaces with the nervous system to restore, augment, or treat. We tour recording and stimulation modalities, BCI decoding pipelines, and 2024–2026 clinical progress.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="定義" data-en="DEFINITION">定義</div>
+<h2 data-zh="一、什麼是神經工程？" data-en="I. What is Neural Engineering?">一、什麼是神經工程？</h2>
+<div data-lang="zh">
+<p><strong>神經工程（Neural Engineering）</strong>是把工程方法（電子、訊號、材料、機器學習）與神經科學結合，<strong>設計能與神經系統（中樞與周邊）建立資訊或能量交換</strong>的裝置、電極、演算法與療法。臨床目標可粗分三類：(1) <strong>恢復 restoration</strong>——人工耳蝸恢復聽力、視網膜植入恢復視覺、BCI 恢復運動或語言；(2) <strong>增強 augmentation</strong>——閉迴路認知/感覺輔助；(3) <strong>治療 treatment</strong>——DBS 對帕金森、RNS 對癲癇、SCS 對慢性疼痛、VNS 對憂鬱。</p>
+<p>神經工程涵蓋三大工程動作：<strong>記錄（recording）</strong>神經電/磁/光訊號、<strong>刺激（stimulation）</strong>注入電流或光以調控神經活動，以及<strong>解碼/編碼（decoding / encoding）</strong>把神經訊號翻譯成意圖（或反向）。每一個動作都對應特定電極、放大器、訊號處理、機器學習演算法、生物相容性與法規流程。</p>
+</div>
+<div data-lang="en">
+<p><strong>Neural engineering</strong> couples engineering disciplines (electronics, signals, materials, ML) with neuroscience to <strong>build devices, electrodes, algorithms and therapies that exchange information or energy with the nervous system</strong> (central and peripheral). Clinical goals fall into three buckets: (1) <strong>restoration</strong> — cochlear implants for hearing, retinal implants for vision, BCIs for motor/speech; (2) <strong>augmentation</strong> — closed-loop sensory/cognitive aids; (3) <strong>treatment</strong> — DBS for Parkinson's, RNS for epilepsy, SCS for chronic pain, VNS for depression.</p>
+<p>Three engineering verbs dominate: <strong>recording</strong> neural electrical/magnetic/optical signals, <strong>stimulation</strong> via current or light to modulate activity, and <strong>decoding/encoding</strong> translating signals into intent (or the other way). Each requires its own electrodes, amplifiers, DSP, ML, biocompatibility, and regulatory path.</p>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>動作電位回顧（Hodgkin-Huxley 1952）：</strong>神經元利用 Na⁺ / K⁺ 通道的電壓相依開合產生 ~1 ms、~100 mV 的動作電位，沿軸突以 1–120 m/s 傳遞。<strong>單神經元 spikes</strong>（&gt;300 Hz 高頻成分）需穿刺電極或微電極陣列才能擷取；<strong>局部場電位 LFP</strong>（1–300 Hz）反映數千神經元突觸活動的總和，可由 ECoG/sEEG 擷取；<strong>頭皮 EEG</strong>（0.5–80 Hz）則是經頭骨衰減後的群體訊號。</span>
+<span data-lang="en"><strong>Action-potential refresher (Hodgkin-Huxley, 1952):</strong> Neurons use voltage-gated Na⁺/K⁺ channels to fire ~1 ms, ~100 mV spikes along axons at 1–120 m/s. <strong>Single-unit spikes</strong> (&gt;300 Hz components) need penetrating microelectrodes; <strong>local field potentials (LFP)</strong> (1–300 Hz) sum thousands of synapses and are captured by ECoG/sEEG; <strong>scalp EEG</strong> (0.5–80 Hz) is the population signal after skull attenuation.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="記錄模態" data-en="RECORDING MODALITIES">記錄模態</div>
+<h2 data-zh="二、神經訊號記錄模態比較" data-en="II. Recording Modalities Compared">二、神經訊號記錄模態比較</h2>
+<div data-lang="zh"><p>選擇模態的核心是「<strong>空間解析度 × 時間解析度 × 侵入性</strong>」的三角權衡。臨床上越深入越精細，但風險與成本越高。</p></div>
+<div data-lang="en"><p>The core trade-off is <strong>spatial resolution × temporal resolution × invasiveness</strong>. Going deeper buys precision but also risk and cost.</p></div>
+<table class="comp-table"><thead><tr><th data-zh="模態" data-en="Modality">模態</th><th data-zh="位置" data-en="Location">位置</th><th data-zh="空間解析度" data-en="Spatial">空間</th><th data-zh="頻寬" data-en="Bandwidth">頻寬</th><th data-zh="侵入性" data-en="Invasiveness">侵入性</th><th data-zh="代表用途" data-en="Use">用途</th></tr></thead><tbody>
+<tr><td><strong>EEG</strong></td><td data-zh="頭皮" data-en="Scalp">頭皮</td><td>~5 cm</td><td>0.5–80 Hz</td><td data-zh="無" data-en="None">無</td><td data-zh="癲癇篩檢、睡眠、BCI" data-en="Epilepsy screen, sleep, BCI">癲癇、睡眠、BCI</td></tr>
+<tr><td><strong>MEG</strong></td><td data-zh="頭皮外" data-en="Outside skull">頭皮外</td><td>~2–3 mm</td><td>1–600 Hz</td><td data-zh="無（需 SQUID 或 OPM）" data-en="None (SQUID/OPM)">無（需冷卻）</td><td data-zh="癲癇灶定位、術前 mapping" data-en="Epileptic focus, presurgical mapping">癲癇灶</td></tr>
+<tr><td><strong>fNIRS</strong></td><td data-zh="頭皮（光學）" data-en="Scalp (optical)">頭皮（光學）</td><td>~1–3 cm</td><td>~0.01–3 Hz (BOLD-like)</td><td data-zh="無" data-en="None">無</td><td data-zh="認知 BCI、嬰兒、運動研究" data-en="Cognitive BCI, infants, motor">認知 BCI</td></tr>
+<tr><td><strong>ECoG</strong></td><td data-zh="腦皮層表面" data-en="Cortical surface">腦皮層表面</td><td>2–10 mm</td><td>0–500 Hz</td><td data-zh="侵入（開顱）" data-en="Invasive (craniotomy)">高（開顱）</td><td data-zh="癲癇監測、語言/動作 BCI" data-en="Epilepsy mon., speech/motor BCI">癲癇、BCI</td></tr>
+<tr><td><strong>sEEG</strong></td><td data-zh="腦深部" data-en="Depth">腦深部（立體定位）</td><td>~1–3 mm</td><td>0–500 Hz</td><td data-zh="侵入（鑽孔）" data-en="Invasive (burr hole)">高</td><td data-zh="難治性癲癇 mapping" data-en="Refractory epilepsy mapping">癲癇 mapping</td></tr>
+<tr><td><strong>Utah array</strong></td><td data-zh="皮質內 (MEA)" data-en="Intracortical">皮質內 100-ch</td><td>~400 μm</td><td>0.1–7,500 Hz</td><td data-zh="高度侵入" data-en="Highly invasive">高</td><td data-zh="運動 BCI（BrainGate）" data-en="Motor BCI (BrainGate)">運動 BCI</td></tr>
+<tr><td><strong>Neuralink N1 threads</strong></td><td data-zh="皮質內柔性電極" data-en="Flexible threads">皮質內柔線</td><td>~4 μm <span data-zh="(電極粗細)" data-en="(thread)">(電極粗細)</span></td><td>0–10 kHz</td><td data-zh="高（機器人植入）" data-en="High (robotic)">高</td><td data-zh="1024 通道運動 BCI" data-en="1024-ch motor BCI">高密度 BCI</td></tr>
+<tr><td><strong>Patch clamp</strong></td><td data-zh="單細胞" data-en="Single cell">單細胞（in vitro）</td><td>~1 μm</td><td>DC–20 kHz</td><td data-zh="極侵入（離體）" data-en="Ex vivo">極（離體）</td><td data-zh="離子通道研究" data-en="Ion channels">基礎研究</td></tr>
+</tbody></table>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>慢性記錄穩定性是長年痛點：</strong>植入電極周邊 1–2 週開始形成 <em>gliosis</em>（神經膠細胞包覆）、6 個月後 spike yield 通常衰退 30–60%。Neuralink 等柔性電極（thread 直徑 ~4 μm，Young's modulus 接近腦組織）的設計動機，就是減少這個 foreign body response。</span>
+<span data-lang="en"><strong>Chronic recording stability is a long-standing pain point.</strong> Implanted electrodes trigger <em>gliosis</em> within 1–2 weeks; spike yield typically falls 30–60% by 6 months. Flexible electrodes (Neuralink threads ~4 μm, Young's modulus close to brain tissue) are designed precisely to mitigate this foreign-body response.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="刺激與神經調控" data-en="STIMULATION">刺激與神經調控</div>
+<h2 data-zh="三、刺激/神經調控（neuromodulation）" data-en="III. Stimulation &amp; Neuromodulation">三、刺激與神經調控</h2>
+<div data-lang="zh"><p>刺激比記錄更接近「療法」。FDA 已核可的植入式神經調控覆蓋耳、腦、脊髓、迷走神經、視網膜等多個層次：</p></div>
+<div data-lang="en"><p>Stimulation is the "therapy" side. FDA-approved implants cover ear, brain, spinal cord, vagus nerve, and retina:</p></div>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">👂</div><h4 data-zh="人工耳蝸（Cochlear Implant）" data-en="Cochlear Implant">人工耳蝸</h4>
+<div data-lang="zh"><p>把聲音先 FFT 分頻 → 對應到 22 條沿 cochlea 排列的電極（place coding）。三家主要廠商：Cochlear Ltd（Nucleus 8）、Advanced Bionics（Naída CI）、MED-EL（Sonnet 2）。編碼策略：CIS、ACE、MP3000；電流擴散 ~0.5 mm 為解析瓶頸。1980s 起，至今全球植入超過 100 萬例。</p></div>
+<div data-lang="en"><p>Sound is FFT-decomposed → 22 electrodes along the cochlea (place coding). Big three: Cochlear Ltd (Nucleus 8), Advanced Bionics (Naída CI), MED-EL (Sonnet 2). Strategies CIS, ACE, MP3000; current spread ~0.5 mm limits resolution. Since the 1980s, &gt;1 million people have been implanted.</p></div></div>
+
+<div class="card"><div class="card-icon">🧠</div><h4 data-zh="深部腦刺激（DBS）" data-en="Deep Brain Stimulation">深部腦刺激（DBS）</h4>
+<div data-lang="zh"><p>STN/GPi/VIM/ANT 等靶點高頻刺激（~130 Hz）。Medtronic Activa / Percept PC（內建 BrainSense 偵測 β 振盪）、Boston Scientific Vercise Genus、Abbott Infinity（無方向性 / 方向性電極）。適應症：帕金森、原發性顫抖、肌張力不全、強迫症（OCD HDE）、難治性癲癇。</p></div>
+<div data-lang="en"><p>High-frequency (~130 Hz) stim of STN/GPi/VIM/ANT. Medtronic Activa / Percept PC (BrainSense β-band sensing), Boston Scientific Vercise Genus, Abbott Infinity (directional leads). Indications: Parkinson's, essential tremor, dystonia, OCD (HDE), refractory epilepsy.</p></div></div>
+
+<div class="card"><div class="card-icon">👁️</div><h4 data-zh="視網膜植入（Retinal Implant）" data-en="Retinal Implant">視網膜植入</h4>
+<div data-lang="zh"><p>Argus II（Second Sight）2013 FDA 核准，2019 公司倒閉、2022 全面停止支援，使用者面對「植入物孤兒」議題。當代研究：Pixium Vision PRIMA 為 subretinal photovoltaic 陣列（無線、由近紅外驅動）、Science Bionic Eye 計畫、日本人工視網膜。挑戰：解析度仍遠低於正常視覺。</p></div>
+<div data-lang="en"><p>Argus II (Second Sight) approved 2013; company bankrupt 2019, support discontinued 2022, leaving "orphan implant" patients. Current efforts: Pixium Vision PRIMA (sub-retinal photovoltaic, NIR-driven), Science Bionic Eye, Japan's artificial retina. Resolution remains far below normal vision.</p></div></div>
+
+<div class="card"><div class="card-icon">🦴</div><h4 data-zh="脊髓電刺激（SCS）" data-en="Spinal Cord Stimulation">脊髓電刺激</h4>
+<div data-lang="zh"><p>Nevro HFX 10 kHz paresthesia-free、Boston Scientific WaveWriter Alpha、Abbott Proclaim、Medtronic Inceptiv（首支閉迴路 ECAP-sensing）。用於慢性背痛、糖尿病周邊神經痛、複雜性區域疼痛症候群（CRPS）。</p></div>
+<div data-lang="en"><p>Nevro HFX 10 kHz (paresthesia-free), Boston Scientific WaveWriter Alpha, Abbott Proclaim, Medtronic Inceptiv (first closed-loop ECAP sensing). For chronic back pain, painful diabetic neuropathy, CRPS.</p></div></div>
+
+<div class="card"><div class="card-icon">🩺</div><h4 data-zh="迷走神經刺激（VNS）" data-en="Vagus Nerve Stimulation">迷走神經刺激</h4>
+<div data-lang="zh"><p>LivaNova（前 Cyberonics）VNS Therapy 用於難治性癲癇（1997）與憂鬱症（2005）。透過環狀電極包覆左頸迷走神經，傳入 NTS → locus coeruleus → 皮質擴散影響。2024 FDA 開放阻塞性睡眠呼吸中止症 obstructive sleep apnea（Inspire Medical 是不同產品，靶舌下神經）。</p></div>
+<div data-lang="en"><p>LivaNova (ex-Cyberonics) VNS Therapy for refractory epilepsy (1997) and depression (2005). Cuff electrode on the left cervical vagus → NTS → locus coeruleus → cortical modulation. Inspire Medical for OSA is a different device (hypoglossal nerve).</p></div></div>
+
+<div class="card"><div class="card-icon">⚡</div><h4 data-zh="反應性神經刺激 RNS" data-en="Responsive Neurostimulation">反應性神經刺激（RNS）</h4>
+<div data-lang="zh"><p>NeuroPace RNS System（2013 PMA）：閉迴路癲癇治療，植入顱骨內，偵測到 ictal pattern 即發送刺激中斷發作。是首支「sense-and-respond」腦植入；2023 NAUTILUS 試驗擴展全身性癲癇適應症。</p></div>
+<div data-lang="en"><p>NeuroPace RNS System (PMA 2013): closed-loop for epilepsy, embedded in the skull; detects ictal patterns and delivers counter-stimulation. The first "sense-and-respond" brain implant; 2023 NAUTILUS trial expanded to generalized epilepsy.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="BCI 解碼" data-en="BCI DECODING">BCI 解碼</div>
+<h2 data-zh="四、腦機介面（BCI）解碼管線" data-en="IV. Brain-Computer Interface (BCI) Decoding Pipeline">四、腦機介面解碼管線</h2>
+<div data-lang="zh"><p>BCI = 量測神經訊號 → 提取特徵 → 解碼成控制命令。經典「典範（paradigm）」分三大類：</p>
+<ol class="numbered">
+<li><strong>運動想像（Motor Imagery）</strong>——使用者想像左手 / 右手 / 腳動作，激發 μ (8–12 Hz) 與 β (13–30 Hz) 的 event-related desynchronization (ERD)。對應到 Common Spatial Pattern (CSP) + LDA 是經典 EEG 解碼配方。</li>
+<li><strong>P300</strong>——對「期待的、稀有的」刺激會在 ~300 ms 出現大正波，常見「字母矩陣 speller」。</li>
+<li><strong>SSVEP（穩態視覺誘發電位）</strong>——對特定頻率閃爍刺激（6–30 Hz）的同頻反應，特點是訊號雜訊比高、訓練少。</li>
+</ol>
+<p>植入式 BCI 用 Utah array 或 Neuralink threads 量單神經元 spikes 與 LFP，<strong>解碼器</strong>常見三代：(a) Kalman / Wiener filter（線性、可解釋），(b) RNN/LSTM，(c) Transformer（近年新主流；2023–2025 Stanford 與 UCSF 在語音 BCI 解碼上以 Transformer + CTC 大幅提升字錯誤率）。</p></div>
+<div data-lang="en"><p>BCI = measure neural signal → extract features → decode to control commands. Three classic paradigms:</p>
+<ol class="numbered">
+<li><strong>Motor Imagery</strong> — user imagines left/right hand or foot movement, eliciting μ (8–12 Hz) and β (13–30 Hz) ERD. Classic recipe: Common Spatial Pattern (CSP) + LDA on EEG.</li>
+<li><strong>P300</strong> — a ~300 ms positive deflection after a rare, expected stimulus; basis of the letter-matrix speller.</li>
+<li><strong>SSVEP</strong> — synchronous response to a flickering stimulus (6–30 Hz); high SNR, minimal training.</li>
+</ol>
+<p>Implanted BCIs use Utah arrays or Neuralink threads to capture single-unit spikes and LFP. Three generations of <strong>decoders</strong>: (a) Kalman/Wiener filter (linear, interpretable); (b) RNN/LSTM; (c) Transformer (current SOTA — Stanford and UCSF 2023–2025 showed Transformer + CTC slashed WER in speech BCIs).</p></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="2024–2026 臨床進展" data-en="2024–2026 PROGRESS">臨床進展</div>
+<h2 data-zh="五、2024–2026 BCI 臨床公司一覽" data-en="V. 2024–2026 BCI Clinical Landscape">五、2024–2026 BCI 公司現況</h2>
+<table class="comp-table"><thead><tr><th data-zh="公司 / 系統" data-en="Company / System">公司</th><th data-zh="技術" data-en="Tech">技術</th><th data-zh="最新狀態" data-en="Status">狀態（2024–2026）</th></tr></thead><tbody>
+<tr><td><strong>Neuralink N1 / R1</strong></td><td data-zh="1024 ch 柔性 threads + R1 機器人植入 + telepathy App" data-en="1024-ch flexible threads + R1 robotic implanter + Telepathy app">1024-ch threads + R1 機器人</td><td data-zh="PRIME 試驗：2025 中已收 9 例（US/CA/UK/UAE），目標 2025 底達 20–30；首例 Noland Arbaugh 每天使用 10+ 小時；Brad（ALS）用腦訊號錄製 YouTube；2025/5 FDA 突破裝置認證 N1 用於語言恢復。" data-en="PRIME trial: 9 patients by mid-2025 (US/CA/UK/UAE), target 20–30 by end-2025; first patient Noland Arbaugh uses 10+ hrs/day; Brad (ALS) narrated a YouTube video via brain signals; FDA breakthrough designation May 2025 for speech restoration.">PRIME 試驗 9 例，2025/5 FDA 突破認證</td></tr>
+<tr><td><strong>Synchron Stentrode</strong></td><td data-zh="經血管 BCI、放在 SSS 上覆蓋運動皮層、16 ch" data-en="Transvascular BCI placed in SSS overlying motor cortex, 16 ch">經血管 BCI（NCT04617886）</td><td data-zh="無需開顱；2024 與 NVIDIA、Apple 整合 visionOS；NIH NIA 撥款支援；BLESS 美國試驗持續招募。" data-en="No craniotomy needed; 2024 integration with NVIDIA &amp; Apple visionOS; NIH NIA funding; BLESS US trial enrolling.">無需開顱；2024 整合 Apple visionOS</td></tr>
+<tr><td><strong>Blackrock Neurotech MoveAgain</strong></td><td data-zh="Utah array + NeuroPort + 解碼器" data-en="Utah array + NeuroPort + decoder">Utah array</td><td data-zh="2021 FDA Breakthrough；持續 BrainGate 多中心試驗；累計植入 &gt; 40 人歷年。" data-en="2021 FDA Breakthrough; ongoing BrainGate multicenter; &gt;40 cumulative implants over the program's history.">FDA Breakthrough（2021）</td></tr>
+<tr><td><strong>Onward Medical ARC-EX</strong></td><td data-zh="非侵入頸 / 腰脊髓電刺激" data-en="Non-invasive cervical/lumbar spinal stim">經皮 SCS</td><td data-zh="2024 FDA 核可 ARC-EX，恢復脊髓損傷者上肢功能；ARC-IM 植入版臨床試驗中。" data-en="2024 FDA cleared ARC-EX for upper-limb function after SCI; ARC-IM implantable version in trial.">2024 FDA 核可 ARC-EX</td></tr>
+<tr><td><strong>Precision Neuroscience Layer 7</strong></td><td data-zh="超薄皮質表面陣列、1024 電極" data-en="Ultra-thin cortical surface array, 1024 electrodes">皮質表面薄膜</td><td data-zh="2024 完成 14 例急性 IDE；2025/4 FDA 510(k) 短期使用核可；長期植入研究進行中。" data-en="14 acute IDE cases 2024; FDA 510(k) cleared for short-term use April 2025; long-term implant studies ongoing.">2025/4 FDA 510(k) 短期</td></tr>
+<tr><td><strong>Paradromics Connexus</strong></td><td data-zh="421 ch 高頻寬 LFP/spike 直接資料通訊" data-en="421-ch high-bandwidth LFP/spike direct data link">高頻寬植入</td><td data-zh="2025 首例急性人類使用（手術中）；2026 首例慢性植入計畫進行中。" data-en="First acute human use 2025 (intraop); first chronic implant planned 2026.">2025 首例急性人類使用</td></tr>
+</tbody></table>
+<div class="callout danger"><span class="callout-icon">🚨</span><div>
+<span data-lang="zh"><strong>Argus II 啟示：</strong>當供應商倒閉，「植入物孤兒」無法升級、維修、甚至連電池都換不到——這提醒整個產業：神經植入物的<strong>長期支援承諾、開放軔體規格、患者數據主權</strong>是設計與監管不可迴避的議題。</span>
+<span data-lang="en"><strong>Argus II lesson:</strong> When the manufacturer fails, "orphan implant" patients can't update, service, or even change a battery — a stark reminder that <strong>long-term support commitments, open firmware specs, and patient data ownership</strong> are unavoidable design + regulatory issues for neural implants.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="六、神經介面選擇決策樹" data-en="VI. Choosing a Neural Interface">六、神經介面選擇決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="臨床問題 → 神經介面決策樹" data-en="Clinical Need → Neural Interface Decision Tree">臨床問題 → 神經介面決策樹</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">病人有<strong>四肢麻痺、想恢復電腦/機器手臂控制</strong>？<span class="dt-arrow">→</span> 高密度皮質內電極 BCI（Neuralink N1、Blackrock Utah、Paradromics）或經血管 BCI（Synchron Stentrode）。</span><span data-lang="en">Patient has <strong>tetraplegia and wants to control computer / robotic arm</strong>? <span class="dt-arrow">→</span> Intracortical BCI (Neuralink N1, Blackrock Utah, Paradromics) or transvascular (Synchron Stentrode).</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">病人為<strong>重度感音性聾</strong>？<span class="dt-arrow">→</span> 人工耳蝸（Cochlear / AB / MED-EL），術前需殘餘聽力與蝸管解剖評估。</span><span data-lang="en">Patient has <strong>severe-profound sensorineural deafness</strong>? <span class="dt-arrow">→</span> Cochlear implant (Cochlear / AB / MED-EL); pre-op residual hearing + cochlear anatomy review.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">病人為<strong>藥物難治帕金森、原發性顫抖</strong>？<span class="dt-arrow">→</span> DBS（Medtronic Percept PC、Boston Sci Vercise、Abbott Infinity），靶點 STN/GPi/VIM 依症狀選擇。</span><span data-lang="en">Patient has <strong>medication-refractory Parkinson's or essential tremor</strong>? <span class="dt-arrow">→</span> DBS (Percept PC / Vercise / Infinity); target STN/GPi/VIM by symptom.</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">病人為<strong>視網膜色素變性致盲</strong>？<span class="dt-arrow">→</span> 仍在實驗階段（Pixium PRIMA、Science Bionic Eye）；尚無 FDA 批准商用產品（Argus II 已停產）。</span><span data-lang="en">Patient has <strong>retinitis-pigmentosa blindness</strong>? <span class="dt-arrow">→</span> Still experimental (Pixium PRIMA, Science Bionic Eye); no FDA-approved commercial device (Argus II discontinued).</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">病人為<strong>難治性癲癇</strong>？<span class="dt-arrow">→</span> 先 sEEG mapping → 切除或 RNS（NeuroPace）或 VNS（LivaNova）。</span><span data-lang="en">Patient has <strong>refractory epilepsy</strong>? <span class="dt-arrow">→</span> sEEG mapping → resection or RNS (NeuroPace) or VNS (LivaNova).</span></div>
+<div class="dt-node"><span class="dt-q">Q6.</span><span data-lang="zh">病人為<strong>慢性背痛、複雜疼痛</strong>？<span class="dt-arrow">→</span> SCS（Nevro HFX、Medtronic Inceptiv 閉迴路、Abbott Proclaim）。</span><span data-lang="en">Patient has <strong>chronic back / complex pain</strong>? <span class="dt-arrow">→</span> SCS (Nevro HFX, Medtronic Inceptiv closed-loop, Abbott Proclaim).</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖" data-en="INTERACTIVE">互動圖</div>
+<h2 data-zh="七、互動：Spike 偵測與閾值滑桿" data-en="VII. Interactive: Spike Detection with Threshold Slider">七、互動 Spike 偵測</h2>
+<div data-lang="zh"><p>下圖模擬三個神經單元疊加在背景雜訊上的胞外電位（extracellular voltage）。拖動下方滑桿調整偵測門檻，被偵測為 spike 的點會被標紅。實務上 spike sorting 需先 band-pass 0.3–7 kHz 濾波、再 PCA + 群集分群（KlustaKwik、KiloSort、MountainSort）。</p></div>
+<div data-lang="en"><p>The chart below simulates extracellular voltage from three units on top of background noise. Drag the slider to set the detection threshold; samples above it are marked red. In practice, spike sorting band-passes 0.3–7 kHz, then PCA + clustering (KlustaKwik, KiloSort, MountainSort).</p></div>
+<div class="interactive-panel">
+<div class="toggle-row" style="align-items:center;">
+  <label style="font-weight:600;" data-zh="閾值（μV）：" data-en="Threshold (μV):">閾值（μV）：</label>
+  <input type="range" id="thrSlider" min="20" max="120" step="5" value="60" style="flex:1;max-width:300px;">
+  <span id="thrVal" style="min-width:60px;text-align:right;font-weight:600;">60 μV</span>
+</div>
+<div class="chart-container"><canvas id="spikeChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">模擬 fs = 30 kHz；三 unit waveforms 疊加白噪聲。</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Simulated fs = 30 kHz; three unit waveforms on white noise.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="八、簡易 Spike 偵測程式" data-en="VIII. Minimal Spike Detection Code">八、簡易 Spike 偵測</h2>
+<div data-lang="zh"><p>以下範例在模擬的神經訊號上做最簡單的 threshold-crossing 偵測，並回傳每個 spike 的時間索引。實務上會加入 refractory period（避免一個動作電位被算成多個）與 PCA + 群集進行 spike sorting。</p></div>
+<div data-lang="en"><p>The following example runs the simplest threshold-crossing spike detector on a simulated neural trace and returns each spike's sample index. Production pipelines add a refractory period (so a single AP isn't double-counted) plus PCA + clustering for full spike sorting.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.signal <span class="kw">import</span> butter, filtfilt, find_peaks
+
+fs  = <span class="num">30_000</span>                                <span class="comment"># 30 kHz acquisition</span>
+T   = <span class="num">2.0</span>                                   <span class="comment"># 2 s of data</span>
+t   = np.<span class="func">arange</span>(<span class="num">0</span>, T, <span class="num">1</span>/fs)
+rng = np.random.<span class="func">default_rng</span>(<span class="num">42</span>)
+sig = rng.<span class="func">normal</span>(<span class="num">0</span>, <span class="num">15</span>, t.size)         <span class="comment"># 15 μV noise</span>
+<span class="kw">for</span> ts <span class="kw">in</span> rng.<span class="func">uniform</span>(<span class="num">0.05</span>, T-<span class="num">0.05</span>, <span class="num">40</span>):    <span class="comment"># inject spikes</span>
+    i = <span class="func">int</span>(ts*fs)
+    sig[i:i+<span class="num">30</span>] += -<span class="num">80</span>*np.<span class="func">exp</span>(-np.<span class="func">arange</span>(<span class="num">30</span>)/<span class="num">8</span>)
+
+<span class="comment"># Band-pass 0.3–7 kHz to isolate spike band</span>
+b, a   = <span class="func">butter</span>(<span class="num">4</span>, [<span class="num">300</span>, <span class="num">7000</span>], <span class="str">"bandpass"</span>, fs=fs)
+hp     = <span class="func">filtfilt</span>(b, a, sig)
+
+<span class="comment"># Threshold = 5× MAD (Quiroga 2004 robust estimator)</span>
+thr    = <span class="num">5</span>*np.<span class="func">median</span>(np.<span class="func">abs</span>(hp))/<span class="num">0.6745</span>
+spikes, _ = <span class="func">find_peaks</span>(-hp, height=thr, distance=<span class="func">int</span>(<span class="num">0.001</span>*fs))   <span class="comment"># 1 ms refractory</span>
+<span class="func">print</span>(<span class="str">f"Detected {len(spikes)} spikes; threshold = {thr:.1f} μV"</span>)</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% Minimal spike detection in MATLAB</span>
+fs = <span class="num">30e3</span>; T = <span class="num">2</span>; t = <span class="num">0</span>:<span class="num">1</span>/fs:T-<span class="num">1</span>/fs;
+rng(<span class="num">42</span>);
+sig = <span class="num">15</span>*<span class="func">randn</span>(<span class="num">1</span>, length(t));
+ts  = <span class="num">0.05</span> + (T-<span class="num">0.1</span>)*<span class="func">rand</span>(<span class="num">1</span>,<span class="num">40</span>);
+<span class="kw">for</span> k = <span class="num">1</span>:length(ts)
+    i = <span class="func">round</span>(ts(k)*fs);
+    sig(i:i+<span class="num">29</span>) = sig(i:i+<span class="num">29</span>) - <span class="num">80</span>*<span class="func">exp</span>(-(<span class="num">0</span>:<span class="num">29</span>)/<span class="num">8</span>);
+<span class="kw">end</span>
+
+<span class="comment">% Band-pass 0.3–7 kHz</span>
+[b,a] = <span class="func">butter</span>(<span class="num">4</span>, [<span class="num">300</span> <span class="num">7000</span>]/(fs/<span class="num">2</span>), <span class="str">'bandpass'</span>);
+hp    = <span class="func">filtfilt</span>(b, a, sig);
+
+thr   = <span class="num">5</span>*<span class="func">median</span>(<span class="func">abs</span>(hp))/<span class="num">0.6745</span>;
+[~, locs] = <span class="func">findpeaks</span>(-hp, <span class="str">'MinPeakHeight'</span>, thr, ...
+                       <span class="str">'MinPeakDistance'</span>, <span class="func">round</span>(<span class="num">0.001</span>*fs));
+<span class="func">fprintf</span>(<span class="str">'Detected %d spikes; thr = %.1f uV\n'</span>, length(locs), thr);</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="工程挑戰" data-en="ENGINEERING CHALLENGES">工程挑戰</div>
+<h2 data-zh="九、神經介面的工程挑戰" data-en="IX. Engineering Challenges">九、神經介面工程挑戰</h2>
+<ol class="numbered">
+<li><strong data-zh="慢性記錄穩定性" data-en="Chronic recording stability">慢性記錄穩定性</strong> — <span data-lang="zh">FBR、gliosis、encapsulation；柔性電極、塗層（PEDOT:PSS、parylene-C）、機器人植入精準度都是研發方向。</span><span data-lang="en">Foreign-body response, gliosis, encapsulation; mitigation via flexible electrodes, coatings (PEDOT:PSS, parylene-C), precise robotic placement.</span></li>
+<li><strong data-zh="無線供電與資料" data-en="Wireless power &amp; data">無線供電與資料</strong> — <span data-lang="zh">經顱感應耦合、超音波 power、UWB 高頻寬資料；功率密度受 IEEE C95 / IEC 60601-2-33 限制（避免熱傷害）。</span><span data-lang="en">Transcutaneous inductive coupling, ultrasound power, UWB high-bandwidth data; power density limited by IEEE C95 / IEC 60601-2-33 to prevent thermal injury.</span></li>
+<li><strong data-zh="生物相容性" data-en="Biocompatibility">生物相容性</strong> — <span data-lang="zh">ISO 10993 系列；植入超過 30 天屬 long-term，cytotoxicity、sensitization、implantation、genotoxicity、chronic toxicity 皆需做。</span><span data-lang="en">ISO 10993 series; implant duration &gt;30 days = long-term, requiring cytotoxicity, sensitization, implantation, genotoxicity, chronic toxicity testing.</span></li>
+<li><strong data-zh="法規路徑" data-en="Regulatory path">法規路徑</strong> — <span data-lang="zh">植入式神經調控絕大多數為 Class III + PMA；輔以 IDE 臨床研究、Breakthrough Device 路徑。EU MDR 下為 Class III + Annex IX。</span><span data-lang="en">Implantable neuromodulators are almost all Class III + PMA; supported by IDE clinical study, Breakthrough Device pathway. EU MDR: Class III + Annex IX.</span></li>
+<li><strong data-zh="網路安全" data-en="Cybersecurity">網路安全</strong> — <span data-lang="zh">2025/9 FDA cybersecurity 指南終版生效；BCI 與 DBS 因含無線通訊與韌體更新，須符合 SPDF (Secure Product Development Framework)。</span><span data-lang="en">FDA cybersecurity final guidance effective Sep 2025; BCIs and DBSes (with wireless + firmware update) must follow SPDF (Secure Product Development Framework).</span></li>
+<li><strong data-zh="倫理與資料主權" data-en="Ethics &amp; data sovereignty">倫理與資料主權</strong> — <span data-lang="zh">「神經權利 neurorights」概念興起；智利 2021 修憲為全球首例；Chile, Brazil, Colorado 2024 立法限制神經資料商業使用。</span><span data-lang="en">"Neurorights" gaining traction; Chile amended its constitution in 2021 (world first); Brazil, Colorado 2024 laws restrict commercial use of neural data.</span></li>
+</ol>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十、本章關鍵術語" data-en="X. Key Terms">十、本章關鍵術語</h2>
+<p><span class="term">BCI<span class="term-tip">Brain-Computer Interface — 直接以神經訊號控制外部裝置或溝通的系統。</span></span> &nbsp;
+<span class="term">ECoG<span class="term-tip">Electrocorticography — 放在腦皮質表面的陣列電極，空間 2–10 mm。</span></span> &nbsp;
+<span class="term">Utah array<span class="term-tip">10×10 矽針陣列、400 μm 間距、100 通道；BrainGate 計畫核心硬體。</span></span> &nbsp;
+<span class="term">DBS<span class="term-tip">Deep Brain Stimulation — 植入電極對 STN/GPi/VIM 等核團高頻刺激。</span></span> &nbsp;
+<span class="term">RNS<span class="term-tip">Responsive Neurostimulation — 閉迴路偵測 + 即時刺激；NeuroPace 為代表。</span></span> &nbsp;
+<span class="term">SCS<span class="term-tip">Spinal Cord Stimulation — 脊髓硬膜外電極刺激緩解慢性疼痛。</span></span> &nbsp;
+<span class="term">VNS<span class="term-tip">Vagus Nerve Stimulation — 環狀電極包覆迷走神經；LivaNova 用於癲癇與憂鬱。</span></span> &nbsp;
+<span class="term">CIS<span class="term-tip">Continuous Interleaved Sampling — 人工耳蝸的經典編碼策略，避免電極間電流交互。</span></span> &nbsp;
+<span class="term">CSP<span class="term-tip">Common Spatial Pattern — EEG 運動想像 BCI 的經典空間濾波器。</span></span> &nbsp;
+<span class="term">P300<span class="term-tip">面對稀有、預期刺激約 300 ms 出現的正向 ERP，常用於 BCI speller。</span></span> &nbsp;
+<span class="term">SSVEP<span class="term-tip">Steady-State Visual Evoked Potential — 對閃爍刺激的同頻 EEG 反應。</span></span> &nbsp;
+<span class="term">Gliosis<span class="term-tip">電極周圍神經膠細胞增生形成的包覆層，是慢性記錄退化的主因。</span></span> &nbsp;
+<span class="term">PEDOT:PSS<span class="term-tip">導電聚合物，常作神經電極塗層降低阻抗、提升生物相容性。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q1. 下列哪一個記錄模態空間解析度最高，但侵入性也最高？</span><span data-lang="en">Q1. Which recording modality has the highest spatial resolution and the highest invasiveness?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 頭皮 EEG</span><span data-lang="en">A. Scalp EEG</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. fNIRS</span><span data-lang="en">B. fNIRS</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 皮質內微電極陣列（Utah / Neuralink threads）</span><span data-lang="en">C. Intracortical microelectrode array (Utah / Neuralink threads)</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. MEG</span><span data-lang="en">D. MEG</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q2. NeuroPace RNS System 與 Medtronic Activa（傳統 DBS）最關鍵的工程差異是？</span><span data-lang="en">Q2. The key engineering difference between NeuroPace RNS and traditional Medtronic Activa DBS is:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 電池容量</span><span data-lang="en">A. Battery capacity</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. RNS 為閉迴路 sense-and-respond；偵測到 ictal pattern 才發送刺激</span><span data-lang="en">B. RNS is closed-loop sense-and-respond, stimulating only when ictal patterns are detected</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. RNS 為光遺傳裝置</span><span data-lang="en">C. RNS is an optogenetic device</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. RNS 需與 EEG 帽連線</span><span data-lang="en">D. RNS requires a tethered EEG cap</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="0"><p><span data-lang="zh">Q3. 關於 Neuralink PRIME 試驗截至 2025 年中的描述，下列何者最接近事實？</span><span data-lang="en">Q3. Which best describes the Neuralink PRIME trial status by mid-2025?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 已收 9 例（US/CA/UK/UAE），N1 為 1024 通道柔性 threads，R1 機器人植入；首例 Noland Arbaugh 每日使用 10+ 小時</span><span data-lang="en">A. 9 patients enrolled (US/CA/UK/UAE); N1 has 1024-ch flexible threads; R1 robotic implanter; first patient Noland Arbaugh uses it 10+ hrs/day</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 已收 200+ 例，全部位於日本</span><span data-lang="en">B. 200+ patients, all in Japan</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 試驗已於 2024 終止</span><span data-lang="en">C. Trial terminated in 2024</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. Neuralink 不使用機器人植入</span><span data-lang="en">D. Neuralink does not use a robotic implanter</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="biophotonics.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="D4 · 生醫光電" data-en="D4 · Biophotonics">D4 · 生醫光電</span></a>
+<a href="gene-cell-therapy-eng.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="E2 · 基因與細胞治療工程" data-en="E2 · Gene &amp; Cell Therapy Engineering">E2 · 基因與細胞治療工程</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · E1 Neural Engineering &amp; BCI</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// Spike-detection interactive chart
+const N=2000;
+const sig=new Array(N);
+// Seeded pseudo-random noise + 3 unit spike injections
+let s=42; function rnd(){s=(s*9301+49297)%233280; return s/233280;}
+for(let i=0;i<N;i++) sig[i] = (rnd()-0.5)*30;
+const spikeTimes=[];
+for(let k=0;k<25;k++){
+  const ti=Math.floor(80+rnd()*(N-160));
+  spikeTimes.push(ti);
+  const amp = -(60+rnd()*60); // -60 to -120 μV
+  for(let j=0;j<30;j++){ sig[ti+j] += amp*Math.exp(-j/8); }
+}
+const labels=Array.from({length:N},(_,i)=>i);
+let spikeChart=null;
+function drawSpike(thr){
+  const ctx=document.getElementById('spikeChart').getContext('2d');
+  const pts=sig.map((v,i)=> v < -thr ? {x:i,y:v} : null).filter(Boolean);
+  if(spikeChart) spikeChart.destroy();
+  const lang=I18n.get();
+  spikeChart=new Chart(ctx,{
+    data:{labels,datasets:[
+      {type:'line',label:lang==='zh'?'神經訊號 (μV)':'Neural signal (μV)',data:sig,borderColor:'rgba(13,148,136,.8)',borderWidth:1,pointRadius:0,tension:0},
+      {type:'scatter',label:lang==='zh'?'偵測到的 spike':'Detected spike',data:pts,backgroundColor:'#dc2626',pointRadius:4}
+    ]},
+    options:{animation:false,plugins:{legend:{display:true}},
+      scales:{x:{title:{display:true,text:'sample (fs = 30 kHz)'}},
+              y:{title:{display:true,text:'μV'}}}}
+  });
+}
+drawSpike(60);
+document.getElementById('thrSlider').addEventListener('input',e=>{
+  document.getElementById('thrVal').textContent=e.target.value+' μV';
+  drawSpike(+e.target.value);
+});
+document.addEventListener('langchange',()=>drawSpike(+document.getElementById('thrSlider').value));
+</script>
+</body></html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>E3: 手術機器人與 AI 醫療 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html" class="active">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER E3 · BLOCK E EMERGING &amp; REGULATION</div>
+<h1 data-zh="手術機器人與 AI 醫療" data-en="Surgical Robotics &amp; AI in Medicine">手術機器人與 AI 醫療</h1>
+<p class="subtitle" data-lang="zh">從 da Vinci 5、Hugo、Mako 到 Aidoc CARE1 基礎模型；從影像 AI 到 PCCP 預定變更控制——本章把 2025–2026 的手術機器人與 AI 醫療地圖一次攤開。</p>
+<p class="subtitle" data-lang="en">From da Vinci 5, Hugo, and Mako to the Aidoc CARE1 foundation model; from imaging AI to Predetermined Change Control Plans — this chapter unfolds the 2025–2026 map of surgical robotics and AI in medicine.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="市場概觀" data-en="MARKET">市場概觀</div>
+<h2 data-zh="一、手術機器人市場現況（2025）" data-en="I. Surgical Robotics Market (2025)">一、手術機器人市場現況</h2>
+<div data-lang="zh">
+<p>2025 年全球手術機器人市場規模約 <strong>USD 12.93 B</strong>，預計 2035 年達 <strong>USD 59.55 B</strong>（CAGR ~16.5%）。Intuitive Surgical 以 da Vinci 系列穩居超過 70% 市佔，但近三年競爭加劇：Medtronic Hugo RAS、CMR Surgical Versius、Distalmotion Dexter、Asensus Senhance 進入歐亞市場，骨科端 Stryker Mako、Zimmer Biomet ROSA、Medtronic Mazor X 大幅成長。</p>
+<p>商業模式：通常為「設備價（USD 1.5–2.5 M）+ 拋棄式器械（EndoWrist 每例 ~USD 1.5–3k）+ 服務年費」三段式營收；intuitive 一年消耗品收入早已超過設備收入，建立強勁的<strong>razor-and-blade</strong>護城河。</p>
+</div>
+<div data-lang="en">
+<p>2025 global surgical-robotics market is ~<strong>USD 12.93 B</strong>, projected to <strong>USD 59.55 B</strong> by 2035 (CAGR ~16.5%). Intuitive Surgical's da Vinci family holds &gt;70% share, but competition has intensified: Medtronic Hugo RAS, CMR Surgical Versius, Distalmotion Dexter, Asensus Senhance into EU/Asia; orthopedic side dominated by Stryker Mako, Zimmer Biomet ROSA, and Medtronic Mazor X.</p>
+<p>Business model is a three-tier "system (USD 1.5–2.5 M) + disposables (EndoWrist instruments ~USD 1.5–3k/case) + service annual fee." Intuitive's consumables revenue has long exceeded system revenue — a classic <strong>razor-and-blade</strong> moat.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="平台比較" data-en="PLATFORMS">平台比較</div>
+<h2 data-zh="二、主要手術機器人平台比較" data-en="II. Major Surgical-Robot Platforms">二、主要平台比較</h2>
+<table class="comp-table"><thead><tr><th data-zh="平台" data-en="Platform">平台</th><th data-zh="廠商" data-en="Maker">廠商</th><th data-zh="型態" data-en="Form">型態</th><th data-zh="主科別" data-en="Specialty">主科別</th><th data-zh="2024–2025 重點" data-en="2024–25 Note">2024–25 重點</th></tr></thead><tbody>
+<tr><td><strong>da Vinci Xi</strong></td><td>Intuitive Surgical</td><td data-zh="多孔 4 臂" data-en="Multi-port, 4 arms">多孔 4 臂</td><td data-zh="泌尿、婦科、一般、胸外" data-en="Uro, gyn, general, thoracic">泌尿、婦科、一般</td><td data-zh="主力安裝量；2014 起" data-en="Workhorse install base; since 2014">主力機種</td></tr>
+<tr><td><strong>da Vinci SP</strong></td><td>Intuitive Surgical</td><td data-zh="單孔 single port" data-en="Single port">單孔</td><td data-zh="泌尿、TORS 喉部" data-en="Uro, TORS throat">泌尿、TORS</td><td data-zh="2018 上市；2024 新增多項適應症" data-en="Launched 2018; new indications 2024">適應症擴大</td></tr>
+<tr><td><strong>da Vinci 5</strong></td><td>Intuitive Surgical</td><td data-zh="次世代多孔 + Force Feedback" data-en="Next-gen multiport + Force Feedback">力回饋多孔</td><td data-zh="同 Xi 但 AI 工作流" data-en="Like Xi + AI workflow">全科</td><td data-zh="2025/2 上市；首支具 Force Feedback；力感測資料量 10,000× 提升" data-en="Launched Feb 2025; first with Force Feedback; 10,000× more force-sensing data">2025/2 上市</td></tr>
+<tr><td><strong>Hugo RAS</strong></td><td>Medtronic</td><td data-zh="模組化獨立 4 推車" data-en="Modular 4-cart">模組化</td><td data-zh="泌尿、婦科" data-en="Uro, gyn">泌尿、婦科</td><td data-zh="開放主控台、跨網路；2025 美國 IDE 進度中" data-en="Open console, network-linked; US IDE in 2025">2025 美國 IDE</td></tr>
+<tr><td><strong>Versius</strong></td><td>CMR Surgical (UK)</td><td data-zh="模組化獨立小推車" data-en="Modular small carts">模組化小推車</td><td data-zh="泌尿、婦科、結直腸" data-en="Uro, gyn, colorectal">泌尿、婦科、結直腸</td><td data-zh="2025 全球安裝 200+；強調可移動、空間小" data-en="200+ installs by 2025; mobile, small footprint">可移動</td></tr>
+<tr><td><strong>Mako SmartRobotics</strong></td><td>Stryker</td><td data-zh="骨科導引臂" data-en="Orthopedic guidance arm">骨科</td><td data-zh="髖、膝、肩" data-en="Hip, knee, shoulder">髖膝肩</td><td data-zh="2024/6 次世代軟體 + 即時術中資料；累計手術數突破 200 萬例" data-en="June 2024 next-gen SW + real-time intraop data; &gt;2M procedures">200 萬例</td></tr>
+<tr><td><strong>Mazor X Stealth</strong></td><td>Medtronic</td><td data-zh="脊椎導引臂 + StealthStation 導航" data-en="Spine + StealthStation nav">脊椎導引</td><td data-zh="脊椎融合螺釘植入" data-en="Spinal fusion screw placement">脊椎</td><td data-zh="與 O-arm 整合" data-en="Integrated with O-arm">整合術中影像</td></tr>
+<tr><td><strong>ROSA</strong></td><td>Zimmer Biomet</td><td data-zh="多用途導引臂" data-en="Multi-use guidance arm">多用途</td><td data-zh="膝、腦、脊椎" data-en="Knee, brain, spine">膝/腦/脊椎</td><td data-zh="ROSA Knee 與 Persona iQ 整合" data-en="ROSA Knee + Persona iQ smart implant">整合 smart implant</td></tr>
+<tr><td><strong>Senhance</strong></td><td>Asensus</td><td data-zh="多孔、眼控、力回饋" data-en="Multiport, eye-tracking, haptic">眼控+力回饋</td><td data-zh="一般、婦科" data-en="General, gyn">一般、婦科</td><td data-zh="ISU 智慧手術單元 AI 整合" data-en="ISU Intelligent Surgical Unit (AI)">AI 整合</td></tr>
+<tr><td><strong>Dexter</strong></td><td>Distalmotion (CH)</td><td data-zh="open + robotic hybrid" data-en="Open + robotic hybrid">混合式</td><td data-zh="泌尿、婦科" data-en="Uro, gyn">泌尿、婦科</td><td data-zh="2024 美國 FDA 510(k)；快速進入" data-en="2024 US FDA 510(k); fast entry">美國新進入者</td></tr>
+<tr><td><strong>Vicarious</strong></td><td>Vicarious Surgical</td><td data-zh="單臂擬人雙手" data-en="Single-arm anthropomorphic">擬人單臂</td><td data-zh="腹腔" data-en="Abdominal">腹腔</td><td data-zh="2024 FDA Breakthrough；臨床試驗推進中" data-en="2024 FDA Breakthrough; clinical trial advancing">研究中</td></tr>
+</tbody></table>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>da Vinci 5「力回饋」（Force Feedback）的工程意義：</strong>前代 da Vinci 缺乏觸覺，主刀全靠視覺判斷組織張力；da Vinci 5 將每例手術產生的<strong>力感測資料量提升 10,000 倍</strong>，可量化縫線張力、組織抓握，未來能餵給 AI 模型學習「動作品質」並輔助 telementoring。</span>
+<span data-lang="en"><strong>Force Feedback in da Vinci 5 — engineering significance:</strong> Prior da Vinci had no haptics; surgeons relied on visual cues. da Vinci 5 increases <strong>force-sensing data per case by ~10,000×</strong>, quantifying suture tension and tissue grip — feeding future AI models on motion quality and enabling telementoring.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="影像導引手術" data-en="IMAGE-GUIDED SURGERY">影像導引手術</div>
+<h2 data-zh="三、影像導引與 AR 手術" data-en="III. Image-Guided &amp; AR Surgery">三、影像導引手術</h2>
+<div data-lang="zh">
+<p>影像導引手術（Image-Guided Surgery, IGS）的核心是「<strong>術前影像 + 術中追蹤 + 病人解剖配準</strong>」。三大追蹤模態：</p>
+<ul>
+<li><strong>光學追蹤</strong>——NDI Polaris、Atracsys、Brainlab Curve；紅外攝影機追蹤被動或主動反射球，精度 0.1–0.3 mm，需 line-of-sight。</li>
+<li><strong>電磁追蹤</strong>——NDI Aurora、Polhemus；磁場下追蹤微線圈感測器，可進體腔（catheter 尖端），但對金屬干擾敏感。</li>
+<li><strong>慣性 + 視覺混合</strong>——HoloLens 2、Apple Vision Pro、Magic Leap 為基礎的 AR 平台。</li>
+</ul>
+<p>AR 手術代表系統：<strong>Augmedics XVision</strong>（脊椎螺釘導引，2020 FDA 510(k)，將術前 CT 直接疊在手術視野）、<strong>Brainlab Mixed Reality</strong>（HoloLens 2 + Loop-X 行動 CT）、<strong>Medivis SurgicalAR</strong>。</p>
+</div>
+<div data-lang="en">
+<p>Image-Guided Surgery (IGS) hinges on "<strong>preop image + intraop tracking + patient anatomy registration</strong>." Three tracking modalities:</p>
+<ul>
+<li><strong>Optical tracking</strong> — NDI Polaris, Atracsys, Brainlab Curve; IR cameras track passive/active reflective spheres, 0.1–0.3 mm precision, needs line-of-sight.</li>
+<li><strong>Electromagnetic tracking</strong> — NDI Aurora, Polhemus; magnetic field tracks micro-coil sensors that fit inside catheter tips, but is metal-sensitive.</li>
+<li><strong>Inertial + visual hybrid</strong> — HoloLens 2, Apple Vision Pro, Magic Leap based AR.</li>
+</ul>
+<p>AR-surgery flagships: <strong>Augmedics XVision</strong> (spinal-screw guidance, FDA 510(k) 2020, overlays preop CT directly on the surgical field), <strong>Brainlab Mixed Reality</strong> (HoloLens 2 + Loop-X mobile CT), <strong>Medivis SurgicalAR</strong>.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="FDA AI/ML 裝置" data-en="FDA AI/ML DEVICES">FDA AI/ML 裝置</div>
+<h2 data-zh="四、FDA AI/ML 醫療裝置統計（2025–2026）" data-en="IV. FDA AI/ML Device Stats (2025–2026)">四、FDA AI/ML 裝置統計</h2>
+<div data-lang="zh">
+<p>FDA AI/ML-Enabled Medical Device 公開清單為衡量「AI 進入臨床」最直接的指標：截至 2025 年底累計 <strong>1,451 件</strong>、2025 一年新增 <strong>295 件</strong>（史上最多）；2026 年 3 月新增 24 件（平均每 31 小時 1 件），4 月新增 27 件。專科分布以<strong>放射 76%</strong>為主，其次為心血管、神經、眼科。</p>
+<p>2025 年具代表性事件：<strong>Aidoc CARE1</strong>於 2025/2 成為 FDA 首支獲核可的<strong>「基礎模型驅動的臨床 AI 系統」</strong>（foundation-model-powered clinical AI）；其影像 triage 引擎一次涵蓋顱內出血、肺栓塞、主動脈剝離等多種急症，是「single-tasking → multi-tasking AI 裝置」的轉折點。</p>
+</div>
+<div data-lang="en">
+<p>FDA's AI/ML-Enabled Medical Device list is the best public proxy for "AI entering the clinic": cumulative <strong>1,451 by end-2025</strong>; 2025 alone added <strong>295</strong> (record year); March 2026 added 24 (one every 31 hrs), April 2026 added 27. <strong>Radiology 76%</strong>; rest cardio, neuro, ophthalmology.</p>
+<p>Landmark 2025 event: <strong>Aidoc CARE1</strong> (Feb 2025) became the first FDA-cleared <strong>foundation-model-powered clinical AI</strong>; its imaging triage engine covers intracranial hemorrhage, pulmonary embolism, aortic dissection and more in one model — the pivot from "single-task AI" to "multi-task AI" devices.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="代表 AI 醫療裝置" data-en="NOTABLE AI DEVICES">代表 AI 裝置</div>
+<h2 data-zh="五、代表性 AI 醫療裝置" data-en="V. Notable AI Medical Devices">五、代表性 AI 醫療裝置</h2>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">🧠</div><h4>Viz.ai (LVO Stroke)</h4>
+<div data-lang="zh"><p>2018 FDA De Novo 核可，首支 AI 中風影像 triage：偵測 CT angiography 中大血管阻塞（LVO）→ 即時透過 App 通知 stroke team；證實縮短 door-to-puncture 時間。後續擴及肺栓塞、主動脈剝離、ICH。</p></div>
+<div data-lang="en"><p>FDA De Novo 2018, the first AI stroke imaging triage: detects large-vessel occlusion (LVO) on CT angio, pings the stroke team via app — proven to cut door-to-puncture time. Later expanded to PE, aortic dissection, ICH.</p></div></div>
+
+<div class="card"><div class="card-icon">❤️</div><h4>HeartFlow FFRct</h4>
+<div data-lang="zh"><p>由冠狀動脈 CT 角影像生成 CFD 模擬 + AI，計算非侵入式 fractional flow reserve（FFR-CT），替代部分侵入式 ICA + FFR 測量。NICE 2017 認可，已納入多國臨床路徑。</p></div>
+<div data-lang="en"><p>Generates a CFD + AI simulation from coronary CTA, producing non-invasive fractional flow reserve (FFR-CT) and avoiding some invasive ICA + FFR. NICE-endorsed 2017; included in multi-country care pathways.</p></div></div>
+
+<div class="card"><div class="card-icon">👁️</div><h4>IDx-DR (Digital Diagnostics)</h4>
+<div data-lang="zh"><p>2018 FDA De Novo，全球首支「<strong>自主性 AI 診斷</strong>」——基層診所中由非眼科專業人員拍照後，AI 直接出「轉診/未轉診」結果，無需眼科醫師判讀。糖尿病視網膜病變篩檢的里程碑。</p></div>
+<div data-lang="en"><p>FDA De Novo 2018, the world's first <strong>autonomous AI diagnosis</strong> — primary-care staff capture retinal images, AI outputs "refer / don't refer" without an ophthalmologist. A milestone for diabetic retinopathy screening.</p></div></div>
+
+<div class="card"><div class="card-icon">🩺</div><h4>Caption Guidance</h4>
+<div data-lang="zh"><p>2020 FDA 核可，AI 引導非心臟科醫師取得診斷品質心臟超音波；新冠期間在 ICU 廣泛部署。被 GE Healthcare 2021 收購。</p></div>
+<div data-lang="en"><p>FDA cleared 2020, AI-guided cardiac ultrasound for non-cardiology users — deployed widely in ICUs during COVID. Acquired by GE Healthcare 2021.</p></div></div>
+
+<div class="card"><div class="card-icon">🔬</div><h4>Paige.AI / PathAI</h4>
+<div data-lang="zh"><p>數位病理 AI——Paige Prostate（2021 FDA 首支病理 AI）偵測前列腺癌；PathAI 提供多種癌症分級工具給藥廠與醫院。</p></div>
+<div data-lang="en"><p>Digital pathology AI — Paige Prostate (2021, first FDA pathology AI) detects prostate cancer; PathAI provides cancer-grading tools to pharma and hospitals.</p></div></div>
+
+<div class="card"><div class="card-icon">🧪</div><h4>Tempus / Bayer Calantic / RapidAI</h4>
+<div data-lang="zh"><p><strong>Tempus</strong> 結合基因檢測 + RWE + AI 提供腫瘤決策支援；<strong>Bayer Calantic</strong>影像 AI marketplace；<strong>RapidAI</strong> 中風/PE/AAA 影像 triage 全套。</p></div>
+<div data-lang="en"><p><strong>Tempus</strong> combines NGS + RWE + AI for oncology decision support; <strong>Bayer Calantic</strong> imaging-AI marketplace; <strong>RapidAI</strong> end-to-end stroke/PE/AAA imaging triage.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="醫療 LLM" data-en="MEDICAL LLMs">醫療 LLM</div>
+<h2 data-zh="六、醫療 LLM 與生成式 AI" data-en="VI. Medical LLMs &amp; Generative AI">六、醫療 LLM 與生成式 AI</h2>
+<table class="comp-table"><thead><tr><th data-zh="模型 / 平台" data-en="Model / Platform">模型 / 平台</th><th data-zh="廠商" data-en="Maker">廠商</th><th data-zh="特色" data-en="Feature">特色</th></tr></thead><tbody>
+<tr><td><strong>MedGemma</strong>（取代 Med-PaLM 2）</td><td>Google DeepMind</td><td data-zh="開源、多模態（影像+文本）；2025/5 公開 4B/27B" data-en="Open-source, multimodal (image+text); 4B/27B released May 2025">開源多模態</td></tr>
+<tr><td><strong>Med-Gemini 1.5</strong></td><td>Google</td><td data-zh="長 context（百萬 token）、放射報告與影像推理" data-en="Million-token context, radiology report + image reasoning">長 context</td></tr>
+<tr><td><strong>MedLM</strong></td><td>Google Cloud</td><td data-zh="Vertex AI 上的醫療基礎模型（GA）；API 計費" data-en="Healthcare foundation models on Vertex AI (GA); API-billed">Vertex AI</td></tr>
+<tr><td><strong>OpenEvidence</strong></td><td>OpenEvidence Inc.</td><td data-zh="醫師專用 RAG 系統，連 NEJM、JAMA 即時文獻；2025 已逾 70 萬醫師註冊" data-en="Physician-only RAG; NEJM/JAMA live; 700k+ doctors registered by 2025">RAG / NEJM 整合</td></tr>
+<tr><td><strong>Glass.health</strong></td><td>Glass Health</td><td data-zh="鑑別診斷 + 治療建議；面向醫師工作流" data-en="Differential + treatment recommendations">DDx 工作流</td></tr>
+<tr><td><strong>Hippocratic AI</strong></td><td>Hippocratic AI</td><td data-zh="生成式語音代理人（patient navigator、出院教育）；非診斷導向" data-en="Generative voice agents (patient navigator, discharge); non-diagnostic">語音 agent</td></tr>
+<tr><td><strong>MedAlign / MIMIC-IV-LLM</strong></td><td data-zh="學界" data-en="Academia">學界</td><td data-zh="醫療指令對齊資料集 / EHR benchmark" data-en="Healthcare instruction tuning + EHR benchmark">學術 benchmark</td></tr>
+</tbody></table>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>整合層：</strong>SMART on FHIR 讓 LLM 安全存取 EHR 資料；<strong>Anthropic MCP (Model Context Protocol)</strong> 與其衍生的 <strong>MCPmed</strong> 提供統一介面，讓不同醫療系統（EHR、PACS、LIS）可被 LLM agent 工具化呼叫，是 2025 興起的核心醫療 AI 中介層。</span>
+<span data-lang="en"><strong>Integration layer:</strong> SMART on FHIR provides safe LLM access to EHRs; <strong>Anthropic MCP (Model Context Protocol)</strong> and its derivative <strong>MCPmed</strong> offer a unified contract letting LLM agents tool-call EHRs, PACS, and LIS — the emerging 2025 healthcare-AI middleware.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="PCCP" data-en="PCCP">PCCP</div>
+<h2 data-zh="七、PCCP：AI 模型可以「合法」更新" data-en="VII. PCCP: Letting AI Models Lawfully Update">七、PCCP 預定變更控制計畫</h2>
+<div data-lang="zh">
+<p>傳統 510(k) / PMA 模型一上市就「凍結」——任何重大改動須重新送審。但 AI 模型本質會隨資料更新。FDA 自 2019 起提出 <strong>Predetermined Change Control Plan (PCCP)</strong> 概念，於 <strong>2024 年 12 月發布最終指南</strong>，正式允許廠商：</p>
+<ol class="numbered">
+<li>先在原始上市申請中列出<strong>「預期變更（modification description）」</strong>——例如：增加新影像來源、重新訓練、調整 threshold。</li>
+<li>定義<strong>「模型更新流程」</strong>——訓練資料、驗證方法、效能下限。</li>
+<li>規範<strong>「影響評估」</strong>——更新後如何驗證安全、有效、無偏。</li>
+</ol>
+<p>遵循已備案 PCCP 的更新<strong>不需重新送 510(k)</strong>。是 AI/ML SaMD 史上最重要的法規鬆綁；EU MDR 與 IVDR 的對應機制目前透過 2024 年 AI Act + MDCG 指引補位。</p>
+</div>
+<div data-lang="en">
+<p>Traditional 510(k)/PMA "freezes" a device on launch — any material change triggers a new submission. But AI models inherently update. From 2019 FDA developed the <strong>Predetermined Change Control Plan (PCCP)</strong>; <strong>final guidance issued Dec 2024</strong> formally allows sponsors to:</p>
+<ol class="numbered">
+<li>List intended changes (<strong>modification description</strong>) in the original submission — e.g. new image source, retraining, threshold tweak.</li>
+<li>Define the <strong>update process</strong> — training data, validation method, performance floor.</li>
+<li>Specify <strong>impact assessment</strong> — how safety/effectiveness/no-bias are verified post-update.</li>
+</ol>
+<p>Updates inside a filed PCCP <strong>do not require a new 510(k)</strong>. Largest regulatory unlock in AI/ML SaMD history. EU MDR/IVDR equivalents are bridged via the 2024 AI Act + MDCG guidance.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="八、機器人 vs 腹腔鏡 vs 開放手術" data-en="VIII. Robotic vs Laparoscopic vs Open">八、技術選擇決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="術式 + AI 自主程度決策樹" data-en="Procedure + AI Autonomy Decision Tree">術式 + AI 自主程度決策樹</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">術式需要<strong>深窄空間 + 高靈巧度 + 高解析縫合</strong>（前列腺切除、子宮全切、上消化道）？<span class="dt-arrow">→</span> <strong>機器人手術</strong>（da Vinci、Hugo、Versius）。</span><span data-lang="en">Procedure needs <strong>deep narrow access + dexterity + fine suturing</strong> (prostatectomy, hysterectomy, upper GI)? <span class="dt-arrow">→</span> <strong>Robotic</strong> (da Vinci, Hugo, Versius).</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">術式為<strong>骨科精準切骨/植入定位</strong>（膝、髖、肩、脊椎）？<span class="dt-arrow">→</span> <strong>骨科導引臂</strong>（Mako、ROSA、Mazor X），結合術前 CT 規劃。</span><span data-lang="en">Procedure is <strong>orthopedic precision cutting / placement</strong> (knee, hip, shoulder, spine)? <span class="dt-arrow">→</span> <strong>Orthopedic guidance arm</strong> (Mako, ROSA, Mazor X) with preop-CT planning.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">術式為<strong>標準腹腔鏡可勝任、成本敏感</strong>？<span class="dt-arrow">→</span> <strong>傳統腹腔鏡</strong> 或<strong>低價機器人</strong>（Dexter、Versius）。</span><span data-lang="en">Procedure is <strong>well-served by standard laparoscopy and cost-sensitive</strong>? <span class="dt-arrow">→</span> <strong>Traditional laparoscopy</strong> or <strong>budget robotic</strong> (Dexter, Versius).</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">AI 設定為<strong>「triage / 提示」</strong>，臨床醫師最終決策？<span class="dt-arrow">→</span> 常規 510(k)；可考慮 PCCP 提前申報未來更新。</span><span data-lang="en">AI is <strong>"triage / hint"</strong>, with clinician final-call? <span class="dt-arrow">→</span> Standard 510(k); consider filing a PCCP for future updates.</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">AI 為<strong>自主診斷</strong>（直接出最終結果無人覆核）？<span class="dt-arrow">→</span> De Novo（如 IDx-DR）；風險評估嚴格、需多中心臨床。</span><span data-lang="en">AI is <strong>autonomous diagnosis</strong> (final output, no human review)? <span class="dt-arrow">→</span> De Novo (e.g. IDx-DR); rigorous risk assessment + multicenter trials.</span></div>
+<div class="dt-node"><span class="dt-q">Q6.</span><span data-lang="zh">AI 屬<strong>生成式 LLM / 對話 agent</strong>？<span class="dt-arrow">→</span> 目前多以「臨床支援工具」走 SaMD 路徑；FDA 2025/12 開始討論 GenAI SaMD 專屬指南。</span><span data-lang="en">AI is a <strong>generative LLM / conversational agent</strong>? <span class="dt-arrow">→</span> Mostly filed as a clinical-support SaMD today; FDA began discussing GenAI-specific SaMD guidance in Dec 2025.</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖" data-en="INTERACTIVE">互動圖</div>
+<h2 data-zh="九、FDA AI/ML 裝置累計件數趨勢" data-en="IX. FDA AI/ML Device Cumulative Trend">九、FDA AI/ML 裝置趨勢</h2>
+<div data-lang="zh"><p>下圖顯示 FDA AI/ML 醫療裝置 2015–2025 累計件數，與依專科分布。資料來源：FDA AI/ML-Enabled Device List（2025/12 更新）。</p></div>
+<div data-lang="en"><p>The chart shows the FDA AI/ML Medical Device cumulative count 2015–2025 and specialty mix. Source: FDA AI/ML-Enabled Device List (Dec 2025 update).</p></div>
+<div class="interactive-panel">
+<div class="toggle-row">
+  <button class="toggle-btn active" data-view="cum" data-zh="累計件數" data-en="Cumulative">累計件數</button>
+  <button class="toggle-btn" data-view="specialty" data-zh="依專科" data-en="By Specialty">依專科</button>
+</div>
+<div class="chart-container"><canvas id="aiChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">資料來源：FDA AI/ML-Enabled Device List（2025/12）。</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Source: FDA AI/ML-Enabled Device List (Dec 2025).</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="十、分析 FDA AI/ML 裝置清單" data-en="X. Analyzing the FDA AI/ML Device List">十、分析 FDA AI/ML 裝置清單</h2>
+<div data-lang="zh"><p>FDA 公開 AI/ML-Enabled Device List CSV。以下程式讀入後依專科分組計數，並輸出前 5 大專科。</p></div>
+<div data-lang="en"><p>FDA publishes the AI/ML-Enabled Device List as CSV. The code reads it, groups by specialty, and prints the top 5.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+
+<span class="comment"># Download the CSV from FDA's website once and load locally</span>
+df = pd.<span class="func">read_csv</span>(<span class="str">"fda_ai_ml_devices.csv"</span>)
+
+<span class="comment"># Standardize column names</span>
+df.columns = df.columns.str.<span class="func">strip</span>().str.<span class="func">lower</span>().str.<span class="func">replace</span>(<span class="str">" "</span>, <span class="str">"_"</span>)
+
+<span class="comment"># Group by specialty/panel and count</span>
+top = (df.<span class="func">groupby</span>(<span class="str">"lead_panel"</span>)
+         .size()
+         .<span class="func">sort_values</span>(ascending=<span class="kw">False</span>)
+         .<span class="func">head</span>(<span class="num">5</span>))
+<span class="func">print</span>(<span class="str">"Top 5 specialties on the FDA AI/ML list:"</span>)
+<span class="func">print</span>(top)
+
+<span class="comment"># Year-on-year additions</span>
+df[<span class="str">"year"</span>] = pd.<span class="func">to_datetime</span>(df[<span class="str">"date_of_final_decision"</span>]).dt.year
+<span class="func">print</span>(<span class="str">"\nDevices added per year:"</span>)
+<span class="func">print</span>(df.<span class="func">groupby</span>(<span class="str">"year"</span>).size())</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% Analyze FDA AI/ML device list in MATLAB</span>
+T = <span class="func">readtable</span>(<span class="str">'fda_ai_ml_devices.csv'</span>);
+
+<span class="comment">% Standardize column names: lowercase, replace spaces with underscores</span>
+T.Properties.VariableNames = ...
+   <span class="func">lower</span>(<span class="func">strrep</span>(T.Properties.VariableNames, <span class="str">' '</span>, <span class="str">'_'</span>));
+
+<span class="comment">% Top 5 specialties</span>
+[g, names] = <span class="func">findgroups</span>(T.lead_panel);
+counts     = <span class="func">accumarray</span>(g, <span class="num">1</span>);
+[~, idx]   = <span class="func">sort</span>(counts, <span class="str">'descend'</span>);
+<span class="func">fprintf</span>(<span class="str">'Top 5 specialties:\n'</span>);
+<span class="kw">for</span> k = <span class="num">1</span>:<span class="num">5</span>
+    <span class="func">fprintf</span>(<span class="str">'  %-20s  %4d\n'</span>, names{idx(k)}, counts(idx(k)));
+<span class="kw">end</span>
+
+<span class="comment">% Devices per year</span>
+T.year = <span class="func">year</span>(T.date_of_final_decision);
+<span class="func">disp</span>(<span class="func">groupsummary</span>(T, <span class="str">'year'</span>));</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十一、本章關鍵術語" data-en="XI. Key Terms">十一、關鍵術語</h2>
+<p><span class="term">da Vinci 5<span class="term-tip">2025/2 上市的次世代 da Vinci 平台，首支具 Force Feedback；力感測資料 10,000× 提升。</span></span> &nbsp;
+<span class="term">EndoWrist<span class="term-tip">Intuitive 拋棄式 7-DOF 手腕器械；da Vinci 商業模式核心。</span></span> &nbsp;
+<span class="term">Mako<span class="term-tip">Stryker 骨科導引臂，2024/6 推出次世代軟體與術中即時資料。</span></span> &nbsp;
+<span class="term">AR Surgery<span class="term-tip">擴增實境手術，把術前影像疊合至實際視野；XVision、Brainlab Mixed Reality 為代表。</span></span> &nbsp;
+<span class="term">SaMD<span class="term-tip">Software as a Medical Device — 軟體本身即醫療器材；FDA 與 IMDRF 個別規範。</span></span> &nbsp;
+<span class="term">PCCP<span class="term-tip">Predetermined Change Control Plan — 2024/12 FDA 終版指南，允許 AI 模型在預先核可範圍內合法更新。</span></span> &nbsp;
+<span class="term">Foundation Model<span class="term-tip">大型預訓練模型，可微調至多任務；Aidoc CARE1 為首支 FDA 核可的臨床基礎模型。</span></span> &nbsp;
+<span class="term">MCP<span class="term-tip">Model Context Protocol — Anthropic 提出的開放協議，讓 LLM agent 可與外部系統互通；MCPmed 為醫療版。</span></span> &nbsp;
+<span class="term">SMART on FHIR<span class="term-tip">標準化 OAuth + FHIR 介面，讓第三方 App / LLM 安全存取 EHR。</span></span> &nbsp;
+<span class="term">De Novo (AI)<span class="term-tip">創新無 predicate AI 裝置的 FDA 上市路徑；IDx-DR 為代表。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q1. 下列何者是 da Vinci 5（2025/2 上市）相較前代最重要的新功能？</span><span data-lang="en">Q1. What is the most important new feature in da Vinci 5 (Feb 2025) over its predecessors?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 拋棄式 EndoWrist 器械</span><span data-lang="en">A. Disposable EndoWrist instruments</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 單孔 single-port 配置</span><span data-lang="en">B. Single-port configuration</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. Force Feedback 力回饋，力感測資料量 10,000× 提升</span><span data-lang="en">C. Force Feedback, with ~10,000× more force-sensing data</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 取代主刀醫師</span><span data-lang="en">D. Replaces the surgeon</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q2. PCCP（FDA 2024/12 終版指南）的核心精神是？</span><span data-lang="en">Q2. The core idea of FDA's PCCP (final guidance Dec 2024) is:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 廢除 510(k)</span><span data-lang="en">A. Abolishes 510(k)</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 廠商可在原始上市申請中預先描述未來允許的模型變更，後續更新無需新 510(k)</span><span data-lang="en">B. Sponsors describe planned model changes in the original submission; subsequent updates need no new 510(k)</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 強制所有 AI 裝置每年重新審查</span><span data-lang="en">C. Forces yearly re-review of every AI device</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 把 AI 醫療裝置一律歸為 Class III</span><span data-lang="en">D. Reclassifies all AI devices as Class III</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="0"><p><span data-lang="zh">Q3. 截至 2025 年底 FDA 累計核可的 AI/ML 醫療裝置數與專科分布大致為？</span><span data-lang="en">Q3. By end-2025, the cumulative FDA AI/ML medical-device count and specialty mix is roughly:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. ~1,451 件；2025 年新增 295 件創紀錄；放射約佔 76%</span><span data-lang="en">A. ~1,451 cumulative; record 295 added in 2025; radiology ~76%</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. ~100 件；多為心臟科</span><span data-lang="en">B. ~100 cumulative; mostly cardiology</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. ~5,000 件；多為神經科</span><span data-lang="en">C. ~5,000 cumulative; mostly neurology</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 0 件</span><span data-lang="en">D. Zero — no AI devices yet</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="gene-cell-therapy-eng.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="E2 · 基因與細胞治療工程" data-en="E2 · Gene &amp; Cell Therapy Engineering">E2 · 基因與細胞治療工程</span></a>
+<a href="regulation-ethics.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="E4 · 法規、倫理與品質系統" data-en="E4 · Regulation, Ethics &amp; QMS">E4 · 法規、倫理與品質系統</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · E3 Surgical Robotics &amp; AI in Medicine</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// FDA AI/ML chart
+const aiData={
+  cum: {
+    labels:['2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],
+    radio:[18,32,52,79,135,237,357,484,650,889,1103],
+    cardio:[3,5,9,15,25,40,60,80,108,140,175],
+    neuro:[1,2,4,7,12,20,32,45,62,80,103],
+    other:[2,4,6,9,15,23,35,48,62,47,70]
+  }
+};
+let aiChart=null;
+function drawAI(view){
+  if(aiChart) aiChart.destroy();
+  const ctx=document.getElementById('aiChart').getContext('2d');
+  const lang=I18n.get();
+  if(view==='cum'){
+    aiChart=new Chart(ctx,{type:'bar',
+      data:{labels:aiData.cum.labels,datasets:[
+        {label:lang==='zh'?'放射':'Radiology',data:aiData.cum.radio,backgroundColor:'rgba(131,24,67,.8)',stack:'s'},
+        {label:lang==='zh'?'心血管':'Cardiology',data:aiData.cum.cardio,backgroundColor:'rgba(13,148,136,.8)',stack:'s'},
+        {label:lang==='zh'?'神經':'Neurology',data:aiData.cum.neuro,backgroundColor:'rgba(245,158,11,.8)',stack:'s'},
+        {label:lang==='zh'?'其他':'Other',data:aiData.cum.other,backgroundColor:'rgba(120,120,120,.7)',stack:'s'}
+      ]},
+      options:{plugins:{legend:{display:true}},
+        scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true,title:{display:true,text:lang==='zh'?'累計件數':'cumulative count'}}}}});
+  } else {
+    const last=aiData.cum;
+    const i=last.labels.length-1;
+    aiChart=new Chart(ctx,{type:'doughnut',
+      data:{labels:[lang==='zh'?'放射':'Radiology',lang==='zh'?'心血管':'Cardiology',lang==='zh'?'神經':'Neurology',lang==='zh'?'其他':'Other'],
+        datasets:[{data:[last.radio[i],last.cardio[i],last.neuro[i],last.other[i]],
+          backgroundColor:['rgba(131,24,67,.85)','rgba(13,148,136,.85)','rgba(245,158,11,.85)','rgba(120,120,120,.7)']}]},
+      options:{plugins:{legend:{display:true,position:'right'}}}});
+  }
+}
+drawAI('cum');
+document.querySelectorAll('.toggle-btn[data-view]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.toggle-btn[data-view]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); drawAI(b.dataset.view);
+}));
+document.addEventListener('langchange',()=>{
+  const cur=document.querySelector('.toggle-btn[data-view].active').dataset.view;
+  drawAI(cur);
+});
+</script>
+</body></html>

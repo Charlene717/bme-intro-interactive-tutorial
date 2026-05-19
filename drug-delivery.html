@@ -1,0 +1,394 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>C4: 藥物遞送系統 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html" class="active">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER C4 · BLOCK C MECHANICS/TISSUE</div>
+<h1 data-zh="藥物遞送系統" data-en="Drug Delivery Systems">藥物遞送系統</h1>
+<p class="subtitle" data-lang="zh">從口服膠囊到 LNP-mRNA、從滲透泵到體內 CRISPR——本章把藥物的 ADME 與遞送工程一次說清楚。</p>
+<p class="subtitle" data-lang="en">From oral capsules to LNP-mRNA, from osmotic pumps to in-vivo CRISPR — this chapter unifies pharmacokinetics with delivery engineering.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="PK/PD" data-en="PK/PD">PK / PD</div>
+<h2 data-zh="一、PK / PD 基礎" data-en="I. PK / PD Fundamentals">一、PK / PD 基礎</h2>
+<div data-lang="zh">
+<p><strong>藥物動力學（PK, pharmacokinetics）</strong>研究「身體對藥物做了什麼」——四步驟 <strong>ADME</strong>：</p>
+<ul>
+<li><strong>A</strong>bsorption — 吸收（口服、注射、皮膚、肺）</li>
+<li><strong>D</strong>istribution — 分布（V<sub>d</sub>，分布容積）</li>
+<li><strong>M</strong>etabolism — 代謝（肝臟 CYP450 為主）</li>
+<li><strong>E</strong>limination — 排泄（腎、膽）</li>
+</ul>
+<p><strong>藥物效力學（PD, pharmacodynamics）</strong>研究「藥物對身體做了什麼」——劑量-反應關係、EC<sub>50</sub>、效能（efficacy）、毒性閾值。</p>
+<p><strong>關鍵指標：</strong></p>
+<ul>
+<li><strong>C<sub>max</sub>：</strong>血中濃度峰值</li>
+<li><strong>T<sub>max</sub>：</strong>達到 C<sub>max</sub> 的時間</li>
+<li><strong>AUC：</strong>濃度-時間曲線下面積，代表總暴露量</li>
+<li><strong>t<sub>½</sub>：</strong>半衰期，濃度下降一半所需時間（t<sub>½</sub> = 0.693·V<sub>d</sub>/CL）</li>
+<li><strong>CL：</strong>清除率（mL/min），= 0.693·V<sub>d</sub>/t<sub>½</sub></li>
+<li><strong>F：</strong>生物利用率（口服 / IV 的 AUC 比）</li>
+<li><strong>治療窗（therapeutic window）：</strong>有效劑量（MEC）與毒性劑量（MTC）之間的安全範圍</li>
+</ul>
+</div>
+<div data-lang="en">
+<p><strong>Pharmacokinetics (PK)</strong> = "what the body does to the drug" — the four-step <strong>ADME</strong>:</p>
+<ul>
+<li><strong>A</strong>bsorption (oral, injection, skin, lung)</li>
+<li><strong>D</strong>istribution (V<sub>d</sub>, volume of distribution)</li>
+<li><strong>M</strong>etabolism (mostly hepatic CYP450)</li>
+<li><strong>E</strong>limination (renal, biliary)</li>
+</ul>
+<p><strong>Pharmacodynamics (PD)</strong> = "what the drug does to the body" — dose-response, EC<sub>50</sub>, efficacy, toxicity threshold.</p>
+<p><strong>Key parameters:</strong></p>
+<ul>
+<li><strong>C<sub>max</sub>:</strong> peak plasma concentration</li>
+<li><strong>T<sub>max</sub>:</strong> time to C<sub>max</sub></li>
+<li><strong>AUC:</strong> area under the C-t curve = total exposure</li>
+<li><strong>t<sub>½</sub>:</strong> half-life = 0.693·V<sub>d</sub>/CL</li>
+<li><strong>CL:</strong> clearance (mL/min)</li>
+<li><strong>F:</strong> bioavailability (oral/IV AUC ratio)</li>
+<li><strong>Therapeutic window:</strong> safe range between MEC (min effective) and MTC (max tolerated)</li>
+</ul>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>記憶口訣：</strong>「給藥目標 = 把血中濃度長時間維持在 MEC 與 MTC 之間」。傳統口服藥讓濃度起起伏伏；控制釋放/緩釋的工程目標就是「壓平這條曲線」。</span>
+<span data-lang="en"><strong>Mnemonic:</strong> "Keep plasma level between MEC and MTC for as long as possible." Conventional oral dosing produces peaks and troughs; controlled/sustained release engineering aims to flatten the curve.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="釋放動力學" data-en="RELEASE KINETICS">釋放動力學</div>
+<h2 data-zh="二、藥物釋放動力學" data-en="II. Drug Release Kinetics">二、釋放動力學</h2>
+<table class="comp-table"><thead><tr><th data-zh="模型" data-en="Model">模型</th><th data-zh="方程" data-en="Equation">方程</th><th data-zh="代表應用" data-en="Example">應用</th></tr></thead><tbody>
+<tr><td><strong data-zh="零階（zero-order）" data-en="Zero-order">零階</strong></td><td>dM/dt = k₀（速率恆定）</td><td data-zh="滲透泵 OROS、儲庫式藥膜、植入式 levonorgestrel 棒" data-en="OROS osmotic pumps, reservoir patches, levonorgestrel rod">OROS、植入棒</td></tr>
+<tr><td><strong data-zh="一階（first-order）" data-en="First-order">一階</strong></td><td>dM/dt = −k·M（指數衰減）</td><td data-zh="多數口服 immediate-release、簡單 matrix" data-en="Most IR oral; simple matrix">IR 口服</td></tr>
+<tr><td><strong data-zh="Higuchi（√t）" data-en="Higuchi (√t)">Higuchi</strong></td><td>M(t) = k<sub>H</sub>·√t</td><td data-zh="基質擴散控制（皮下植入、貼片）" data-en="Matrix diffusion (transdermal, dermal patch)">貼片、植入物</td></tr>
+<tr><td><strong data-zh="Korsmeyer-Peppas" data-en="Korsmeyer-Peppas">K-P 冪律</strong></td><td>M(t)/M<sub>∞</sub> = k·t<sup>n</sup></td><td data-zh="水凝膠、膨潤系統；n = 0.5 Fickian、1.0 zero-order、其間為 anomalous" data-en="Hydrogels &amp; swelling systems; n=0.5 Fickian, 1.0 zero-order, between = anomalous">水凝膠</td></tr>
+<tr><td><strong data-zh="Hixson-Crowell" data-en="Hixson-Crowell">H-C</strong></td><td>M<sub>0</sub><sup>1/3</sup>−M<sub>t</sub><sup>1/3</sup> = κt</td><td data-zh="不溶解粒子隨表面積縮小的釋放" data-en="Dissolution-limited with shrinking surface">微粒溶蝕</td></tr>
+<tr><td><strong data-zh="Weibull" data-en="Weibull">Weibull</strong></td><td>M(t)/M<sub>∞</sub> = 1−exp(−((t−T)/a)<sup>b</sup>)</td><td data-zh="經驗模型；常用於擬合複雜釋放曲線" data-en="Empirical; fits complex profiles">通用擬合</td></tr>
+</tbody></table>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>burst release：</strong>許多製劑在前幾小時釋放量激增，是支架表面殘藥或孔通道未閉合所致；對窄治療窗藥物（如 chemo、opioids）可能致命，需在配方中加入「擴散障壁層」抑制。</span>
+<span data-lang="en"><strong>Burst release:</strong> Many formulations dump a large fraction in the first hours due to surface residue or open pores. For narrow-therapeutic-window drugs (chemo, opioids) this can be fatal; add a diffusion-barrier layer to suppress.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="給藥途徑" data-en="ROUTES">給藥途徑</div>
+<h2 data-zh="三、給藥途徑比較" data-en="III. Comparison of Routes">三、給藥途徑</h2>
+<table class="comp-table"><thead><tr><th data-zh="途徑" data-en="Route">途徑</th><th data-zh="特點" data-en="Properties">特點</th><th data-zh="典型應用 / F" data-en="Examples / F">應用</th></tr></thead><tbody>
+<tr><td><strong data-zh="口服 PO" data-en="Oral PO">口服</strong></td><td data-zh="便利、生物利用率低（first-pass 效應）" data-en="Convenient, low F (first-pass)">便利、low F</td><td data-zh="多數慢性藥；F 通常 5–50%" data-en="Most chronic drugs; F 5–50%">F 5–50%</td></tr>
+<tr><td><strong data-zh="靜脈 IV" data-en="IV">IV</strong></td><td data-zh="F = 100%、可控、需技術人員" data-en="F=100%, controlled, requires HCP">F = 100%</td><td data-zh="化療、抗生素、急救藥" data-en="Chemo, antibiotics, emergencies">化療、急救</td></tr>
+<tr><td><strong data-zh="肌肉 IM / 皮下 SC" data-en="IM / SC">IM / SC</strong></td><td data-zh="F 高、緩慢釋放、可自我注射（pen）" data-en="High F, slow release, self-injectable pen">SC pen</td><td data-zh="疫苗、insulin、GLP-1 (semaglutide)、生物製劑" data-en="Vaccines, insulin, GLP-1 (semaglutide), biologics">insulin、GLP-1</td></tr>
+<tr><td><strong data-zh="經皮（貼片）" data-en="Transdermal">經皮</strong></td><td data-zh="繞過 first-pass、長時間穩態、限於小親脂分子（&lt; 500 Da、logP 1–3）" data-en="Bypasses first-pass, steady state; small lipophilic only">繞 first-pass</td><td data-zh="Estraderm（雌激素）、fentanyl 貼片、nicotine、scopolamine" data-en="Estraderm, fentanyl, nicotine, scopolamine">荷爾蒙、鎮痛</td></tr>
+<tr><td><strong data-zh="吸入 / 肺" data-en="Pulmonary">吸入</strong></td><td data-zh="肺泡面積 70 m²；微粒 1–5 μm；MDI、DPI、nebulizer" data-en="Alveolar 70 m²; particles 1–5 μm; MDI/DPI/nebulizer">肺泡 70 m²</td><td data-zh="ICS（氣喘）、bronchodilator、cystic fibrosis、aerosolized mRNA 研發中" data-en="ICS, bronchodilators, CF; inhaled mRNA in development">ICS、SABA</td></tr>
+<tr><td><strong data-zh="鼻腔 / nasal" data-en="Nasal">鼻腔</strong></td><td data-zh="繞 first-pass，可直送 CNS（嗅球）；naloxone 急救" data-en="Bypasses first-pass; nose-to-brain via olfactory; naloxone rescue">繞 first-pass、CNS</td><td data-zh="Narcan（naloxone）、計畫疫苗" data-en="Narcan; some vaccines">Narcan</td></tr>
+<tr><td><strong data-zh="鞘膜內 / intrathecal" data-en="Intrathecal">鞘膜內</strong></td><td data-zh="直入 CSF 繞過 BBB；植入式 Medtronic SynchroMed 泵" data-en="Direct CSF, bypasses BBB; implantable Medtronic SynchroMed pump">直入 CSF</td><td data-zh="慢性疼痛 morphine、baclofen 痙攣、Spinraza ASO" data-en="Morphine, baclofen, Spinraza ASO">Spinraza</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="控制釋放" data-en="CONTROLLED RELEASE">控制釋放</div>
+<h2 data-zh="四、控制釋放配方類型" data-en="IV. Controlled-Release Formulations">四、控制釋放配方</h2>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">💧</div><h4 data-zh="滲透泵（OROS）" data-en="Osmotic Pump (OROS)">滲透泵 OROS</h4>
+<div data-lang="zh"><p>Alza/J&amp;J 開發；半透膜外殼 + 雷射打的釋放孔 + 內部 osmotic agent（NaCl, 甘露糖醇）+ 藥物。水進入推升 piston → 藥液以接近零階速率擠出。代表：Concerta（methylphenidate）、Procardia XL（nifedipine）。</p></div>
+<div data-lang="en"><p>Alza/J&amp;J; semi-permeable shell + laser-drilled orifice + osmotic agent + drug. Water enters, piston pushes drug out at near-zero-order rate. Examples: Concerta (methylphenidate), Procardia XL (nifedipine).</p></div></div>
+<div class="card"><div class="card-icon">🧱</div><h4 data-zh="基質型（matrix）" data-en="Matrix">基質型</h4>
+<div data-lang="zh"><p>藥物均勻分散在 hydrophilic（HPMC、PEO）或 lipophilic（蠟）基質中；遵循 Higuchi √t 動力學。代表：metformin XR、tramadol ER。</p></div>
+<div data-lang="en"><p>Drug uniformly dispersed in hydrophilic (HPMC, PEO) or lipophilic (wax) matrix; follows Higuchi √t. Examples: metformin XR, tramadol ER.</p></div></div>
+<div class="card"><div class="card-icon">🎯</div><h4 data-zh="儲庫式（reservoir）" data-en="Reservoir">儲庫式</h4>
+<div data-lang="zh"><p>藥物核心 + 速率控制膜；釋放速率由膜決定，可達零階。代表：Norplant、Nuvaring、藥物洗脫支架（drug-eluting stents）。</p></div>
+<div data-lang="en"><p>Drug core + rate-controlling membrane; membrane sets the (often zero-order) release rate. Examples: Norplant, Nuvaring, drug-eluting stents.</p></div></div>
+<div class="card"><div class="card-icon">🌐</div><h4 data-zh="水凝膠／長效注射" data-en="Hydrogel / Long-Acting Injectable">水凝膠</h4>
+<div data-lang="zh"><p>PLGA 微球可釋放數週～數月；代表：Lupron Depot（leuprolide 攝護腺癌）、Trelstar、Risperdal Consta。長效抗精神病、HIV PrEP（cabotegravir LA, 8 週）。</p></div>
+<div data-lang="en"><p>PLGA microspheres release over weeks–months; Lupron Depot (leuprolide for prostate Ca), Trelstar, Risperdal Consta. Long-acting antipsychotic, HIV PrEP (cabotegravir LA, 8 weeks).</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="奈米與標靶" data-en="NANO &amp; TARGETING">奈米標靶</div>
+<h2 data-zh="五、奈米藥物與標靶遞送" data-en="V. Nanomedicines &amp; Targeted Delivery">五、奈米與標靶</h2>
+<div data-lang="zh">
+<p><strong>被動標靶（passive targeting）— EPR 效應：</strong>腫瘤血管「漏」（孔徑 200–800 nm）且淋巴回流差，奈米粒子（10–200 nm）會被動聚集——Enhanced Permeability and Retention。<strong>主動標靶（active targeting）：</strong>表面修飾 ligand（抗體、aptamer、folate、RGD）辨識細胞表面受體。</p>
+<p><strong>主要奈米平台：</strong></p>
+<ul>
+<li><strong>脂質體（liposomes）：</strong>磷脂雙層空心球（50–200 nm）。<strong>Doxil</strong>（PEG-脂質體 doxorubicin）1995 為首支 FDA 核准奈米藥；<strong>Onivyde</strong>（irinotecan 脂質體）2015 用於胰臟癌。</li>
+<li><strong>聚合物奈米粒子（polymeric NP）：</strong>PLGA、PLA-PEG；<strong>Abraxane</strong>（albumin-bound paclitaxel）2005。</li>
+<li><strong>微胞（micelles）：</strong>兩親性嵌段共聚物自組織。</li>
+<li><strong>樹枝狀分子（dendrimers）：</strong>PAMAM 等，可精確控制大小與表面。</li>
+<li><strong>金奈米粒子：</strong>光熱治療（CYT-6091 試驗中）、成像對比、放射增敏。</li>
+<li><strong>抗體-藥物複合體（ADC）：</strong>單株抗體 + linker + 細胞毒素。<strong>Kadcyla（T-DM1）</strong>2013、<strong>Enhertu（T-DXd, trastuzumab deruxtecan）</strong>2019、2024 對 HR+ / HER2-low 乳癌、2025 對胃癌擴張適應症。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p><strong>Passive targeting — EPR effect:</strong> tumor vasculature is leaky (pore 200–800 nm) and lymph drainage poor, so nanoparticles (10–200 nm) accumulate — Enhanced Permeability and Retention. <strong>Active targeting:</strong> surface ligands (antibody, aptamer, folate, RGD) bind cell-surface receptors.</p>
+<p><strong>Key platforms:</strong></p>
+<ul>
+<li><strong>Liposomes:</strong> phospholipid bilayer vesicles (50–200 nm). <strong>Doxil</strong> (PEG-liposomal doxorubicin), 1995 FDA — first nanomedicine. <strong>Onivyde</strong> (liposomal irinotecan), 2015 for pancreatic cancer.</li>
+<li><strong>Polymeric NPs:</strong> PLGA, PLA-PEG; <strong>Abraxane</strong> (albumin-bound paclitaxel), 2005.</li>
+<li><strong>Micelles:</strong> amphiphilic block copolymers, self-assembled.</li>
+<li><strong>Dendrimers:</strong> PAMAM and others — precise size and surface control.</li>
+<li><strong>Gold nanoparticles:</strong> photothermal therapy (CYT-6091 in trials), imaging contrast, radiosensitization.</li>
+<li><strong>Antibody-drug conjugates (ADCs):</strong> mAb + linker + cytotoxin. <strong>Kadcyla (T-DM1)</strong> 2013, <strong>Enhertu (T-DXd)</strong> 2019, expanded to HER2-low breast cancer 2024 and gastric cancer 2025.</li>
+</ul>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="LNP" data-en="LNP &amp; mRNA">LNP / mRNA</div>
+<h2 data-zh="六、脂質奈米粒子（LNP）與 mRNA 時代" data-en="VI. Lipid Nanoparticles (LNP) &amp; the mRNA Era">六、LNP 與 mRNA</h2>
+<div data-lang="zh">
+<p>LNP（lipid nanoparticle）是過去十年最重要的遞送平台。標準配方有四種脂質：</p>
+<ol>
+<li><strong>離子化脂質（ionizable lipid）：</strong>低 pH 帶正電（包裝 mRNA），中性 pH 不帶電（降低毒性）；BioNTech 用 <strong>ALC-0315</strong>、Moderna 用 <strong>SM-102</strong>，二者皆 pKa ~ 6.3。</li>
+<li><strong>助劑脂質（helper lipid）：</strong>DSPC，提供雙層穩定。</li>
+<li><strong>膽固醇：</strong>調節流動性與融合。</li>
+<li><strong>PEG-脂質：</strong>BioNTech <strong>ALC-0159</strong>、Moderna <strong>PEG2000-DMG</strong>，提供 stealth 與顆粒穩定。</li>
+</ol>
+<p><strong>製造：</strong>用 microfluidic mixer（precision NanoSystems NanoAssemblr、Knauer IJM）讓酒精相 + 水相（含 mRNA）快速混合 → 沉澱形成 LNP，再透析、濃縮。粒徑 80–100 nm。</p>
+<p><strong>關鍵產品時間軸：</strong></p>
+<ul>
+<li><strong>2018：Onpattro (patisiran)</strong>——首支 LNP-siRNA 藥物（治療 hATTR amyloidosis）。</li>
+<li><strong>2020 末：Comirnaty (BNT162b2)</strong> 與 <strong>Spikevax (mRNA-1273)</strong>——首批 mRNA 疫苗 EUA，全球 &gt; 130 億劑接種。</li>
+<li><strong>2023：Casgevy (exa-cel)</strong>——首支 CRISPR 療法，治療鐮刀型貧血 / β-thalassemia（ex-vivo，但仍是 cell + gene engineering 里程碑）。</li>
+<li><strong>2024：</strong>Verve VERVE-101（PCSK9 鹼基編輯）pause，2025 重啟；<strong>Intellia NTLA-2002</strong> 體內 CRISPR 治療 HAE（hereditary angioedema）2025 三期啟動。</li>
+<li><strong>2025–2026：</strong>多家公司開發 in-vivo CAR-T LNP（將 CAR mRNA 送入 T 細胞）；癌症 mRNA 疫苗（Moderna mRNA-4157 + pembrolizumab 黑色素瘤三期）。</li>
+</ul>
+<p><strong>器官標靶（SORT, Siegwart 2020）：</strong>調整 LNP 中第五脂質可改變肝外標靶——加入正電脂質 → 肺、加入負電脂質 → 脾。</p>
+</div>
+<div data-lang="en">
+<p>LNPs have been the most important delivery platform of the last decade. Standard formulation = four lipids:</p>
+<ol>
+<li><strong>Ionizable lipid:</strong> protonated at low pH (packages mRNA), neutral at physiological pH (reduces tox). BioNTech uses <strong>ALC-0315</strong>, Moderna uses <strong>SM-102</strong> — both pKa ~ 6.3.</li>
+<li><strong>Helper lipid:</strong> DSPC — bilayer stability.</li>
+<li><strong>Cholesterol:</strong> modulates fluidity &amp; fusion.</li>
+<li><strong>PEG-lipid:</strong> BioNTech <strong>ALC-0159</strong>, Moderna <strong>PEG2000-DMG</strong> — stealth + particle stability.</li>
+</ol>
+<p><strong>Manufacture:</strong> microfluidic mixers (Precision NanoSystems NanoAssemblr, Knauer IJM) rapidly combine ethanol phase + aqueous mRNA → precipitate LNPs → dialyze and concentrate. Size 80–100 nm.</p>
+<p><strong>Timeline:</strong></p>
+<ul>
+<li><strong>2018: Onpattro (patisiran)</strong> — first LNP-siRNA drug (hATTR amyloidosis).</li>
+<li><strong>Late 2020: Comirnaty (BNT162b2)</strong> &amp; <strong>Spikevax (mRNA-1273)</strong> — first mRNA-vaccine EUAs; &gt; 13 billion doses worldwide.</li>
+<li><strong>2023: Casgevy (exa-cel)</strong> — first CRISPR therapy (sickle cell / β-thalassemia); ex-vivo, but a landmark for cell + gene engineering.</li>
+<li><strong>2024:</strong> Verve VERVE-101 (PCSK9 base editing) paused, restarted 2025; <strong>Intellia NTLA-2002</strong> in-vivo CRISPR for HAE entered phase III in 2025.</li>
+<li><strong>2025–2026:</strong> multiple in-vivo CAR-T LNP programs (deliver CAR mRNA to T cells); cancer mRNA vaccines (Moderna mRNA-4157 + pembrolizumab phase III melanoma).</li>
+</ul>
+<p><strong>Organ targeting (SORT, Siegwart 2020):</strong> adding a fifth lipid redirects LNPs from liver — positively charged → lung; negatively charged → spleen.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="智慧遞送" data-en="SMART DELIVERY">智慧遞送</div>
+<h2 data-zh="七、智慧 / 刺激響應型遞送" data-en="VII. Smart / Stimuli-Responsive Delivery">七、智慧遞送</h2>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">🌡️</div><h4 data-zh="溫度響應" data-en="Thermo-Responsive">溫度</h4>
+<div data-lang="zh"><p>PNIPAM（poly-NIPAm）LCST ~ 32°C；體溫以下溶解、體溫以上塌陷釋藥。應用：MR-HIFU 觸發遞送、ThermoDox（lyso-thermosensitive liposome doxorubicin）+ HIFU 三期試驗。</p></div>
+<div data-lang="en"><p>PNIPAM LCST ~ 32°C; soluble below body temp, collapses above. Apps: MR-HIFU triggered release, ThermoDox (lyso-thermosensitive liposomal doxorubicin) + HIFU phase III.</p></div></div>
+<div class="card"><div class="card-icon">⚗️</div><h4 data-zh="pH 響應" data-en="pH-Responsive">pH</h4>
+<div data-lang="zh"><p>腫瘤微環境 pH ~ 6.5、內體 pH ~ 5；用 PHIS、PEAA、imidazole 等可質子化基團；釋放控制與 LNP 內體逃逸也使用。</p></div>
+<div data-lang="en"><p>Tumor microenv pH ~ 6.5, endosome pH ~ 5. Use PHIS, PEAA, imidazole groups. Used for release control and LNP endosomal escape.</p></div></div>
+<div class="card"><div class="card-icon">🧲</div><h4 data-zh="磁性 / 超音波" data-en="Magnetic / Ultrasound">磁／超音波</h4>
+<div data-lang="zh"><p>Fe₃O₄ 超順磁奈米粒在交變磁場下發熱（magnetic hyperthermia）；超音波微泡可在血腦屏障打開暫時 BBB（FUS）——已用於 Alzheimer 試驗。</p></div>
+<div data-lang="en"><p>Superparamagnetic Fe₃O₄ NPs heat under AC field (magnetic hyperthermia); microbubbles + focused ultrasound open BBB (FUS) — used in Alzheimer's trials.</p></div></div>
+<div class="card"><div class="card-icon">💡</div><h4 data-zh="光響應" data-en="Light-Responsive">光</h4>
+<div data-lang="zh"><p>UV / NIR 觸發釋放；NIR 二窗（700–900 nm、1000–1700 nm）穿透 cm-級組織。應用：photodynamic therapy（PDT）+ 光敏奈米載體。</p></div>
+<div data-lang="en"><p>UV / NIR-triggered release; NIR-II window (1000–1700 nm) penetrates cm-deep tissue. Apps: photodynamic therapy (PDT) + photo-responsive carriers.</p></div></div>
+<div class="card"><div class="card-icon">⚙️</div><h4 data-zh="植入式泵" data-en="Implantable Pumps">植入式泵</h4>
+<div data-lang="zh"><p>Medtronic <strong>SynchroMed II</strong>（鞘膜內 morphine / baclofen / Spinraza）；可程式化、可遙控；MiniMed 670G/780G 胰島素閉迴路結合 CGM（人工胰臟）。</p></div>
+<div data-lang="en"><p>Medtronic <strong>SynchroMed II</strong> (intrathecal morphine/baclofen/Spinraza); programmable, telemetry-controlled. MiniMed 670G/780G closed-loop insulin + CGM (artificial pancreas).</p></div></div>
+<div class="card"><div class="card-icon">📍</div><h4 data-zh="微針貼片" data-en="Microneedle Patches">微針</h4>
+<div data-lang="zh"><p>solid / dissolving / coated / hollow 四類；針長 100–800 μm 不及痛覺神經。可吸收 polymer + 抗原；應用：流感、COVID、HPV 疫苗、insulin、長效避孕。</p></div>
+<div data-lang="en"><p>Solid / dissolving / coated / hollow types; needles 100–800 μm avoid pain nerves. Biodegradable polymer + antigen. Apps: flu, COVID, HPV vaccines, insulin, long-acting contraception.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖表" data-en="INTERACTIVE">互動圖表</div>
+<h2 data-zh="八、互動：多劑量血藥濃度堆疊" data-en="VIII. Interactive: Multi-Dose Plasma Accumulation">八、多劑量互動模擬</h2>
+<div data-lang="zh"><p>1 室口服模型：C(t) = (F·D·k<sub>a</sub>)/(V<sub>d</sub>·(k<sub>a</sub>−k<sub>e</sub>))·(e<sup>−k<sub>e</sub>t</sup> − e<sup>−k<sub>a</sub>t</sup>)；穩態濃度 C<sub>ss,avg</sub> = F·D/(CL·τ)。改變劑量、給藥間隔、半衰期，觀察峰谷與穩態。</p></div>
+<div data-lang="en"><p>1-compartment oral model: C(t) = (F·D·k<sub>a</sub>)/(V<sub>d</sub>·(k<sub>a</sub>−k<sub>e</sub>))·(e<sup>−k<sub>e</sub>t</sup> − e<sup>−k<sub>a</sub>t</sup>); steady state C<sub>ss,avg</sub> = F·D/(CL·τ). Adjust dose, interval, half-life and watch peaks/troughs converge to steady state.</p></div>
+<div class="interactive-panel">
+<div class="slider-row">
+  <label><span data-zh="劑量 D (mg)" data-en="Dose D (mg)">劑量 D</span>: <span id="DVal">100</span> mg</label>
+  <input type="range" id="DSlider" min="10" max="500" step="10" value="100">
+</div>
+<div class="slider-row">
+  <label><span data-zh="給藥間隔 τ (h)" data-en="Dosing interval τ (h)">間隔 τ</span>: <span id="tauVal">8</span> h</label>
+  <input type="range" id="tauSlider" min="2" max="48" step="1" value="8">
+</div>
+<div class="slider-row">
+  <label><span data-zh="消除半衰期 t½ (h)" data-en="Elim half-life t½ (h)">t½</span>: <span id="thalfVal">6</span> h</label>
+  <input type="range" id="thalfSlider" min="1" max="48" step="0.5" value="6">
+</div>
+<div class="slider-row">
+  <label><span data-zh="吸收速率 k<sub>a</sub> (1/h)" data-en="Absorption k_a (1/h)">k<sub>a</sub></span>: <span id="kaVal">1.0</span></label>
+  <input type="range" id="kaSlider" min="0.2" max="3" step="0.1" value="1.0">
+</div>
+<div class="chart-container"><canvas id="pkChart"></canvas></div>
+<p style="font-size:.9rem;text-align:center;"><strong data-zh="穩態平均：" data-en="Steady-state mean:">穩態平均：</strong> <span id="cssOut">--</span> mg/L</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="九、應選哪一類遞送平台？" data-en="IX. Which Delivery Platform?">九、遞送平台決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="遞送平台選擇" data-en="Delivery Platform Selection">遞送平台選擇</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">是否為核酸（mRNA / siRNA / CRISPR）？<span class="dt-arrow">→</span> LNP（肝為主）；組織標靶用 SORT 或 GalNAc-siRNA。</span><span data-lang="en">Nucleic acid (mRNA / siRNA / CRISPR)? <span class="dt-arrow">→</span> LNP (liver default); SORT or GalNAc-siRNA for tissue targeting.</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">是否為腫瘤化療？<span class="dt-arrow">→</span> 脂質體（Doxil）、ADC（T-DXd）、polymeric NP（Abraxane）；考量 EPR vs active targeting。</span><span data-lang="en">Tumor chemo? <span class="dt-arrow">→</span> Liposome (Doxil), ADC (T-DXd), polymeric NP (Abraxane); EPR vs active targeting.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">是否為慢性、需穩態血中濃度？<span class="dt-arrow">→</span> 控釋口服（OROS / matrix）、貼片、LA 注射（PLGA depot）。</span><span data-lang="en">Chronic, need steady plasma level? <span class="dt-arrow">→</span> Controlled-release oral (OROS / matrix), transdermal, LA injection (PLGA depot).</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">是否要繞過 BBB？<span class="dt-arrow">→</span> 鞘膜內（SynchroMed 泵、Spinraza）；focused ultrasound + microbubbles 暫時打開 BBB；標靶受體（如 transferrin）。</span><span data-lang="en">Bypass BBB? <span class="dt-arrow">→</span> Intrathecal (SynchroMed pump, Spinraza); focused-US + microbubbles to transiently open BBB; receptor-mediated (transferrin).</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">是否要刺激觸發（按需）？<span class="dt-arrow">→</span> 溫度（PNIPAM + HIFU）、磁性、光（NIR-II）、pH。</span><span data-lang="en">On-demand triggered? <span class="dt-arrow">→</span> Thermal (PNIPAM + HIFU), magnetic, light (NIR-II), pH.</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="十、1 室與 2 室 PK 模型" data-en="X. 1- &amp; 2-Compartment PK Models">十、PK 模型程式</h2>
+<div data-lang="zh"><p>(a) 1 室口服 IV bolus 解析解；(b) 2 室 IV 模型 ODE — <code>scipy.integrate.solve_ivp</code> / MATLAB <code>ode45</code>。</p></div>
+<div data-lang="en"><p>(a) 1-compartment IV-bolus analytical solution; (b) 2-compartment IV ODE via <code>scipy.integrate.solve_ivp</code> / MATLAB <code>ode45</code>.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">from</span> scipy.integrate <span class="kw">import</span> solve_ivp
+
+<span class="comment"># (a) 1-compartment IV bolus: C(t) = (D/Vd)*exp(-ke*t)</span>
+D, Vd, ke = <span class="num">100</span>, <span class="num">40</span>, <span class="num">0.116</span>   <span class="comment"># mg, L, 1/h (t½ ≈ 6h)</span>
+t = np.<span class="func">linspace</span>(<span class="num">0</span>,<span class="num">36</span>,<span class="num">200</span>)
+C1 = (D/Vd)*np.<span class="func">exp</span>(-ke*t)
+
+<span class="comment"># (b) 2-compartment IV: central + peripheral</span>
+k12, k21, k10 = <span class="num">0.5</span>, <span class="num">0.3</span>, <span class="num">0.15</span>
+<span class="kw">def</span> <span class="func">two_comp</span>(t,y):
+    Cc, Cp = y
+    dCc = -(k12+k10)*Cc + k21*Cp
+    dCp =  k12*Cc - k21*Cp
+    <span class="kw">return</span> [dCc, dCp]
+
+sol = <span class="func">solve_ivp</span>(two_comp,[<span class="num">0</span>,<span class="num">36</span>], [D/Vd, <span class="num">0</span>], t_eval=t)
+
+plt.<span class="func">plot</span>(t, C1, label=<span class="str">"1-comp"</span>)
+plt.<span class="func">plot</span>(t, sol.y[<span class="num">0</span>], label=<span class="str">"2-comp central"</span>)
+plt.<span class="func">plot</span>(t, sol.y[<span class="num">1</span>], <span class="str">"--"</span>, label=<span class="str">"2-comp peripheral"</span>)
+plt.<span class="func">yscale</span>(<span class="str">"log"</span>); plt.<span class="func">xlabel</span>(<span class="str">"t (h)"</span>); plt.<span class="func">ylabel</span>(<span class="str">"C (mg/L)"</span>)
+plt.<span class="func">title</span>(<span class="str">"PK models"</span>); plt.<span class="func">legend</span>(); plt.<span class="func">grid</span>(alpha=<span class="num">.3</span>); plt.<span class="func">show</span>()</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre>D=<span class="num">100</span>; Vd=<span class="num">40</span>; ke=<span class="num">0.116</span>;
+t = linspace(<span class="num">0</span>,<span class="num">36</span>,<span class="num">200</span>);
+C1 = (D/Vd)*<span class="func">exp</span>(-ke*t);
+
+k12=<span class="num">0.5</span>; k21=<span class="num">0.3</span>; k10=<span class="num">0.15</span>;
+A = [-(k12+k10) k21; k12 -k21];
+[T,Y] = <span class="func">ode45</span>(@(t,y) A*y, [<span class="num">0</span> <span class="num">36</span>], [D/Vd; <span class="num">0</span>]);
+
+<span class="func">semilogy</span>(t,C1,<span class="str">'-'</span>,T,Y(:,<span class="num">1</span>),<span class="str">'-'</span>,T,Y(:,<span class="num">2</span>),<span class="str">'--'</span>,<span class="str">'LineWidth'</span>,<span class="num">1.4</span>);
+<span class="func">legend</span>(<span class="str">'1-comp'</span>,<span class="str">'2-comp central'</span>,<span class="str">'2-comp peripheral'</span>); <span class="func">grid on</span>;
+<span class="func">xlabel</span>(<span class="str">'t (h)'</span>); <span class="func">ylabel</span>(<span class="str">'C (mg/L)'</span>);</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十一、本章關鍵術語" data-en="XI. Key Terms">十一、關鍵術語</h2>
+<p><span class="term">ADME<span class="term-tip">吸收、分布、代謝、排泄；PK 四步驟。</span></span> &nbsp;
+<span class="term">AUC<span class="term-tip">濃度-時間曲線下面積，代表暴露總量。</span></span> &nbsp;
+<span class="term">Bioavailability<span class="term-tip">F = AUC<sub>oral</sub>/AUC<sub>IV</sub>；IV = 100%。</span></span> &nbsp;
+<span class="term">First-pass<span class="term-tip">口服藥被肝臟在進入體循環前代謝，造成低 F。</span></span> &nbsp;
+<span class="term">EPR effect<span class="term-tip">Enhanced Permeability and Retention；腫瘤血管漏 + 淋巴差，奈米粒被動聚積。</span></span> &nbsp;
+<span class="term">ADC<span class="term-tip">Antibody-Drug Conjugate；抗體 + linker + 細胞毒；Kadcyla、Enhertu。</span></span> &nbsp;
+<span class="term">LNP<span class="term-tip">Lipid Nanoparticle；ionizable + helper + cholesterol + PEG-lipid。</span></span> &nbsp;
+<span class="term">Doxil<span class="term-tip">PEG 脂質體 doxorubicin，1995 首支 FDA 奈米藥。</span></span> &nbsp;
+<span class="term">Onpattro<span class="term-tip">Patisiran；2018 首支 LNP-siRNA 藥物。</span></span> &nbsp;
+<span class="term">OROS<span class="term-tip">Osmotic-controlled release oral system；Alza/J&amp;J 滲透泵。</span></span> &nbsp;
+<span class="term">Higuchi<span class="term-tip">基質擴散釋放：M(t) ∝ √t。</span></span> &nbsp;
+<span class="term">Korsmeyer-Peppas<span class="term-tip">M/M∞ = kt<sup>n</sup>；n 指示釋放機制。</span></span> &nbsp;
+<span class="term">BBB<span class="term-tip">血腦屏障；多數大分子無法穿越，需鞘膜內或 FUS。</span></span> &nbsp;
+<span class="term">Microneedle<span class="term-tip">微針貼片；100-800 μm 不及痛覺。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q1. 在 PK 中「first-pass effect」造成？</span><span data-lang="en">Q1. The "first-pass effect" in PK causes:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. C<sub>max</sub> 提早出現</span><span data-lang="en">A. Earlier C<sub>max</sub></span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 半衰期變長</span><span data-lang="en">B. Longer half-life</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 口服生物利用率 F 下降（藥物在進入體循環前被肝臟代謝）</span><span data-lang="en">C. Reduced oral bioavailability F (drug metabolized by liver before systemic circulation)</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 提高體內 V<sub>d</sub></span><span data-lang="en">D. Larger V<sub>d</sub></span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q2. LNP 配方中「ionizable lipid」（如 ALC-0315 或 SM-102）的角色是？</span><span data-lang="en">Q2. In an LNP, the "ionizable lipid" (e.g. ALC-0315, SM-102) functions to:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 形成顆粒表面 stealth 層</span><span data-lang="en">A. Provide a stealth surface layer</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 在低 pH 帶正電以包裝 mRNA、生理 pH 不帶電以降低毒性，並協助內體逃逸</span><span data-lang="en">B. Be protonated at low pH to package mRNA but neutral at physiological pH (low tox), and aid endosomal escape</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 提供雙層機械強度</span><span data-lang="en">C. Provide mechanical strength to the bilayer</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 控制 LNP 顆粒大小</span><span data-lang="en">D. Control LNP particle size</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="0"><p><span data-lang="zh">Q3. 一個藥物若遵循 Higuchi 模型，其累積釋放 M(t) 隨時間的關係為？</span><span data-lang="en">Q3. A drug following Higuchi kinetics has cumulative release M(t) ∝ ?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. M(t) ∝ √t（擴散控制基質型）</span><span data-lang="en">A. M(t) ∝ √t (matrix diffusion)</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. M(t) ∝ t（零階）</span><span data-lang="en">B. M(t) ∝ t (zero-order)</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. M(t) ∝ t²</span><span data-lang="en">C. M(t) ∝ t²</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. M(t) ∝ e<sup>−kt</sup>（一階）</span><span data-lang="en">D. M(t) ∝ e<sup>−kt</sup> (first-order)</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="tissue-engineering.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="C3 · 組織工程" data-en="C3 · Tissue Engineering">C3 · 組織工程</span></a>
+<a href="medical-devices.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="D1 · 醫療裝置" data-en="D1 · Medical Devices">D1 · 醫療裝置</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · C4 Drug Delivery</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// Multi-dose PK interactive
+const DSL=document.getElementById('DSlider'),tauSL=document.getElementById('tauSlider'),thSL=document.getElementById('thalfSlider'),kaSL=document.getElementById('kaSlider');
+const DV=document.getElementById('DVal'),tauV=document.getElementById('tauVal'),thV=document.getElementById('thalfVal'),kaV=document.getElementById('kaVal'),cssO=document.getElementById('cssOut');
+let pkChart=null;
+function drawPK(){
+  const D=parseFloat(DSL.value), tau=parseFloat(tauSL.value), t12=parseFloat(thSL.value), ka=parseFloat(kaSL.value);
+  DV.textContent=D; tauV.textContent=tau; thV.textContent=t12.toFixed(1); kaV.textContent=ka.toFixed(1);
+  const ke=Math.log(2)/t12;
+  const F=0.5, Vd=40;
+  const CL=ke*Vd;
+  // simulate 96 h
+  const tEnd=96; const N=300;
+  const xs=[]; const ys=[];
+  for(let i=0;i<=N;i++){
+    const t=i*tEnd/N;
+    let C=0;
+    // sum dose contributions for tau-spaced doses up to t
+    const nDose=Math.floor(t/tau)+1;
+    for(let n=0;n<nDose;n++){
+      const td=t-n*tau;
+      if(td<0)continue;
+      // 1-comp oral absorption with bolus equivalent
+      const coef=(F*D*ka)/(Vd*(ka-ke+1e-9));
+      C += coef*(Math.exp(-ke*td)-Math.exp(-ka*td));
+    }
+    xs.push(t.toFixed(1)); ys.push(C);
+  }
+  const Css = F*D/(CL*tau);
+  cssO.textContent=Css.toFixed(2);
+  const lang=I18n.get();
+  if(pkChart)pkChart.destroy();
+  pkChart=new Chart(document.getElementById('pkChart').getContext('2d'),{
+    type:'line',
+    data:{labels:xs,datasets:[
+      {label:lang==='zh'?'血藥濃度 C(t)':'Plasma C(t)',data:ys,
+       borderColor:'#831843',backgroundColor:'rgba(131,24,67,.12)',fill:true,pointRadius:0,tension:.2},
+      {label:lang==='zh'?'穩態平均 Css':'Steady-state Css',
+       data:xs.map(()=>Css),borderColor:'#0f766e',borderDash:[5,4],pointRadius:0}
+    ]},
+    options:{plugins:{legend:{display:true}},
+      scales:{x:{title:{display:true,text:lang==='zh'?'時間 (h)':'Time (h)'}},
+              y:{title:{display:true,text:lang==='zh'?'濃度 C (mg/L)':'C (mg/L)'}}}}
+  });
+}
+[DSL,tauSL,thSL,kaSL].forEach(s=>s.addEventListener('input',drawPK));
+drawPK();
+document.addEventListener('langchange',drawPK);
+</script>
+</body></html>

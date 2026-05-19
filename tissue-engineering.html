@@ -1,0 +1,367 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>C3: 組織工程與再生醫學 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html" class="active">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER C3 · BLOCK C MECHANICS/TISSUE</div>
+<h1 data-zh="組織工程與再生醫學" data-en="Tissue Engineering &amp; Regenerative Medicine">組織工程與再生醫學</h1>
+<p class="subtitle" data-lang="zh">把細胞、支架、訊號三大支柱組裝成「活的醫療產品」。從電紡支架到 FRESH 3D 列印水凝膠，從 iPSC 類器官到全球首支 stem-cell 角膜療法——本章帶你進入組織工程與再生醫學。</p>
+<p class="subtitle" data-lang="en">Assemble the three pillars — cells, scaffolds, signals — into "living medical products." From electrospun scaffolds to FRESH-printed hydrogels, from iPSC organoids to the world's first stem-cell corneal therapy — this chapter explores tissue engineering and regenerative medicine.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="三大支柱" data-en="THREE PILLARS">三大支柱</div>
+<h2 data-zh="一、組織工程的三大支柱" data-en="I. The Three Pillars of TE">一、三大支柱</h2>
+<div data-lang="zh">
+<p>1993 年 Langer 與 Vacanti 在 <em>Science</em> 提出組織工程經典定義：「結合工程與生命科學的原理，以發展取代或修復生物組織之功能的方法。」其骨架即「<strong>細胞 + 支架 + 訊號</strong>」三角。</p>
+<ol>
+<li><strong>細胞（Cells）：</strong>給予再生潛能。可自體（autologous）、同種異體（allogeneic）、誘導多能（iPSCs）。</li>
+<li><strong>支架（Scaffold）：</strong>提供 3D 結構、力學支撐、細胞貼附位點。多孔結構（pore 100–500 μm）讓細胞長入、營養擴散、血管化。</li>
+<li><strong>訊號（Signals）：</strong>生長因子（BMP、VEGF、FGF）、機械刺激（cyclic strain、shear）、電刺激、低氧 / 常氧、co-culture。透過 bioreactor 控制。</li>
+</ol>
+</div>
+<div data-lang="en">
+<p>Langer &amp; Vacanti's 1993 <em>Science</em> paper gave the classical definition: "an interdisciplinary field that applies the principles of engineering and life sciences toward the development of biological substitutes that restore, maintain, or improve tissue function." The framework: <strong>cells + scaffold + signals</strong>.</p>
+<ol>
+<li><strong>Cells:</strong> source of regenerative potential. Autologous, allogeneic, or iPSC-derived.</li>
+<li><strong>Scaffold:</strong> 3D architecture, mechanical support, cell-attachment sites. Pore size 100–500 μm enables ingrowth, nutrient diffusion, vascularization.</li>
+<li><strong>Signals:</strong> growth factors (BMP, VEGF, FGF), mechanical loading (cyclic strain, shear), electrical stim, hypoxia/normoxia, co-culture. Controlled by a bioreactor.</li>
+</ol>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>定位：</strong>組織工程屬於 ATMP（advanced therapy medicinal product）的一支，與細胞療法、基因療法、組合產品並列。FDA 屬 CBER；EU 屬 EMA CAT 委員會。</span>
+<span data-lang="en"><strong>Regulatory note:</strong> tissue engineering is one branch of ATMPs (advanced therapy medicinal products), alongside cell therapy, gene therapy, and combination products. FDA: CBER; EU: EMA CAT committee.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="細胞來源" data-en="CELL SOURCES">細胞來源</div>
+<h2 data-zh="二、細胞來源" data-en="II. Cell Sources">二、細胞來源</h2>
+<table class="comp-table"><thead><tr><th data-zh="細胞類型" data-en="Cell Type">類型</th><th data-zh="特性" data-en="Properties">特性</th><th data-zh="應用 / 限制" data-en="Application / Limitation">應用</th></tr></thead><tbody>
+<tr><td><strong data-zh="自體（autologous）" data-en="Autologous">自體</strong></td><td data-zh="無免疫排斥；數量有限；製程客製化、成本高" data-en="No rejection; limited yield; bespoke process, costly">無排斥但成本高</td><td data-zh="ACI 軟骨修復、CAR-T、皮膚 Apligraf 與 Dermagraft 部分" data-en="ACI cartilage, CAR-T, parts of skin Apligraf/Dermagraft">ACI、CAR-T</td></tr>
+<tr><td><strong data-zh="同種異體（allogeneic）" data-en="Allogeneic">同種異體</strong></td><td data-zh="現成（off-the-shelf）；可批次生產；需考慮排斥（MSC 免疫豁免）" data-en="Off-the-shelf, batch manufacturable; rejection risk (MSCs are immune-privileged)">現成、批次製造</td><td data-zh="Apligraf（嬰兒包皮纖維母細胞）、Vertex VX-880 同種胰島細胞" data-en="Apligraf (neonatal foreskin fibroblasts), Vertex VX-880 islets">Apligraf、VX-880</td></tr>
+<tr><td><strong data-zh="MSC（間充質幹細胞）" data-en="MSC">MSC</strong></td><td data-zh="從骨髓、脂肪、臍帶取得；分化為骨/軟骨/脂肪；免疫調節" data-en="From marrow, fat, cord; osteo/chondro/adipo differentiation; immunomodulation">易取得、免疫調節</td><td data-zh="骨科、克隆氏症、GVHD（Remestemcel-L Ryoncil 2024 美國核准）" data-en="Orthopedic, Crohn's, GVHD (Remestemcel-L Ryoncil FDA 2024)">Ryoncil 2024</td></tr>
+<tr><td><strong data-zh="iPSC" data-en="iPSC">iPSC</strong></td><td data-zh="Yamanaka 2006；體細胞 → 多能；可分化為幾乎所有細胞" data-en="Yamanaka 2006; somatic → pluripotent; ~any cell">幾近萬能</td><td data-zh="iPSC-RPE 黃斑變性、iPSC-CM 心肌、iPSC 巴金森 dopamine 神經元" data-en="iPSC-RPE (AMD), iPSC-CM, iPSC dopaminergic neurons for Parkinson's">RPE、心肌、DA 神經</td></tr>
+<tr><td><strong data-zh="hESC（胚胎幹細胞）" data-en="hESC">hESC</strong></td><td data-zh="高分化潛力；倫理爭議大；近年 iPSC 取代多數應用" data-en="High potency; ethical concerns; iPSC has largely replaced">倫理爭議</td><td data-zh="少數試驗仍在進行（如 Vertex VX-880 是 hESC 衍生）" data-en="Some trials persist (Vertex VX-880 is hESC-derived)">VX-880</td></tr>
+<tr><td><strong data-zh="類器官（organoid）" data-en="Organoid">類器官</strong></td><td data-zh="3D 微型器官；可由 iPSC / 成體幹細胞培養" data-en="3D mini-organs; from iPSC or adult stem cells">3D 微型器官</td><td data-zh="疾病建模、新藥篩選、未來移植 patch" data-en="Disease models, drug screens, future transplant patches">建模、藥篩</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="支架材料" data-en="SCAFFOLDS">支架材料</div>
+<h2 data-zh="三、支架材料與孔徑要求" data-en="III. Scaffold Materials &amp; Pore Requirements">三、支架材料</h2>
+<div data-lang="zh">
+<p>理想組織工程支架的條件：</p>
+<ul>
+<li><strong>生物相容、可降解</strong>（與新組織形成速率匹配）</li>
+<li><strong>3D 多孔（pore 100–500 μm）：</strong>小於 100 μm 阻礙血管化、大於 500 μm 力學變差。骨組織常用 300–500 μm，神經/軟組織常 100–300 μm。</li>
+<li><strong>互聯孔（interconnected）</strong>讓細胞遷移、營養擴散（&gt; 90% open porosity 較佳）</li>
+<li><strong>機械模數匹配目標組織</strong>（軟組織 kPa、骨頭 GPa）</li>
+<li><strong>表面化學適合貼附</strong>（RGD 序列、層黏蛋白塗層、電漿處理）</li>
+</ul>
+<p><strong>常用材料：</strong></p>
+<ul>
+<li><strong>天然高分子：</strong>膠原蛋白、明膠（denatured collagen）、纖維蛋白原 fibrin、海藻酸 alginate、玻尿酸 HA、絲蛋白 silk、去細胞 ECM（dECM）。生物相容性高，但批間差異大、力學弱。</li>
+<li><strong>合成高分子：</strong>PLGA、PLA、PCL、PEG、GelMA（甲基丙烯酰化明膠，可光固化）、PHEMA。力學可控、批次穩定，但生物活性需後修飾（RGD）。</li>
+<li><strong>陶瓷與複合：</strong>HA、β-TCP、bioglass + 高分子複合（骨用）。</li>
+<li><strong>水凝膠 bioink：</strong>GelMA、alginate、HAMA、PEGDA + 細胞，3D bioprinting 主力。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p>An ideal scaffold should be:</p>
+<ul>
+<li><strong>Biocompatible &amp; biodegradable</strong>, matched to neo-tissue formation rate</li>
+<li><strong>3D porous (100–500 μm):</strong> &lt; 100 μm hinders vascularization, &gt; 500 μm weakens mechanics. Bone: 300–500 μm; nerve/soft tissue: 100–300 μm.</li>
+<li><strong>Interconnected pores</strong> for cell migration &amp; nutrient diffusion (&gt; 90% open porosity preferred)</li>
+<li><strong>Modulus matched to target tissue</strong> (soft tissue kPa, bone GPa)</li>
+<li><strong>Surface chemistry friendly to adhesion</strong> (RGD peptides, laminin coatings, plasma treatment)</li>
+</ul>
+<p><strong>Common materials:</strong></p>
+<ul>
+<li><strong>Natural polymers:</strong> collagen, gelatin (denatured collagen), fibrin, alginate, hyaluronic acid (HA), silk, decellularized ECM (dECM). High bioactivity but batch-to-batch variability and weak mechanics.</li>
+<li><strong>Synthetic polymers:</strong> PLGA, PLA, PCL, PEG, GelMA (photo-crosslinkable gelatin methacrylate), PHEMA. Tunable mechanics, batch-consistent, need post-functionalization (RGD).</li>
+<li><strong>Ceramics &amp; composites:</strong> HA, β-TCP, bioglass + polymer (bone).</li>
+<li><strong>Hydrogel bioinks:</strong> GelMA, alginate, HAMA, PEGDA + cells — the 3D bioprinting workhorses.</li>
+</ul>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="製造方法" data-en="FABRICATION">製造方法</div>
+<h2 data-zh="四、支架製造與 3D 生物列印" data-en="IV. Scaffold Fabrication &amp; 3D Bioprinting">四、支架製造</h2>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">🧵</div><h4 data-zh="電紡（Electrospinning）" data-en="Electrospinning">電紡</h4>
+<div data-lang="zh"><p>高壓電場將高分子溶液拉成奈米/微米纖維，沉積為非織造支架。纖維直徑 50 nm – 10 μm，可模仿天然 ECM 的纖維形態。應用：血管支架、神經導管、皮膚敷料。</p></div>
+<div data-lang="en"><p>High-voltage electric field draws polymer solution into nano/micro fibers, deposited as nonwoven scaffold. Fiber diameter 50 nm – 10 μm — mimics native ECM. Apps: vascular scaffolds, nerve conduits, skin dressings.</p></div></div>
+<div class="card"><div class="card-icon">❄️</div><h4 data-zh="凍乾（Freeze-Drying）" data-en="Freeze-Drying">凍乾</h4>
+<div data-lang="zh"><p>溶液冷凍 → 冰晶昇華 → 留下多孔結構。孔徑由凍結速率控制（慢速 → 大孔）。常用於膠原蛋白支架，孔徑 50–500 μm 可調。</p></div>
+<div data-lang="en"><p>Freeze the solution → sublimate ice → leave a porous network. Pore size controlled by freezing rate (slow = larger). Common for collagen scaffolds; tunable 50–500 μm.</p></div></div>
+<div class="card"><div class="card-icon">💨</div><h4 data-zh="氣體發泡" data-en="Gas Foaming">氣體發泡</h4>
+<div data-lang="zh"><p>超臨界 CO₂ 注入高分子熔體 → 釋壓 → 氣泡膨脹形成孔隙。可避免溶劑殘留，但孔互聯性較差。</p></div>
+<div data-lang="en"><p>Supercritical CO₂ infused into polymer melt → release → bubbles expand into pores. Avoids solvent residue but interconnectivity may be poor.</p></div></div>
+<div class="card"><div class="card-icon">🖨️</div><h4 data-zh="3D 生物列印" data-en="3D Bioprinting">3D 生物列印</h4>
+<div data-lang="zh"><p>四大模式：(1) <strong>Extrusion (DIW)</strong> ——主流，用 bioink + 細胞，解析度 ~ 100 μm；(2) <strong>Inkjet</strong> ——液滴噴印；(3) <strong>SLA / DLP</strong> ——光固化，解析度 &lt; 10 μm；(4) <strong>FRESH（Freeform Reversible Embedding of Suspended Hydrogels）</strong>——CMU Feinberg 2019 發表，將軟水凝膠列印在明膠浴中，2022 列印整個 mini 心臟。代表廠商：CELLINK / BICO、Allevi、Aspect Biosystems、Organovo、Prellis Biologics。</p></div>
+<div data-lang="en"><p>Four modes: (1) <strong>Extrusion (DIW)</strong> — dominant, bioink + cells, ~ 100 μm; (2) <strong>Inkjet</strong> — droplet-based; (3) <strong>SLA/DLP</strong> — photo-cured, &lt; 10 μm; (4) <strong>FRESH</strong> (Feinberg, CMU 2019) — print soft hydrogels into a gelatin support bath; 2022 demonstrated a full mini-heart. Vendors: CELLINK/BICO, Allevi, Aspect Biosystems, Organovo, Prellis Biologics.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="生物反應器" data-en="BIOREACTORS">生物反應器</div>
+<h2 data-zh="五、生物反應器與類器官" data-en="V. Bioreactors &amp; Organoids">五、Bioreactor 與類器官</h2>
+<div data-lang="zh">
+<p><strong>Bioreactor</strong> = 可控環境下培養細胞 / 組織的「人工身體外環境」，提供：溫度 37°C、pH、O₂/CO₂、營養液流動、機械訊號。常用類型：</p>
+<ul>
+<li><strong>Perfusion bioreactor：</strong>培養液流經支架，模擬血流；用於骨、心臟組織。</li>
+<li><strong>Spinner flask：</strong>磁攪拌；類器官、神經球（neurosphere）。</li>
+<li><strong>Rotating-wall vessel（NASA 起源）：</strong>低剪切微重力環境；軟骨、肝。</li>
+<li><strong>Mechanical loading bioreactor：</strong>cyclic strain（肌腱、軟骨）、cyclic pressure（血管、瓣膜）。</li>
+<li><strong>Hollow fiber bioreactor：</strong>高密度肝細胞培養，仿肝 sinusoid。</li>
+</ul>
+<p><strong>類器官（Organoids）</strong>是 3D 自組織迷你器官，重要里程碑：</p>
+<ul>
+<li><strong>2009 Sato et al.</strong> — 首例小腸類器官（Lgr5+ stem cell + Matrigel + Wnt/EGF/Noggin）。</li>
+<li><strong>2013 Lancaster &amp; Knoblich</strong> — 大腦類器官（cerebral organoid）。</li>
+<li><strong>後續</strong>：肝（Huch）、腎（Takasato）、胰島（Pagliuca）、視網膜（Eiraku）、心臟（Lewis-Israeli）。</li>
+<li><strong>應用：</strong>疾病建模（CFTR 突變病人腸 organoid 預測 ivacaftor 反應）、新藥篩選（Roche、AstraZeneca 用組織）、未來移植。</li>
+</ul>
+<p><strong>Vertex VX-880：</strong>幹細胞分化胰島細胞療法治療第一型糖尿病；2024 進入 stage III、2025 多名患者擺脫胰島素。</p>
+</div>
+<div data-lang="en">
+<p>A <strong>bioreactor</strong> is the "external body" providing controlled environment: 37°C, pH, O₂/CO₂, nutrient flow, mechanical signals. Common types:</p>
+<ul>
+<li><strong>Perfusion:</strong> medium flows through scaffold; bone, cardiac.</li>
+<li><strong>Spinner flask:</strong> magnetic stirring; organoids, neurospheres.</li>
+<li><strong>Rotating-wall vessel</strong> (NASA): low-shear microgravity; cartilage, liver.</li>
+<li><strong>Mechanical-loading bioreactor:</strong> cyclic strain (tendon, cartilage), cyclic pressure (vessel, valve).</li>
+<li><strong>Hollow fiber:</strong> high-density hepatocytes mimicking sinusoids.</li>
+</ul>
+<p><strong>Organoids</strong> are self-organizing 3D mini-organs:</p>
+<ul>
+<li><strong>2009 Sato</strong> — first intestinal organoid (Lgr5+ + Matrigel + Wnt/EGF/Noggin).</li>
+<li><strong>2013 Lancaster &amp; Knoblich</strong> — cerebral organoid.</li>
+<li>Liver (Huch), kidney (Takasato), pancreatic islet (Pagliuca), retina (Eiraku), heart (Lewis-Israeli).</li>
+<li><strong>Applications:</strong> disease modeling (CFTR-patient intestinal organoids predict ivacaftor response), drug screens (Roche, AstraZeneca), future transplant patches.</li>
+</ul>
+<p><strong>Vertex VX-880:</strong> stem-cell-derived islets for type-1 diabetes; entered phase III in 2024; multiple patients insulin-independent by 2025.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="血管化挑戰" data-en="VASCULARIZATION">血管化</div>
+<h2 data-zh="六、血管化的根本難題" data-en="VI. The Vascularization Bottleneck">六、血管化挑戰</h2>
+<div data-lang="zh">
+<p>體內氧氣透過擴散只能傳遞 ~ 100–200 μm 距離（capillary 間距標準）；超過此距離的細胞會缺氧死亡。要培養厚組織（&gt; 1 mm），必須建立血管網路。</p>
+<p><strong>策略：</strong></p>
+<ul>
+<li><strong>共培養（co-culture）：</strong>endothelial cells + 主要細胞 + perivascular（MSC、smooth muscle）→ 自組織形成微血管。</li>
+<li><strong>犧牲材料（sacrificial）：</strong>3D 列印 PVA、Pluronic F-127、糖纖維作為流道模板，灌入水凝膠後溶解、形成血管狀通道（Lewis lab）。</li>
+<li><strong>生物列印多材料：</strong>同時列印 endothelial 細胞 + 主細胞 + 通道；FRESH + 多噴嘴。</li>
+<li><strong>體內預血管化（in-vivo prevascularization）：</strong>把支架先植在 omentum 或大腿肌肉血管化幾週，再轉移至缺損處。</li>
+<li><strong>AngioChip（U Toronto Radisic, 2016）：</strong>微加工內含微通道的支架，可灌注培養。</li>
+<li><strong>器官去細胞 + 再細胞化：</strong>整個器官（心、肺、肝）用 SDS 去除細胞、保留血管 ECM 骨架，再灌入細胞——Ott 與 Taylor 的經典工作。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p>Oxygen diffuses only ~ 100–200 μm in tissue (the standard capillary spacing); cells beyond this die from hypoxia. Thick tissues (&gt; 1 mm) require an engineered vascular network.</p>
+<p><strong>Strategies:</strong></p>
+<ul>
+<li><strong>Co-culture:</strong> endothelial cells + parenchyma + perivascular (MSC, SMC) self-assemble microvasculature.</li>
+<li><strong>Sacrificial templates:</strong> print PVA, Pluronic F-127, or sugar fibers as channel templates inside a hydrogel, then dissolve (Lewis lab).</li>
+<li><strong>Multi-material bioprinting:</strong> co-print endothelial + parenchyma + channels (FRESH + multi-nozzle).</li>
+<li><strong>In-vivo prevascularization:</strong> implant scaffold in omentum or thigh muscle for weeks to vascularize, then move to defect.</li>
+<li><strong>AngioChip</strong> (Radisic, U Toronto 2016) — microfabricated scaffold with perfusable channels.</li>
+<li><strong>Decellularize + recellularize:</strong> entire organs (heart, lung, liver) stripped with SDS, leaving vascular ECM scaffold, then re-seeded — classic Ott / Taylor work.</li>
+</ul>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="臨床成果" data-en="CLINICAL SUCCESSES">臨床成果</div>
+<h2 data-zh="七、已商業化的組織工程產品" data-en="VII. Approved Tissue-Engineered Products">七、臨床成果與爭議</h2>
+<table class="comp-table"><thead><tr><th data-zh="產品" data-en="Product">產品</th><th data-zh="組織" data-en="Tissue">組織</th><th data-zh="核准 / 上市" data-en="Approval / Launch">核准</th></tr></thead><tbody>
+<tr><td><strong>Apligraf</strong> (Organogenesis)</td><td data-zh="雙層皮膚（角質 + 真皮 + 同種異體細胞）" data-en="Bilayer skin (epidermis + dermis + allogeneic cells)">皮膚</td><td>FDA 1998</td></tr>
+<tr><td><strong>Dermagraft</strong> (Organogenesis)</td><td data-zh="嬰兒包皮纖維母細胞 + PLGA 網" data-en="Neonatal foreskin fibroblasts on PLGA mesh">皮膚</td><td>FDA 2001</td></tr>
+<tr><td><strong>Carticel / MACI</strong> (Vericel)</td><td data-zh="自體軟骨細胞貼附膠原膜（ACI / MACI）" data-en="Autologous chondrocytes on collagen membrane">軟骨</td><td>1997 / 2016</td></tr>
+<tr><td><strong data-zh="工程化膀胱（Atala）" data-en="Engineered bladder (Atala)">工程化膀胱</strong></td><td data-zh="自體尿路上皮 + smooth muscle 在膠原 PGA 支架" data-en="Autologous urothelial + SM cells on collagen-PGA">膀胱</td><td data-zh="2006 Lancet 報告 7 例兒童" data-en="2006 Lancet, 7 pediatric cases">研究/個案</td></tr>
+<tr><td><strong>Holoclar</strong> (Chiesi)</td><td data-zh="角膜緣幹細胞培養片治療 LSCD（角膜緣幹細胞缺乏）" data-en="Cultured limbal stem cell sheet for LSCD">角膜</td><td data-zh="EMA 2015——全球首支幹細胞療法獲批" data-en="EMA 2015 — world's first approved stem-cell therapy">EMA 2015 首支</td></tr>
+<tr><td><strong>JACE / NEPIC / OCURAL</strong></td><td data-zh="日本自體皮膚 / 軟骨 / 角膜片" data-en="Japan autologous skin / cartilage / corneal sheets">多項</td><td data-zh="PMDA 2007–2020 多項" data-en="PMDA 2007–2020">PMDA</td></tr>
+<tr><td><strong data-zh="Ryoncil (remestemcel-L)" data-en="Ryoncil (remestemcel-L)">Ryoncil</strong></td><td data-zh="同種異體 MSC，治療兒童急性 GVHD" data-en="Allogeneic MSC for pediatric acute GVHD">MSC 療法</td><td>FDA 2024</td></tr>
+</tbody></table>
+<div class="callout danger"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>倫理警示——Macchiarini 案：</strong>2008–2013 年 Paolo Macchiarini 用合成支架 + 自體 MSC 進行氣管移植，發表多篇 <em>Lancet</em> 高影響論文。後續調查發現多數患者死亡、資料造假，2016 被 Karolinska 解職、2023 瑞典法院判刑。BME 臨床轉譯必須遵循 IRB、informed consent、長期追蹤、誠實揭露。</span>
+<span data-lang="en"><strong>Ethical cautionary tale — Macchiarini affair:</strong> Between 2008–2013, Paolo Macchiarini performed tracheal transplants with synthetic scaffolds + autologous MSCs, publishing high-impact <em>Lancet</em> papers. Most patients later died; data falsification was found. Karolinska dismissed him in 2016; Swedish court convicted him in 2023. BME translation must follow IRB, informed consent, long-term follow-up, and honest disclosure.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖表" data-en="INTERACTIVE">互動圖表</div>
+<h2 data-zh="八、互動：孔徑對細胞遷移率" data-en="VIII. Interactive: Pore Size vs Cell Migration">八、孔徑互動模擬</h2>
+<div data-lang="zh"><p>調整支架孔徑，觀察細胞 7 天的遷移深度（簡化模型：太小 → 阻塞；太大 → 失去附著；最佳 ~ 200–400 μm）。</p></div>
+<div data-lang="en"><p>Adjust scaffold pore size and observe simulated 7-day cell migration depth (toy model: too small → blocked; too large → no anchoring; optimum ~ 200–400 μm).</p></div>
+<div class="interactive-panel">
+<div class="slider-row">
+  <label><span data-zh="孔徑 d (μm)" data-en="Pore size d (μm)">孔徑 d</span>: <span id="dVal">200</span> μm</label>
+  <input type="range" id="dSlider" min="20" max="800" step="10" value="200">
+</div>
+<div class="slider-row">
+  <label><span data-zh="孔隙度 (%)" data-en="Porosity (%)">孔隙度</span>: <span id="poVal">80</span> %</label>
+  <input type="range" id="poSlider" min="40" max="95" step="1" value="80">
+</div>
+<div class="chart-container"><canvas id="poreChart"></canvas></div>
+<p style="font-size:.9rem;text-align:center;"><strong data-zh="預估第 7 日遷移深度：" data-en="Predicted 7-day migration depth:">預估第 7 日遷移深度：</strong> <span id="depthOut">--</span> μm</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="九、要做哪種組織？怎麼選方法？" data-en="IX. Which Tissue? Which Method?">九、組織選擇決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="組織工程方法選擇" data-en="TE Method Selection">組織工程方法選擇</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">要做「薄、無血管」的組織（皮膚 / 角膜 / 軟骨）？<span class="dt-arrow">→</span> 細胞片 + 簡單支架（膠原、HA）；通常已有商品可參考。</span><span data-lang="en">Thin, avascular tissue (skin / cornea / cartilage)? <span class="dt-arrow">→</span> Cell sheets + simple scaffold (collagen, HA); commercial precedents exist.</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">要做「硬的承重」組織（骨）？<span class="dt-arrow">→</span> HA / β-TCP / PCL + MSC + perfusion bioreactor + 機械刺激。</span><span data-lang="en">Hard load-bearing (bone)? <span class="dt-arrow">→</span> HA / β-TCP / PCL + MSC + perfusion bioreactor + mech loading.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">要做「厚的、需血管化」的器官？<span class="dt-arrow">→</span> 多材料 3D bioprinting + 共培養 + 犧牲通道；或 dECM 再細胞化。</span><span data-lang="en">Thick, vascularized organ? <span class="dt-arrow">→</span> Multi-material 3D bioprinting + co-culture + sacrificial channels; or decellularized ECM + recellularization.</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">要做「藥物 / 疾病建模平台」？<span class="dt-arrow">→</span> Organoid 或 organ-on-chip；不必移植入人。</span><span data-lang="en">Drug / disease modeling platform? <span class="dt-arrow">→</span> Organoid or organ-on-chip; no transplantation needed.</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">要做「神經導管」？<span class="dt-arrow">→</span> 電紡奈米纖維 + Schwann / 神經幹細胞 + 神經生長因子梯度。</span><span data-lang="en">Nerve conduit? <span class="dt-arrow">→</span> Electrospun nanofibers + Schwann / NSC + NGF gradient.</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="十、細胞生長 + 支架內擴散" data-en="X. Cell Growth + Diffusion in Scaffold">十、程式示例</h2>
+<div data-lang="zh"><p>(a) Logistic 細胞生長 dN/dt = rN(1−N/K)。(b) Fick 第二定律一維擴散 ∂C/∂t = D ∂²C/∂x² 模擬營養 / O₂ 進入支架的滲透曲線。</p></div>
+<div data-lang="en"><p>(a) Logistic cell growth dN/dt = rN(1−N/K). (b) 1-D Fick's 2nd law ∂C/∂t = D ∂²C/∂x² for nutrient/O₂ penetration into a scaffold.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="comment"># (a) Logistic growth: r = 0.6/day, K = 5e6 cells</span>
+t = np.<span class="func">linspace</span>(<span class="num">0</span>,<span class="num">14</span>,<span class="num">200</span>)
+N0, K, r = <span class="num">1e5</span>, <span class="num">5e6</span>, <span class="num">0.6</span>
+N = K/(<span class="num">1</span>+(K-N0)/N0*np.<span class="func">exp</span>(-r*t))
+plt.<span class="func">plot</span>(t,N); plt.<span class="func">yscale</span>(<span class="str">"log"</span>); plt.<span class="func">title</span>(<span class="str">"Logistic cell growth"</span>); plt.<span class="func">xlabel</span>(<span class="str">"day"</span>); plt.<span class="func">show</span>()
+
+<span class="comment"># (b) 1-D Fick diffusion of O2 into a scaffold (explicit FD)</span>
+D, L = <span class="num">2e-9</span>, <span class="num">2e-3</span>          <span class="comment"># m^2/s, scaffold thickness 2 mm</span>
+nx = <span class="num">100</span>; dx = L/(nx-<span class="num">1</span>); dt = <span class="num">0.4</span>*dx**<span class="num">2</span>/D  <span class="comment"># CFL</span>
+C  = np.<span class="func">zeros</span>(nx)
+C[<span class="num">0</span>] = <span class="num">21</span>                       <span class="comment"># surface 21% O2</span>
+T  = <span class="num">3600</span>                       <span class="comment"># 1 h</span>
+steps = <span class="func">int</span>(T/dt)
+snap=[]
+<span class="kw">for</span> n <span class="kw">in</span> <span class="func">range</span>(steps):
+    C[<span class="num">1</span>:-<span class="num">1</span>] += D*dt/dx**<span class="num">2</span>*(C[<span class="num">2</span>:]-<span class="num">2</span>*C[<span class="num">1</span>:-<span class="num">1</span>]+C[:-<span class="num">2</span>])
+    C[<span class="num">0</span>]=<span class="num">21</span>; C[-<span class="num">1</span>]=C[-<span class="num">2</span>]
+    <span class="kw">if</span> n%(steps//<span class="num">6</span>)==<span class="num">0</span>: snap.<span class="func">append</span>(C.<span class="func">copy</span>())
+x = np.<span class="func">linspace</span>(<span class="num">0</span>,L*<span class="num">1e3</span>,nx)
+<span class="kw">for</span> s <span class="kw">in</span> snap: plt.<span class="func">plot</span>(x,s)
+plt.<span class="func">xlabel</span>(<span class="str">"depth (mm)"</span>); plt.<span class="func">ylabel</span>(<span class="str">"O2 (%)"</span>); plt.<span class="func">title</span>(<span class="str">"Diffusion into scaffold"</span>); plt.<span class="func">show</span>()</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% (a) Logistic growth</span>
+t = linspace(<span class="num">0</span>,<span class="num">14</span>,<span class="num">200</span>);
+N0=<span class="num">1e5</span>; K=<span class="num">5e6</span>; r=<span class="num">0.6</span>;
+N = K./(<span class="num">1</span>+(K-N0)./N0.*<span class="func">exp</span>(-r*t));
+<span class="func">semilogy</span>(t,N,<span class="str">'LineWidth'</span>,<span class="num">1.5</span>); <span class="func">grid on</span>;
+<span class="func">xlabel</span>(<span class="str">'day'</span>); <span class="func">ylabel</span>(<span class="str">'N'</span>); <span class="func">title</span>(<span class="str">'Logistic cell growth'</span>);
+
+<span class="comment">% (b) 1-D diffusion</span>
+D=<span class="num">2e-9</span>; L=<span class="num">2e-3</span>; nx=<span class="num">100</span>; dx=L/(nx-<span class="num">1</span>); dt=<span class="num">0.4</span>*dx^<span class="num">2</span>/D;
+C=zeros(<span class="num">1</span>,nx); C(<span class="num">1</span>)=<span class="num">21</span>;
+steps=round(<span class="num">3600</span>/dt);
+<span class="kw">for</span> n=<span class="num">1</span>:steps
+  C(<span class="num">2</span>:end-<span class="num">1</span>) = C(<span class="num">2</span>:end-<span class="num">1</span>) + D*dt/dx^<span class="num">2</span>*(C(<span class="num">3</span>:end)-<span class="num">2</span>*C(<span class="num">2</span>:end-<span class="num">1</span>)+C(<span class="num">1</span>:end-<span class="num">2</span>));
+  C(<span class="num">1</span>)=<span class="num">21</span>; C(end)=C(end-<span class="num">1</span>);
+<span class="kw">end</span>
+x=linspace(<span class="num">0</span>,L*<span class="num">1e3</span>,nx);
+<span class="func">plot</span>(x,C,<span class="str">'LineWidth'</span>,<span class="num">1.5</span>); <span class="func">grid on</span>;
+<span class="func">xlabel</span>(<span class="str">'depth (mm)'</span>); <span class="func">ylabel</span>(<span class="str">'O2 (%)'</span>);</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十一、本章關鍵術語" data-en="XI. Key Terms">十一、關鍵術語</h2>
+<p><span class="term">iPSC<span class="term-tip">Induced Pluripotent Stem Cell；Yamanaka 2006 把體細胞重編程為多能。</span></span> &nbsp;
+<span class="term">MSC<span class="term-tip">Mesenchymal Stem Cell；間充質幹細胞，骨/軟骨/脂肪三分化潛能 + 免疫調節。</span></span> &nbsp;
+<span class="term">Organoid<span class="term-tip">3D 自組織迷你器官；Sato 2009 小腸、Lancaster 2013 大腦。</span></span> &nbsp;
+<span class="term">Scaffold<span class="term-tip">支架，提供 3D 結構 + 力學支撐 + 細胞附著位點。</span></span> &nbsp;
+<span class="term">PLGA<span class="term-tip">乳酸-羥乙酸共聚物；可吸收高分子，BME 最常用之一。</span></span> &nbsp;
+<span class="term">GelMA<span class="term-tip">Gelatin Methacrylate；可光固化的明膠水凝膠，3D bioprinting 主力。</span></span> &nbsp;
+<span class="term">dECM<span class="term-tip">Decellularized ECM；去細胞 ECM 支架，保留天然蛋白與結構。</span></span> &nbsp;
+<span class="term">FRESH<span class="term-tip">Freeform Reversible Embedding of Suspended Hydrogels；CMU Feinberg 法，列印軟水凝膠於明膠浴中。</span></span> &nbsp;
+<span class="term">Bioreactor<span class="term-tip">提供溫度、pH、營養、機械刺激的細胞培養系統。</span></span> &nbsp;
+<span class="term">Vascularization<span class="term-tip">血管化；組織工程厚組織的根本挑戰（200 μm 擴散極限）。</span></span> &nbsp;
+<span class="term">ATMP<span class="term-tip">Advanced Therapy Medicinal Product；歐盟對 cell、gene、tissue 療法的統稱。</span></span> &nbsp;
+<span class="term">Holoclar<span class="term-tip">2015 EMA 核准首支幹細胞療法，治療角膜緣幹細胞缺乏症。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q1. 組織工程的「三大支柱」是？</span><span data-lang="en">Q1. The "three pillars" of tissue engineering are:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. CT 影像 + AI + 機器人</span><span data-lang="en">A. CT imaging + AI + robotics</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 細胞 + 支架 + 訊號（生長因子 / 機械 / bioreactor）</span><span data-lang="en">B. Cells + scaffold + signals (growth factors / mech / bioreactor)</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 蛋白質 + 抗體 + 疫苗</span><span data-lang="en">C. Protein + antibody + vaccine</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. CRISPR + AAV + LNP</span><span data-lang="en">D. CRISPR + AAV + LNP</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q2. 「200 μm 擴散極限」對厚組織工程意味著？</span><span data-lang="en">Q2. The "200-μm diffusion limit" means for thick TE constructs:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 細胞最大直徑 200 μm</span><span data-lang="en">A. Cells are at most 200 μm in diameter</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 支架孔徑必須 &lt; 200 μm</span><span data-lang="en">B. Pore size must be &lt; 200 μm</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 超過 200 μm 距離血管的細胞會缺氧，因此厚組織必須建立血管網路</span><span data-lang="en">C. Cells beyond ~200 μm from a capillary become hypoxic, so thick tissues need an engineered vascular network</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 細胞分裂週期 200 μm</span><span data-lang="en">D. Cell cycle is 200 μm</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="0"><p><span data-lang="zh">Q3. 2015 年由 EMA 核准的 Holoclar 是？</span><span data-lang="en">Q3. Holoclar (EMA, 2015) is:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 全球首支獲批的幹細胞療法，治療角膜緣幹細胞缺乏症（LSCD）</span><span data-lang="en">A. World's first approved stem-cell therapy, for limbal stem cell deficiency</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. CAR-T 治療白血病</span><span data-lang="en">B. CAR-T for leukemia</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. iPSC 治療巴金森氏症</span><span data-lang="en">C. iPSC for Parkinson's</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 3D 列印膀胱</span><span data-lang="en">D. 3D-printed bladder</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="biofluid-mechanics.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="C2 · 生物流體力學" data-en="C2 · Biofluid Mechanics">C2 · 生物流體力學</span></a>
+<a href="drug-delivery.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="C4 · 藥物遞送系統" data-en="C4 · Drug Delivery Systems">C4 · 藥物遞送系統</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · C3 Tissue Engineering</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// Pore-size interactive (toy migration curve)
+const dSL=document.getElementById('dSlider'),poSL=document.getElementById('poSlider');
+const dV=document.getElementById('dVal'),poV=document.getElementById('poVal'),depthOut=document.getElementById('depthOut');
+let poreChart=null;
+function migrationDepth(d,por){
+  // bell-shaped around 300 μm; scaled by porosity
+  const opt=300;
+  const bell=Math.exp(-Math.pow((d-opt)/180,2));
+  return Math.round(bell*(por/80)*1500); // up to ~1500 μm
+}
+function drawPore(){
+  const d=parseFloat(dSL.value), por=parseFloat(poSL.value);
+  dV.textContent=d; poV.textContent=por;
+  const depth=migrationDepth(d,por);
+  depthOut.textContent=depth;
+  const xs=[]; const ys=[];
+  for(let dd=20; dd<=800; dd+=20){xs.push(dd); ys.push(migrationDepth(dd,por));}
+  const lang=I18n.get();
+  if(poreChart)poreChart.destroy();
+  poreChart=new Chart(document.getElementById('poreChart').getContext('2d'),{
+    type:'line',
+    data:{labels:xs,datasets:[
+      {label:lang==='zh'?'遷移深度 (μm)':'Migration depth (μm)',data:ys,
+       borderColor:'#831843',backgroundColor:'rgba(131,24,67,.12)',fill:true,pointRadius:0,tension:.25},
+      {label:lang==='zh'?'目前點':'Current',data:[{x:d,y:depth}],
+       borderColor:'#0f766e',backgroundColor:'#0f766e',pointRadius:8,showLine:false,type:'scatter'}
+    ]},
+    options:{plugins:{legend:{display:true}},
+      scales:{x:{type:'linear',title:{display:true,text:lang==='zh'?'孔徑 d (μm)':'Pore size d (μm)'}},
+              y:{title:{display:true,text:lang==='zh'?'遷移深度 (μm)':'Migration depth (μm)'}}}}
+  });
+}
+[dSL,poSL].forEach(s=>s.addEventListener('input',drawPore));
+drawPore();
+document.addEventListener('langchange',drawPore);
+</script>
+</body></html>

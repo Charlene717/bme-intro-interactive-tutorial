@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>E2: 基因與細胞治療工程 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html" class="active">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER E2 · BLOCK E EMERGING &amp; REGULATION</div>
+<h1 data-zh="基因與細胞治療工程" data-en="Gene &amp; Cell Therapy Engineering">基因與細胞治療工程</h1>
+<p class="subtitle" data-lang="zh">從 AAV、慢病毒、LNP 到 CRISPR；從 CAR-T 製程到 mRNA 疫苗；從 Casgevy 到 Zolgensma。本章帶你看清「活的藥物」與「可編程的基因」背後的工程體系。</p>
+<p class="subtitle" data-lang="en">From AAV, lentivirus, and LNPs to CRISPR; from CAR-T manufacturing to mRNA vaccines; from Casgevy to Zolgensma — this chapter unpacks the engineering behind "living drugs" and "programmable genes."</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="定義" data-en="DEFINITION">定義</div>
+<h2 data-zh="一、基因 vs 細胞治療" data-en="I. Gene vs Cell Therapy">一、基因治療 vs 細胞治療</h2>
+<div data-lang="zh">
+<p><strong>基因治療（Gene therapy）</strong>是「修改 DNA 或 RNA」——在病人體內（<em>in vivo</em>）或體外取出細胞修改後回輸（<em>ex vivo</em>）。<strong>細胞治療（Cell therapy）</strong>是「轉移細胞」——同種異體（allogeneic）或自體（autologous）。實務上兩者常結合：CAR-T 就是「對自體 T 細胞做基因修改（lentivirus 表現 CAR）後回輸」——同時是基因治療也是細胞治療。</p>
+<p>工程師在這個領域的工作不在「生物學發現」，而在「把生物學<strong>變成可量產、可重現、合格規 GMP 的工程系統</strong>」——涵蓋載體設計、純化、製造、品保、冷鏈、ICU 回輸流程、上市後監測。</p>
+</div>
+<div data-lang="en">
+<p><strong>Gene therapy</strong> = "modify DNA or RNA" — either in the patient (<em>in vivo</em>) or in extracted cells that are returned (<em>ex vivo</em>). <strong>Cell therapy</strong> = "transfer cells" — allogeneic or autologous. In practice the two combine: CAR-T is "engineering autologous T cells (lentiviral CAR expression) and reinfusing them" — both gene <em>and</em> cell therapy.</p>
+<p>An engineer's job here is less about biological discovery and more about turning biology into a <strong>scalable, reproducible, GMP-compliant engineering system</strong> — covering vector design, purification, manufacturing, QC, cold chain, ICU infusion workflow, and post-market surveillance.</p>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>FDA 將基因治療視為 biologic（生物製劑），歸 CBER (Center for Biologics Evaluation and Research) 管理，上市路徑為 BLA（Biologics License Application）而非 510(k)/PMA。</strong>製造端適用 21 CFR 600 系列 + 21 CFR 1271（HCT/Ps）+ ICH Q5/Q6/Q7。CAR-T、AAV、mRNA 全屬 BLA 範疇。</span>
+<span data-lang="en"><strong>FDA classifies gene therapy as a biologic</strong>, under CBER (Center for Biologics Evaluation and Research). Pathway is <strong>BLA</strong> (Biologics License Application), not 510(k)/PMA. Manufacturing follows 21 CFR 600s + 21 CFR 1271 (HCT/Ps) + ICH Q5/Q6/Q7. CAR-T, AAV, and mRNA all go BLA.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="載體" data-en="VECTORS">載體</div>
+<h2 data-zh="二、基因治療載體比較" data-en="II. Gene Therapy Vectors Compared">二、基因治療載體比較</h2>
+<table class="comp-table"><thead><tr><th data-zh="載體" data-en="Vector">載體</th><th data-zh="酬載 (cargo)" data-en="Cargo">酬載</th><th data-zh="整合" data-en="Integrates">整合</th><th data-zh="免疫原性" data-en="Immunogenicity">免疫</th><th data-zh="代表用途" data-en="Use">代表用途</th></tr></thead><tbody>
+<tr><td><strong>AAV</strong></td><td data-zh="ssDNA ~4.7 kb" data-en="ssDNA ~4.7 kb">ssDNA ~4.7 kb</td><td data-zh="非整合（episomal）" data-en="Non-integrating (episomal)">非整合</td><td data-zh="低（但 NAb 普遍）" data-en="Low (but NAbs common)">低</td><td data-zh="Luxturna (RPE65)、Zolgensma (SMA)、Hemgenix (HemB)、Elevidys (DMD)" data-en="Luxturna (RPE65), Zolgensma (SMA), Hemgenix (HemB), Elevidys (DMD)">Luxturna / Zolgensma</td></tr>
+<tr><td><strong>Lentivirus</strong></td><td data-zh="ssRNA ~8 kb" data-en="ssRNA ~8 kb">ssRNA ~8 kb</td><td data-zh="整合" data-en="Integrates">整合（穩定）</td><td data-zh="中" data-en="Medium">中</td><td data-zh="CAR-T 全系列；Zynteglo β-thal" data-en="All CAR-Ts; Zynteglo β-thalassemia">CAR-T / Zynteglo</td></tr>
+<tr><td><strong>Retrovirus (γ-RV)</strong></td><td data-zh="ssRNA ~8 kb" data-en="ssRNA ~8 kb">ssRNA ~8 kb</td><td data-zh="整合（偏向啟動子）" data-en="Integrates (near promoters)">整合（風險高）</td><td data-zh="中" data-en="Medium">中</td><td data-zh="Strimvelis ADA-SCID；早期 CAR-T" data-en="Strimvelis ADA-SCID; early CAR-T">Strimvelis</td></tr>
+<tr><td><strong>Adenovirus</strong></td><td data-zh="dsDNA ~36 kb" data-en="dsDNA ~36 kb">dsDNA ~36 kb</td><td data-zh="非整合（transient）" data-en="Non-integrating (transient)">非整合</td><td data-zh="高" data-en="High">高</td><td data-zh="COVID 疫苗（J&amp;J、AstraZeneca）；癌症溶瘤" data-en="COVID vaccines (J&amp;J, AstraZeneca); oncolytic">COVID 疫苗</td></tr>
+<tr><td><strong>LNP (mRNA)</strong></td><td data-zh="mRNA / sgRNA / Cas mRNA" data-en="mRNA / sgRNA / Cas mRNA">mRNA / sgRNA / Cas mRNA</td><td data-zh="非整合（cytoplasmic）" data-en="Non-integrating (cytoplasmic)">非整合</td><td data-zh="低–中" data-en="Low–medium">低</td><td data-zh="Comirnaty、Spikevax、Verve VERVE-101、Intellia NTLA-2001" data-en="Comirnaty, Spikevax, Verve VERVE-101, Intellia NTLA-2001">mRNA 疫苗 + 體內 CRISPR</td></tr>
+<tr><td><strong>Electroporation / Transposon</strong></td><td data-zh="DNA / RNA 任意" data-en="DNA / RNA any">DNA / RNA</td><td data-zh="可整合（Sleeping Beauty、PiggyBac）" data-en="Can integrate (SB, PiggyBac)">可整合</td><td data-zh="低" data-en="Low">低</td><td data-zh="非病毒 CAR-T（Poseida）、TCR-T" data-en="Non-viral CAR-T (Poseida), TCR-T">非病毒 CAR-T</td></tr>
+</tbody></table>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>AAV 血清型選擇影響組織傾向（tropism）：</strong>AAV2（早期通用）、AAV5（呼吸道/視網膜）、AAV8（肝臟）、AAV9（CNS、心肌；可穿越 BBB）、AAVrh10（CNS）。Luxturna 用 AAV2 注入視網膜下、Zolgensma 用 AAV9 全身靜脈、Hemgenix 用 AAV5 靶肝臟生產 FIX。</span>
+<span data-lang="en"><strong>AAV serotype determines tropism:</strong> AAV2 (general), AAV5 (airway/retina), AAV8 (liver), AAV9 (CNS, cardiac; crosses BBB), AAVrh10 (CNS). Luxturna uses AAV2 sub-retinally; Zolgensma uses AAV9 IV; Hemgenix uses AAV5 targeting hepatocytes to produce FIX.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="CRISPR" data-en="CRISPR">CRISPR</div>
+<h2 data-zh="三、CRISPR 工程：從 Cas9 到 prime editor" data-en="III. CRISPR Engineering: Cas9 → Prime Editor">三、CRISPR 工程</h2>
+<div data-lang="zh">
+<p>2012 Doudna 與 Charpentier 證明 Cas9 + sgRNA 可程式化切 DNA（2020 諾貝爾化學獎）。工程上 CRISPR 系統可分四代：</p>
+<ol class="numbered">
+<li><strong>Cas9（DSB）</strong> — 對 PAM 5'-NGG 3'（SpCas9）製造雙股斷裂，NHEJ 修補造成 indels。代表：Casgevy（Vertex / CRISPR Tx，2023/12 FDA 核可，首支 CRISPR 療法，<em>ex vivo</em> 編輯 HSC 治療鐮刀型貧血 + β-thalassemia）。</li>
+<li><strong>Cas12 / Cas13</strong> — Cas12a（Cpf1）PAM 為 TTTV；Cas13 切 RNA 而非 DNA，可用於 SHERLOCK / Mammoth 診斷與 RNA 編輯。</li>
+<li><strong>Base editors</strong>（Liu Lab 2016–17） — 不切 DNA，把 C→T（CBE）或 A→G（ABE）。Verve VERVE-101 是首支 <em>in vivo</em> base editor，LNP 遞送靶 PCSK9 治療家族性高膽固醇血症。</li>
+<li><strong>Prime editors</strong>（Liu Lab 2019） — Cas9 nickase + 反轉錄酶 + pegRNA，可精準寫入小段任意序列，無需 DSB。</li>
+</ol>
+</div>
+<div data-lang="en">
+<p>In 2012 Doudna and Charpentier showed Cas9 + sgRNA programmably cuts DNA (Nobel Chemistry 2020). Four engineering generations:</p>
+<ol class="numbered">
+<li><strong>Cas9 (DSB)</strong> — cuts at PAM 5'-NGG 3' (SpCas9); NHEJ produces indels. Flagship: <strong>Casgevy</strong> (Vertex / CRISPR Tx, Dec 2023 FDA approval — first CRISPR therapy; <em>ex vivo</em> HSC editing for sickle cell + β-thalassemia).</li>
+<li><strong>Cas12 / Cas13</strong> — Cas12a (Cpf1) uses TTTV PAM; Cas13 cuts RNA, powering SHERLOCK / Mammoth diagnostics and RNA editing.</li>
+<li><strong>Base editors</strong> (Liu Lab 2016–17) — no DSB; convert C→T (CBE) or A→G (ABE). Verve VERVE-101 is the first <em>in vivo</em> base editor, LNP-delivered to liver, targeting PCSK9 for FH.</li>
+<li><strong>Prime editors</strong> (Liu Lab 2019) — Cas9 nickase + reverse transcriptase + pegRNA; writes precise short edits without DSB.</li>
+</ol>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>Intellia NTLA-2001</strong>（與 Regeneron 合作）是首支「真正 in vivo CRISPR」治療轉甲狀腺素類澱粉沉積症（ATTR amyloidosis）：LNP 包覆 Cas9 mRNA + sgRNA，IV 給藥後在肝臟敲除 TTR 基因。Phase 3 已啟動，預計 2025–2026 公布期中。</span>
+<span data-lang="en"><strong>Intellia NTLA-2001</strong> (partnered with Regeneron) is the first "true <em>in vivo</em> CRISPR" therapy, for transthyretin amyloidosis (ATTR): LNP-packaged Cas9 mRNA + sgRNA, IV-dosed, knocks out hepatic TTR. Phase 3 underway, interim 2025–2026.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="CAR-T 工程" data-en="CAR-T ENGINEERING">CAR-T 工程</h2>
+<h2 data-zh="四、CAR-T 細胞工程與製程" data-en="IV. CAR-T Engineering &amp; Manufacturing">四、CAR-T 細胞工程</h2>
+<div data-lang="zh"><p>CAR-T（Chimeric Antigen Receptor T cell）= 在 T 細胞表面工程出一個「抗體片段 + 跨膜 + 共刺激 + 訊號」融合受體，使其能識別並殺死腫瘤細胞。CAR 結構由 N 端到 C 端：</p>
+<ol class="numbered">
+<li><strong>scFv</strong>（single-chain variable fragment）——抗原辨識，靶 CD19、BCMA、CD22 等。</li>
+<li><strong>Hinge + transmembrane</strong>——通常用 CD8α 或 CD28 hinge/TM。</li>
+<li><strong>共刺激 domain</strong>——4-1BB（CD137）vs CD28：4-1BB 持久性好（Kymriah、Carvykti）；CD28 殺傷快但短命（Yescarta）。</li>
+<li><strong>訊號 domain CD3ζ</strong>——啟動 T 細胞活化訊號。</li>
+</ol>
+<p>製程（autologous）：<strong>白血球分離 leukapheresis → T cell selection（CD3+/CD4+/CD8+ magnetic bead）→ 活化（CD3/CD28 beads）→ 慢病毒轉導 → 擴增（Xuri Cell Expansion W25 / G-Rex bioreactor）→ 冷凍保存 → 冷鏈運送回醫院 → 病人接受 lymphodepletion（Flu/Cy）→ 回輸 → 體內擴增</strong>。整個流程 2–4 週、需嚴格 chain of identity (COI) + chain of custody (COC)。</p></div>
+<div data-lang="en"><p>CAR-T (Chimeric Antigen Receptor T cell) = engineering a fusion receptor on T cells: "antibody fragment + transmembrane + costim + signaling." Structure N→C:</p>
+<ol class="numbered">
+<li><strong>scFv</strong> — antigen recognition (CD19, BCMA, CD22…).</li>
+<li><strong>Hinge + transmembrane</strong> — usually CD8α or CD28.</li>
+<li><strong>Co-stim domain</strong> — 4-1BB (CD137) vs CD28; 4-1BB = longer persistence (Kymriah, Carvykti); CD28 = faster, shorter-lived (Yescarta).</li>
+<li><strong>CD3ζ signaling</strong> — activates the T cell.</li>
+</ol>
+<p>Autologous workflow: <strong>leukapheresis → T cell selection (CD3/CD4/CD8 magnetic beads) → activation (CD3/CD28 beads) → lentiviral transduction → expansion (Xuri Cell Expansion W25 / G-Rex bioreactor) → cryopreserve → cold-chain ship → patient lymphodepletion (Flu/Cy) → infusion → in-vivo expansion</strong>. End-to-end 2–4 weeks; strict chain of identity (COI) + chain of custody (COC).</p></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="核可細胞與基因治療" data-en="APPROVED PRODUCTS">已核可產品</div>
+<h2 data-zh="五、已核可細胞與基因治療（2025 年版）" data-en="V. Approved Cell &amp; Gene Therapies (2025)">五、已核可細胞與基因治療</h2>
+<table class="comp-table"><thead><tr><th data-zh="產品" data-en="Product">產品</th><th data-zh="廠商" data-en="Maker">廠商</th><th data-zh="靶點 / 適應症" data-en="Target / Indication">靶點 / 適應症</th><th data-zh="首次核可" data-en="First approved">首次核可</th><th data-zh="標價（美國）" data-en="US list price">標價</th></tr></thead><tbody>
+<tr><td>Kymriah</td><td>Novartis</td><td data-zh="CD19 / B-ALL、DLBCL、FL" data-en="CD19 / B-ALL, DLBCL, FL">CD19 / B-ALL</td><td>2017/8</td><td>~$475k</td></tr>
+<tr><td>Yescarta</td><td>Gilead/Kite</td><td data-zh="CD19 / DLBCL、FL" data-en="CD19 / DLBCL, FL">CD19 / DLBCL</td><td>2017/10</td><td>~$425k</td></tr>
+<tr><td>Tecartus</td><td>Gilead/Kite</td><td data-zh="CD19 / MCL、B-ALL" data-en="CD19 / MCL, B-ALL">CD19 / MCL</td><td>2020/7</td><td>~$425k</td></tr>
+<tr><td>Breyanzi</td><td>BMS</td><td data-zh="CD19 / DLBCL、CLL" data-en="CD19 / DLBCL, CLL">CD19 / DLBCL</td><td>2021/2</td><td>~$410k</td></tr>
+<tr><td>Abecma</td><td>BMS / 2seventy bio</td><td data-zh="BCMA / multiple myeloma" data-en="BCMA / multiple myeloma">BCMA / MM</td><td>2021/3</td><td>~$420k</td></tr>
+<tr><td>Carvykti</td><td>J&amp;J / Legend</td><td data-zh="BCMA / multiple myeloma" data-en="BCMA / multiple myeloma">BCMA / MM</td><td>2022/2</td><td>~$465k</td></tr>
+<tr><td>Casgevy (exa-cel)</td><td>Vertex / CRISPR Tx</td><td data-zh="CRISPR-Cas9 ex vivo / SCD、β-thal" data-en="CRISPR-Cas9 ex vivo / SCD, β-thal">SCD、β-thal</td><td>2023/12</td><td>$2.2M</td></tr>
+<tr><td>Luxturna</td><td>Spark / Roche</td><td data-zh="AAV2 / RPE65 視網膜失明" data-en="AAV2 / RPE65 retinal blindness">AAV2 / RPE65</td><td>2017/12</td><td>$850k</td></tr>
+<tr><td>Zolgensma</td><td>Novartis</td><td data-zh="AAV9 / SMA SMN1" data-en="AAV9 / SMA SMN1">AAV9 / SMA</td><td>2019/5</td><td>$2.1M</td></tr>
+<tr><td>Hemgenix</td><td>CSL Behring / uniQure</td><td data-zh="AAV5 / 血友病 B (FIX)" data-en="AAV5 / hemophilia B">AAV5 / HemB</td><td>2022/11</td><td>$3.5M</td></tr>
+<tr><td>Elevidys</td><td>Sarepta</td><td data-zh="AAVrh74 / DMD micro-dystrophin" data-en="AAVrh74 / DMD micro-dystrophin">DMD</td><td>2023/6</td><td>$3.2M</td></tr>
+</tbody></table>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>2025–2026 政策變化：</strong>(1) 2025/6 FDA <strong>取消所有自體 CAR-T 的 REMS</strong> 風險管控計畫（因經驗成熟）。(2) 2025/12 FDA 發布 CAR-T 上市路徑指南，新進廠商<strong>傾向要求 RCT</strong>（而非單臂試驗）。(3) Kyverna miv-cel CAR-T 治療僵硬人症候群（Stiff Person Syndrome）目標 2026 上半年 FDA 申報——CAR-T 跨入自體免疫疾病。</span>
+<span data-lang="en"><strong>2025–2026 policy updates:</strong> (1) June 2025 FDA <strong>eliminated REMS for all autologous CAR-Ts</strong> (programs mature). (2) Dec 2025 FDA CAR-T pathway guidance leans toward <strong>requiring RCTs</strong> for new entrants. (3) Kyverna miv-cel CAR-T for stiff-person syndrome targets 1H-2026 FDA filing — CAR-T moves into autoimmune disease.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="mRNA &amp; LNP" data-en="mRNA &amp; LNP">mRNA &amp; LNP</div>
+<h2 data-zh="六、mRNA 療法與 LNP 工程" data-en="VI. mRNA Therapeutics &amp; LNP Engineering">六、mRNA 療法與 LNP 工程</h2>
+<div data-lang="zh"><p>COVID-19 把 mRNA + LNP 推到全球規模：<strong>Pfizer/BioNTech Comirnaty</strong>（LNP 配方含 ALC-0315 ionizable lipid）、<strong>Moderna Spikevax</strong>（SM-102）。LNP 標準四成分：</p>
+<ul>
+<li><strong>離子化脂質 ionizable lipid</strong>——低 pH 下帶正電與 mRNA 結合，生理 pH 下中性以避免毒性。</li>
+<li><strong>磷脂 phospholipid</strong>——DSPC，提供雙層膜骨架。</li>
+<li><strong>膽固醇 cholesterol</strong>——膜穩定性。</li>
+<li><strong>PEG-lipid</strong>（DMG-PEG2000）——延長循環半衰期、降低免疫反應。</li>
+</ul>
+<p>當代 mRNA 應用已從疫苗擴大到：<strong>癌症個人化新抗原疫苗</strong>（Moderna/Merck mRNA-4157 黑色素瘤 Ph3 NCT05933577，2024 中期顯示 RFS 改善 49%）、<strong>體內 CAR-T</strong>（用 LNP 直接重編程 T 細胞，免去 ex-vivo 製程；學術階段）、<strong>蛋白質置換療法</strong>（Moderna mRNA-3927 治療甲基丙二酸血症 MMA）、<strong>過敏 / 自體免疫</strong>調節。</p></div>
+<div data-lang="en"><p>COVID-19 scaled mRNA + LNP to a global stage: <strong>Pfizer/BioNTech Comirnaty</strong> (LNP includes ALC-0315 ionizable lipid) and <strong>Moderna Spikevax</strong> (SM-102). The canonical four-component LNP:</p>
+<ul>
+<li><strong>Ionizable lipid</strong> — positively charged at low pH to bind mRNA, neutral at physiologic pH to limit toxicity.</li>
+<li><strong>Phospholipid</strong> — DSPC, providing bilayer scaffold.</li>
+<li><strong>Cholesterol</strong> — membrane stability.</li>
+<li><strong>PEG-lipid</strong> (DMG-PEG2000) — extends circulation, dampens immune reactions.</li>
+</ul>
+<p>Beyond vaccines, mRNA now spans: <strong>personalized neoantigen cancer vaccines</strong> (Moderna/Merck mRNA-4157 melanoma Ph3 NCT05933577 — 2024 interim showed 49% RFS improvement); <strong>in vivo CAR-T</strong> (LNPs reprogramming T cells directly, no ex-vivo manufacturing; academic stage); <strong>protein-replacement therapy</strong> (Moderna mRNA-3927 for methylmalonic acidemia); allergy and autoimmune modulation.</p></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="GMP 製造" data-en="GMP MANUFACTURING">GMP 製造</div>
+<h2 data-zh="七、製造設施與 GMP 等級" data-en="VII. Manufacturing Facilities &amp; GMP Grades">七、製造與 GMP</h2>
+<div data-lang="zh"><p>細胞與基因治療的「藥廠」與小分子藥廠很不同，更像是<strong>無菌生產線 + ICU 等級無菌技術員</strong>。EU GMP Annex 1（2022 修訂、2023/8 生效）把無菌生產分四級：</p></div>
+<div data-lang="en"><p>Cell &amp; gene manufacturing looks less like a small-molecule plant and more like <strong>aseptic production + ICU-grade aseptic technicians</strong>. EU GMP Annex 1 (2022 revision, effective Aug 2023) defines four grades:</p></div>
+<table class="comp-table"><thead><tr><th data-zh="等級" data-en="Grade">等級</th><th data-zh="ISO 等級" data-en="ISO class">ISO 等級</th><th data-zh="≥0.5 μm 粒子/m³（運作中）" data-en="≥0.5 μm particles/m³ (in operation)">粒子數</th><th data-zh="用途" data-en="Use">用途</th></tr></thead><tbody>
+<tr><td><strong>A</strong></td><td>ISO 5</td><td>3,520</td><td data-zh="關鍵無菌操作（充填、開放細胞處理）" data-en="Critical aseptic ops (fill, open cell handling)">關鍵無菌操作</td></tr>
+<tr><td><strong>B</strong></td><td>ISO 7</td><td>352,000</td><td data-zh="Grade A 周圍背景" data-en="Background to Grade A">A 周圍背景</td></tr>
+<tr><td><strong>C</strong></td><td>ISO 8</td><td>3,520,000</td><td data-zh="次要無菌（封閉系統）" data-en="Secondary aseptic (closed systems)">次要無菌</td></tr>
+<tr><td><strong>D</strong></td><td>ISO 8 (在靜止時)</td><td data-zh="未管制（運作中）" data-en="Not specified (in op)">N/A</td><td data-zh="前處理、清洗、緩衝液配製" data-en="Prep, washing, buffer make">前處理</td></tr>
+</tbody></table>
+<div data-lang="zh"><p>主要設備：<strong>單次性生物反應器</strong>（GE Xuri W25 cell expansion、Sartorius ambr、Cytiva）；<strong>自動化封閉細胞處理</strong>（Lonza Cocoon、Miltenyi CliniMACS Prodigy）；<strong>無菌連接器</strong>（Pall Kleenpak、Cytiva ReadyMate）。代表 CDMO：<strong>Lonza、Catalent、WuXi Advanced Therapies、Resilience、Charles River、Samsung Biologics</strong>。</p></div>
+<div data-lang="en"><p>Key equipment: <strong>single-use bioreactors</strong> (GE Xuri W25, Sartorius ambr, Cytiva); <strong>closed automated cell processing</strong> (Lonza Cocoon, Miltenyi CliniMACS Prodigy); <strong>aseptic connectors</strong> (Pall Kleenpak, Cytiva ReadyMate). Major CDMOs: <strong>Lonza, Catalent, WuXi Advanced Therapies, Resilience, Charles River, Samsung Biologics</strong>.</p></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="八、載體選擇決策樹" data-en="VIII. Vector Selection Decision Tree">八、載體選擇決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="AAV vs Lentivirus vs LNP 選擇樹" data-en="AAV vs Lentivirus vs LNP Decision Tree">AAV vs Lentivirus vs LNP 選擇樹</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">需要<strong>長期穩定表現（一輩子）</strong>且不分裂細胞（如肌肉、肝、視網膜、神經元）？<span class="dt-arrow">→</span> <strong>AAV</strong>。注意 cargo ≤ 4.7 kb；NAb 預先檢測（10–40% 人口已有 AAV2/5/8 抗體）。</span><span data-lang="en">Need <strong>lifelong stable expression</strong> in non-dividing tissue (muscle, liver, retina, neurons)? <span class="dt-arrow">→</span> <strong>AAV</strong>. Cargo ≤4.7 kb; pre-screen for NAbs (10–40% of population has AAV2/5/8 antibodies).</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">需要<strong>整合進分裂中的細胞</strong>（如 T 細胞、HSC）讓表現隨細胞分裂保留？<span class="dt-arrow">→</span> <strong>Lentivirus</strong>（CAR-T、Zynteglo、Casgevy 是 CRISPR + ex vivo 但概念相同）。</span><span data-lang="en">Need <strong>integration in dividing cells</strong> (T cells, HSCs) so expression persists through division? <span class="dt-arrow">→</span> <strong>Lentivirus</strong> (CAR-T, Zynteglo; Casgevy uses CRISPR + ex vivo but same paradigm).</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">需要<strong>暫時表現 + 可重複給藥</strong>（疫苗、體內 CRISPR Cas9 mRNA）？<span class="dt-arrow">→</span> <strong>LNP / mRNA</strong>。靠 LNP 設計改變組織傾向。</span><span data-lang="en">Need <strong>transient expression + repeat dosing</strong> (vaccine, in-vivo CRISPR Cas9 mRNA)? <span class="dt-arrow">→</span> <strong>LNP / mRNA</strong>; tune LNP composition for tropism.</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">需要<strong>大酬載 &gt; 8 kb</strong>（例：DMD 全長 dystrophin 11 kb）？<span class="dt-arrow">→</span> Adenovirus 或 dual-AAV split-intein 系統。</span><span data-lang="en">Need <strong>large cargo &gt;8 kb</strong> (e.g. full-length dystrophin 11 kb)? <span class="dt-arrow">→</span> Adenovirus or dual-AAV split-intein.</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">想要<strong>非病毒 + 持久整合</strong>？<span class="dt-arrow">→</span> Sleeping Beauty / PiggyBac 跳躍子 + 電穿孔（Poseida 非病毒 CAR-T）。</span><span data-lang="en">Want <strong>non-viral + stable integration</strong>? <span class="dt-arrow">→</span> Sleeping Beauty / PiggyBac transposons + electroporation (Poseida non-viral CAR-T).</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖" data-en="INTERACTIVE">互動圖</div>
+<h2 data-zh="九、互動：載體酬載容量比較" data-en="IX. Interactive: Vector Cargo Capacity">九、互動圖表</h2>
+<div data-lang="zh"><p>下圖比較常用基因治療載體的「酬載大小（kb）」與「整合性」。切換視角可看到 2025 年已核可基因治療的標價分佈。</p></div>
+<div data-lang="en"><p>The chart compares cargo capacity (kb) of common gene-therapy vectors and integration status. Switch views to see 2025 list prices of approved gene therapies.</p></div>
+<div class="interactive-panel">
+<div class="toggle-row">
+  <button class="toggle-btn active" data-view="cargo" data-zh="酬載容量" data-en="Cargo size">酬載容量</button>
+  <button class="toggle-btn" data-view="price" data-zh="2025 標價" data-en="2025 List Price">2025 標價</button>
+</div>
+<div class="chart-container"><canvas id="vectorChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">資料：ASGCT 2025 年報、各公司公告。</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Source: ASGCT 2025, company announcements.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="十、sgRNA PAM 位點搜尋" data-en="X. sgRNA PAM Site Finder">十、sgRNA PAM 位點</h2>
+<div data-lang="zh"><p>SpCas9 識別 PAM 為 5'-NGG-3'，sgRNA 的 20 nt protospacer 必須在 PAM 上游。下例對給定 DNA 序列找出所有 PAM 位點與對應 protospacer。實務 sgRNA 設計還需評估 off-target（CRISPOR、CHOPCHOP、Benchling）。</p></div>
+<div data-lang="en"><p>SpCas9 recognizes PAM 5'-NGG-3'; the 20-nt sgRNA protospacer sits upstream. The example finds all PAM sites and corresponding protospacers in a DNA sequence. Production sgRNA design also checks off-targets (CRISPOR, CHOPCHOP, Benchling).</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> re
+
+dna = (<span class="str">"ATGGCCTCAGAGCTGACCTAGCCATGCTGAAGCCTGGAATGAAGGCC"</span>
+       <span class="str">"GCCTGGGTGCTGTGCCAACCCATGCTCAAGGCTGCTGAGCGCTAG"</span>)
+
+<span class="comment"># SpCas9 PAM = NGG on the + strand</span>
+hits = []
+<span class="kw">for</span> m <span class="kw">in</span> re.<span class="func">finditer</span>(<span class="str">r"(?=([ACGT]{20})([ACGT]GG))"</span>, dna):
+    proto, pam = m.<span class="func">group</span>(<span class="num">1</span>), m.<span class="func">group</span>(<span class="num">2</span>)
+    gc = <span class="func">sum</span>(c <span class="kw">in</span> <span class="str">"GC"</span> <span class="kw">for</span> c <span class="kw">in</span> proto)/<span class="num">20</span>
+    hits.<span class="func">append</span>((m.<span class="func">start</span>(), proto, pam, gc))
+
+<span class="kw">for</span> pos, p, pam, gc <span class="kw">in</span> hits[:<span class="num">5</span>]:
+    <span class="func">print</span>(<span class="str">f"pos={pos:3d}  proto=5'-{p}-3'  PAM={pam}  GC={gc:.0%}"</span>)
+<span class="func">print</span>(<span class="str">f"Total: {len(hits)} candidate sgRNAs"</span>)</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% Find SpCas9 (NGG) PAM sites + 20 nt protospacers</span>
+dna = [<span class="str">'ATGGCCTCAGAGCTGACCTAGCCATGCTGAAGCCTGGAATGAAGGCC'</span> ...
+       <span class="str">'GCCTGGGTGCTGTGCCAACCCATGCTCAAGGCTGCTGAGCGCTAG'</span>];
+
+[tok, idx] = <span class="func">regexp</span>(dna, <span class="str">'(?=([ACGT]{20})([ACGT]GG))'</span>, ...
+                      <span class="str">'tokens'</span>, <span class="str">'start'</span>);
+
+<span class="func">fprintf</span>(<span class="str">'Found %d sgRNA candidates\n'</span>, length(idx));
+<span class="kw">for</span> k = <span class="num">1</span>:<span class="func">min</span>(<span class="num">5</span>, length(idx))
+    proto = tok{k}{<span class="num">1</span>};
+    pam   = tok{k}{<span class="num">2</span>};
+    gc    = <span class="func">sum</span>(proto==<span class="str">'G'</span>|proto==<span class="str">'C'</span>)/<span class="num">20</span>;
+    <span class="func">fprintf</span>(<span class="str">'pos=%3d  proto=5''-%s-3''  PAM=%s  GC=%.0f%%\n'</span>, ...
+            idx(k), proto, pam, <span class="num">100</span>*gc);
+<span class="kw">end</span></pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十一、本章關鍵術語" data-en="XI. Key Terms">十一、關鍵術語</h2>
+<p><span class="term">AAV<span class="term-tip">Adeno-Associated Virus — 非整合單股 DNA 載體，最常用 in-vivo 基因治療載體。</span></span> &nbsp;
+<span class="term">Lentivirus<span class="term-tip">逆轉錄病毒科、可整合進分裂與非分裂細胞，CAR-T 主要載體。</span></span> &nbsp;
+<span class="term">LNP<span class="term-tip">Lipid Nanoparticle — mRNA 與 sgRNA 的非病毒遞送載體，COVID mRNA 疫苗核心。</span></span> &nbsp;
+<span class="term">CRISPR-Cas9<span class="term-tip">細菌免疫系統改造而成的可程式化 DNA 切割工具，2020 諾貝爾化學獎。</span></span> &nbsp;
+<span class="term">Base editor<span class="term-tip">由 Cas9 nickase 融合脫胺酶，把單一鹼基 C→T 或 A→G，不切 DNA。</span></span> &nbsp;
+<span class="term">Prime editor<span class="term-tip">Cas9 nickase + 反轉錄酶 + pegRNA，可精準寫入短片段任意序列。</span></span> &nbsp;
+<span class="term">CAR-T<span class="term-tip">Chimeric Antigen Receptor T-cell — 工程過表達合成受體的自體/異體 T 細胞療法。</span></span> &nbsp;
+<span class="term">scFv<span class="term-tip">single-chain variable fragment — 抗體 VH + VL 串連的單鏈，CAR 的辨識端。</span></span> &nbsp;
+<span class="term">BLA<span class="term-tip">Biologics License Application — FDA 對生物製劑（含基因/細胞治療）的上市路徑。</span></span> &nbsp;
+<span class="term">CBER<span class="term-tip">Center for Biologics Evaluation and Research — FDA 管理 biologics（含基因/細胞治療）的部門。</span></span> &nbsp;
+<span class="term">GMP Annex 1<span class="term-tip">EU GMP 對無菌製造的詳細規範，2022 修訂、2023/8 強制生效。</span></span> &nbsp;
+<span class="term">CDMO<span class="term-tip">Contract Development &amp; Manufacturing Organization — 委託開發與製造服務商。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="0"><p><span data-lang="zh">Q1. 關於 AAV 載體的敘述，下列何者正確？</span><span data-lang="en">Q1. Which statement about AAV vectors is correct?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 單股 DNA、酬載 ~4.7 kb、非整合、AAV9 可穿越 BBB；Zolgensma 使用 AAV9</span><span data-lang="en">A. ssDNA, ~4.7 kb cargo, non-integrating; AAV9 crosses the BBB; Zolgensma uses AAV9</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. dsRNA、酬載 ~36 kb、永遠整合</span><span data-lang="en">B. dsRNA, ~36 kb cargo, always integrates</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 完全沒有預存抗體問題</span><span data-lang="en">C. No pre-existing antibody issue</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 不能用於肝臟靶向</span><span data-lang="en">D. Cannot be used for liver targeting</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q2. Casgevy（exa-cel）是哪一類療法？</span><span data-lang="en">Q2. What kind of therapy is Casgevy (exa-cel)?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. mRNA 疫苗</span><span data-lang="en">A. mRNA vaccine</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. AAV in-vivo 基因治療</span><span data-lang="en">B. AAV in-vivo gene therapy</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. CRISPR-Cas9 ex-vivo 編輯 HSC 治療鐮刀型貧血與 β-thalassemia（2023/12 FDA 核可的首支 CRISPR 療法）</span><span data-lang="en">C. CRISPR-Cas9 ex-vivo HSC editing for sickle cell + β-thalassemia (first FDA CRISPR approval, Dec 2023)</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 自體 CAR-T 治療多發性骨髓瘤</span><span data-lang="en">D. Autologous CAR-T for multiple myeloma</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q3. CAR-T 結構中，影響「持久性 vs 殺傷力」的關鍵 domain 是？</span><span data-lang="en">Q3. In CAR architecture, which domain governs persistence vs killing speed?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. scFv</span><span data-lang="en">A. scFv</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 共刺激 domain（4-1BB 長持久；CD28 快但短）</span><span data-lang="en">B. Co-stim domain (4-1BB = long persistence; CD28 = fast, short-lived)</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. CD3ζ</span><span data-lang="en">C. CD3ζ</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. Hinge</span><span data-lang="en">D. Hinge</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="neural-engineering.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="E1 · 神經工程" data-en="E1 · Neural Engineering">E1 · 神經工程</span></a>
+<a href="surgical-robotics-ai.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="E3 · 手術機器人與 AI 醫療" data-en="E3 · Surgical Robotics &amp; AI">E3 · 手術機器人與 AI 醫療</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · E2 Gene &amp; Cell Therapy Engineering</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// Vector chart
+const vData={
+  cargo:{labels:['AAV','Lentivirus','Retrovirus','Adenovirus','LNP / mRNA','Transposon'],
+         values:[4.7, 8.0, 8.0, 36.0, 15.0, 100.0]},
+  price:{labels:['Kymriah','Carvykti','Luxturna','Zolgensma','Hemgenix','Elevidys','Casgevy'],
+         values:[475, 465, 850, 2100, 3500, 3200, 2200]}
+};
+let vChart=null;
+function drawV(view){
+  if(vChart) vChart.destroy();
+  const ctx=document.getElementById('vectorChart').getContext('2d');
+  const lang=I18n.get();
+  const d=vData[view];
+  vChart=new Chart(ctx,{type:'bar',
+    data:{labels:d.labels,datasets:[{
+      label: view==='cargo'? (lang==='zh'?'酬載容量 (kb)':'Cargo (kb)') : (lang==='zh'?'美國標價 (USD k)':'US list price (USD k)'),
+      data:d.values,
+      backgroundColor:'rgba(131,24,67,.75)',borderColor:'#500724',borderWidth:1
+    }]},
+    options:{indexAxis: view==='price' ? 'y' : 'x', plugins:{legend:{display:true}},
+      scales:{ [view==='price'?'x':'y']:{beginAtZero:true,title:{display:true,
+        text: view==='cargo'?'kb':'USD ×1000'}}}}});
+}
+drawV('cargo');
+document.querySelectorAll('.toggle-btn[data-view]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.toggle-btn[data-view]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); drawV(b.dataset.view);
+}));
+document.addEventListener('langchange',()=>{
+  const cur=document.querySelector('.toggle-btn[data-view].active').dataset.view;
+  drawV(cur);
+});
+</script>
+</body></html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>B1: 生醫訊號 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html" class="active">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER B1 · BLOCK B SIGNALS &amp; IMAGES</div>
+<h1 data-zh="生醫訊號：身體的電報" data-en="Biosignals: The Body's Telegrams">生醫訊號：身體的電報</h1>
+<p class="subtitle" data-lang="zh">ECG、EEG、EMG、PPG、SpO₂、血壓——六種主流生醫訊號的物理來源、振幅、頻率、取樣率、電極與雜訊全景圖。</p>
+<p class="subtitle" data-lang="en">ECG, EEG, EMG, PPG, SpO₂, BP — the physical origin, amplitude, frequency, sampling, electrodes, and noise sources of six core biosignals.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="定義" data-en="DEFINITION">定義</div>
+<h2 data-zh="一、什麼是生醫訊號？" data-en="I. What is a Biosignal?">一、什麼是生醫訊號？</h2>
+<div data-lang="zh">
+<p><strong>生醫訊號（biosignal）</strong>泛指可從生物體上量測到、且<em>隨時間變化</em>的物理量，包括電位（mV、μV）、壓力（mmHg）、聲學（dB）、光學（透光率）、化學濃度（mmol/L）與機械量（力、位移）。在臨床與工程實務中，最常被連續記錄、分析、診斷的是<strong>「電生理訊號」</strong>與<strong>「血流／呼吸生理訊號」</strong>兩大類。</p>
+<p>BME 工程師對任一個生醫訊號，第一個要問的三個問題是：(1) <strong>它從哪來？</strong>（細胞 / 組織 / 系統層次的生成機制）；(2) <strong>它有多大？多快？</strong>（典型振幅、頻寬、所需取樣率）；(3) <strong>它會被誰污染？</strong>（雜訊與假影來源、共模、漂移）。本章建立這個全景表。</p>
+</div>
+<div data-lang="en">
+<p>A <strong>biosignal</strong> is any time-varying physical quantity measured from a living organism — electrical potential (mV, μV), pressure (mmHg), acoustic (dB), optical (transmittance), chemical concentration (mmol/L), or mechanical (force, displacement). In clinical and engineering practice, the most continuously recorded and analyzed are <strong>electrophysiological</strong> and <strong>cardiopulmonary</strong> signals.</p>
+<p>For any biosignal, the BME engineer should always ask three questions: (1) <strong>Where does it come from?</strong> (cell / tissue / system-level generator); (2) <strong>How big and how fast?</strong> (typical amplitude, bandwidth, required sampling rate); (3) <strong>What contaminates it?</strong> (noise sources, common-mode, drift). This chapter builds that panoramic table.</p>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>命名約定：</strong>名稱結尾的「-gram」代表記錄圖（記錄結果），如 ECG = Electro<u>cardio</u>gram；「-graph」則指儀器或記錄行為（如 electrocardiograph）。臨床日常用 ECG（美式）或 EKG（源自德文 Elektrokardiogramm）皆可互通。</span>
+<span data-lang="en"><strong>Naming:</strong> The "-gram" suffix denotes the <em>record</em> (ECG = Electro<u>cardio</u>gram), while "-graph" denotes the <em>instrument</em>. In clinical use, ECG (American) and EKG (from German Elektrokardiogramm) are interchangeable.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="六大主流訊號" data-en="SIX CORE SIGNALS">六大主流訊號</div>
+<h2 data-zh="二、六大主流生醫訊號比較" data-en="II. Six Core Biosignals — Comparison Table">二、六大主流生醫訊號</h2>
+<table class="comp-table"><thead><tr><th data-zh="訊號" data-en="Signal">訊號</th><th data-zh="生理來源" data-en="Origin">生理來源</th><th data-zh="振幅" data-en="Amplitude">振幅</th><th data-zh="頻寬" data-en="Bandwidth">頻寬</th><th data-zh="取樣率" data-en="Fs">取樣率</th><th data-zh="主要臨床用途" data-en="Clinical use">臨床用途</th></tr></thead><tbody>
+<tr><td><strong>ECG</strong><br><span data-zh="心電圖" data-en="Electrocardiogram">心電圖</span></td><td data-zh="心肌動作電位的體表投影；竇房結（SA node）→ 心房 → 房室結 → 浦肯野纖維 → 心室。" data-en="Body-surface projection of myocardial action potentials: SA node → atria → AV node → Purkinje → ventricles.">心肌動作電位投影</td><td>0.5–5 mV</td><td>0.05–150 Hz<br>(<span data-zh="診斷級" data-en="diagnostic">診斷級</span>)</td><td>250–1000 Hz</td><td data-zh="心律不整、心肌梗塞、ST 變化、QT 延長" data-en="Arrhythmia, MI, ST changes, QT prolongation">心律不整、MI、QT</td></tr>
+<tr><td><strong>EEG</strong><br><span data-zh="腦電圖" data-en="Electroencephalogram">腦電圖</span></td><td data-zh="皮質錐體細胞群同步突觸後電位（PSPs）；以 10–20 系統量到頭皮。" data-en="Summed post-synaptic potentials of cortical pyramidal cells; recorded with 10-20 scalp montage.">皮質 PSP 同步</td><td>5–100 μV</td><td>0.5–80 Hz<br>(δ/θ/α/β/γ)</td><td>250–1000 Hz</td><td data-zh="癲癇、睡眠分期、麻醉深度、BCI" data-en="Epilepsy, sleep staging, anesthesia depth, BCI">癲癇、睡眠、BCI</td></tr>
+<tr><td><strong>EMG</strong><br><span data-zh="肌電圖" data-en="Electromyogram">肌電圖</span></td><td data-zh="運動單元（motor unit）動作電位的疊加；表面 sEMG 為遠場、針極 iEMG 為近場。" data-en="Superposition of motor-unit action potentials (MUAPs); sEMG is far-field, needle iEMG is near-field.">運動單元 MUAP 疊加</td><td>50 μV–5 mV</td><td>20–500 Hz</td><td>1–2 kHz</td><td data-zh="疲勞分析、義肢控制、肌病變、復健" data-en="Fatigue, prosthesis control, myopathy, rehab">疲勞、義肢、肌病</td></tr>
+<tr><td><strong>PPG</strong><br><span data-zh="光體積描記" data-en="Photoplethysmogram">光體積描記</span></td><td data-zh="LED（綠/紅/紅外）照射 + 光偵測器測組織血量隨心跳變化的吸光差異。" data-en="LED (green/red/IR) + photodetector measuring blood-volume-dependent absorption changes per heartbeat.">血量光吸收變化</td><td>0.1–2 V<br>(<span data-zh="類比" data-en="analog">類比</span>)</td><td>0.5–10 Hz</td><td>50–500 Hz</td><td data-zh="心率、HRV、SpO₂、血管彈性" data-en="HR, HRV, SpO₂, vascular tone">心率、HRV、SpO₂</td></tr>
+<tr><td><strong>SpO₂</strong><br><span data-zh="脈搏血氧飽和度" data-en="Pulse Oximetry">血氧</span></td><td data-zh="紅光 660 nm 與紅外光 940 nm 對 oxyHb / deoxyHb 的吸收比值 R = (AC/DC)<sub>660</sub>/(AC/DC)<sub>940</sub>。" data-en="Ratio R = (AC/DC)₆₆₀ / (AC/DC)₉₄₀ of red vs IR absorption by oxy/deoxy Hb.">兩波長吸收比</td><td>%</td><td>~ 1 Hz</td><td>1–20 Hz</td><td data-zh="低血氧、呼吸衰竭、麻醉監測、新生兒" data-en="Hypoxemia, respiratory failure, anesthesia, neonatal">低血氧、麻醉</td></tr>
+<tr><td><strong>BP</strong><br><span data-zh="動脈血壓" data-en="Arterial Blood Pressure">血壓</span></td><td data-zh="非侵入：oscillometric（袖帶振盪）；侵入：動脈導管接 transducer。" data-en="Non-invasive: oscillometric cuff; invasive: arterial line with transducer.">袖帶 / 導管</td><td>60–200 mmHg</td><td>0–50 Hz</td><td>100–500 Hz</td><td data-zh="高血壓、低血壓、麻醉、ICU 連續監測" data-en="HTN, hypotension, anesthesia, ICU monitoring">高/低血壓、ICU</td></tr>
+</tbody></table>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>取樣率經驗法則：</strong>依 Nyquist–Shannon 取樣定理 f<sub>s</sub> ≥ 2·f<sub>max</sub>。但實務取「3–5 倍」最高有效頻率，以保留波形細節與後續濾波餘裕。例如診斷級 ECG 標準是 500 Hz（IEC 60601-2-25 規定 ≥ 500 Hz、頻寬 0.05–150 Hz）。</span>
+<span data-lang="en"><strong>Sampling-rate rule of thumb:</strong> Nyquist requires f<sub>s</sub> ≥ 2·f<sub>max</sub>, but in practice we use 3–5× the highest useful frequency to preserve waveform detail and leave headroom for filtering. Diagnostic-grade ECG standard is 500 Hz (IEC 60601-2-25 mandates ≥ 500 Hz, bandwidth 0.05–150 Hz).</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="電極技術" data-en="ELECTRODES">電極技術</div>
+<h2 data-zh="三、電極類型與耦合機制" data-en="III. Electrode Types &amp; Coupling">三、電極類型</h2>
+<div data-lang="zh"><p>電極是「離子電流（皮膚側）」與「電子電流（電路側）」的轉換器，本質上是電化學介面。不同電極選擇直接決定訊號品質、舒適度、長期可用性與成本。</p></div>
+<div data-lang="en"><p>An electrode is a transducer between "ionic current (skin side)" and "electronic current (circuit side)" — an electrochemical interface. The choice directly determines signal quality, comfort, long-term wearability, and cost.</p></div>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">🟢</div><h4 data-zh="① Ag/AgCl 凝膠電極（金標準）" data-en="① Ag/AgCl Gel (Gold Standard)">① Ag/AgCl 凝膠電極</h4>
+<div data-lang="zh"><p>銀–氯化銀界面提供穩定的<strong>半電池電位</strong>，低極化、低漂移；搭配導電水膠（hydrogel）降低皮膚阻抗到 5–50 kΩ。臨床 ECG/EEG/EMG 通用，但拋棄式、有過敏風險、長期佩戴會乾化。</p></div>
+<div data-lang="en"><p>The silver/silver-chloride interface provides a stable <strong>half-cell potential</strong>, low polarization, low drift; combined with conductive hydrogel it drops skin impedance to 5–50 kΩ. Universal in clinical ECG/EEG/EMG, but disposable, allergen-risk, and dries out for long-term wear.</p></div></div>
+<div class="card"><div class="card-icon">⚪</div><h4 data-zh="② Dry 電極（不鏽鋼 / 導電橡膠）" data-en="② Dry Electrodes (Stainless / Conductive Rubber)">② Dry 電極</h4>
+<div data-lang="zh"><p>無凝膠，皮膚阻抗高（100 kΩ–1 MΩ），需配高輸入阻抗放大器（>10 GΩ）。優點：可重複使用、適合穿戴與長期使用；缺點：移動假影大、初接觸時 SNR 較差。</p></div>
+<div data-lang="en"><p>Gel-free; high skin impedance (100 kΩ–1 MΩ) demands very-high-input-impedance amps (&gt;10 GΩ). Pros: reusable, ideal for wearables and long-term use. Cons: more motion artifact, worse SNR at initial contact.</p></div></div>
+<div class="card"><div class="card-icon">🔵</div><h4 data-zh="③ Capacitive 電容耦合電極" data-en="③ Capacitive (Non-contact) Electrodes">③ 電容耦合電極</h4>
+<div data-lang="zh"><p>不直接接觸皮膚（隔衣服 / 介電材料），靠位移電流 i = C·dV/dt 耦合訊號。可整合進衣物、椅背、方向盤；對運動極敏感，需主動屏蔽（driven shield）。</p></div>
+<div data-lang="en"><p>No direct skin contact (through clothing / dielectric); couples via displacement current i = C·dV/dt. Integrable into clothing, car seats, steering wheels; highly motion-sensitive, requires active driven-shield.</p></div></div>
+<div class="card"><div class="card-icon">🧵</div><h4 data-zh="④ Textile / 編織電極" data-en="④ Textile / Woven Electrodes">④ 編織電極</h4>
+<div data-lang="zh"><p>把銀塗層、不鏽鋼絲或導電聚合物 PEDOT:PSS 編入紡織品。應用：智慧衣（Hexoskin、Astroskin）、嬰兒監測。可水洗 30–50 次後性能衰退。</p></div>
+<div data-lang="en"><p>Silver-coated fibers, stainless steel yarn, or PEDOT:PSS woven into fabric. Applications: smart shirts (Hexoskin, Astroskin), neonatal monitoring. Performance degrades after 30–50 washes.</p></div></div>
+<div class="card"><div class="card-icon">🟣</div><h4 data-zh="⑤ Microelectrode array (MEA)" data-en="⑤ Microelectrode Arrays (MEA)">⑤ 微電極陣列</h4>
+<div data-lang="zh"><p>10–100 μm 級陣列；應用：Utah array（神經元 single-unit）、HD-MEA（培養神經元）、Neuropixels（高密度 in vivo）。BCI 與神經科學主力工具。</p></div>
+<div data-lang="en"><p>10–100 μm scale arrays. Examples: Utah array (single-unit neurons in vivo), HD-MEA (cultured neurons), Neuropixels (high-density in vivo). The workhorse of BCI and neuroscience.</p></div></div>
+<div class="card"><div class="card-icon">🟡</div><h4 data-zh="⑥ Epidermal / Tattoo 電極" data-en="⑥ Epidermal / Tattoo Electrodes">⑥ 表皮電極</h4>
+<div data-lang="zh"><p>厚度 μm、楊氏模量接近皮膚的金屬蛇形布線（serpentine）。能 7–14 天連續佩戴而不脫落；研究熱點：Rogers Lab、MC10 BioStamp。</p></div>
+<div data-lang="en"><p>μm-thin serpentine metal traces with skin-matched Young's modulus; wears 7–14 days continuously. Research focus: Rogers Lab, MC10 BioStamp.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="雜訊與假影" data-en="NOISE &amp; ARTIFACTS">雜訊與假影</div>
+<h2 data-zh="四、常見雜訊與假影" data-en="IV. Noise &amp; Artifacts">四、常見雜訊與假影</h2>
+<table class="comp-table"><thead><tr><th data-zh="雜訊類型" data-en="Noise type">雜訊類型</th><th data-zh="頻譜特徵" data-en="Spectral signature">頻譜特徵</th><th data-zh="物理來源" data-en="Origin">物理來源</th><th data-zh="處理對策" data-en="Mitigation">處理對策</th></tr></thead><tbody>
+<tr><td><strong data-zh="工頻干擾" data-en="Power-line interference">工頻干擾</strong></td><td>50 Hz (EU/TW/JP) <br>or 60 Hz (US/CA)</td><td data-zh="附近電源線、燈具、變壓器的電磁耦合；皮膚阻抗不對稱放大共模。" data-en="EM coupling from nearby mains, lamps, transformers; skin-impedance mismatch amplifies common mode.">電源線電磁耦合</td><td data-zh="notch（陷波濾波器）；提升 CMRR、駕動右腿（DRL）" data-en="Notch filter; high CMRR amplifier; driven-right-leg (DRL)">notch、DRL、屏蔽</td></tr>
+<tr><td><strong data-zh="基線漂移" data-en="Baseline wander">基線漂移</strong></td><td>&lt; 0.5 Hz<br>(<span data-zh="呼吸~ 0.3 Hz" data-en="resp ~ 0.3 Hz">呼吸~ 0.3 Hz</span>)</td><td data-zh="呼吸動作改變電極／皮膚介面、出汗、姿勢變化。" data-en="Respiration moving electrode-skin interface, sweating, posture change.">呼吸、汗、姿勢</td><td data-zh="HPF（cut-off 0.5 Hz）、樣條擬合、形態學濾波" data-en="HPF (cut 0.5 Hz), spline fit, morphological filter">HPF / 樣條</td></tr>
+<tr><td><strong data-zh="EMG 突發污染" data-en="EMG burst contamination">EMG 突發</strong></td><td>20–500 Hz</td><td data-zh="ECG/EEG 量測時的肌肉緊張、顫抖、發抖；常於胸前 ECG 與顳葉 EEG。" data-en="Muscle tension/tremor during ECG/EEG; common on precordial ECG and temporal EEG.">不自主肌肉收縮</td><td data-zh="LPF（&lt; 35 Hz 監測級）、放鬆病人、ICA、wavelet" data-en="LPF (&lt; 35 Hz monitoring), patient relaxation, ICA, wavelet">LPF / ICA</td></tr>
+<tr><td><strong data-zh="運動假影" data-en="Motion artifact">運動假影</strong></td><td data-zh="寬頻、低頻偏多" data-en="Broadband, low-freq dominant">寬頻、低頻偏多</td><td data-zh="電極相對皮膚位移 → 半電池電位瞬變；穿戴情境最大難題。" data-en="Electrode-skin micromotion → transient half-cell potential; the #1 wearable problem.">電極／皮膚位移</td><td data-zh="加速度計參考、adaptive LMS、深度學習除噪" data-en="Accelerometer reference, adaptive LMS, deep-learning denoise">加速度計、自適應</td></tr>
+<tr><td><strong data-zh="電極極化／pop" data-en="Electrode pop">電極 pop</strong></td><td data-zh="瞬時尖峰" data-en="Sharp transient">瞬時尖峰</td><td data-zh="氣泡進入凝膠、接觸瞬斷、靜電放電（ESD）。" data-en="Air bubbles in gel, momentary disconnection, ESD.">氣泡、靜電</td><td data-zh="重貼電極；軟體偵測與插補" data-en="Re-apply electrode; software detection &amp; interpolation">重貼、插補</td></tr>
+<tr><td><strong data-zh="眼動假影 (EOG)" data-en="EOG (eye-movement)">EOG 眼動</strong></td><td>&lt; 4 Hz</td><td data-zh="角膜（+）與視網膜（−）形成偶極子，眨眼／掃視時於前額 EEG 出現大幅 deflection。" data-en="Cornea (+) / retina (−) form a dipole; blinks/saccades cause large frontal deflections.">眼睛偶極子</td><td data-zh="參考通道回歸、ICA 移除眼動成分" data-en="Reference-channel regression; ICA blink-component removal">回歸、ICA</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="標準導程" data-en="STANDARD LEADS">標準導程</div>
+<h2 data-zh="五、標準導程與系統（Einthoven、10-20）" data-en="V. Standard Lead Systems (Einthoven, 10-20)">五、標準導程系統</h2>
+<div class="card-grid cols-2">
+<div class="card"><h4 data-zh="🫀 Einthoven 三角形 + 12 導程 ECG" data-en="🫀 Einthoven Triangle + 12-Lead ECG">🫀 Einthoven 三角 + 12 導程</h4>
+<div data-lang="zh"><p>1903 年 Einthoven 在右臂（RA）、左臂（LA）、左腿（LL）放電極，定義雙極導程：<strong>I = LA − RA、II = LL − RA、III = LL − LA</strong>，三者滿足 <em>II = I + III</em>。後續 Goldberger 加上 aVR/aVL/aVF（加壓單極），Wilson 加上 V1–V6（胸前單極），組成標準 <strong>12 導程</strong>。其中：</p>
+<ul><li>下壁（II/III/aVF）：右冠狀動脈灌流區</li><li>側壁（I/aVL/V5/V6）：左旋支</li><li>前壁（V1–V4）：左前降支 LAD</li></ul></div>
+<div data-lang="en"><p>In 1903 Einthoven placed electrodes on RA, LA, LL and defined bipolar leads <strong>I = LA−RA, II = LL−RA, III = LL−LA</strong>, satisfying <em>II = I + III</em>. Goldberger added aVR/aVL/aVF (augmented unipolar), Wilson added V1–V6 (precordial unipolar) → standard <strong>12-lead ECG</strong>. Walls:</p>
+<ul><li>Inferior (II/III/aVF): RCA territory</li><li>Lateral (I/aVL/V5/V6): LCx</li><li>Anterior (V1–V4): LAD</li></ul></div></div>
+<div class="card"><h4 data-zh="🧠 10-20 EEG 系統" data-en="🧠 10-20 EEG System">🧠 10-20 EEG 系統</h4>
+<div data-lang="zh"><p>1958 年 Jasper 提出，把鼻根（nasion）到枕外隆突（inion）的距離分為 10% 與 20% 間距、共 21 個電極：Fp1/Fp2/F3/F4/F7/F8/Fz/C3/C4/Cz/T3/T4/T5/T6/P3/P4/Pz/O1/O2/A1/A2。<strong>奇數=左、偶數=右、z=中線</strong>。高密度版本（10-10、10-5）可達 64–256 通道。</p></div>
+<div data-lang="en"><p>Proposed by Jasper in 1958; 21 electrodes spaced at 10% and 20% of the nasion-to-inion distance: Fp1/Fp2/F3/F4/F7/F8/Fz/C3/C4/Cz/T3/T4/T5/T6/P3/P4/Pz/O1/O2/A1/A2. <strong>Odd = left, even = right, z = midline.</strong> Higher-density (10-10, 10-5) reach 64–256 channels.</p></div></div>
+<div class="card"><h4 data-zh="🩺 BIPM 血壓量測協定" data-en="🩺 BIPM Blood-Pressure Protocol">🩺 BIPM 血壓協定</h4>
+<div data-lang="zh"><p>國際度量衡局（BIPM）與 ISO 81060-2:2019/AMD1:2024 規範非侵入式血壓計的<strong>準確度</strong>：與聽診標準同步量測，平均誤差 ±5 mmHg、標準差 ≤ 8 mmHg。AAMI/ESH/ISO 三方協定 2018 更新後為國際金標準。</p></div>
+<div data-lang="en"><p>BIPM and ISO 81060-2:2019/AMD1:2024 govern non-invasive BP device <strong>accuracy</strong>: simultaneous auscultatory reference, mean error ±5 mmHg, SD ≤ 8 mmHg. The 2018 AAMI/ESH/ISO joint protocol is the global gold standard.</p></div></div>
+<div class="card"><h4 data-zh="💪 SENIAM sEMG 指引" data-en="💪 SENIAM sEMG Guidelines">💪 SENIAM 表面肌電指引</h4>
+<div data-lang="zh"><p>歐盟 SENIAM 計畫定義 30+ 肌肉的標準電極位置、電極間距（20 mm）、皮膚準備（去角質至 5 kΩ 以下）；是表面肌電（sEMG）的事實標準。</p></div>
+<div data-lang="en"><p>EU SENIAM project standardized electrode placement for 30+ muscles, inter-electrode distance (20 mm), and skin prep (exfoliate to &lt; 5 kΩ); de-facto standard for sEMG.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動模擬" data-en="INTERACTIVE">互動模擬</div>
+<h2 data-zh="六、ECG 模擬器（心率 + 雜訊可調）" data-en="VI. ECG Simulator (HR + Noise Adjustable)">六、ECG 模擬器</h2>
+<div data-lang="zh"><p>下方訊號 = 連續 PQRST 波形（高斯混合）+ 0.3 Hz 基線漂移 + 50 Hz 工頻 + 白雜訊。調整心率與雜訊強度，觀察 R 波是否還能被偵測。</p></div>
+<div data-lang="en"><p>Signal below = continuous PQRST (Gaussian mixture) + 0.3 Hz baseline wander + 50 Hz power-line + white noise. Adjust HR and noise level to see whether R-peaks remain detectable.</p></div>
+<div class="interactive-panel">
+<div class="slider-group"><label><span data-zh="心率 (bpm)" data-en="Heart rate (bpm)">心率</span> <span id="vHR">75</span></label><input type="range" id="sHR" min="40" max="180" value="75" step="1"></div>
+<div class="slider-group"><label><span data-zh="基線漂移振幅" data-en="Baseline wander">基線漂移</span> <span id="vBW">0.15</span></label><input type="range" id="sBW" min="0" max="0.6" value="0.15" step="0.05"></div>
+<div class="slider-group"><label><span data-zh="工頻 50 Hz 振幅" data-en="50 Hz amplitude">工頻</span> <span id="vPL">0.10</span></label><input type="range" id="sPL" min="0" max="0.4" value="0.10" step="0.05"></div>
+<div class="slider-group"><label><span data-zh="白雜訊 σ" data-en="White noise σ">白雜訊</span> <span id="vWN">0.04</span></label><input type="range" id="sWN" min="0" max="0.2" value="0.04" step="0.01"></div>
+<div class="chart-container" style="height:220px"><canvas id="ecgChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">紅色虛線為自動偵測到的 R 峰（簡單門檻法）；雜訊太大時會出現偽峰。</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Red dashed lines mark detected R-peaks (simple threshold); excess noise produces false positives.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="七、哪個訊號回答哪個臨床問題？" data-en="VII. Which Signal for Which Clinical Question?">七、訊號選擇決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="臨床問題 → 生醫訊號決策樹" data-en="Clinical Question → Biosignal Decision Tree">臨床問題 → 生醫訊號</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">想偵測<strong>心律不整 / 心肌梗塞 / QT 延長</strong>？<span class="dt-arrow">→</span> <strong>ECG</strong>（12 導程診斷級或單導 Holter / patch 連續監測）。</span><span data-lang="en">Detecting <strong>arrhythmia / MI / QT prolongation</strong>? <span class="dt-arrow">→</span> <strong>ECG</strong> (12-lead diagnostic, or single-lead Holter / patch for ambulatory).</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">想偵測<strong>癲癇發作 / 睡眠分期 / 麻醉深度</strong>？<span class="dt-arrow">→</span> <strong>EEG</strong>（10-20 系統，至少 8 通道；BIS™ 麻醉用 4 通道）。</span><span data-lang="en">Detecting <strong>seizures / sleep stages / anesthesia depth</strong>? <span class="dt-arrow">→</span> <strong>EEG</strong> (10-20 system, ≥ 8 ch; BIS™ uses 4 ch for anesthesia).</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">想量<strong>肌肉疲勞 / 義肢控制意圖 / 神經肌肉病變</strong>？<span class="dt-arrow">→</span> <strong>EMG</strong>（表面 sEMG 量肌群、針極 iEMG 量單一運動單元）。</span><span data-lang="en">Measuring <strong>fatigue / prosthesis intent / neuromuscular disease</strong>? <span class="dt-arrow">→</span> <strong>EMG</strong> (sEMG for muscle groups; needle iEMG for single MUAPs).</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">想量<strong>血氧 / 低血氧</strong>？<span class="dt-arrow">→</span> <strong>SpO₂</strong>（脈搏血氧計，兩波長比值法；新生兒用足部 transmissive）。</span><span data-lang="en">Measuring <strong>oxygenation / hypoxemia</strong>? <span class="dt-arrow">→</span> <strong>SpO₂</strong> (pulse oximeter, two-wavelength ratio; neonatal uses foot transmissive).</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">想監測<strong>連續血壓 + 心率變異</strong>但希望非侵入？<span class="dt-arrow">→</span> <strong>PPG</strong> + 機器學習估算（waveform-based BP 估計）；金標準仍為動脈導管。</span><span data-lang="en">Continuous <strong>BP + HRV</strong> non-invasively? <span class="dt-arrow">→</span> <strong>PPG</strong> + ML-based estimation; gold standard remains arterial line.</span></div>
+<div class="dt-node"><span class="dt-q">Q6.</span><span data-lang="zh">想做<strong>運動 / 居家 / 24×7 監測</strong>？<span class="dt-arrow">→</span> 穿戴式 PPG（手錶/環）+ 1-lead ECG（patch）；避免單純依賴胸前帶。</span><span data-lang="en"><strong>Sports / home / 24×7</strong> monitoring? <span class="dt-arrow">→</span> Wearable PPG (watch/ring) + 1-lead ECG patch; avoid relying solely on chest straps.</span></div>
+<div class="dt-node"><span class="dt-q">Q7.</span><span data-lang="zh">想做<strong>胎兒心率監測</strong>？<span class="dt-arrow">→</span> 母體腹部 fECG（需與母體 ECG 分離，常用 ICA）或都卜勒超音波（CTG）。</span><span data-lang="en"><strong>Fetal heart-rate</strong>? <span class="dt-arrow">→</span> Maternal abdominal fECG (separate from maternal ECG via ICA) or Doppler ultrasound (CTG).</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="八、合成 ECG + Pan-Tompkins QRS 偵測前處理" data-en="VIII. Synthesize ECG + Pan-Tompkins QRS Pre-processing">八、ECG 合成與 QRS 偵測</h2>
+<div data-lang="zh"><p>1985 年 Jiapu Pan &amp; Willis Tompkins 提出的 Pan-Tompkins 演算法，是工業界最常被引用的 QRS 偵測流程：(1) 5–15 Hz 帶通 → (2) 微分 → (3) 平方 → (4) 移動視窗積分（150 ms） → (5) 雙閾值 + 不應期。下面是 Python（scipy.signal）與 MATLAB（Signal Processing Toolbox）的最小可執行範例。</p></div>
+<div data-lang="en"><p>The 1985 Pan-Tompkins algorithm (Jiapu Pan &amp; Willis Tompkins) is the industry's most-cited QRS detection pipeline: (1) 5–15 Hz band-pass → (2) differentiate → (3) square → (4) 150 ms moving-window integration → (5) dual thresholds + refractory. Minimal Python (scipy.signal) and MATLAB (Signal Processing Toolbox) examples below.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.signal <span class="kw">import</span> butter, filtfilt, find_peaks
+
+fs = <span class="num">500</span>            <span class="comment"># sampling rate (Hz), IEC 60601-2-25 diagnostic</span>
+T  = <span class="num">10</span>; hr = <span class="num">75</span>
+t  = np.<span class="func">arange</span>(<span class="num">0</span>, T, <span class="num">1</span>/fs)
+rr = <span class="num">60</span>/hr
+
+<span class="comment"># --- Synthesize PQRST using Gaussian mixture per beat ---</span>
+<span class="kw">def</span> <span class="func">beat</span>(tau):
+    g = <span class="kw">lambda</span> a,c,w: a*np.<span class="func">exp</span>(-((tau-c)/w)**<span class="num">2</span>)
+    <span class="kw">return</span> (g(<span class="num">0.15</span>,<span class="num">0.15</span>,<span class="num">0.025</span>) - g(<span class="num">0.10</span>,<span class="num">0.20</span>,<span class="num">0.015</span>)
+          + g(<span class="num">1.20</span>,<span class="num">0.22</span>,<span class="num">0.012</span>) - g(<span class="num">0.25</span>,<span class="num">0.24</span>,<span class="num">0.015</span>)
+          + g(<span class="num">0.30</span>,<span class="num">0.40</span>,<span class="num">0.045</span>))
+ecg = np.<span class="func">zeros_like</span>(t)
+<span class="kw">for</span> k <span class="kw">in</span> range(<span class="func">int</span>(T/rr)+<span class="num">1</span>):
+    ecg += <span class="func">beat</span>(t - k*rr)
+ecg += <span class="num">0.05</span>*np.random.<span class="func">randn</span>(len(t))                <span class="comment"># white noise</span>
+ecg += <span class="num">0.10</span>*np.<span class="func">sin</span>(<span class="num">2</span>*np.pi*<span class="num">50</span>*t)               <span class="comment"># 50 Hz powerline</span>
+
+<span class="comment"># --- Pan-Tompkins pre-processing ---</span>
+b,a = butter(<span class="num">2</span>, [<span class="num">5</span>/(fs/<span class="num">2</span>), <span class="num">15</span>/(fs/<span class="num">2</span>)], btype=<span class="str">'band'</span>)
+x   = filtfilt(b, a, ecg)
+d   = np.<span class="func">diff</span>(x, prepend=<span class="num">0</span>)         <span class="comment"># differentiate</span>
+s   = d**<span class="num">2</span>                          <span class="comment"># square</span>
+w   = np.<span class="func">ones</span>(<span class="func">int</span>(<span class="num">0.150</span>*fs))/<span class="func">int</span>(<span class="num">0.150</span>*fs)
+mwi = np.<span class="func">convolve</span>(s, w, mode=<span class="str">'same'</span>)
+peaks,_ = find_peaks(mwi, distance=<span class="func">int</span>(<span class="num">0.25</span>*fs),
+                     height=<span class="num">0.4</span>*np.<span class="func">max</span>(mwi))
+<span class="func">print</span>(<span class="str">"Detected HR (bpm) ="</span>,
+      <span class="func">round</span>(<span class="num">60</span>/np.<span class="func">mean</span>(np.<span class="func">diff</span>(peaks)/fs), <span class="num">1</span>))</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre>fs = <span class="num">500</span>; T = <span class="num">10</span>; hr = <span class="num">75</span>;
+t  = <span class="num">0</span>:<span class="num">1</span>/fs:T-<span class="num">1</span>/fs;  rr = <span class="num">60</span>/hr;
+g  = @(a,c,w,tt) a*<span class="func">exp</span>(-((tt-c)/w).^<span class="num">2</span>);
+
+ecg = <span class="func">zeros</span>(<span class="num">1</span>, length(t));
+<span class="kw">for</span> k = <span class="num">0</span>:floor(T/rr)
+    tau = t - k*rr;
+    ecg = ecg + g(<span class="num">0.15</span>,<span class="num">0.15</span>,<span class="num">0.025</span>,tau) - g(<span class="num">0.10</span>,<span class="num">0.20</span>,<span class="num">0.015</span>,tau) ...
+              + g(<span class="num">1.20</span>,<span class="num">0.22</span>,<span class="num">0.012</span>,tau) - g(<span class="num">0.25</span>,<span class="num">0.24</span>,<span class="num">0.015</span>,tau) ...
+              + g(<span class="num">0.30</span>,<span class="num">0.40</span>,<span class="num">0.045</span>,tau);
+<span class="kw">end</span>
+ecg = ecg + <span class="num">0.05</span>*<span class="func">randn</span>(<span class="num">1</span>,length(t)) + <span class="num">0.10</span>*<span class="func">sin</span>(<span class="num">2</span>*pi*<span class="num">50</span>*t);
+
+<span class="comment">% Pan-Tompkins pre-processing</span>
+[b,a] = <span class="func">butter</span>(<span class="num">2</span>, [<span class="num">5</span> <span class="num">15</span>]/(fs/<span class="num">2</span>), <span class="str">'bandpass'</span>);
+x   = <span class="func">filtfilt</span>(b,a,ecg);
+d   = [<span class="num">0</span> <span class="func">diff</span>(x)];
+s   = d.^<span class="num">2</span>;
+mwi = <span class="func">movmean</span>(s, round(<span class="num">0.150</span>*fs));
+[~,locs] = <span class="func">findpeaks</span>(mwi, <span class="str">'MinPeakDistance'</span>, round(<span class="num">0.25</span>*fs), ...
+                          <span class="str">'MinPeakHeight'</span>, <span class="num">0.4</span>*max(mwi));
+fprintf(<span class="str">'Detected HR = %.1f bpm\n'</span>, <span class="num">60</span>/<span class="func">mean</span>(<span class="func">diff</span>(locs)/fs));</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="九、本章關鍵術語" data-en="IX. Key Terms">九、關鍵術語</h2>
+<p><span class="term">CMRR<span class="term-tip">Common-Mode Rejection Ratio — 差動放大器抑制共模雜訊的能力，dB；生醫前端通常 ≥ 100 dB。</span></span> &nbsp;
+<span class="term">DRL<span class="term-tip">Driven-Right-Leg — 把共模訊號反相注入右腿，主動降低工頻干擾。</span></span> &nbsp;
+<span class="term">SNR<span class="term-tip">Signal-to-Noise Ratio — 訊噪比，常以 dB 表示。</span></span> &nbsp;
+<span class="term">Sampling rate (f<sub>s</sub>)<span class="term-tip">每秒取樣次數，Hz；需 ≥ 2× 最高頻率 (Nyquist)。</span></span> &nbsp;
+<span class="term">Half-cell potential<span class="term-tip">電極與電解液界面的平衡電位，材料相關；Ag/AgCl 約 220 mV。</span></span> &nbsp;
+<span class="term">Skin impedance<span class="term-tip">皮膚對交流電的阻抗，常用 10 Hz 量；&lt; 5 kΩ 為佳。</span></span> &nbsp;
+<span class="term">PQRST<span class="term-tip">ECG 一個心動週期的五個波峰波谷：P（房去極）、QRS（室去極）、T（室復極）。</span></span> &nbsp;
+<span class="term">HRV<span class="term-tip">Heart Rate Variability — 相鄰 R-R 間期變異；時域 SDNN/RMSSD、頻域 LF/HF。</span></span> &nbsp;
+<span class="term">10-20 system<span class="term-tip">EEG 頭皮電極標準座標系統；Jasper 1958。</span></span> &nbsp;
+<span class="term">Refractory period<span class="term-tip">心臟細胞除極後 ~ 250 ms 內無法再除極；QRS 偵測同樣設這個守則避免偽峰。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check (3 questions)">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2">
+<p><span data-lang="zh">Q1. 臨床診斷級 ECG（IEC 60601-2-25）建議的最低取樣率是？</span><span data-lang="en">Q1. The minimum recommended sampling rate for diagnostic ECG (IEC 60601-2-25) is:</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0">A. 60 Hz</div>
+<div class="quiz-opt" data-opt="1">B. 250 Hz</div>
+<div class="quiz-opt" data-opt="2">C. 500 Hz</div>
+<div class="quiz-opt" data-opt="3">D. 5,000 Hz</div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+<div class="quiz-q" data-correct="1">
+<p><span data-lang="zh">Q2. SpO₂ 脈搏血氧計利用的兩個波長分別是？</span><span data-lang="en">Q2. SpO₂ pulse oximeters use which two wavelengths?</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0">A. 405 nm &amp; 532 nm</div>
+<div class="quiz-opt" data-opt="1">B. 660 nm (<span data-zh="紅光" data-en="red">紅光</span>) &amp; 940 nm (<span data-zh="紅外光" data-en="IR">紅外光</span>)</div>
+<div class="quiz-opt" data-opt="2">C. 850 nm &amp; 1064 nm</div>
+<div class="quiz-opt" data-opt="3">D. 254 nm &amp; 365 nm</div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+<div class="quiz-q" data-correct="0">
+<p><span data-lang="zh">Q3. Pan-Tompkins 演算法的核心五步驟（依順序）為？</span><span data-lang="en">Q3. The five core steps of Pan-Tompkins (in order) are:</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 帶通 → 微分 → 平方 → 移動視窗積分 → 雙閾值</span><span data-lang="en">A. Band-pass → differentiate → square → moving-window integration → dual threshold</span></div>
+<div class="quiz-opt" data-opt="1"><span data-lang="zh">B. FFT → ICA → 主成分分析 → SVM → 閾值</span><span data-lang="en">B. FFT → ICA → PCA → SVM → threshold</span></div>
+<div class="quiz-opt" data-opt="2"><span data-lang="zh">C. Wavelet → Hilbert → 神經網路 → softmax</span><span data-lang="en">C. Wavelet → Hilbert → neural net → softmax</span></div>
+<div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 平方 → 微分 → 帶通 → 卷積 → CNN</span><span data-lang="en">D. Square → differentiate → band-pass → convolve → CNN</span></div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+</section>
+
+<div class="page-nav">
+<a href="biomaterials.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="A4 · 生醫材料" data-en="A4 · Biomaterials">A4 · 生醫材料</span></a>
+<a href="signal-processing.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="B2 · 訊號處理" data-en="B2 · Signal Processing">B2 · 訊號處理</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · B1 Biosignals</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// ECG simulator
+const sHR=document.getElementById('sHR'),sBW=document.getElementById('sBW'),sPL=document.getElementById('sPL'),sWN=document.getElementById('sWN');
+const vHR=document.getElementById('vHR'),vBW=document.getElementById('vBW'),vPL=document.getElementById('vPL'),vWN=document.getElementById('vWN');
+let ecgChart=null;
+function gauss(a,c,w,tau){return a*Math.exp(-Math.pow((tau-c)/w,2));}
+function beat(tau){return gauss(0.15,0.15,0.025,tau)-gauss(0.10,0.20,0.015,tau)+gauss(1.20,0.22,0.012,tau)-gauss(0.25,0.24,0.015,tau)+gauss(0.30,0.40,0.045,tau);}
+function update(){
+  const hr=parseFloat(sHR.value),bw=parseFloat(sBW.value),pl=parseFloat(sPL.value),wn=parseFloat(sWN.value);
+  vHR.textContent=hr; vBW.textContent=bw.toFixed(2); vPL.textContent=pl.toFixed(2); vWN.textContent=wn.toFixed(2);
+  const fs=250,T=6,N=fs*T,rr=60/hr;
+  const t=Array.from({length:N},(_,i)=>i/fs);
+  const ecg=new Array(N).fill(0);
+  for(let k=0;k<Math.ceil(T/rr)+1;k++){const c=k*rr;for(let i=0;i<N;i++)ecg[i]+=beat(t[i]-c);}
+  for(let i=0;i<N;i++)ecg[i]+=bw*Math.sin(2*Math.PI*0.3*t[i])+pl*Math.sin(2*Math.PI*50*t[i])+wn*(Math.random()*2-1);
+  // simple R detection: peaks above 0.6 with 0.3 s refractory
+  const peaks=[]; let last=-1;
+  for(let i=2;i<N-2;i++){if(ecg[i]>0.6 && ecg[i]>ecg[i-1] && ecg[i]>ecg[i+1] && (i-last)/fs>0.3){peaks.push(i);last=i;}}
+  const lang=I18n.get();
+  if(ecgChart) ecgChart.destroy();
+  ecgChart=new Chart(document.getElementById('ecgChart').getContext('2d'),{
+    type:'line',
+    data:{labels:t.map(x=>x.toFixed(2)),datasets:[
+      {label:lang==='zh'?'模擬 ECG (mV)':'Simulated ECG (mV)',data:ecg,borderColor:'#831843',pointRadius:0,tension:0.1,borderWidth:1.2},
+      {label:lang==='zh'?'偵測到的 R 峰':'Detected R peaks',data:t.map((_,i)=>peaks.includes(i)?ecg[i]:null),borderColor:'#dc2626',pointRadius:4,pointStyle:'crossRot',showLine:false}
+    ]},
+    options:{plugins:{legend:{display:true}},scales:{x:{title:{display:true,text:'t (s)'},ticks:{maxTicksLimit:10}},y:{title:{display:true,text:'mV'}}}}
+  });
+}
+[sHR,sBW,sPL,sWN].forEach(s=>s.addEventListener('input',update));
+document.addEventListener('langchange',update);
+update();
+</script>
+</body></html>

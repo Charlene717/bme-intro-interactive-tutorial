@@ -1,0 +1,323 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>C2: 生物流體力學 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html" class="active">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER C2 · BLOCK C MECHANICS/TISSUE</div>
+<h1 data-zh="生物流體力學與循環" data-en="Biofluid Mechanics &amp; Circulation">生物流體力學與循環</h1>
+<p class="subtitle" data-lang="zh">血液的非牛頓特性、Poiseuille 與 Womersley 流動、人工瓣膜與 LVAD、心血管 CFD——本章把工程流體力學帶進循環系統。</p>
+<p class="subtitle" data-lang="en">Non-Newtonian blood, Poiseuille and Womersley flow, prosthetic valves and LVADs, cardiovascular CFD — engineering fluid mechanics for the circulation.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="血液流變" data-en="HEMORHEOLOGY">血液流變</div>
+<h2 data-zh="一、血液的流變特性" data-en="I. Rheology of Blood">一、血液流變</h2>
+<div data-lang="zh">
+<p>血液是<strong>懸浮液</strong>：~55% 血漿（牛頓流體，μ ≈ 1.2 cP）+ 45% 細胞（紅血球 RBC、白血球、血小板）。整體呈<strong>非牛頓行為</strong>——剪切變稀（shear-thinning）：低剪切率時 RBC 聚集成「rouleaux」黏度高（&gt; 10 cP），高剪切率（&gt; 100 s⁻¹）RBC 變形排列、黏度降至 3–4 cP。</p>
+<p>常用模型：</p>
+<ul>
+<li><strong>Newtonian 近似：</strong>大血管（aorta, large arteries），D &gt; 1 mm、剪切率高，μ ≈ 3.5 cP。</li>
+<li><strong>Casson 模型：</strong>√τ = √τ<sub>y</sub> + √(μ·γ̇)；含 yield stress τ<sub>y</sub>，適用於低剪切（小靜脈、stagnation 區）。</li>
+<li><strong>Carreau-Yasuda：</strong>四參數模型，覆蓋整段剪切範圍，是 CFD 中血液最常用模型。</li>
+</ul>
+<p><strong>血容比（hematocrit, Hct）：</strong>男 40–54%、女 36–48%。Hct ↑ → 黏度指數型上升（polycythemia, doping → 中風風險）。Fåhræus-Lindqvist 效應：管徑 &lt; 0.3 mm 時表觀黏度下降——RBC 沿軸心流動。</p>
+</div>
+<div data-lang="en">
+<p>Blood is a <strong>suspension</strong>: ~55% plasma (Newtonian, μ ≈ 1.2 cP) + 45% cells (RBCs, WBCs, platelets). Globally <strong>non-Newtonian, shear-thinning</strong>: at low shear, RBCs aggregate into rouleaux (μ &gt; 10 cP); at high shear (γ̇ &gt; 100 s⁻¹), RBCs deform and align, dropping μ to 3–4 cP.</p>
+<p>Common models:</p>
+<ul>
+<li><strong>Newtonian approximation:</strong> large vessels (aorta, large arteries), D &gt; 1 mm, high shear; μ ≈ 3.5 cP.</li>
+<li><strong>Casson:</strong> √τ = √τ<sub>y</sub> + √(μ·γ̇); yield-stress fluid, good for low-shear regions (venules, stagnation).</li>
+<li><strong>Carreau-Yasuda:</strong> 4-parameter, full shear range; the workhorse for CFD.</li>
+</ul>
+<p><strong>Hematocrit (Hct):</strong> ♂ 40–54%, ♀ 36–48%. ↑Hct → viscosity rises exponentially (polycythemia, blood doping → stroke risk). Fåhræus-Lindqvist effect: in vessels &lt; 0.3 mm apparent viscosity falls — RBCs cluster on the axis.</p>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>記憶要點：</strong>主動脈、大動脈用 Newtonian 即可；想模擬 stent strut 周邊回流、靜脈瓣、aneurysm 內 stagnation，必須用非牛頓模型（Casson / Carreau-Yasuda）。</span>
+<span data-lang="en"><strong>Rule of thumb:</strong> Newtonian is fine for aorta &amp; large arteries; for stent-strut recirculation, venous valves, or aneurysm stagnation, you need non-Newtonian (Casson / Carreau-Yasuda).</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="流動方程" data-en="FLOW EQUATIONS">流動方程</div>
+<h2 data-zh="二、Poiseuille、Reynolds 與 Womersley" data-en="II. Poiseuille, Reynolds &amp; Womersley">二、基本流動方程</h2>
+<div data-lang="zh">
+<p><strong>1. Poiseuille flow（穩態層流圓管）：</strong></p>
+<p style="text-align:center;font-family:Cambria,serif"><strong>Q = π · ΔP · r⁴ / (8μL)</strong></p>
+<p>流量對半徑 4 次方敏感——半徑減一半，流量降 16 倍（解釋為什麼血管狹窄如此危險、為什麼小兒科氣管插管要小心）。</p>
+<p><strong>2. Reynolds number：</strong></p>
+<p style="text-align:center;font-family:Cambria,serif"><strong>Re = ρ · v · D / μ</strong></p>
+<p>直管中 Re &lt; 2100 為層流（laminar）、2100–4000 為過渡、&gt; 4000 為紊流（turbulent）。<strong>主動脈 Re ≈ 4000</strong>，但因為脈動（pulsatile）且管短，實際只在收縮期峰值短暫紊流；多數時間仍可視為層流或過渡。</p>
+<p><strong>3. Womersley number（脈動流參數）：</strong></p>
+<p style="text-align:center;font-family:Cambria,serif"><strong>α = R · √(ωρ/μ)</strong></p>
+<p>其中 ω = 2π·HR (rad/s) ≈ 7.5 rad/s。α &lt; 1 時脈動效應小、速度剖面近似拋物線（Poiseuille）；α &gt; 10 時慣性主導、剖面變「方塊狀」、流速與壓力梯度有相位差（aorta α ≈ 10–15、femoral α ≈ 4、capillary α ≪ 1）。Womersley 解用 Bessel 函數 J<sub>0</sub>。</p>
+</div>
+<div data-lang="en">
+<p><strong>1. Poiseuille flow (steady laminar pipe):</strong></p>
+<p style="text-align:center;font-family:Cambria,serif"><strong>Q = π · ΔP · r⁴ / (8μL)</strong></p>
+<p>Flow scales with the 4th power of radius — halving the radius cuts flow 16-fold (why arterial stenosis is so dangerous, why pediatric airway intubation needs care).</p>
+<p><strong>2. Reynolds number:</strong></p>
+<p style="text-align:center;font-family:Cambria,serif"><strong>Re = ρ · v · D / μ</strong></p>
+<p>Straight pipe: Re &lt; 2100 laminar, 2100–4000 transitional, &gt; 4000 turbulent. <strong>Aortic Re ≈ 4000</strong>, but flow is pulsatile and the pipe is short, so genuine turbulence appears only briefly at peak systole.</p>
+<p><strong>3. Womersley number (pulsatile parameter):</strong></p>
+<p style="text-align:center;font-family:Cambria,serif"><strong>α = R · √(ωρ/μ)</strong></p>
+<p>ω = 2π·HR (rad/s) ≈ 7.5 rad/s. α &lt; 1: pulsatile effects small, parabolic Poiseuille-like profile; α &gt; 10: inertia dominates, profile flattens (blunt), velocity lags pressure (aorta α ≈ 10–15, femoral α ≈ 4, capillary α ≪ 1). Womersley solution uses Bessel function J<sub>0</sub>.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="脈波" data-en="PULSE WAVE">脈波</div>
+<h2 data-zh="三、壓力-流量波形與脈波速度" data-en="III. Pressure-Flow Waveforms &amp; PWV">三、波形與脈波速度</h2>
+<div data-lang="zh">
+<p>動脈壓力波由收縮期外推 + 從遠端反射回波疊加而成。年輕健康者反射波回到時近舒張期、抬升 diastolic pressure（augmentation index 低）；硬化動脈反射波太快回到、堆疊在收縮峰上、收縮壓上升（augmentation index 高，是動脈硬化指標）。</p>
+<p><strong>Moens-Korteweg 方程（脈波速度 PWV）：</strong></p>
+<p style="text-align:center;font-family:Cambria,serif"><strong>PWV = √(E · h / (2ρ · r))</strong></p>
+<p>E = 血管壁彈性模數、h = 壁厚、r = 半徑。年輕健康主動脈 PWV ≈ 5 m/s；70 歲動脈硬化者 PWV ≈ 12 m/s。臨床用 carotid-femoral PWV（cf-PWV）作為心血管事件預測指標——&gt; 10 m/s 視為高風險。</p>
+<p><strong>波形成分：</strong>(1) 主收縮波 → (2) 切跡（dicrotic notch，aortic valve 關閉）→ (3) 舒張回波。Windkessel 模型用 RC 等效電路解釋 diastolic decay。</p>
+</div>
+<div data-lang="en">
+<p>The arterial pressure wave = forward systolic wave + reflected wave from periphery. In healthy young vessels, the reflection arrives in diastole, augmenting diastolic pressure (low augmentation index). In stiff aged arteries, the reflection arrives early and piles onto systolic peak (high augmentation index — a stiffness marker).</p>
+<p><strong>Moens-Korteweg (pulse wave velocity):</strong></p>
+<p style="text-align:center;font-family:Cambria,serif"><strong>PWV = √(E · h / (2ρ · r))</strong></p>
+<p>E = wall modulus, h = wall thickness, r = radius. Healthy young aorta PWV ≈ 5 m/s; stiff 70-yr-old PWV ≈ 12 m/s. Clinically, carotid-femoral PWV (cf-PWV) &gt; 10 m/s is high cardiovascular risk.</p>
+<p><strong>Waveform features:</strong> (1) main systolic peak → (2) dicrotic notch (aortic valve closure) → (3) diastolic reflection. The Windkessel model uses an RC circuit analogue to explain diastolic decay.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="心血管裝置" data-en="CV DEVICES">心血管裝置</div>
+<h2 data-zh="四、心血管流體裝置" data-en="IV. Cardiovascular Fluidic Devices">四、心血管裝置</h2>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">💗</div><h4 data-zh="人工心臟瓣膜" data-en="Prosthetic Heart Valves">人工瓣膜</h4>
+<div data-lang="zh"><p>(1) <strong>機械瓣（mechanical）：</strong>St. Jude Medical bileaflet（pyrolytic carbon），耐久 &gt; 25 年，但需終生 warfarin 抗凝。(2) <strong>生物瓣（bioprosthetic）：</strong>porcine 或 bovine pericardium，無需長期抗凝、10–15 年退化。(3) <strong>TAVR（經導管）：</strong>Edwards SAPIEN 3 Ultra、Medtronic Evolut FX；2019 起獲 FDA 核准用於低風險病人，已取代傳統開胸換瓣為主流。</p></div>
+<div data-lang="en"><p>(1) <strong>Mechanical:</strong> St. Jude bileaflet (pyrolytic carbon); &gt; 25-yr durability but lifelong warfarin. (2) <strong>Bioprosthetic:</strong> porcine/bovine pericardium; no chronic anticoagulation, 10–15 yr degeneration. (3) <strong>TAVR:</strong> Edwards SAPIEN 3 Ultra, Medtronic Evolut FX; FDA-cleared for low-risk since 2019, now dominant over open-heart valve replacement.</p></div></div>
+<div class="card"><div class="card-icon">🔄</div><h4 data-zh="LVAD 左心室輔助" data-en="LVAD">LVAD</h4>
+<div data-lang="zh"><p>HeartMate 3（Abbott）為 2025 年市場主導，採用全磁懸浮 centrifugal pump、人工脈動（intrinsic pulse），降低 hemolysis 與血栓。流量 ≈ 5–6 L/min，植入後 5 年存活率 ~ 60%。臨床路徑：bridge-to-transplant、destination therapy。下一代 BiVACOR TAH 2024 進入 FDA early feasibility study。</p></div>
+<div data-lang="en"><p>HeartMate 3 (Abbott) leads 2025 market — fully maglev centrifugal pump with intrinsic pulse mode, lowering hemolysis and thrombus. ~ 5–6 L/min, 5-yr survival ~ 60%. Bridge-to-transplant or destination therapy. Next-gen BiVACOR TAH entered FDA early feasibility 2024.</p></div></div>
+<div class="card"><div class="card-icon">🫁</div><h4 data-zh="ECMO 體外膜氧合" data-en="ECMO">ECMO</h4>
+<div data-lang="zh"><p>VV-ECMO（venovenous）：嚴重呼衰，從中央靜脈引血 → oxygenator → 還血至靜脈；不取代心臟。<br>VA-ECMO（venoarterial）：心源性休克，引血 → 還血至動脈，繞過心肺；增加後負荷，常需 IABP / Impella 卸壓。COVID-19 期間 ECMO 使用激增。</p></div>
+<div data-lang="en"><p>VV-ECMO: severe respiratory failure — central vein → oxygenator → vein; heart untouched.<br>VA-ECMO: cardiogenic shock — vein → artery, bypassing heart-lungs; raises afterload, often needs IABP / Impella unloading. COVID-19 caused a major surge.</p></div></div>
+<div class="card"><div class="card-icon">💧</div><h4 data-zh="血液透析" data-en="Hemodialysis">血液透析</h4>
+<div data-lang="zh"><p>對流（convection）+ 擴散（diffusion）跨半透膜清除尿素、肌酸酐；典型流量 Q<sub>B</sub> ≈ 300 mL/min、Q<sub>D</sub> 500 mL/min。clearance K = Q<sub>B</sub>·(C<sub>in</sub>−C<sub>out</sub>)/C<sub>in</sub>。常見膜：聚醚碸 PES、聚碸 PSU、cellulose triacetate。連續腎臟替代療法（CRRT）用於 ICU。</p></div>
+<div data-lang="en"><p>Convection + diffusion across a semi-permeable membrane to clear urea, creatinine; typical Q<sub>B</sub> ≈ 300 mL/min, Q<sub>D</sub> 500 mL/min. Clearance K = Q<sub>B</sub>·(C<sub>in</sub>−C<sub>out</sub>)/C<sub>in</sub>. Common membranes: PES, PSU, cellulose triacetate. CRRT for ICU.</p></div></div>
+<div class="card"><div class="card-icon">🩸</div><h4 data-zh="冠狀動脈支架" data-en="Coronary Stent">冠脈支架</h4>
+<div data-lang="zh"><p>金屬骨架（CoCr、Pt-Cr）+ 藥物塗層（everolimus, zotarolimus）+ 可吸收 polymer。流體議題：strut 後方的低速回流區（low WSS, oscillatory shear）促 neointimal hyperplasia 與再狹窄；CFD 用來優化 strut 厚度（&lt; 80 μm）、覆蓋率、cell 設計。</p></div>
+<div data-lang="en"><p>Metal scaffold (CoCr, Pt-Cr) + drug coating (everolimus, zotarolimus) + bioresorbable polymer. Fluidic concerns: low-WSS / oscillatory zone behind struts drives neointimal hyperplasia &amp; restenosis. CFD optimizes strut thickness (&lt; 80 μm), coverage, cell design.</p></div></div>
+<div class="card"><div class="card-icon">🧪</div><h4 data-zh="微流體 / lab-on-chip" data-en="Microfluidics">微流體</h4>
+<div data-lang="zh"><p>微通道（10–500 μm）內 Re ≪ 1（蠕流）；擴散主導混合（被動 mixer 用 herringbone 結構）。應用：POC 診斷（COVID 抗原卡）、CTC 分離、organ-on-chip、droplet-based scRNA-seq（10x Genomics）。</p></div>
+<div data-lang="en"><p>Microchannels (10–500 μm) operate at Re ≪ 1 (Stokes flow); diffusion-dominated mixing (passive mixers use herringbone grooves). Apps: POC diagnostics (COVID antigen), CTC sorting, organ-on-chip, droplet scRNA-seq (10x Genomics).</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="CFD 應用" data-en="CFD IN BME">CFD 應用</div>
+<h2 data-zh="五、心血管 CFD 與 WSS" data-en="V. Cardiovascular CFD &amp; WSS">五、心血管 CFD</h2>
+<div data-lang="zh">
+<p>計算流體力學（CFD）解 Navier-Stokes 方程：</p>
+<p style="text-align:center;font-family:Cambria,serif">ρ(∂<strong>v</strong>/∂t + <strong>v</strong>·∇<strong>v</strong>) = −∇p + μ∇²<strong>v</strong> + <strong>f</strong></p>
+<p>BME 常用軟體：ANSYS Fluent / CFX、OpenFOAM（開源）、Star-CCM+、COMSOL、<strong>SimVascular</strong>（開源，心血管專用 patient-specific pipeline：影像分割 → 表面建模 → 網格 → CFD → WSS map）。</p>
+<p><strong>關鍵輸出 — 牆面剪應力（WSS）：</strong></p>
+<ul>
+<li>正常 WSS：1–7 Pa（10–70 dyn/cm²）</li>
+<li>低 WSS（&lt; 0.4 Pa）+ 振盪（OSI &gt; 0.2）→ 內皮活化、發炎、<strong>動脈粥樣硬化（atherosclerosis）</strong>初發部位（頸動脈分叉、冠脈彎曲處）</li>
+<li>高 WSS（&gt; 10 Pa）→ <strong>aneurysm 成長與破裂</strong>風險上升（cerebral aneurysm）</li>
+</ul>
+<p><strong>流-結構耦合（FSI）：</strong>瓣膜 leaflet 動態、TAVR 部署、aneurysm 壁變形——必須把血流與血管壁變形耦合解，常用 ALE（Arbitrary Lagrangian-Eulerian）或 IBM（Immersed Boundary Method）。</p>
+</div>
+<div data-lang="en">
+<p>CFD solves Navier-Stokes:</p>
+<p style="text-align:center;font-family:Cambria,serif">ρ(∂<strong>v</strong>/∂t + <strong>v</strong>·∇<strong>v</strong>) = −∇p + μ∇²<strong>v</strong> + <strong>f</strong></p>
+<p>Common software: ANSYS Fluent/CFX, OpenFOAM (open source), Star-CCM+, COMSOL, and <strong>SimVascular</strong> (open source, patient-specific cardiovascular pipeline: image segmentation → surface model → mesh → CFD → WSS map).</p>
+<p><strong>Key output — Wall Shear Stress (WSS):</strong></p>
+<ul>
+<li>Normal WSS: 1–7 Pa (10–70 dyn/cm²)</li>
+<li>Low WSS (&lt; 0.4 Pa) + oscillatory (OSI &gt; 0.2) → endothelial activation, inflammation, <strong>atherosclerosis</strong> initiation (carotid bifurcation, coronary bends)</li>
+<li>High WSS (&gt; 10 Pa) → <strong>aneurysm growth and rupture</strong> risk (cerebral aneurysms)</li>
+</ul>
+<p><strong>Fluid-Structure Interaction (FSI):</strong> valve leaflet dynamics, TAVR deployment, aneurysm wall deformation — must couple blood flow with vessel wall deformation; use ALE (Arbitrary Lagrangian-Eulerian) or IBM (Immersed Boundary Method).</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖表" data-en="INTERACTIVE">互動圖表</div>
+<h2 data-zh="六、互動：Poiseuille 流量計算機" data-en="VI. Interactive: Poiseuille Calculator">六、Poiseuille 互動</h2>
+<div data-lang="zh"><p>調整管半徑、黏度、壓力差，觀察流量 Q 的變化。注意：半徑是 r⁴ 關係——小變化會造成巨大效果。</p></div>
+<div data-lang="en"><p>Adjust radius, viscosity, and pressure drop to see how flow Q responds. Note the r⁴ dependence — small changes have huge effects.</p></div>
+<div class="interactive-panel">
+<div class="slider-row">
+  <label><span data-zh="管半徑 r (mm)" data-en="Radius r (mm)">管半徑 r</span>: <span id="rVal">5.0</span> mm</label>
+  <input type="range" id="rSlider" min="0.5" max="12" step="0.1" value="5.0">
+</div>
+<div class="slider-row">
+  <label><span data-zh="黏度 μ (cP)" data-en="Viscosity μ (cP)">黏度 μ</span>: <span id="muVal">3.5</span> cP</label>
+  <input type="range" id="muSlider" min="1" max="10" step="0.1" value="3.5">
+</div>
+<div class="slider-row">
+  <label><span data-zh="壓力差 ΔP (mmHg)" data-en="Pressure drop ΔP (mmHg)">壓力差 ΔP</span>: <span id="dpVal">80</span> mmHg</label>
+  <input type="range" id="dpSlider" min="10" max="200" step="1" value="80">
+</div>
+<div class="slider-row">
+  <label><span data-zh="長度 L (cm)" data-en="Length L (cm)">長度 L</span>: <span id="LVal">20</span> cm</label>
+  <input type="range" id="LSlider" min="1" max="50" step="1" value="20">
+</div>
+<div class="chart-container"><canvas id="poiChart"></canvas></div>
+<p style="font-size:.9rem;text-align:center;"><strong data-zh="計算結果：" data-en="Result:">計算結果：</strong> Q = <span id="qOut">--</span> mL/min ; Re = <span id="reOut">--</span></p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="七、要選哪種流動分析？" data-en="VII. Which Flow Analysis?">七、流動分析決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="流動分析方法選擇" data-en="Flow Analysis Selection">流動分析方法</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">流動是穩態？管徑均勻？非脈動？<span class="dt-arrow">→</span> Poiseuille（解析解）；只算 Q, τ。</span><span data-lang="en">Steady, uniform pipe, non-pulsatile? <span class="dt-arrow">→</span> Poiseuille (analytical); compute Q, τ.</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">脈動但直管？α 重要嗎？<span class="dt-arrow">→</span> Womersley 解析解（Bessel J<sub>0</sub>）；正弦壓力梯度。</span><span data-lang="en">Pulsatile, straight pipe? Need α? <span class="dt-arrow">→</span> Womersley (Bessel J<sub>0</sub>) for sinusoidal pressure gradient.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">幾何複雜（分叉、彎曲、aneurysm）？<span class="dt-arrow">→</span> CFD（ANSYS / OpenFOAM / SimVascular）；3D Navier-Stokes。</span><span data-lang="en">Complex geometry (bifurcation, bend, aneurysm)? <span class="dt-arrow">→</span> CFD (ANSYS / OpenFOAM / SimVascular); 3D NS.</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">血管壁要變形 / 瓣膜要拍動？<span class="dt-arrow">→</span> FSI（ALE 或 IBM 法）；流-結構耦合。</span><span data-lang="en">Wall deforms / valve flaps? <span class="dt-arrow">→</span> FSI (ALE or IBM); fluid-structure coupling.</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">微通道 / 細胞排序？<span class="dt-arrow">→</span> Stokes 流（Re ≪ 1），常用解析或 COMSOL；考慮擴散與電動學。</span><span data-lang="en">Microchannel / cell sorting? <span class="dt-arrow">→</span> Stokes flow (Re ≪ 1), analytical or COMSOL; add diffusion + electrokinetics.</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="八、Womersley 脈動流解" data-en="VIII. Womersley Pulsatile Flow Solution">八、Womersley 程式</h2>
+<div data-lang="zh"><p>解析解：直圓管在正弦壓力梯度下的速度剖面 u(r,t)，使用 Bessel function of complex argument J<sub>0</sub>。</p></div>
+<div data-lang="en"><p>Analytical solution for sinusoidal pressure gradient in a straight circular pipe; uses Bessel function J<sub>0</sub> of complex argument.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">from</span> scipy.special <span class="kw">import</span> jv
+
+<span class="comment"># Aortic-like pulsatile flow</span>
+R     = <span class="num">0.012</span>           <span class="comment"># radius (m)</span>
+mu    = <span class="num">0.0035</span>          <span class="comment"># Pa.s</span>
+rho   = <span class="num">1060</span>            <span class="comment"># kg/m^3</span>
+HR    = <span class="num">75</span>              <span class="comment"># bpm</span>
+omega = <span class="num">2</span>*np.pi*HR/<span class="num">60</span>
+alpha = R*np.<span class="func">sqrt</span>(omega*rho/mu)
+<span class="func">print</span>(<span class="str">f"Womersley alpha = {alpha:.2f}"</span>)
+
+K  = <span class="num">2000</span>             <span class="comment"># pressure-gradient amplitude (Pa/m)</span>
+i  = <span class="num">1j</span>
+r  = np.<span class="func">linspace</span>(<span class="num">0</span>,R,<span class="num">80</span>)
+t  = np.<span class="func">linspace</span>(<span class="num">0</span>, <span class="num">2</span>*np.pi/omega, <span class="num">8</span>)
+fig,ax = plt.<span class="func">subplots</span>(figsize=(<span class="num">7</span>,<span class="num">4</span>))
+<span class="kw">for</span> tk <span class="kw">in</span> t:
+    arg = (i**<span class="num">1.5</span>)*alpha*r/R
+    argR= (i**<span class="num">1.5</span>)*alpha
+    u   = (K/(i*omega*rho))*(<span class="num">1</span> - jv(<span class="num">0</span>,arg)/jv(<span class="num">0</span>,argR))*np.<span class="func">exp</span>(i*omega*tk)
+    ax.<span class="func">plot</span>(r*<span class="num">1000</span>, u.real, label=<span class="str">f"t={tk*1000:.0f} ms"</span>)
+ax.<span class="func">set_xlabel</span>(<span class="str">"r (mm)"</span>); ax.<span class="func">set_ylabel</span>(<span class="str">"u (m/s)"</span>)
+ax.<span class="func">set_title</span>(<span class="str">f"Womersley profile, alpha={alpha:.1f}"</span>); ax.<span class="func">legend</span>(); plt.<span class="func">show</span>()</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre>R = <span class="num">0.012</span>; mu = <span class="num">0.0035</span>; rho = <span class="num">1060</span>;
+HR = <span class="num">75</span>; w = <span class="num">2</span>*pi*HR/<span class="num">60</span>;
+alpha = R*sqrt(w*rho/mu);
+<span class="func">fprintf</span>(<span class="str">'alpha = %.2f\n'</span>, alpha);
+
+K = <span class="num">2000</span>;  ii = <span class="num">1i</span>;
+r = linspace(<span class="num">0</span>,R,<span class="num">80</span>);
+t = linspace(<span class="num">0</span>, <span class="num">2</span>*pi/w, <span class="num">8</span>);
+<span class="kw">for</span> k = <span class="num">1</span>:length(t)
+  arg  = (ii^<span class="num">1.5</span>)*alpha*r/R;
+  argR = (ii^<span class="num">1.5</span>)*alpha;
+  u = (K/(ii*w*rho)).*(<span class="num">1</span> - <span class="func">besselj</span>(<span class="num">0</span>,arg)./<span class="func">besselj</span>(<span class="num">0</span>,argR)).*<span class="func">exp</span>(ii*w*t(k));
+  <span class="func">plot</span>(r*<span class="num">1000</span>, real(u),<span class="str">'LineWidth'</span>,<span class="num">1.3</span>); <span class="func">hold on</span>;
+<span class="kw">end</span>
+<span class="func">xlabel</span>(<span class="str">'r (mm)'</span>); <span class="func">ylabel</span>(<span class="str">'u (m/s)'</span>);
+<span class="func">title</span>(<span class="func">sprintf</span>(<span class="str">'Womersley alpha=%.1f'</span>,alpha)); <span class="func">grid on</span>;</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="九、本章關鍵術語" data-en="IX. Key Terms">九、關鍵術語</h2>
+<p><span class="term">Newtonian fluid<span class="term-tip">τ = μ·γ̇，黏度與剪切率無關。水、血漿是 Newtonian。</span></span> &nbsp;
+<span class="term">Shear-thinning<span class="term-tip">黏度隨剪切率上升而下降；血液的典型行為。</span></span> &nbsp;
+<span class="term">Casson model<span class="term-tip">血液低剪切區常用：√τ = √τ<sub>y</sub> + √(μγ̇)；有 yield stress。</span></span> &nbsp;
+<span class="term">Hematocrit<span class="term-tip">紅血球體積佔總血液比例；男 40-54%，女 36-48%。</span></span> &nbsp;
+<span class="term">Poiseuille<span class="term-tip">Q = πΔPr⁴/(8μL)；穩態層流圓管。</span></span> &nbsp;
+<span class="term">Reynolds<span class="term-tip">Re = ρvD/μ；&lt; 2100 層流、&gt; 4000 紊流。</span></span> &nbsp;
+<span class="term">Womersley<span class="term-tip">α = R√(ωρ/μ)；脈動流參數，aorta α ≈ 10-15。</span></span> &nbsp;
+<span class="term">WSS<span class="term-tip">Wall Shear Stress；血流對血管壁的剪應力，正常 1-7 Pa。</span></span> &nbsp;
+<span class="term">OSI<span class="term-tip">Oscillatory Shear Index；剪應力方向變化程度，&gt; 0.2 與粥狀硬化關聯。</span></span> &nbsp;
+<span class="term">PWV<span class="term-tip">Pulse Wave Velocity；脈波速度，cf-PWV &gt; 10 m/s 高心血管風險。</span></span> &nbsp;
+<span class="term">TAVR<span class="term-tip">Transcatheter Aortic Valve Replacement；經導管主動脈瓣置換。</span></span> &nbsp;
+<span class="term">FSI<span class="term-tip">Fluid-Structure Interaction；流-結構耦合模擬。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q1. 在 Poiseuille 流中，若血管半徑減半，其餘條件不變，流量 Q 將：</span><span data-lang="en">Q1. In Poiseuille flow, halving the vessel radius (other variables fixed) changes Q by:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 減為 1/2</span><span data-lang="en">A. Halved</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 減為 1/4</span><span data-lang="en">B. 1/4</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 減為 1/16（因為 Q 對 r⁴）</span><span data-lang="en">C. 1/16 (Q ∝ r⁴)</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 不變</span><span data-lang="en">D. Unchanged</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q2. 下列哪一項<strong>最</strong>能描述「低 WSS + 高 OSI」區域的臨床意義？</span><span data-lang="en">Q2. What does a region of "low WSS + high OSI" most strongly indicate?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 動脈瘤破裂風險升高</span><span data-lang="en">A. Increased aneurysm rupture risk</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 動脈粥樣硬化 atherosclerosis 初發部位（內皮活化、發炎）</span><span data-lang="en">B. Initiation site of atherosclerosis (endothelial activation, inflammation)</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 紅血球破裂</span><span data-lang="en">C. Hemolysis</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 血液黏度上升</span><span data-lang="en">D. Increased viscosity</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="0"><p><span data-lang="zh">Q3. 主動脈 Womersley α ≈ 10–15，這代表：</span><span data-lang="en">Q3. Aortic α ≈ 10–15 means:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 慣性主導、速度剖面變方塊狀、流速與壓力梯度有相位差</span><span data-lang="en">A. Inertia dominates, profile flattens, velocity lags pressure gradient</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 黏性主導、速度剖面是拋物線</span><span data-lang="en">B. Viscous-dominated parabolic profile</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 流動是穩態</span><span data-lang="en">C. Flow is steady</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 流動是 Stokes 流</span><span data-lang="en">D. Stokes flow</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="biomechanics.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="C1 · 生物力學" data-en="C1 · Biomechanics">C1 · 生物力學</span></a>
+<a href="tissue-engineering.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="C3 · 組織工程與再生醫學" data-en="C3 · Tissue Engineering">C3 · 組織工程與再生醫學</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · C2 Biofluid Mechanics</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// Poiseuille interactive — sweep curve over radius for given mu, dP, L
+const rSL=document.getElementById('rSlider'),muSL=document.getElementById('muSlider'),dpSL=document.getElementById('dpSlider'),LSL=document.getElementById('LSlider');
+const rV=document.getElementById('rVal'),muV=document.getElementById('muVal'),dpV=document.getElementById('dpVal'),LV=document.getElementById('LVal');
+const qO=document.getElementById('qOut'),reO=document.getElementById('reOut');
+let poiChart=null;
+function poiCalc(){
+  const r_mm=parseFloat(rSL.value), mu_cP=parseFloat(muSL.value), dp_mmHg=parseFloat(dpSL.value), L_cm=parseFloat(LSL.value);
+  rV.textContent=r_mm.toFixed(1); muV.textContent=mu_cP.toFixed(1); dpV.textContent=dp_mmHg.toFixed(0); LV.textContent=L_cm.toFixed(0);
+  const r=r_mm/1000, mu=mu_cP/1000, dP=dp_mmHg*133.322, L=L_cm/100, rho=1060;
+  const Q = Math.PI*dP*Math.pow(r,4)/(8*mu*L); // m^3/s
+  const v = Q/(Math.PI*r*r);
+  const Re = rho*v*(2*r)/mu;
+  const Q_ml_min = Q*1e6*60;
+  qO.textContent=Q_ml_min.toFixed(1); reO.textContent=Re.toFixed(0);
+  // Curve: Q as function of r (sweep), with current values
+  const xs=[]; const ys=[];
+  for(let rr=0.5; rr<=12; rr+=0.2){
+    const r_m=rr/1000;
+    const qq=Math.PI*dP*Math.pow(r_m,4)/(8*mu*L)*1e6*60;
+    xs.push(rr.toFixed(1)); ys.push(qq);
+  }
+  const lang=I18n.get();
+  if(poiChart)poiChart.destroy();
+  poiChart=new Chart(document.getElementById('poiChart').getContext('2d'),{
+    type:'line',
+    data:{labels:xs,datasets:[
+      {label:lang==='zh'?'Q vs 半徑 (mL/min)':'Q vs radius (mL/min)',
+       data:ys,borderColor:'#831843',backgroundColor:'rgba(131,24,67,.12)',fill:true,pointRadius:0,tension:.2},
+      {label:lang==='zh'?'目前操作點':'Current op-point',
+       data:[{x:r_mm.toFixed(1),y:Q_ml_min}],borderColor:'#0f766e',backgroundColor:'#0f766e',pointRadius:8,showLine:false,type:'scatter'}
+    ]},
+    options:{plugins:{legend:{display:true}},
+      scales:{x:{title:{display:true,text:lang==='zh'?'半徑 r (mm)':'Radius r (mm)'}},
+              y:{type:'logarithmic',title:{display:true,text:lang==='zh'?'流量 Q (mL/min, log)':'Q (mL/min, log)'}}}}
+  });
+}
+[rSL,muSL,dpSL,LSL].forEach(s=>s.addEventListener('input',poiCalc));
+poiCalc();
+document.addEventListener('langchange',poiCalc);
+</script>
+</body></html>

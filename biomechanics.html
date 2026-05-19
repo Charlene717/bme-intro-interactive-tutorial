@@ -1,0 +1,337 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>C1: 生物力學 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html" class="active">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER C1 · BLOCK C MECHANICS/TISSUE</div>
+<h1 data-zh="生物力學" data-en="Biomechanics">生物力學</h1>
+<p class="subtitle" data-lang="zh">從骨頭的應力應變、肌腱的黏彈性、到心臟的壓力-容積環與步態分析——本章帶你用工程力學的語彙拆解人體的「結構與運動」。</p>
+<p class="subtitle" data-lang="en">From bone stress-strain and tendon viscoelasticity to cardiac PV loops and gait analysis — this chapter decodes the human body's structure and motion using engineering mechanics.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="基礎力學" data-en="FUNDAMENTALS">基礎力學</div>
+<h2 data-zh="一、應力、應變與楊氏模數" data-en="I. Stress, Strain &amp; Young's Modulus">一、應力、應變與楊氏模數</h2>
+<div data-lang="zh">
+<p><strong>應力（stress）</strong> σ = F/A，單位 Pa = N/m²（生醫常用 MPa 或 GPa）；<strong>應變（strain）</strong> ε = ΔL/L₀，無量綱。一維彈性區下 Hooke's law：<strong>σ = E · ε</strong>，其中 E 為楊氏模數（Young's modulus），代表材料的「剛度」。</p>
+<p>典型工程材料的 σ-ε 曲線可分為四階段：(1) <strong>彈性區（elastic）</strong>——線性、卸載可恢復；(2) <strong>降伏點（yield, σ<sub>y</sub>）</strong>——之後出現永久塑性變形；(3) <strong>極限抗拉強度（UTS, σ<sub>u</sub>）</strong>——應力最高點；(4) <strong>斷裂（fracture, σ<sub>f</sub>）</strong>。<em>延性（ductile）</em>材料如不鏽鋼 / Ti，斷前有大塑性區與「頸縮」；<em>脆性（brittle）</em>材料如陶瓷 / 皮質骨，幾乎無塑性區、斷面平整。</p>
+</div>
+<div data-lang="en">
+<p><strong>Stress</strong> σ = F/A in Pa = N/m² (BME often uses MPa or GPa); <strong>strain</strong> ε = ΔL/L₀ (dimensionless). In the elastic regime Hooke's law gives <strong>σ = E · ε</strong>, where E is the Young's modulus — material stiffness.</p>
+<p>A typical σ-ε curve has four phases: (1) <strong>elastic</strong> — linear, recoverable on unloading; (2) <strong>yield point (σ<sub>y</sub>)</strong> — permanent plastic deformation begins; (3) <strong>ultimate tensile strength (UTS, σ<sub>u</sub>)</strong> — peak stress; (4) <strong>fracture (σ<sub>f</sub>)</strong>. <em>Ductile</em> materials (stainless, Ti) show large plastic zone and necking before fracture; <em>brittle</em> materials (ceramics, cortical bone) have almost no plastic region and a flat fracture surface.</p>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>三大相關常數：</strong>Young's modulus E、shear modulus G、bulk modulus K，與 Poisson's ratio ν 滿足 G = E/2(1+ν)。人體軟組織常假設 ν ≈ 0.49（接近不可壓縮）；骨頭 ν ≈ 0.3。</span>
+<span data-lang="en"><strong>Three related constants:</strong> Young's modulus E, shear G, bulk K — with Poisson's ratio ν satisfying G = E/2(1+ν). Soft tissues ν ≈ 0.49 (nearly incompressible); bone ν ≈ 0.3.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="骨骼力學" data-en="BONE MECHANICS">骨骼力學</div>
+<h2 data-zh="二、骨頭的結構與力學性質" data-en="II. Bone Structure &amp; Mechanical Properties">二、骨骼力學</h2>
+<div data-lang="zh">
+<p>骨頭是一種<strong>分階層複合材料</strong>：奈米尺度的羥磷灰石（HA）礦物 + 第一型膠原蛋白；微結構分為<strong>皮質骨（cortical / compact）</strong>與<strong>骨小樑（trabecular / cancellous）</strong>。皮質骨密度 ≈ 1.9 g/cm³、孔隙度 5–10%；骨小樑密度 0.2–0.5 g/cm³、孔隙度 50–90%（如蜂巢）。</p>
+<ul>
+<li><strong>皮質骨：</strong>E ≈ 17 GPa（長軸方向）、σ<sub>UTS</sub> ≈ 130 MPa 拉伸 / 200 MPa 壓縮。</li>
+<li><strong>骨小樑：</strong>E ≈ 0.1–0.5 GPa、σ<sub>UTS</sub> ≈ 1–10 MPa，對方向敏感。</li>
+<li><strong>異向性（anisotropy）：</strong>沿哈氏管軸向強約 2–3 倍橫向。</li>
+<li><strong>Wolff's law（1892）：</strong>骨頭會依長期應力場重塑——多承重的區域變厚、少承重萎縮。Stress shielding 即由此而來。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p>Bone is a <strong>hierarchical composite</strong>: nanoscale hydroxyapatite (HA) mineral + type-I collagen. Two micro-structures: <strong>cortical (compact)</strong> and <strong>trabecular (cancellous)</strong>. Cortical density ≈ 1.9 g/cm³, porosity 5–10%; trabecular 0.2–0.5 g/cm³, porosity 50–90% (honeycomb-like).</p>
+<ul>
+<li><strong>Cortical bone:</strong> E ≈ 17 GPa (long axis), σ<sub>UTS</sub> ≈ 130 MPa tensile / 200 MPa compressive.</li>
+<li><strong>Trabecular bone:</strong> E ≈ 0.1–0.5 GPa, σ<sub>UTS</sub> ≈ 1–10 MPa; highly direction-dependent.</li>
+<li><strong>Anisotropy:</strong> ~2-3× stronger along the Haversian (osteonal) axis than transverse.</li>
+<li><strong>Wolff's law (1892):</strong> Bone remodels in response to long-term stress fields — load-bearing regions thicken, unloaded regions atrophy. Stress shielding follows directly from this.</li>
+</ul>
+</div>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>骨質疏鬆與骨折風險：</strong>停經後女性 BMD 每年下降約 1–3%；當 T-score ≤ −2.5（骨質疏鬆），髖部骨折風險指數型上升。臨床評估工具：DXA + FRAX 10 年骨折機率；治療：bisphosphonates、denosumab、teriparatide、romosozumab。</span>
+<span data-lang="en"><strong>Osteoporosis &amp; fracture risk:</strong> Postmenopausal BMD drops 1–3%/yr; T-score ≤ −2.5 = osteoporosis, hip-fracture risk rises exponentially. Clinical tools: DXA + FRAX 10-yr fracture probability. Drugs: bisphosphonates, denosumab, teriparatide, romosozumab.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="軟組織" data-en="SOFT TISSUE">軟組織</div>
+<h2 data-zh="三、軟組織的黏彈性" data-en="III. Soft-Tissue Viscoelasticity">三、軟組織黏彈性</h2>
+<div data-lang="zh">
+<p>軟組織（肌腱、韌帶、皮膚、血管、心肌）不是純彈性的——它們<strong>時間相依</strong>：相同應變下、加載速率越快應力越大。三大現象：</p>
+<ul>
+<li><strong>應力鬆弛（stress relaxation）：</strong>固定 ε，σ(t) 隨時間下降。</li>
+<li><strong>潛變（creep）：</strong>固定 σ，ε(t) 隨時間增加。</li>
+<li><strong>遲滯（hysteresis）：</strong>加載與卸載曲線形成迴圈，迴圈面積 = 該循環消散的能量。</li>
+</ul>
+<p>常用三種<strong>簡化黏彈模型</strong>：</p>
+<ol>
+<li><strong>Maxwell 模型</strong>（彈簧 + 阻尼器串聯）：dε/dt = (1/E) dσ/dt + σ/η；擅長描述「應力鬆弛」（指數衰減）。</li>
+<li><strong>Kelvin-Voigt 模型</strong>（並聯）：σ(t) = E·ε(t) + η·dε/dt；擅長描述「潛變」（指數逼近）。</li>
+<li><strong>標準線性固體 SLS（Zener）：</strong>Maxwell 並聯一彈簧；可同時擬合鬆弛與潛變，是肌腱、皮膚常用模型。</li>
+</ol>
+<p><strong>膠原纖維招募（fiber recruitment）：</strong>肌腱/韌帶 σ-ε 曲線有 toe region（小應變、彎曲的膠原逐步被拉直）→ linear region（所有纖維對齊承載）→ failure。Toe 區是非線性的關鍵特徵。</p>
+</div>
+<div data-lang="en">
+<p>Soft tissues (tendons, ligaments, skin, vessels, myocardium) are not purely elastic — they are <strong>time-dependent</strong>: faster loading → higher stress at the same strain. Three hallmarks:</p>
+<ul>
+<li><strong>Stress relaxation:</strong> at fixed ε, σ(t) decays over time.</li>
+<li><strong>Creep:</strong> at fixed σ, ε(t) grows over time.</li>
+<li><strong>Hysteresis:</strong> loading and unloading form a loop; loop area = energy dissipated per cycle.</li>
+</ul>
+<p>Three common <strong>simplified viscoelastic models:</strong></p>
+<ol>
+<li><strong>Maxwell</strong> (spring + dashpot in series): dε/dt = (1/E) dσ/dt + σ/η; captures stress relaxation (exponential).</li>
+<li><strong>Kelvin-Voigt</strong> (parallel): σ(t) = E·ε(t) + η·dε/dt; captures creep (exponential approach).</li>
+<li><strong>Standard linear solid (SLS, Zener):</strong> Maxwell unit in parallel with a spring; fits both relaxation and creep — workhorse for tendon and skin.</li>
+</ol>
+<p><strong>Collagen fiber recruitment:</strong> Tendon/ligament σ-ε exhibits a <em>toe region</em> (low strain, crimped fibers progressively straighten) → linear region (all aligned, bearing load) → failure. The toe region is the signature nonlinearity.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="心臟力學" data-en="CARDIAC MECHANICS">心臟力學</div>
+<h2 data-zh="四、心臟力學與壓力-容積環" data-en="IV. Cardiac Mechanics &amp; PV Loops">四、心臟力學</h2>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">❤️</div><h4 data-zh="PV 環四階段" data-en="PV Loop — 4 Phases">PV 環四階段</h4>
+<div data-lang="zh"><p>(1) <strong>等容收縮</strong>：mitral 關、aortic 未開，壓力升、容積不變；(2) <strong>射血</strong>：aortic 開，容積由 EDV → ESV；(3) <strong>等容鬆弛</strong>：aortic 關、mitral 未開；(4) <strong>充填</strong>：mitral 開，容積由 ESV → EDV。Stroke volume SV = EDV − ESV ≈ 70 mL。</p></div>
+<div data-lang="en"><p>(1) <strong>Isovolumic contraction</strong>: mitral closed, aortic shut, pressure ↑ at constant V; (2) <strong>Ejection</strong>: aortic opens, V drops EDV → ESV; (3) <strong>Isovolumic relaxation</strong>; (4) <strong>Filling</strong>: mitral opens, V grows ESV → EDV. Stroke volume SV = EDV − ESV ≈ 70 mL.</p></div></div>
+<div class="card"><div class="card-icon">📈</div><h4 data-zh="Frank-Starling 機制" data-en="Frank-Starling Mechanism">Frank-Starling 機制</h4>
+<div data-lang="zh"><p>EDV 增加（前負荷 preload 上升）→ 心肌纖維拉長 → 收縮力增、SV 增加。是心臟自我調節輸出的內在機制；在 ESV-pressure 曲線上斜率 = 收縮性指標 E<sub>max</sub>（end-systolic elastance）。</p></div>
+<div data-lang="en"><p>↑EDV (preload) → fibers lengthen → stronger contraction → ↑SV. Intrinsic auto-regulation. On the ESP–V relation, slope = <strong>E<sub>max</sub></strong> (end-systolic elastance) — the standard contractility index.</p></div></div>
+<div class="card"><div class="card-icon">🩺</div><h4 data-zh="後負荷與舒張功能" data-en="Afterload &amp; Diastolic Function">後負荷與舒張</h4>
+<div data-lang="zh"><p><strong>後負荷</strong> ≈ 主動脈壓 / SVR；高血壓 → 後負荷上升、SV 下降、肥厚（HCM）。<strong>舒張功能不全（HFpEF）</strong>：EF 正常但 EDPVR（end-diastolic pressure-volume relation）斜率變陡——「心室太硬」、充填受限。</p></div>
+<div data-lang="en"><p><strong>Afterload</strong> ≈ aortic pressure / SVR; hypertension → ↑afterload, ↓SV, hypertrophy (HCM). <strong>HFpEF (diastolic dysfunction):</strong> EF normal but EDPVR slope steepens — stiff ventricle, impaired filling.</p></div></div>
+<div class="card"><div class="card-icon">⚙️</div><h4 data-zh="臨床心輸出量" data-en="Cardiac Output in Clinic">臨床心輸出量</h4>
+<div data-lang="zh"><p>CO = SV × HR ≈ 5 L/min（靜息）；運動可達 25 L/min。臨床測量：Swan-Ganz（熱稀釋）、Fick 原理（VO₂ / [A-V O₂ 差]）、echocardiography Doppler、cardiac MRI（黃金標準）。</p></div>
+<div data-lang="en"><p>CO = SV × HR ≈ 5 L/min at rest; up to 25 L/min in exercise. Clinical measurement: Swan-Ganz (thermodilution), Fick principle (VO₂ / [A-V O₂ diff]), echo Doppler, cardiac MRI (gold standard).</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="步態分析" data-en="GAIT ANALYSIS">步態分析</div>
+<h2 data-zh="五、步態與運動生物力學" data-en="V. Gait &amp; Movement Biomechanics">五、步態分析</h2>
+<div data-lang="zh">
+<p>一個正常步態週期分 <strong>站立期（stance, ~60%）</strong>與 <strong>擺盪期（swing, ~40%）</strong>。站立期可細分：腳跟著地 → 足平放 → 中站 → 腳跟離地 → 腳趾離地。雙腳同時著地（double support）約 10–12%，跑步時為 0。</p>
+<p><strong>關鍵量測：</strong></p>
+<ul>
+<li><strong>Ground Reaction Force（GRF）：</strong>三軸測力板（force plate, Kistler / AMTI / Bertec），垂直分量呈現雙駝峰（heel-strike 峰 ≈ 1.0–1.2 BW、push-off 峰 ≈ 1.1 BW）。</li>
+<li><strong>動作捕捉（mocap）：</strong>Vicon、OptiTrack 紅外線反射標記 + 高速攝影機；新一代以 markerless（Theia 3D、Captury）+ 深度學習 2D-pose（OpenPose、MediaPipe → biomechanical-grade DeepLabCut）。</li>
+<li><strong>表面 EMG（sEMG）：</strong>Delsys、Noraxon；測肌肉激活時序與強度。</li>
+<li><strong>肌肉骨骼模型：</strong>OpenSim（Stanford，開源）、AnyBody Technology（商業）；輸入 mocap + GRF → 反向動力學 + 反向動力學 + 靜態最佳化 → 估算肌肉力、關節接觸力。</li>
+</ul>
+<p><strong>臨床應用：</strong>腦性麻痺手術術前規劃、義肢設計、跑步傷害分析（patellofemoral pain、ITB syndrome）、人工關節術後評估。</p>
+</div>
+<div data-lang="en">
+<p>One gait cycle = <strong>stance (~60%)</strong> + <strong>swing (~40%)</strong>. Stance subdivides into heel-strike → foot-flat → mid-stance → heel-off → toe-off. Double support ≈ 10–12% in walking, 0% in running.</p>
+<p><strong>Key measurements:</strong></p>
+<ul>
+<li><strong>Ground reaction force (GRF):</strong> tri-axial force plates (Kistler / AMTI / Bertec); vertical component shows a double bump (heel-strike peak ≈ 1.0–1.2 BW, push-off ≈ 1.1 BW).</li>
+<li><strong>Motion capture:</strong> Vicon, OptiTrack (IR-reflective markers + high-speed cameras); newer markerless systems (Theia 3D, Captury) + deep-learning 2D pose (OpenPose, MediaPipe → DeepLabCut biomechanics-grade).</li>
+<li><strong>Surface EMG (sEMG):</strong> Delsys, Noraxon; muscle activation timing &amp; intensity.</li>
+<li><strong>Musculoskeletal models:</strong> OpenSim (Stanford, open source), AnyBody (commercial); inputs = mocap + GRF → inverse kinematics + inverse dynamics + static optimization → muscle &amp; joint-contact forces.</li>
+</ul>
+<p><strong>Clinical applications:</strong> cerebral-palsy surgical planning, prosthetic design, running-injury analysis (patellofemoral pain, ITB syndrome), post-arthroplasty outcomes.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="FEA 應用" data-en="FEA IN BME">FEA 應用</div>
+<h2 data-zh="六、有限元素分析在 BME 的應用" data-en="VI. Finite Element Analysis in BME">六、FEA 在 BME</h2>
+<table class="comp-table"><thead><tr><th data-zh="應用" data-en="Application">應用</th><th data-zh="軟體" data-en="Software">軟體</th><th data-zh="關鍵輸出" data-en="Key Output">關鍵輸出</th></tr></thead><tbody>
+<tr><td><strong data-zh="人工髖關節應力" data-en="Hip Implant Stress">人工髖關節</strong></td><td>Abaqus, ANSYS</td><td data-zh="Stem-bone interface 應力、骨頭應力分布、stress shielding 估算" data-en="Stem-bone interface stress, bone stress distribution, stress shielding">介面應力、stress shielding</td></tr>
+<tr><td><strong data-zh="脊椎 cage / 椎弓根螺釘" data-en="Spinal Cage / Pedicle Screw">脊椎</strong></td><td>Abaqus, FEBio</td><td data-zh="椎間應力、subsidence 風險、螺釘鬆動" data-en="Interbody stress, subsidence, screw loosening">subsidence、鬆動風險</td></tr>
+<tr><td><strong data-zh="骨折風險" data-en="Fracture Risk">骨折風險</strong></td><td>QCT-FEA (BoneMat)</td><td data-zh="病人 CT → FEA → 髖部跌倒應力 / yield，比 BMD 預測力更佳" data-en="Patient CT → FEA → hip-fall stress vs yield; outperforms BMD alone">優於單純 BMD</td></tr>
+<tr><td><strong data-zh="心臟瓣膜模擬" data-en="Heart Valve Simulation">心臟瓣膜</strong></td><td>Abaqus, LS-DYNA, FEBio</td><td data-zh="leaflet 應力、TAVR 支架展開、長期疲勞" data-en="Leaflet stress, TAVR deployment, long-term fatigue">leaflet 應力、疲勞</td></tr>
+<tr><td><strong data-zh="心血管支架展開" data-en="Stent Deployment">支架展開</strong></td><td>Abaqus, ANSYS</td><td data-zh="支架 vs. 血管壁應力、回彈、apposition" data-en="Stent-vessel stress, recoil, apposition">展開、回彈</td></tr>
+<tr><td><strong data-zh="軟組織手術模擬" data-en="Soft Tissue Surgery">軟組織</strong></td><td>FEBio (free, BME-oriented), SimVascular</td><td data-zh="手術切口、組織縫合、植入物 vs. 軟組織" data-en="Incision, suture, implant-soft tissue">縫合、植入物</td></tr>
+</tbody></table>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>FEA 流程八步：</strong>(1) 幾何建模（CAD 或 patient CT）→ (2) 切網格（tet/hex）→ (3) 材料指派（彈性 / 黏彈 / 超彈 Mooney-Rivlin）→ (4) 邊界條件 + 接觸 → (5) 載入 → (6) 求解 → (7) 後處理（von Mises、principal stress）→ (8) 驗證（與實驗對比）。</span>
+<span data-lang="en"><strong>FEA 8 steps:</strong> (1) geometry (CAD or patient CT) → (2) mesh (tet/hex) → (3) materials (elastic / viscoelastic / hyperelastic Mooney-Rivlin) → (4) BCs + contact → (5) loads → (6) solve → (7) post-process (von Mises, principal stress) → (8) validate against experiment.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖表" data-en="INTERACTIVE">互動圖表</div>
+<h2 data-zh="七、互動：材料應力-應變曲線" data-en="VII. Interactive: Stress-Strain Curve">七、互動應力-應變曲線</h2>
+<div data-lang="zh"><p>切換不同材料，比較其楊氏模數、降伏點、UTS、與斷裂應變。請注意：人體軟組織 E 比金屬低 6 個量級，但其降伏應變（&gt; 0.1）卻遠大於金屬（&lt; 0.01）。</p></div>
+<div data-lang="en"><p>Switch materials to compare Young's modulus, yield, UTS, and fracture strain. Note that human soft tissue has E six orders of magnitude lower than metals — but yield strain &gt; 0.1 (vs &lt; 0.01 in metals).</p></div>
+<div class="interactive-panel">
+<div class="toggle-row">
+  <button class="toggle-btn active" data-mat="steel" data-zh="不鏽鋼" data-en="316L Steel">不鏽鋼 316L</button>
+  <button class="toggle-btn" data-mat="ti" data-zh="鈦合金" data-en="Ti-6Al-4V">Ti-6Al-4V</button>
+  <button class="toggle-btn" data-mat="peek" data-zh="PEEK" data-en="PEEK">PEEK</button>
+  <button class="toggle-btn" data-mat="bone" data-zh="皮質骨" data-en="Cortical Bone">皮質骨</button>
+  <button class="toggle-btn" data-mat="tendon" data-zh="肌腱" data-en="Tendon">肌腱</button>
+  <button class="toggle-btn" data-mat="skin" data-zh="皮膚" data-en="Skin">皮膚</button>
+</div>
+<div class="chart-container"><canvas id="ssChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">資料為示意值，真實數據依測試方向、速率、年齡而異。</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Illustrative values; real data vary with direction, rate, and age.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="八、要做哪一種生物力學分析？" data-en="VIII. Which Biomechanical Analysis?">八、生物力學分析決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="生物力學方法選擇" data-en="Choosing the Biomechanics Method">生物力學方法選擇</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">要評估「骨折風險 / 植入物應力」？<span class="dt-arrow">→</span> Patient-specific CT-FEA（Abaqus / ANSYS / FEBio）。</span><span data-lang="en">Assess fracture risk / implant stress? <span class="dt-arrow">→</span> Patient-specific CT-FEA (Abaqus / ANSYS / FEBio).</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">要分析「步行 / 跑步 / 跳躍動作」？<span class="dt-arrow">→</span> Mocap + force plates + EMG + OpenSim。</span><span data-lang="en">Analyze walking / running / jumping? <span class="dt-arrow">→</span> Mocap + force plates + EMG + OpenSim.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">要研究「肌腱 / 皮膚 / 韌帶」的黏彈行為？<span class="dt-arrow">→</span> 拉伸試驗機（Instron / MTS）+ 應力鬆弛、潛變、循環測試；以 SLS 模型擬合。</span><span data-lang="en">Study tendon/skin/ligament viscoelasticity? <span class="dt-arrow">→</span> Tensile machine (Instron/MTS) + relaxation/creep/cyclic; fit SLS.</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">要評估「心臟收縮力 / 瓣膜功能」？<span class="dt-arrow">→</span> Echocardiography + cardiac MRI；PV loop（catheter）；FEA (LS-DYNA) 模擬瓣膜。</span><span data-lang="en">Evaluate cardiac contractility / valve? <span class="dt-arrow">→</span> Echo + cardiac MRI; PV loop (catheter); FEA (LS-DYNA) for leaflets.</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">要設計「外骨骼 / 義肢 / 矯形器」？<span class="dt-arrow">→</span> mocap + EMG-driven musculoskeletal model + control engineering。</span><span data-lang="en">Design exoskeleton / prosthesis / orthosis? <span class="dt-arrow">→</span> mocap + EMG-driven MSK + control engineering.</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="九、樑彎曲與 Kelvin-Voigt 響應" data-en="IX. Beam Bending &amp; Kelvin-Voigt Response">九、程式示例</h2>
+<div data-lang="zh"><p>(a) 簡支樑中點彎曲應力 σ = M·y/I（用於估算骨頭、植入物中段最大應力）。(b) Kelvin-Voigt 模型對階躍應力的潛變響應 ε(t) = (σ₀/E)·(1−e<sup>−Et/η</sup>)。</p></div>
+<div data-lang="en"><p>(a) Simply-supported beam mid-span bending stress σ = M·y/I (rough estimate for bone/implant mid-shaft). (b) Kelvin-Voigt creep response to a step stress: ε(t) = (σ₀/E)·(1−e<sup>−Et/η</sup>).</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+<span class="kw">from</span> scipy.integrate <span class="kw">import</span> odeint
+
+<span class="comment"># (a) Beam bending — long bone mid-shaft</span>
+F    = <span class="num">700</span>           <span class="comment"># body weight (N)</span>
+L    = <span class="num">0.40</span>          <span class="comment"># femur length (m)</span>
+d_o  = <span class="num">0.028</span>; d_i = <span class="num">0.016</span>   <span class="comment"># outer/inner diameter (m)</span>
+I    = np.pi*(d_o**<span class="num">4</span> - d_i**<span class="num">4</span>)/<span class="num">64</span>
+M    = F*L/<span class="num">4</span>          <span class="comment"># simply supported, mid-point load</span>
+y    = d_o/<span class="num">2</span>
+sigma= M*y/I
+<span class="func">print</span>(<span class="str">f"Max bending stress = {sigma/1e6:.1f} MPa"</span>)
+
+<span class="comment"># (b) Kelvin-Voigt creep</span>
+E, eta, sigma0 = <span class="num">1e6</span>, <span class="num">5e6</span>, <span class="num">1e4</span>   <span class="comment"># Pa, Pa.s, Pa</span>
+<span class="kw">def</span> <span class="func">dedt</span>(eps,t): <span class="kw">return</span> (sigma0 - E*eps)/eta
+t = np.<span class="func">linspace</span>(<span class="num">0</span>,<span class="num">30</span>,<span class="num">300</span>)
+eps = <span class="func">odeint</span>(dedt,<span class="num">0</span>,t)
+plt.<span class="func">plot</span>(t,eps); plt.<span class="func">xlabel</span>(<span class="str">"t (s)"</span>); plt.<span class="func">ylabel</span>(<span class="str">"strain"</span>)
+plt.<span class="func">title</span>(<span class="str">"Kelvin-Voigt creep under step stress"</span>); plt.<span class="func">grid</span>(alpha=<span class="num">.3</span>); plt.<span class="func">show</span>()</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% (a) Beam bending stress</span>
+F = <span class="num">700</span>; L = <span class="num">0.40</span>; d_o = <span class="num">0.028</span>; d_i = <span class="num">0.016</span>;
+I = pi*(d_o^<span class="num">4</span>-d_i^<span class="num">4</span>)/<span class="num">64</span>; M = F*L/<span class="num">4</span>; y = d_o/<span class="num">2</span>;
+sigma = M*y/I;
+<span class="func">fprintf</span>(<span class="str">'Bending stress = %.1f MPa\n'</span>, sigma/<span class="num">1e6</span>);
+
+<span class="comment">% (b) Kelvin-Voigt creep with ode45</span>
+E = <span class="num">1e6</span>; eta = <span class="num">5e6</span>; s0 = <span class="num">1e4</span>;
+[t,eps] = <span class="func">ode45</span>(@(t,e)(s0-E*e)/eta,[<span class="num">0</span> <span class="num">30</span>],<span class="num">0</span>);
+<span class="func">plot</span>(t,eps,<span class="str">'LineWidth'</span>,<span class="num">1.5</span>); <span class="func">grid on</span>;
+<span class="func">xlabel</span>(<span class="str">'t (s)'</span>); <span class="func">ylabel</span>(<span class="str">'strain'</span>);
+<span class="func">title</span>(<span class="str">'Kelvin-Voigt creep'</span>);</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十、本章關鍵術語" data-en="X. Key Terms">十、關鍵術語</h2>
+<p><span class="term">Young's modulus<span class="term-tip">E = σ/ε，材料的剛度，單位 Pa。骨頭 17 GPa、Ti 110 GPa。</span></span> &nbsp;
+<span class="term">Poisson's ratio<span class="term-tip">ν = −ε<sub>橫</sub>/ε<sub>軸</sub>；軟組織 ~0.49，骨 ~0.3。</span></span> &nbsp;
+<span class="term">Anisotropy<span class="term-tip">材料性質與方向有關；皮質骨沿骨長軸最強。</span></span> &nbsp;
+<span class="term">Wolff's law<span class="term-tip">骨頭依長期應力場重塑；應力大區增厚、應力小區萎縮。</span></span> &nbsp;
+<span class="term">Viscoelasticity<span class="term-tip">兼具彈性與黏性；表現為 stress relaxation、creep、hysteresis。</span></span> &nbsp;
+<span class="term">SLS<span class="term-tip">Standard Linear Solid (Zener model)；Maxwell + 並聯彈簧，工程肌腱常用。</span></span> &nbsp;
+<span class="term">PV loop<span class="term-tip">壓力-容積環；四階段；曲線下面積 = stroke work。</span></span> &nbsp;
+<span class="term">Frank-Starling<span class="term-tip">EDV ↑ → 收縮力 ↑ → SV ↑；心臟自我調節輸出。</span></span> &nbsp;
+<span class="term">E<sub>max</sub><span class="term-tip">End-systolic elastance；ESP-V 線斜率；標準收縮性指標。</span></span> &nbsp;
+<span class="term">GRF<span class="term-tip">Ground Reaction Force；地面對腳的反作用力，三軸測力板測量。</span></span> &nbsp;
+<span class="term">OpenSim<span class="term-tip">Stanford 開源肌肉骨骼模擬平台；mocap + GRF 反推肌力。</span></span> &nbsp;
+<span class="term">FEA<span class="term-tip">Finite Element Analysis；把連續體切成小元素求解 PDE。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q1. 下列何者最能描述「stress relaxation」現象？</span><span data-lang="en">Q1. Which best describes "stress relaxation"?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 固定應力下、應變隨時間增加</span><span data-lang="en">A. At fixed stress, strain grows over time</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 加載與卸載曲線形成迴圈</span><span data-lang="en">B. Loading and unloading form a loop</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 固定應變下、應力隨時間下降</span><span data-lang="en">C. At fixed strain, stress decays over time</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 應力與應變呈線性關係</span><span data-lang="en">D. Stress is linearly proportional to strain</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q2. 在心臟 PV 環中，E<sub>max</sub> 代表？</span><span data-lang="en">Q2. In the cardiac PV loop, E<sub>max</sub> represents:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 心室在舒張末期的容積</span><span data-lang="en">A. End-diastolic volume</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. End-systolic pressure-volume relation（ESPVR）的斜率，是收縮性指標</span><span data-lang="en">B. Slope of ESPVR — a contractility index</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 心室壁的最大應力</span><span data-lang="en">C. Maximum wall stress</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 每分鐘心輸出量</span><span data-lang="en">D. Cardiac output per minute</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q3. 「Stress shielding」現象的物理本質是？</span><span data-lang="en">Q3. The physical essence of "stress shielding" is:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 植入物腐蝕</span><span data-lang="en">A. Implant corrosion</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 植入物移位</span><span data-lang="en">B. Implant migration</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 植入物剛度遠高於骨頭，使骨頭不再承擔負荷，導致 Wolff's law 萎縮</span><span data-lang="en">C. Implant stiffness ≫ bone, so bone is unloaded and atrophies per Wolff's law</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 骨水泥老化</span><span data-lang="en">D. Bone cement aging</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="image-processing.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="B4 · 醫學影像處理" data-en="B4 · Image Processing">B4 · 醫學影像處理</span></a>
+<a href="biofluid-mechanics.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="C2 · 生物流體力學" data-en="C2 · Biofluid Mechanics">C2 · 生物流體力學</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · C1 Biomechanics</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// Stress-strain interactive
+// Each material: [E (GPa), yield strain, yield stress (MPa), UTS strain, UTS stress, fracture strain, fracture stress]
+const matDB={
+  steel : {E:200,  ey:0.002, sy:300,  eu:0.20, su:600,  ef:0.40, sf:500,  name_zh:'316L 不鏽鋼', name_en:'316L Stainless'},
+  ti    : {E:114,  ey:0.008, sy:880,  eu:0.06, su:950,  ef:0.14, sf:900,  name_zh:'Ti-6Al-4V', name_en:'Ti-6Al-4V'},
+  peek  : {E:3.6,  ey:0.04,  sy:90,   eu:0.20, su:100,  ef:0.45, sf:80,   name_zh:'PEEK', name_en:'PEEK'},
+  bone  : {E:17,   ey:0.006, sy:110,  eu:0.012,su:130,  ef:0.015,sf:130,  name_zh:'皮質骨', name_en:'Cortical Bone'},
+  tendon: {E:1.2,  ey:0.04,  sy:50,   eu:0.10, su:100,  ef:0.13, sf:100,  name_zh:'肌腱', name_en:'Tendon'},
+  skin  : {E:0.05, ey:0.30,  sy:5,    eu:0.70, su:21,   ef:0.75, sf:18,   name_zh:'皮膚', name_en:'Skin'}
+};
+let ssChart=null;
+function drawSS(key){
+  const m=matDB[key]; const E=m.E*1000; // MPa
+  // construct curve: elastic (linear up to yield), then yield→UTS gentle, then UTS→fracture
+  const pts=[];
+  const N=40;
+  for(let i=0;i<=N;i++){
+    const e=(m.ey)*i/N;
+    pts.push({x:e, y:E*e});
+  }
+  for(let i=1;i<=N;i++){
+    const e=m.ey+(m.eu-m.ey)*i/N;
+    const s=m.sy+(m.su-m.sy)*Math.sin(Math.PI/2*i/N);
+    pts.push({x:e, y:s});
+  }
+  for(let i=1;i<=20;i++){
+    const e=m.eu+(m.ef-m.eu)*i/20;
+    const s=m.su+(m.sf-m.su)*i/20;
+    pts.push({x:e, y:s});
+  }
+  const lang=I18n.get();
+  if(ssChart)ssChart.destroy();
+  ssChart=new Chart(document.getElementById('ssChart').getContext('2d'),{
+    type:'line',
+    data:{datasets:[{label:lang==='zh'?m.name_zh:m.name_en,data:pts,
+      borderColor:'#831843',backgroundColor:'rgba(131,24,67,.15)',fill:true,pointRadius:0,tension:.2}]},
+    options:{
+      plugins:{legend:{display:true},
+        tooltip:{callbacks:{title:(c)=>`ε=${c[0].parsed.x.toFixed(3)}`,label:(c)=>`σ=${c.parsed.y.toFixed(1)} MPa`}}},
+      scales:{
+        x:{type:'linear',title:{display:true,text:lang==='zh'?'應變 ε':'Strain ε'}},
+        y:{title:{display:true,text:lang==='zh'?'應力 σ (MPa)':'Stress σ (MPa)'}}
+      }
+    }
+  });
+}
+let currentMat='steel';
+drawSS(currentMat);
+document.querySelectorAll('.toggle-btn[data-mat]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.toggle-btn[data-mat]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active'); currentMat=b.dataset.mat; drawSS(currentMat);
+  });
+});
+document.addEventListener('langchange',()=>drawSS(currentMat));
+</script>
+</body></html>

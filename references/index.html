@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BME 參考資料 · References</title>
+<meta name="description" content="Introduction to Biomedical Engineering Interactive Tutorial — 20 chapter references: landmark papers, ISO/IEC/FDA standards, textbooks, regulatory documents, and databases with DOIs and errata.">
+<link rel="stylesheet" href="../styles.css">
+<style>
+.ref-list{list-style:none;padding:0;margin:14px 0 0}
+.ref-list li{padding:14px 16px;background:var(--c-surface-alt);border:1px solid var(--c-border-light);border-radius:var(--radius);margin-bottom:10px;font-size:.92rem;line-height:1.65}
+.ref-list li:hover{background:var(--c-surface);border-color:var(--c-border)}
+.ref-tag{display:inline-block;font-family:var(--font-mono);font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:6px;margin-right:8px;letter-spacing:.5px}
+.ref-tag.paper{background:var(--c-accent-light);color:var(--c-accent-dark)}
+.ref-tag.doc{background:#e3f2fd;color:#1565c0}
+.ref-tag.bench{background:#fff3e0;color:#e65100}
+.ref-tag.db{background:#fce4ec;color:#ad1457}
+.ref-tag.book{background:#f3e5f5;color:#6a1b9a}
+.ref-tag.bestp{background:var(--c-highlight-light);color:#475569;border:1px solid var(--c-highlight)}
+.ref-tag.standard{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+.ref-tag.policy{background:#fff8e1;color:#a06a00;border:1px solid #ffd54f}
+.ref-author{color:var(--c-ink);font-weight:600}
+.ref-title{color:var(--c-ink);font-weight:500}
+.ref-meta{color:var(--c-ink-muted);font-size:.85rem;margin-top:4px;display:block}
+.ref-list a{color:var(--c-accent);text-decoration:none;border-bottom:1px dotted var(--c-accent)}
+.ref-list a:hover{color:var(--c-accent-dark);border-bottom-style:solid}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:18px 0}
+.toc-grid a{padding:10px 14px;background:var(--c-surface);border:1px solid var(--c-border-light);border-radius:var(--radius);text-decoration:none;color:var(--c-ink);font-size:.88rem;transition:var(--transition);display:flex;align-items:center;gap:8px}
+.toc-grid a:hover{border-color:var(--c-accent);background:var(--c-accent-light);color:var(--c-accent-dark)}
+.toc-grid a .step-tag{font-family:var(--font-mono);font-size:.72rem;color:var(--c-accent);font-weight:600}
+.section-anchor{scroll-margin-top:80px}
+.back-link{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;font-size:.78rem;font-weight:600;color:var(--c-accent-dark);background:var(--c-accent-light);border-radius:6px;text-decoration:none;transition:var(--transition)}
+.back-link:hover{background:var(--c-accent);color:#fff}
+.errata{background:#fef3c7;border-left:4px solid #d97706;border-radius:0 var(--radius-lg) var(--radius-lg) 0;padding:18px 22px;margin:18px 0;font-size:.9rem}
+.errata h4{margin:0 0 8px;color:#92400e;font-family:var(--font-display);font-size:1.05rem}
+.errata p{color:#78350f;margin-bottom:8px}
+.errata p:last-child{margin-bottom:0}
+.errata a{color:#b45309;text-decoration:none;border-bottom:1px dotted #b45309}
+.errata a:hover{color:#78350f;border-bottom-style:solid}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+<div class="top-nav-inner">
+  <a href="../index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="../intro-bme.html">A1</a></li>
+    <li><a href="../human-physiology.html">A2</a></li>
+    <li><a href="../engineering-math.html">A3</a></li>
+    <li><a href="../biomaterials.html">A4</a></li>
+    <li><a href="../biosignals.html">B1</a></li>
+    <li><a href="../signal-processing.html">B2</a></li>
+    <li><a href="../medical-imaging.html">B3</a></li>
+    <li><a href="../image-processing.html">B4</a></li>
+    <li><a href="../biomechanics.html">C1</a></li>
+    <li><a href="../biofluid-mechanics.html">C2</a></li>
+    <li><a href="../tissue-engineering.html">C3</a></li>
+    <li><a href="../drug-delivery.html">C4</a></li>
+    <li><a href="../medical-devices.html">D1</a></li>
+    <li><a href="../biosensors.html">D2</a></li>
+    <li><a href="../wearable-digital-health.html">D3</a></li>
+    <li><a href="../biophotonics.html">D4</a></li>
+    <li><a href="../neural-engineering.html">E1</a></li>
+    <li><a href="../gene-cell-therapy-eng.html">E2</a></li>
+    <li><a href="../surgical-robotics-ai.html">E3</a></li>
+    <li><a href="../regulation-ethics.html">E4</a></li>
+    <li><a href="index.html" class="active" style="font-weight:700" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div>
+</nav>
+
+<header class="page-hero">
+<div class="step-badge" data-zh="參考資料 · REFERENCES" data-en="REFERENCES">REFERENCES</div>
+<h1 data-zh="生醫工程文獻、法規與標準佐證 / BME References, Regulations &amp; Standards" data-en="Biomedical Engineering References Index">Biomedical Engineering References Index</h1>
+<p class="subtitle" data-lang="zh">為 Introduction to Biomedical Engineering Interactive Tutorial 20 章節提供奠基論文、FDA/EU/ISO/IEC 法規文件、教科書與資料庫的完整佐證，涵蓋 2025–2026 年最新版本（FDA QMSR、IEC 62304 Ed.2、EU AI Act、FDA AI/ML SaMD PCCP）。</p>
+<p class="subtitle" data-lang="en">References, citations, and sources for the Biomedical Engineering Interactive Tutorial — papers, official documents, and benchmarks with DOI / URL links.</p>
+</header>
+
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="概覽" data-en="OVERVIEW">概覽 · Overview</div>
+<h2 data-zh="如何使用這份資料？" data-en="How to use this page">如何使用這份資料？ / How to use this page</h2>
+<p data-lang="zh">本頁針對教學中提到的每個演算法、設備、奠基論文、ISO/IEC 標準與 FDA 法規整理出處。引用標籤含義：</p>
+<p data-lang="en">For every algorithm, device, landmark paper, ISO/IEC standard, and FDA regulation mentioned in the tutorial, this page collects authoritative sources. Citation tag legend:</p>
+<div class="card-grid cols-3">
+  <div class="card"><div class="card-icon" style="background:var(--c-accent-light)">📄</div><h4>Paper</h4><p data-lang="zh">原始論文 · 含 DOI / PubMed / arXiv</p><p data-lang="en">Original papers with DOI / PubMed / arXiv</p></div>
+  <div class="card"><div class="card-icon" style="background:#e3f2fd">📘</div><h4>Doc</h4><p data-lang="zh">官方文件、vignette、FDA guidance、工業文件</p><p data-lang="en">Official documents, vignettes, FDA guidance, industry documents</p></div>
+  <div class="card"><div class="card-icon" style="background:var(--c-highlight-light)">⭐</div><h4>Best Practice</h4><p data-lang="zh">系統性綜述、領域權威 review 論文</p><p data-lang="en">Systematic reviews and authoritative review papers</p></div>
+  <div class="card"><div class="card-icon" style="background:#fff3e0">📊</div><h4>Benchmark</h4><p data-lang="zh">方法評比 / 獨立 benchmarking</p><p data-lang="en">Method comparisons and independent benchmarking</p></div>
+  <div class="card"><div class="card-icon" style="background:#fce4ec">🗄️</div><h4>Database</h4><p data-lang="zh">網路 / 資料庫 / 註冊試驗</p><p data-lang="en">Online repositories, databases, and clinical trial registries</p></div>
+  <div class="card"><div class="card-icon" style="background:#f3e5f5">📚</div><h4>Book</h4><p data-lang="zh">核心教科書與線上免費教材</p><p data-lang="en">Core textbooks and free online materials</p></div>
+  <div class="card"><div class="card-icon" style="background:#e8f5e9">⚖️</div><h4>Standard</h4><p data-lang="zh">ISO / IEC / ASTM 國際標準</p><p data-lang="en">ISO / IEC / ASTM international standards</p></div>
+  <div class="card"><div class="card-icon" style="background:#fff8e1">📜</div><h4>Policy</h4><p data-lang="zh">FDA / EU / WHO 法規與政策</p><p data-lang="en">FDA / EU / WHO regulations and policies</p></div>
+</div>
+
+<h3 data-zh="本頁目錄" data-en="Table of contents">本頁目錄 / Table of contents</h3>
+<div class="toc-grid">
+  <a href="#a1"><span class="step-tag">A1</span><span data-zh="生醫工程簡介" data-en="Introduction to BME">生醫工程簡介</span></a>
+  <a href="#a2"><span class="step-tag">A2</span><span data-zh="人體生理" data-en="Human Physiology">人體生理</span></a>
+  <a href="#a3"><span class="step-tag">A3</span><span data-zh="工程數學" data-en="Engineering Math">工程數學</span></a>
+  <a href="#a4"><span class="step-tag">A4</span><span data-zh="生醫材料" data-en="Biomaterials">生醫材料</span></a>
+  <a href="#b1"><span class="step-tag">B1</span><span data-zh="生醫訊號" data-en="Biosignals">生醫訊號</span></a>
+  <a href="#b2"><span class="step-tag">B2</span><span data-zh="訊號處理" data-en="Signal Processing">訊號處理</span></a>
+  <a href="#b3"><span class="step-tag">B3</span><span data-zh="醫學影像" data-en="Medical Imaging">醫學影像</span></a>
+  <a href="#b4"><span class="step-tag">B4</span><span data-zh="影像處理 AI" data-en="Image Analysis & AI">影像處理 AI</span></a>
+  <a href="#c1"><span class="step-tag">C1</span><span data-zh="生物力學" data-en="Biomechanics">生物力學</span></a>
+  <a href="#c2"><span class="step-tag">C2</span><span data-zh="生物流體" data-en="Biofluid Mechanics">生物流體</span></a>
+  <a href="#c3"><span class="step-tag">C3</span><span data-zh="組織工程" data-en="Tissue Engineering">組織工程</span></a>
+  <a href="#c4"><span class="step-tag">C4</span><span data-zh="藥物遞送" data-en="Drug Delivery">藥物遞送</span></a>
+  <a href="#d1"><span class="step-tag">D1</span><span data-zh="醫療器材" data-en="Medical Devices">醫療器材</span></a>
+  <a href="#d2"><span class="step-tag">D2</span><span data-zh="生醫感測器" data-en="Biosensors">生醫感測器</span></a>
+  <a href="#d3"><span class="step-tag">D3</span><span data-zh="穿戴/數位健康" data-en="Wearables / Digital Health">穿戴/數位健康</span></a>
+  <a href="#d4"><span class="step-tag">D4</span><span data-zh="生醫光電" data-en="Biophotonics">生醫光電</span></a>
+  <a href="#e1"><span class="step-tag">E1</span><span data-zh="神經工程 BCI" data-en="Neural Engineering & BCI">神經工程 BCI</span></a>
+  <a href="#e2"><span class="step-tag">E2</span><span data-zh="基因/細胞治療" data-en="Gene / Cell Therapy">基因/細胞治療</span></a>
+  <a href="#e3"><span class="step-tag">E3</span><span data-zh="手術機器人 AI" data-en="Surgical Robotics & AI">手術機器人 AI</span></a>
+  <a href="#e4"><span class="step-tag">E4</span><span data-zh="法規倫理" data-en="Regulation & Ethics">法規倫理</span></a>
+  <a href="#bestpractices"><span class="step-tag">★</span><span>Best Practices</span></a>
+  <a href="#books"><span class="step-tag">📚</span><span data-zh="核心教科書" data-en="Core Textbooks">核心教科書</span></a>
+  <a href="#standards"><span class="step-tag">⚖️</span><span data-zh="標準法規彙整" data-en="Standards & Regulations">標準法規彙整</span></a>
+  <a href="#errata"><span class="step-tag">!</span><span data-zh="教學註記與細節" data-en="Tutorial Notes & Details">教學註記與細節</span></a>
+</div>
+</section>
+
+<!-- ===================== A1 intro-bme ===================== -->
+<section class="section section-anchor" id="a1">
+<div class="section-label" data-zh="第 A1 章" data-en="Chapter A1">Chapter A1</div>
+<h2 data-zh="生醫工程簡介與學科版圖" data-en="Introduction to BME & Landscape">生醫工程簡介與學科版圖 / Introduction to BME &amp; Landscape</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Saltzman WM.</span>
+    <span class="ref-title"> Biomedical Engineering: Bridging Medicine and Technology (2nd ed.).</span>
+    Cambridge University Press, 2015.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9781107037199 · 耶魯生醫工程入門教材</span><span data-lang="en">ISBN 9781107037199 · Yale's introductory BME textbook.</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Enderle JD, Bronzino JD.</span>
+    <span class="ref-title"> Introduction to Biomedical Engineering (3rd ed.).</span>
+    Academic Press / Elsevier, 2012.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9780123749796 · 美國 ABET 認證 BME 課綱常用教科書</span><span data-lang="en">ISBN 9780123749796 · Common textbook for ABET-accredited BME curricula in the U.S.</span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">U.S. FDA Center for Devices and Radiological Health (CDRH).</span>
+    <span class="ref-title"> Medical Devices portal.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.fda.gov/medical-devices" target="_blank" rel="noopener">fda.gov/medical-devices</a> · 美國醫療器材主管機關官方入口</span><span data-lang="en"><a href="https://www.fda.gov/medical-devices" target="_blank" rel="noopener">fda.gov/medical-devices</a> · Official portal of the U.S. medical device regulator.</span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">ABET Engineering Accreditation Commission.</span>
+    <span class="ref-title"> Criteria for Accrediting Engineering Programs, 2025–2026.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.abet.org/accreditation/accreditation-criteria/criteria-for-accrediting-engineering-programs-2025-2026/" target="_blank" rel="noopener">abet.org</a> · 國際工程教育認證</span><span data-lang="en"><a href="https://www.abet.org/accreditation/accreditation-criteria/criteria-for-accrediting-engineering-programs-2025-2026/" target="_blank" rel="noopener">abet.org</a> · International engineering education accreditation.</span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">World Health Organization.</span>
+    <span class="ref-title"> Global Atlas of Medical Devices.</span>
+    WHO, 2017.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.who.int/publications/i/item/9789241512312" target="_blank" rel="noopener">who.int</a> · 全球醫療器材分布與政策</span><span data-lang="en"><a href="https://www.who.int/publications/i/item/9789241512312" target="_blank" rel="noopener">who.int</a> · Global distribution and policy landscape for medical devices.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Grand View Research.</span>
+    <span class="ref-title"> Surgical Robotics Market Size, Share &amp; Trends Analysis Report, 2025–2030.</span>
+    <em>Industry Report</em> (2025).
+    <span class="ref-meta"><span data-lang="zh">2025 市場規模 $12.93B · CAGR 16.4%</span><span data-lang="en">2025 market size $12.93B · CAGR 16.4%.</span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== A2 human-physiology ===================== -->
+<section class="section section-anchor" id="a2">
+<div class="section-label" data-zh="第 A2 章" data-en="Chapter A2">Chapter A2</div>
+<h2 data-zh="人體生理基礎" data-en="Human Physiology Foundations">人體生理基礎 / Human Physiology Foundations</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Hall JE, Hall ME.</span>
+    <span class="ref-title"> Guyton and Hall Textbook of Medical Physiology (14th ed.).</span>
+    Elsevier, 2020.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9780323597128 · 全球醫學生理學經典</span><span data-lang="en">ISBN 9780323597128 · Worldwide classic of medical physiology.</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Boron WF, Boulpaep EL.</span>
+    <span class="ref-title"> Medical Physiology (3rd ed.).</span>
+    Elsevier, 2016.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9781455743773 · 分子+細胞層級的生理學教科書</span><span data-lang="en">ISBN 9781455743773 · Physiology textbook at the molecular and cellular level.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Hodgkin AL, Huxley AF.</span>
+    <span class="ref-title"> A quantitative description of membrane current and its application to conduction and excitation in nerve.</span>
+    <em>J Physiol</em> 117, 500–544 (1952).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1113/jphysiol.1952.sp004764" target="_blank" rel="noopener">10.1113/jphysiol.1952.sp004764</a> · 諾貝爾獎奠基論文 (1963)</span><span data-lang="en">DOI: <a href="https://doi.org/10.1113/jphysiol.1952.sp004764" target="_blank" rel="noopener">10.1113/jphysiol.1952.sp004764</a> · Nobel Prize-winning foundational paper (1963).</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Bohr C, Hasselbalch K, Krogh A.</span>
+    <span class="ref-title"> Über einen in biologischer Beziehung wichtigen Einfluss... (Bohr effect).</span>
+    <em>Skand Arch Physiol</em> 16, 402–412 (1904).
+    <span class="ref-meta"><span data-lang="zh">血紅素 pH/CO₂ 解離曲線 · Krogh 後獲諾貝爾獎 (1920)</span><span data-lang="en">Hemoglobin pH/CO₂ dissociation curve · Krogh later won the Nobel Prize (1920).</span></span>
+  </li>
+  <li><span class="ref-tag db">DB</span>
+    <span class="ref-author">EMBL-EBI / NIH.</span>
+    <span class="ref-title"> BioModels Repository — computational physiological models.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.ebi.ac.uk/biomodels" target="_blank" rel="noopener">ebi.ac.uk/biomodels</a> · SBML 格式心臟、神經、代謝模型</span><span data-lang="en"><a href="https://www.ebi.ac.uk/biomodels" target="_blank" rel="noopener">ebi.ac.uk/biomodels</a> · Cardiac, neural, and metabolic models in SBML format.</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Klabunde RE.</span>
+    <span class="ref-title"> Cardiovascular Physiology Concepts (3rd ed.).</span>
+    Wolters Kluwer, 2021.
+    <span class="ref-meta"><span data-lang="zh">心血管工程必備生理參考</span><span data-lang="en">Essential physiology reference for cardiovascular engineering.</span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== A3 engineering-math ===================== -->
+<section class="section section-anchor" id="a3">
+<div class="section-label" data-zh="第 A3 章" data-en="Chapter A3">Chapter A3</div>
+<h2 data-zh="生醫工程數學" data-en="Engineering Math for BME">生醫工程數學 / Engineering Math for BME</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Strang G.</span>
+    <span class="ref-title"> Introduction to Linear Algebra (5th ed.).</span>
+    Wellesley-Cambridge Press, 2016.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9780980232776 · 配合 MIT OCW 18.06 線上課程</span><span data-lang="en">ISBN 9780980232776 · Pairs with the MIT OCW 18.06 online course.</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Oppenheim AV, Schafer RW.</span>
+    <span class="ref-title"> Discrete-Time Signal Processing (3rd ed.).</span>
+    Pearson, 2009.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9780131988422 · DSP 標準教材</span><span data-lang="en">ISBN 9780131988422 · Standard textbook for DSP.</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Boyd S, Vandenberghe L.</span>
+    <span class="ref-title"> Introduction to Applied Linear Algebra: Vectors, Matrices, and Least Squares.</span>
+    Cambridge University Press, 2018.
+    <span class="ref-meta"><span data-lang="zh">線上免費：<a href="https://web.stanford.edu/~boyd/vmls/" target="_blank" rel="noopener">stanford.edu/~boyd/vmls</a></span><span data-lang="en">Free online: <a href="https://web.stanford.edu/~boyd/vmls/" target="_blank" rel="noopener">stanford.edu/~boyd/vmls</a></span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Bishop CM.</span>
+    <span class="ref-title"> Pattern Recognition and Machine Learning.</span>
+    Springer, 2006.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9780387310732 · ML 經典 · 線上免費 PDF (2024 release)</span><span data-lang="en">ISBN 9780387310732 · ML classic · Free online PDF (2024 release).</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Goodfellow I, Bengio Y, Courville A.</span>
+    <span class="ref-title"> Deep Learning.</span>
+    MIT Press, 2016.
+    <span class="ref-meta"><span data-lang="zh">線上免費：<a href="https://www.deeplearningbook.org/" target="_blank" rel="noopener">deeplearningbook.org</a></span><span data-lang="en">Free online: <a href="https://www.deeplearningbook.org/" target="_blank" rel="noopener">deeplearningbook.org</a></span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== A4 biomaterials ===================== -->
+<section class="section section-anchor" id="a4">
+<div class="section-label" data-zh="第 A4 章" data-en="Chapter A4">Chapter A4</div>
+<h2 data-zh="生醫材料" data-en="Biomaterials">生醫材料 / Biomaterials</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Ratner BD, Hoffman AS, Schoen FJ, Lemons JE (eds.).</span>
+    <span class="ref-title"> Biomaterials Science: An Introduction to Materials in Medicine (4th ed.).</span>
+    Academic Press / Elsevier, 2020.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9780128161371 · 領域聖經</span><span data-lang="en">ISBN 9780128161371 · The field's bible.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Williams DF.</span>
+    <span class="ref-title"> On the mechanisms of biocompatibility.</span>
+    <em>Biomaterials</em> 29, 2941–2953 (2008).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1016/j.biomaterials.2008.04.023" target="_blank" rel="noopener">10.1016/j.biomaterials.2008.04.023</a> · biocompatibility 定義</span><span data-lang="en">DOI: <a href="https://doi.org/10.1016/j.biomaterials.2008.04.023" target="_blank" rel="noopener">10.1016/j.biomaterials.2008.04.023</a> · Definition of biocompatibility.</span></span>
+  </li>
+  <li><span class="ref-tag standard">STANDARD</span>
+    <span class="ref-author">ISO.</span>
+    <span class="ref-title"> ISO 10993-1:2018 — Biological evaluation of medical devices — Part 1: Evaluation and testing within a risk management process.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.iso.org/standard/68936.html" target="_blank" rel="noopener">iso.org/standard/68936</a> · 全球生物相容性測試框架</span><span data-lang="en"><a href="https://www.iso.org/standard/68936.html" target="_blank" rel="noopener">iso.org/standard/68936</a> · Global framework for biocompatibility testing.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Anderson JM, Rodriguez A, Chang DT.</span>
+    <span class="ref-title"> Foreign body reaction to biomaterials.</span>
+    <em>Semin Immunol</em> 20, 86–100 (2008).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1016/j.smim.2007.11.004" target="_blank" rel="noopener">10.1016/j.smim.2007.11.004</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1016/j.smim.2007.11.004" target="_blank" rel="noopener">10.1016/j.smim.2007.11.004</a></span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Hench LL, Polak JM.</span>
+    <span class="ref-title"> Third-generation biomedical materials.</span>
+    <em>Science</em> 295, 1014–1017 (2002); review continued in <em>Acta Biomater</em> 2017.
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1126/science.1067404" target="_blank" rel="noopener">10.1126/science.1067404</a> · 生物活性玻璃發明人</span><span data-lang="en">DOI: <a href="https://doi.org/10.1126/science.1067404" target="_blank" rel="noopener">10.1126/science.1067404</a> · Inventor of bioactive glass.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Niinomi M.</span>
+    <span class="ref-title"> Mechanical biocompatibilities of titanium alloys for biomedical applications.</span>
+    <em>J Mech Behav Biomed Mater</em> 1, 30–42 (2008).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1016/j.jmbbm.2007.07.001" target="_blank" rel="noopener">10.1016/j.jmbbm.2007.07.001</a> · Ti-6Al-4V 與 β-Ti 合金</span><span data-lang="en">DOI: <a href="https://doi.org/10.1016/j.jmbbm.2007.07.001" target="_blank" rel="noopener">10.1016/j.jmbbm.2007.07.001</a> · Ti-6Al-4V and β-Ti alloys.</span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== B1 biosignals ===================== -->
+<section class="section section-anchor" id="b1">
+<div class="section-label" data-zh="第 B1 章" data-en="Chapter B1">Chapter B1</div>
+<h2 data-zh="生醫訊號" data-en="Biosignals">生醫訊號 / Biosignals</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Webster JG (ed.).</span>
+    <span class="ref-title"> Medical Instrumentation: Application and Design (4th ed.).</span>
+    Wiley, 2009.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9780471676003 · ECG/EEG 量測前端標準教材</span><span data-lang="en">ISBN 9780471676003 · Standard textbook for ECG/EEG measurement front-ends.</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Bronzino JD, Peterson DR (eds.).</span>
+    <span class="ref-title"> The Biomedical Engineering Handbook — Medical Devices and Human Engineering.</span>
+    CRC Press, 2015 (4th ed.).
+    <span class="ref-meta"><span data-lang="zh">ISBN 9781439825181</span><span data-lang="en">ISBN 9781439825181</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Einthoven W.</span>
+    <span class="ref-title"> Die galvanometrische Registrierung des menschlichen Elektrokardiogramms.</span>
+    <em>Pflüger Arch ges Physiol</em> 99, 472–480 (1903).
+    <span class="ref-meta"><span data-lang="zh">心電圖原始論文 · 諾貝爾獎 1924</span><span data-lang="en">Original ECG paper · Nobel Prize 1924.</span></span>
+  </li>
+  <li><span class="ref-tag db">DB</span>
+    <span class="ref-author">Goldberger AL, et al.</span>
+    <span class="ref-title"> PhysioNet / MIT-BIH Arrhythmia Database.</span>
+    <em>Circulation</em> 101, e215–e220 (2000).
+    <span class="ref-meta"><span data-lang="zh"><a href="https://physionet.org/content/mitdb/" target="_blank" rel="noopener">physionet.org/content/mitdb</a> · ECG 演算法評比黃金資料庫</span><span data-lang="en"><a href="https://physionet.org/content/mitdb/" target="_blank" rel="noopener">physionet.org/content/mitdb</a> · Gold-standard database for benchmarking ECG algorithms.</span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Allen J.</span>
+    <span class="ref-title"> Photoplethysmography and its application in clinical physiological measurement.</span>
+    <em>Physiol Meas</em> 28, R1–R39 (2007).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1088/0967-3334/28/3/R01" target="_blank" rel="noopener">10.1088/0967-3334/28/3/R01</a> · PPG 經典綜述</span><span data-lang="en">DOI: <a href="https://doi.org/10.1088/0967-3334/28/3/R01" target="_blank" rel="noopener">10.1088/0967-3334/28/3/R01</a> · Classic review of PPG.</span></span>
+  </li>
+  <li><span class="ref-tag standard">STANDARD</span>
+    <span class="ref-author">IEC.</span>
+    <span class="ref-title"> IEC 60601-2-25 / 2-27 / 2-47 — Particular requirements for ECG monitoring &amp; recording equipment.</span>
+    <span class="ref-meta"><span data-lang="zh">心電監護儀的全球安全與效能標準</span><span data-lang="en">Global safety and performance standards for ECG monitors.</span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== B2 signal-processing ===================== -->
+<section class="section section-anchor" id="b2">
+<div class="section-label" data-zh="第 B2 章" data-en="Chapter B2">Chapter B2</div>
+<h2 data-zh="訊號處理" data-en="Signal Processing">訊號處理 / Signal Processing</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Pan J, Tompkins WJ.</span>
+    <span class="ref-title"> A real-time QRS detection algorithm.</span>
+    <em>IEEE Trans Biomed Eng</em> BME-32, 230–236 (1985).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1109/TBME.1985.325532" target="_blank" rel="noopener">10.1109/TBME.1985.325532</a> · QRS 偵測經典</span><span data-lang="en">DOI: <a href="https://doi.org/10.1109/TBME.1985.325532" target="_blank" rel="noopener">10.1109/TBME.1985.325532</a> · Classic QRS detection paper.</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Bruce EN.</span>
+    <span class="ref-title"> Biomedical Signal Processing and Signal Modeling.</span>
+    Wiley, 2001.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9780471345404</span><span data-lang="en">ISBN 9780471345404</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Mallat S.</span>
+    <span class="ref-title"> A Wavelet Tour of Signal Processing: The Sparse Way (3rd ed.).</span>
+    Academic Press, 2008.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9780123743701 · 小波分析經典</span><span data-lang="en">ISBN 9780123743701 · Classic text on wavelet analysis.</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Hyvärinen A, Karhunen J, Oja E.</span>
+    <span class="ref-title"> Independent Component Analysis.</span>
+    Wiley, 2001.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9780471405405 · EEG/EMG ICA 雜訊分離理論</span><span data-lang="en">ISBN 9780471405405 · ICA theory for EEG/EMG noise separation.</span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">SciPy developers.</span>
+    <span class="ref-title"> scipy.signal — Signal processing routines.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://docs.scipy.org/doc/scipy/reference/signal.html" target="_blank" rel="noopener">docs.scipy.org/doc/scipy/reference/signal.html</a></span><span data-lang="en"><a href="https://docs.scipy.org/doc/scipy/reference/signal.html" target="_blank" rel="noopener">docs.scipy.org/doc/scipy/reference/signal.html</a></span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Cooley JW, Tukey JW.</span>
+    <span class="ref-title"> An algorithm for the machine calculation of complex Fourier series (FFT).</span>
+    <em>Math Comput</em> 19, 297–301 (1965).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1090/S0025-5718-1965-0178586-1" target="_blank" rel="noopener">10.1090/S0025-5718-1965-0178586-1</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1090/S0025-5718-1965-0178586-1" target="_blank" rel="noopener">10.1090/S0025-5718-1965-0178586-1</a></span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== B3 medical-imaging ===================== -->
+<section class="section section-anchor" id="b3">
+<div class="section-label" data-zh="第 B3 章" data-en="Chapter B3">Chapter B3</div>
+<h2 data-zh="醫學影像" data-en="Medical Imaging Physics">醫學影像 / Medical Imaging Physics</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Bushberg JT, Seibert JA, Leidholdt EM, Boone JM.</span>
+    <span class="ref-title"> The Essential Physics of Medical Imaging (4th ed.).</span>
+    Wolters Kluwer, 2020.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9781975103224 · 醫學影像物理聖經</span><span data-lang="en">ISBN 9781975103224 · The bible of medical imaging physics.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Hounsfield GN.</span>
+    <span class="ref-title"> Computerized transverse axial scanning (tomography): Part 1. Description of system.</span>
+    <em>Br J Radiol</em> 46, 1016–1022 (1973).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1259/0007-1285-46-552-1016" target="_blank" rel="noopener">10.1259/0007-1285-46-552-1016</a> · CT 發明，諾貝爾獎 1979</span><span data-lang="en">DOI: <a href="https://doi.org/10.1259/0007-1285-46-552-1016" target="_blank" rel="noopener">10.1259/0007-1285-46-552-1016</a> · Invention of CT · Nobel Prize 1979.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Lauterbur PC.</span>
+    <span class="ref-title"> Image formation by induced local interactions: examples employing nuclear magnetic resonance.</span>
+    <em>Nature</em> 242, 190–191 (1973).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1038/242190a0" target="_blank" rel="noopener">10.1038/242190a0</a> · MRI 成像理論，諾貝爾獎 2003</span><span data-lang="en">DOI: <a href="https://doi.org/10.1038/242190a0" target="_blank" rel="noopener">10.1038/242190a0</a> · MRI imaging theory · Nobel Prize 2003.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Bloch F.</span>
+    <span class="ref-title"> Nuclear induction.</span>
+    <em>Phys Rev</em> 70, 460–474 (1946).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1103/PhysRev.70.460" target="_blank" rel="noopener">10.1103/PhysRev.70.460</a> · NMR / Bloch 方程，諾貝爾獎 1952</span><span data-lang="en">DOI: <a href="https://doi.org/10.1103/PhysRev.70.460" target="_blank" rel="noopener">10.1103/PhysRev.70.460</a> · NMR / Bloch equations · Nobel Prize 1952.</span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Wang G, Ye JC, De Man B.</span>
+    <span class="ref-title"> Deep learning for tomographic image reconstruction.</span>
+    <em>Nat Mach Intell</em> 2, 737–748 (2020).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1038/s42256-020-00273-z" target="_blank" rel="noopener">10.1038/s42256-020-00273-z</a> · AI 重建影像綜述</span><span data-lang="en">DOI: <a href="https://doi.org/10.1038/s42256-020-00273-z" target="_blank" rel="noopener">10.1038/s42256-020-00273-z</a> · Review of AI-based image reconstruction.</span></span>
+  </li>
+  <li><span class="ref-tag standard">STANDARD</span>
+    <span class="ref-author">NEMA / MITA.</span>
+    <span class="ref-title"> DICOM — Digital Imaging and Communications in Medicine (PS3 series).</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.dicomstandard.org/" target="_blank" rel="noopener">dicomstandard.org</a> · 醫療影像全球資料格式標準</span><span data-lang="en"><a href="https://www.dicomstandard.org/" target="_blank" rel="noopener">dicomstandard.org</a> · Global data format standard for medical imaging.</span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== B4 image-processing ===================== -->
+<section class="section section-anchor" id="b4">
+<div class="section-label" data-zh="第 B4 章" data-en="Chapter B4">Chapter B4</div>
+<h2 data-zh="醫學影像處理與 AI" data-en="Medical Image Analysis & AI">醫學影像處理與 AI / Medical Image Analysis &amp; AI</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Ronneberger O, Fischer P, Brox T.</span>
+    <span class="ref-title"> U-Net: Convolutional Networks for Biomedical Image Segmentation.</span>
+    <em>MICCAI</em>, LNCS 9351, 234–241 (2015).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1007/978-3-319-24574-4_28" target="_blank" rel="noopener">10.1007/978-3-319-24574-4_28</a> · 醫學影像分割奠基論文</span><span data-lang="en">DOI: <a href="https://doi.org/10.1007/978-3-319-24574-4_28" target="_blank" rel="noopener">10.1007/978-3-319-24574-4_28</a> · Foundational paper for medical image segmentation.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Isensee F, Jaeger PF, Kohl SAA, Petersen J, Maier-Hein KH.</span>
+    <span class="ref-title"> nnU-Net: a self-configuring method for deep learning-based biomedical image segmentation.</span>
+    <em>Nat Methods</em> 18, 203–211 (2021).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1038/s41592-020-01008-z" target="_blank" rel="noopener">10.1038/s41592-020-01008-z</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1038/s41592-020-01008-z" target="_blank" rel="noopener">10.1038/s41592-020-01008-z</a></span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Kirillov A, Mintun E, Ravi N, et al.</span>
+    <span class="ref-title"> Segment Anything (SAM).</span>
+    <em>ICCV</em> 2023; arXiv:2304.02643.
+    <span class="ref-meta"><span data-lang="zh">arXiv: <a href="https://arxiv.org/abs/2304.02643" target="_blank" rel="noopener">2304.02643</a> · Meta FAIR · 11M images, 1.1B masks</span><span data-lang="en">arXiv: <a href="https://arxiv.org/abs/2304.02643" target="_blank" rel="noopener">2304.02643</a> · Meta FAIR · 11M images, 1.1B masks.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Ravi N, Gabeur V, Hu YT, et al.</span>
+    <span class="ref-title"> SAM 2: Segment Anything in Images and Videos.</span>
+    arXiv:2408.00714 (2024).
+    <span class="ref-meta"><span data-lang="zh">arXiv: <a href="https://arxiv.org/abs/2408.00714" target="_blank" rel="noopener">2408.00714</a> · 增加時序維度</span><span data-lang="en">arXiv: <a href="https://arxiv.org/abs/2408.00714" target="_blank" rel="noopener">2408.00714</a> · Adds a temporal dimension.</span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">U.S. FDA.</span>
+    <span class="ref-title"> Artificial Intelligence/Machine Learning (AI/ML)-Based Software as a Medical Device (SaMD) Action Plan.</span>
+    January 2021.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.fda.gov/media/145022/download" target="_blank" rel="noopener">fda.gov/media/145022/download</a></span><span data-lang="en"><a href="https://www.fda.gov/media/145022/download" target="_blank" rel="noopener">fda.gov/media/145022/download</a></span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">Aidoc Medical.</span>
+    <span class="ref-title"> CARE1 — first FDA-cleared foundation model for clinical radiology AI.</span>
+    FDA 510(k) clearance, February 2025.
+    <span class="ref-meta"><span data-lang="zh">FDA AI/ML 認證資料庫 · 2025 年 295 件 AI 醫療裝置認證</span><span data-lang="en">FDA AI/ML clearance database · 295 AI medical device clearances in 2025.</span></span>
+  </li>
+  <li><span class="ref-tag standard">STANDARD</span>
+    <span class="ref-author">NEMA / MITA.</span>
+    <span class="ref-title"> DICOM Standard PS3.1–PS3.22.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.dicomstandard.org/" target="_blank" rel="noopener">dicomstandard.org</a> · 影像 PACS/RIS 標準</span><span data-lang="en"><a href="https://www.dicomstandard.org/" target="_blank" rel="noopener">dicomstandard.org</a> · Imaging PACS/RIS standard.</span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== C1 biomechanics ===================== -->
+<section class="section section-anchor" id="c1">
+<div class="section-label" data-zh="第 C1 章" data-en="Chapter C1">Chapter C1</div>
+<h2 data-zh="生物力學" data-en="Biomechanics">生物力學 / Biomechanics</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Fung YC.</span>
+    <span class="ref-title"> Biomechanics: Mechanical Properties of Living Tissues (2nd ed.).</span>
+    Springer, 1993.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9780387979472 · 生物力學奠基者著作</span><span data-lang="en">ISBN 9780387979472 · Work by a founder of biomechanics.</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Hamill J, Knutzen KM, Derrick TR.</span>
+    <span class="ref-title"> Biomechanical Basis of Human Movement (4th ed.).</span>
+    Wolters Kluwer, 2014.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9781451177305 · 步態與運動力學教材</span><span data-lang="en">ISBN 9781451177305 · Textbook on gait and movement biomechanics.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Delp SL, Anderson FC, Arnold AS, et al.</span>
+    <span class="ref-title"> OpenSim: open-source software to create and analyze dynamic simulations of movement.</span>
+    <em>IEEE Trans Biomed Eng</em> 54, 1940–1950 (2007).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1109/TBME.2007.901024" target="_blank" rel="noopener">10.1109/TBME.2007.901024</a> · 肌骨建模主流工具</span><span data-lang="en">DOI: <a href="https://doi.org/10.1109/TBME.2007.901024" target="_blank" rel="noopener">10.1109/TBME.2007.901024</a> · Mainstream musculoskeletal modeling tool.</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Wolff J.</span>
+    <span class="ref-title"> Das Gesetz der Transformation der Knochen.</span>
+    Hirschwald, Berlin, 1892.
+    <span class="ref-meta"><span data-lang="zh">Wolff's Law 古典 · 骨重塑與機械刺激</span><span data-lang="en">Classic statement of Wolff's Law · bone remodeling under mechanical stimulus.</span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Carter DR, Beaupré GS.</span>
+    <span class="ref-title"> Skeletal Function and Form: Mechanobiology of Skeletal Development, Aging, and Regeneration.</span>
+    Cambridge University Press, 2001.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9780521714754 · 力學-生物學整合</span><span data-lang="en">ISBN 9780521714754 · Integrates mechanics with biology.</span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== C2 biofluid-mechanics ===================== -->
+<section class="section section-anchor" id="c2">
+<div class="section-label" data-zh="第 C2 章" data-en="Chapter C2">Chapter C2</div>
+<h2 data-zh="生物流體力學與循環" data-en="Biofluid Mechanics & Circulation">生物流體力學與循環 / Biofluid Mechanics &amp; Circulation</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Ku DN.</span>
+    <span class="ref-title"> Blood flow in arteries.</span>
+    <em>Annu Rev Fluid Mech</em> 29, 399–434 (1997).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1146/annurev.fluid.29.1.399" target="_blank" rel="noopener">10.1146/annurev.fluid.29.1.399</a> · 動脈血流綜述</span><span data-lang="en">DOI: <a href="https://doi.org/10.1146/annurev.fluid.29.1.399" target="_blank" rel="noopener">10.1146/annurev.fluid.29.1.399</a> · Review of arterial blood flow.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Womersley JR.</span>
+    <span class="ref-title"> Method for the calculation of velocity, rate of flow and viscous drag in arteries when the pressure gradient is known.</span>
+    <em>J Physiol</em> 127, 553–563 (1955).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1113/jphysiol.1955.sp005276" target="_blank" rel="noopener">10.1113/jphysiol.1955.sp005276</a> · Womersley 數</span><span data-lang="en">DOI: <a href="https://doi.org/10.1113/jphysiol.1955.sp005276" target="_blank" rel="noopener">10.1113/jphysiol.1955.sp005276</a> · Womersley number.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Updegrove A, Wilson NM, Merkow J, et al.</span>
+    <span class="ref-title"> SimVascular: an open source pipeline for cardiovascular simulation.</span>
+    <em>Ann Biomed Eng</em> 45, 525–541 (2017).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1007/s10439-016-1762-8" target="_blank" rel="noopener">10.1007/s10439-016-1762-8</a> · 心血管 CFD 開源平台</span><span data-lang="en">DOI: <a href="https://doi.org/10.1007/s10439-016-1762-8" target="_blank" rel="noopener">10.1007/s10439-016-1762-8</a> · Open-source platform for cardiovascular CFD.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Mehra MR, Uriel N, Naka Y, et al.</span>
+    <span class="ref-title"> A fully magnetically levitated left ventricular assist device — final report (MOMENTUM 3, HeartMate 3).</span>
+    <em>N Engl J Med</em> 380, 1618–1627 (2019).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1056/NEJMoa1900486" target="_blank" rel="noopener">10.1056/NEJMoa1900486</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1056/NEJMoa1900486" target="_blank" rel="noopener">10.1056/NEJMoa1900486</a></span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Leon MB, Mack MJ, Hahn RT, et al.</span>
+    <span class="ref-title"> Outcomes 2 Years After TAVR in Low-Risk Patients (PARTNER 3 / SAPIEN 3).</span>
+    <em>N Engl J Med</em> 382, 799–809 (2020).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1056/NEJMoa1910555" target="_blank" rel="noopener">10.1056/NEJMoa1910555</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1056/NEJMoa1910555" target="_blank" rel="noopener">10.1056/NEJMoa1910555</a></span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== C3 tissue-engineering ===================== -->
+<section class="section section-anchor" id="c3">
+<div class="section-label" data-zh="第 C3 章" data-en="Chapter C3">Chapter C3</div>
+<h2 data-zh="組織工程與再生醫學" data-en="Tissue Engineering & Regenerative Medicine">組織工程與再生醫學 / Tissue Engineering &amp; Regenerative Medicine</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <strong>勘誤 · Errata — Macchiarini 氣管移植案件 / Macchiarini trachea cases.</strong>
+    Paolo Macchiarini 在 2008–2014 年發表的「合成支架氣管移植」相關論文（包括 <em>Lancet</em> 2008、<em>Lancet</em> 2011）已被陸續撤稿；他在 2023 年被瑞典法院判 grievous bodily harm 罪。教學中提及氣管組織工程時請<strong>勿引用此系列為成功案例</strong>。<br>
+    <em>Macchiarini's "synthetic scaffold tracheal transplant" papers from 2008–2014 have been progressively retracted; he was convicted in Sweden in 2023. Do not cite this series as a success story for tracheal tissue engineering.</em>
+  </div>
+</div>
+
+<ul class="ref-list">
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Langer R, Vacanti JP.</span>
+    <span class="ref-title"> Tissue engineering.</span>
+    <em>Science</em> 260, 920–926 (1993).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1126/science.8493529" target="_blank" rel="noopener">10.1126/science.8493529</a> · 領域奠基論文</span><span data-lang="en">DOI: <a href="https://doi.org/10.1126/science.8493529" target="_blank" rel="noopener">10.1126/science.8493529</a> · Foundational paper of the field.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Atala A, Bauer SB, Soker S, Yoo JJ, Retik AB.</span>
+    <span class="ref-title"> Tissue-engineered autologous bladders for patients needing cystoplasty.</span>
+    <em>Lancet</em> 367, 1241–1246 (2006).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1016/S0140-6736(06)68438-9" target="_blank" rel="noopener">10.1016/S0140-6736(06)68438-9</a> · 工程膀胱首例</span><span data-lang="en">DOI: <a href="https://doi.org/10.1016/S0140-6736(06)68438-9" target="_blank" rel="noopener">10.1016/S0140-6736(06)68438-9</a> · First clinical case of a tissue-engineered bladder.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Lancaster MA, Renner M, Martin C-A, et al.</span>
+    <span class="ref-title"> Cerebral organoids model human brain development and microcephaly.</span>
+    <em>Nature</em> 501, 373–379 (2013).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1038/nature12517" target="_blank" rel="noopener">10.1038/nature12517</a> · 大腦類器官</span><span data-lang="en">DOI: <a href="https://doi.org/10.1038/nature12517" target="_blank" rel="noopener">10.1038/nature12517</a> · Cerebral organoids.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Murphy SV, Atala A.</span>
+    <span class="ref-title"> 3D bioprinting of tissues and organs.</span>
+    <em>Nat Biotechnol</em> 32, 773–785 (2014).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1038/nbt.2958" target="_blank" rel="noopener">10.1038/nbt.2958</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1038/nbt.2958" target="_blank" rel="noopener">10.1038/nbt.2958</a></span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">Vertex Pharmaceuticals.</span>
+    <span class="ref-title"> VX-880 — Allogeneic stem-cell-derived islet cell therapy for Type 1 Diabetes (Phase 1/2/3).</span>
+    <span class="ref-meta"><span data-lang="zh">2024 年 ADA 報告 12/12 患者 day-90 endogenous insulin · NCT04786262</span><span data-lang="en">2024 ADA report: 12/12 patients achieved day-90 endogenous insulin · NCT04786262.</span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">European Medicines Agency.</span>
+    <span class="ref-title"> Holoclar (ex-vivo expanded autologous limbal stem cells) — CHMP positive opinion, first ATMP/stem-cell EMA approval (2015).</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.ema.europa.eu/en/medicines/human/EPAR/holoclar" target="_blank" rel="noopener">ema.europa.eu/medicines/holoclar</a></span><span data-lang="en"><a href="https://www.ema.europa.eu/en/medicines/human/EPAR/holoclar" target="_blank" rel="noopener">ema.europa.eu/medicines/holoclar</a></span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== C4 drug-delivery ===================== -->
+<section class="section section-anchor" id="c4">
+<div class="section-label" data-zh="第 C4 章" data-en="Chapter C4">Chapter C4</div>
+<h2 data-zh="藥物遞送系統" data-en="Drug Delivery Systems">藥物遞送系統 / Drug Delivery Systems</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Langer R.</span>
+    <span class="ref-title"> Drug delivery and targeting.</span>
+    <em>Nature</em> 392 (Supp), 5–10 (1998).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1038/32020" target="_blank" rel="noopener">10.1038/32020</a> · 控釋系統奠基綜述</span><span data-lang="en">DOI: <a href="https://doi.org/10.1038/32020" target="_blank" rel="noopener">10.1038/32020</a> · Foundational review of controlled-release systems.</span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Mitchell MJ, Billingsley MM, Haley RM, et al.</span>
+    <span class="ref-title"> Engineering precision nanoparticles for drug delivery.</span>
+    <em>Nat Rev Drug Discov</em> 20, 101–124 (2021).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1038/s41573-020-0090-8" target="_blank" rel="noopener">10.1038/s41573-020-0090-8</a> · LNP / 高分子載體綜述</span><span data-lang="en">DOI: <a href="https://doi.org/10.1038/s41573-020-0090-8" target="_blank" rel="noopener">10.1038/s41573-020-0090-8</a> · Review of LNP and polymer carriers.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Adams D, Gonzalez-Duarte A, O'Riordan WD, et al.</span>
+    <span class="ref-title"> Patisiran, an RNAi therapeutic, for hereditary transthyretin amyloidosis (APOLLO).</span>
+    <em>N Engl J Med</em> 379, 11–21 (2018).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1056/NEJMoa1716153" target="_blank" rel="noopener">10.1056/NEJMoa1716153</a> · 首個 LNP-siRNA 藥物</span><span data-lang="en">DOI: <a href="https://doi.org/10.1056/NEJMoa1716153" target="_blank" rel="noopener">10.1056/NEJMoa1716153</a> · First approved LNP-siRNA drug.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Polack FP, Thomas SJ, Kitchin N, et al.</span>
+    <span class="ref-title"> Safety and efficacy of the BNT162b2 mRNA Covid-19 vaccine.</span>
+    <em>N Engl J Med</em> 383, 2603–2615 (2020).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1056/NEJMoa2034577" target="_blank" rel="noopener">10.1056/NEJMoa2034577</a> · Pfizer-BioNTech LNP mRNA</span><span data-lang="en">DOI: <a href="https://doi.org/10.1056/NEJMoa2034577" target="_blank" rel="noopener">10.1056/NEJMoa2034577</a> · Pfizer-BioNTech LNP mRNA vaccine.</span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">U.S. FDA.</span>
+    <span class="ref-title"> Orange Book (Approved Drug Products) &amp; Purple Book (Biosimilars / BLA).</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.accessdata.fda.gov/scripts/cder/ob/" target="_blank" rel="noopener">Orange Book</a> · <a href="https://purplebooksearch.fda.gov/" target="_blank" rel="noopener">Purple Book</a></span><span data-lang="en"><a href="https://www.accessdata.fda.gov/scripts/cder/ob/" target="_blank" rel="noopener">Orange Book</a> · <a href="https://purplebooksearch.fda.gov/" target="_blank" rel="noopener">Purple Book</a></span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Hoffman AS.</span>
+    <span class="ref-title"> The origins and evolution of "controlled" drug delivery systems.</span>
+    <em>J Control Release</em> 132, 153–163 (2008).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1016/j.jconrel.2008.08.012" target="_blank" rel="noopener">10.1016/j.jconrel.2008.08.012</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1016/j.jconrel.2008.08.012" target="_blank" rel="noopener">10.1016/j.jconrel.2008.08.012</a></span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== D1 medical-devices ===================== -->
+<section class="section section-anchor" id="d1">
+<div class="section-label" data-zh="第 D1 章" data-en="Chapter D1">Chapter D1</div>
+<h2 data-zh="醫療器材設計與分類" data-en="Medical Device Design & Regulation">醫療器材設計與分類 / Medical Device Design &amp; Regulation</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <strong>勘誤 · Errata — Philips Respironics CPAP/BiPAP 召回 / Philips Respironics CPAP foam recall.</strong>
+    2021 年 Philips 召回逾 1,500 萬台 CPAP/BiPAP/呼吸器（PE-PUR 消音泡棉降解），2024 年達成 FDA consent decree 並停止美國銷售。教學中討論「PoF / V&amp;V / post-market surveillance」時請以此案為負面教材。<br>
+    <em>Philips' 2021–2024 PE-PUR foam recall (15M+ devices) and the resulting FDA consent decree is a key cautionary case for post-market surveillance and risk management.</em>
+  </div>
+</div>
+
+<ul class="ref-list">
+  <li><span class="ref-tag standard">STANDARD</span>
+    <span class="ref-author">U.S. FDA.</span>
+    <span class="ref-title"> 21 CFR Part 820 — Quality System Regulation, harmonized as the Quality Management System Regulation (QMSR) Final Rule.</span>
+    Federal Register, 02 Feb 2024; effective 02 Feb 2026.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.federalregister.gov/d/2024-01709" target="_blank" rel="noopener">federalregister.gov/d/2024-01709</a> · 對齊 ISO 13485:2016</span><span data-lang="en"><a href="https://www.federalregister.gov/d/2024-01709" target="_blank" rel="noopener">federalregister.gov/d/2024-01709</a> · Harmonized with ISO 13485:2016.</span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">European Parliament / Council.</span>
+    <span class="ref-title"> Regulation (EU) 2017/745 on Medical Devices (MDR).</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://eur-lex.europa.eu/eli/reg/2017/745/oj" target="_blank" rel="noopener">eur-lex.europa.eu/eli/reg/2017/745</a> · 取代 MDD 93/42/EEC</span><span data-lang="en"><a href="https://eur-lex.europa.eu/eli/reg/2017/745/oj" target="_blank" rel="noopener">eur-lex.europa.eu/eli/reg/2017/745</a> · Replaces MDD 93/42/EEC.</span></span>
+  </li>
+  <li><span class="ref-tag standard">STANDARD</span>
+    <span class="ref-author">IEC.</span>
+    <span class="ref-title"> IEC 60601-1:2005 + A1:2012 + A2:2020 — Medical electrical equipment — Part 1: General requirements for basic safety and essential performance.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://webstore.iec.ch/publication/67497" target="_blank" rel="noopener">webstore.iec.ch/publication/67497</a></span><span data-lang="en"><a href="https://webstore.iec.ch/publication/67497" target="_blank" rel="noopener">webstore.iec.ch/publication/67497</a></span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">U.S. FDA CDRH.</span>
+    <span class="ref-title"> 510(k) Premarket Notification Database &amp; Annual Performance Report (FY 2024).</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm" target="_blank" rel="noopener">FDA 510(k) database</a> · 平均 175 day 審查</span><span data-lang="en"><a href="https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpmn/pmn.cfm" target="_blank" rel="noopener">FDA 510(k) database</a> · Average 175-day review time.</span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">U.S. FDA &amp; DOJ.</span>
+    <span class="ref-title"> Philips Respironics — Consent Decree of Permanent Injunction (CPAP/BiPAP).</span>
+    Court filing, 09 Apr 2024.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.fda.gov/medical-devices/safety-communications/certain-philips-respironics-ventilators-bipap-and-cpap-machines-recalled-due-potential-health-risks" target="_blank" rel="noopener">FDA safety communication</a></span><span data-lang="en"><a href="https://www.fda.gov/medical-devices/safety-communications/certain-philips-respironics-ventilators-bipap-and-cpap-machines-recalled-due-potential-health-risks" target="_blank" rel="noopener">FDA safety communication</a></span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== D2 biosensors ===================== -->
+<section class="section section-anchor" id="d2">
+<div class="section-label" data-zh="第 D2 章" data-en="Chapter D2">Chapter D2</div>
+<h2 data-zh="生醫感測器" data-en="Biosensors">生醫感測器 / Biosensors</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Clark LC Jr, Lyons C.</span>
+    <span class="ref-title"> Electrode systems for continuous monitoring in cardiovascular surgery.</span>
+    <em>Ann N Y Acad Sci</em> 102, 29–45 (1962).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1111/j.1749-6632.1962.tb13623.x" target="_blank" rel="noopener">10.1111/j.1749-6632.1962.tb13623.x</a> · 葡萄糖酶電極始祖</span><span data-lang="en">DOI: <a href="https://doi.org/10.1111/j.1749-6632.1962.tb13623.x" target="_blank" rel="noopener">10.1111/j.1749-6632.1962.tb13623.x</a> · Progenitor of the enzyme glucose electrode.</span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Turner APF.</span>
+    <span class="ref-title"> Biosensors: sense and sensibility.</span>
+    <em>Chem Soc Rev</em> 42, 3184–3196 (2013).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1039/c3cs35528d" target="_blank" rel="noopener">10.1039/c3cs35528d</a> · 生醫感測器演進綜述</span><span data-lang="en">DOI: <a href="https://doi.org/10.1039/c3cs35528d" target="_blank" rel="noopener">10.1039/c3cs35528d</a> · Review of the evolution of biosensors.</span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Heikenfeld J, Jajack A, Rogers J, et al.</span>
+    <span class="ref-title"> Wearable sensors: modalities, challenges, and prospects.</span>
+    <em>Lab Chip</em> 18, 217–248 (2018).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1039/c7lc00914c" target="_blank" rel="noopener">10.1039/c7lc00914c</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1039/c7lc00914c" target="_blank" rel="noopener">10.1039/c7lc00914c</a></span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Bhalla N, Jolly P, Formisano N, Estrela P.</span>
+    <span class="ref-title"> Introduction to biosensors.</span>
+    <em>Essays Biochem</em> 60, 1–8 (2016).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1042/EBC20150001" target="_blank" rel="noopener">10.1042/EBC20150001</a> · 入門綜述</span><span data-lang="en">DOI: <a href="https://doi.org/10.1042/EBC20150001" target="_blank" rel="noopener">10.1042/EBC20150001</a> · Introductory review.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Sjölander S, Urbaniczky C.</span>
+    <span class="ref-title"> Integrated fluid handling system for biomolecular interaction analysis (SPR / BIAcore).</span>
+    <em>Anal Chem</em> 63, 2338–2345 (1991).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1021/ac00020a025" target="_blank" rel="noopener">10.1021/ac00020a025</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1021/ac00020a025" target="_blank" rel="noopener">10.1021/ac00020a025</a></span></span>
+  </li>
+  <li><span class="ref-tag db">DB</span>
+    <span class="ref-author">U.S. FDA.</span>
+    <span class="ref-title"> Continuous Glucose Monitoring (CGM) cleared device list.</span>
+    <span class="ref-meta"><span data-lang="zh">Dexcom G7 / Stelo (OTC, Mar 2024) · Abbott Libre Rio &amp; Lingo (OTC, Jun 2024)</span><span data-lang="en">Dexcom G7 / Stelo (OTC, Mar 2024) · Abbott Libre Rio &amp; Lingo (OTC, Jun 2024).</span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== D3 wearable-digital-health ===================== -->
+<section class="section section-anchor" id="d3">
+<div class="section-label" data-zh="第 D3 章" data-en="Chapter D3">Chapter D3</div>
+<h2 data-zh="穿戴式裝置與數位健康" data-en="Wearables & Digital Health">穿戴式裝置與數位健康 / Wearables &amp; Digital Health</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <strong>勘誤 · Errata — Pear Therapeutics 破產案 / Pear Therapeutics bankruptcy.</strong>
+    Pear Therapeutics 是 FDA 首批通過的處方數位治療（reSET 2017、reSET-O 2018、Somryst 2020）公司，但因保險給付困難於 <strong>2023 年 4 月聲請 Chapter 11 破產</strong>。教學討論「Digital Therapeutics / DTx 商業模式」時應引此為警示：FDA 認證 ≠ 商業成功，reimbursement pathway 才是關鍵。<br>
+    <em>Pear Therapeutics (first PDT/DTx company with FDA clearance) filed for bankruptcy in April 2023 due to reimbursement failure — FDA clearance does not guarantee commercial success.</em>
+  </div>
+</div>
+
+<ul class="ref-list">
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Perez MV, Mahaffey KW, Hedlin H, et al.</span>
+    <span class="ref-title"> Large-scale assessment of a smartwatch to identify atrial fibrillation (Apple Heart Study).</span>
+    <em>N Engl J Med</em> 381, 1909–1917 (2019).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1056/NEJMoa1901183" target="_blank" rel="noopener">10.1056/NEJMoa1901183</a> · 419,297 受試者 PPG-AF 偵測</span><span data-lang="en">DOI: <a href="https://doi.org/10.1056/NEJMoa1901183" target="_blank" rel="noopener">10.1056/NEJMoa1901183</a> · 419,297 participants for PPG-based AF detection.</span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">U.S. FDA.</span>
+    <span class="ref-title"> Stelo (Dexcom, Mar 2024) and Libre Rio / Lingo (Abbott, Jun 2024) — first OTC CGM clearances.</span>
+    <span class="ref-meta"><span data-lang="zh">穿戴 CGM 進入大眾市場的法規里程碑</span><span data-lang="en">Regulatory milestone bringing wearable CGM to the mass market.</span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">U.S. FDA.</span>
+    <span class="ref-title"> Marketing Submission Recommendations for a Predetermined Change Control Plan (PCCP) for AI/ML-Enabled Device Software Functions.</span>
+    Final guidance, December 2024.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence" target="_blank" rel="noopener">FDA guidance</a></span><span data-lang="en"><a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial-intelligence" target="_blank" rel="noopener">FDA guidance</a></span></span>
+  </li>
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Topol EJ.</span>
+    <span class="ref-title"> Deep Medicine: How Artificial Intelligence Can Make Healthcare Human Again.</span>
+    Basic Books, 2019.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9781541644632</span><span data-lang="en">ISBN 9781541644632</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Sim I.</span>
+    <span class="ref-title"> Mobile devices and health.</span>
+    <em>N Engl J Med</em> 381, 956–968 (2019).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1056/NEJMra1806949" target="_blank" rel="noopener">10.1056/NEJMra1806949</a> · mHealth 綜述</span><span data-lang="en">DOI: <a href="https://doi.org/10.1056/NEJMra1806949" target="_blank" rel="noopener">10.1056/NEJMra1806949</a> · mHealth review.</span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">Pear Therapeutics, Inc.</span>
+    <span class="ref-title"> Chapter 11 Voluntary Petition.</span>
+    United States Bankruptcy Court for the District of Delaware, Case No. 23-10429 (Apr 2023).
+    <span class="ref-meta"><span data-lang="zh">首家 FDA-cleared 處方 DTx 公司破產 · DTx reimbursement 失敗案例</span><span data-lang="en">First FDA-cleared prescription DTx company to go bankrupt · Case study of DTx reimbursement failure.</span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== D4 biophotonics ===================== -->
+<section class="section section-anchor" id="d4">
+<div class="section-label" data-zh="第 D4 章" data-en="Chapter D4">Chapter D4</div>
+<h2 data-zh="生醫光電" data-en="Biophotonics">生醫光電 / Biophotonics</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag book">BOOK</span>
+    <span class="ref-author">Boas DA, Pitris C, Ramanujam N (eds.).</span>
+    <span class="ref-title"> Handbook of Biomedical Optics.</span>
+    CRC Press, 2016.
+    <span class="ref-meta"><span data-lang="zh">ISBN 9781138199248</span><span data-lang="en">ISBN 9781138199248</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Huang D, Swanson EA, Lin CP, et al.</span>
+    <span class="ref-title"> Optical coherence tomography.</span>
+    <em>Science</em> 254, 1178–1181 (1991).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1126/science.1957169" target="_blank" rel="noopener">10.1126/science.1957169</a> · OCT 首篇</span><span data-lang="en">DOI: <a href="https://doi.org/10.1126/science.1957169" target="_blank" rel="noopener">10.1126/science.1957169</a> · The original OCT paper.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Boyden ES, Zhang F, Bamberg E, Nagel G, Deisseroth K.</span>
+    <span class="ref-title"> Millisecond-timescale, genetically targeted optical control of neural activity.</span>
+    <em>Nat Neurosci</em> 8, 1263–1268 (2005).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1038/nn1525" target="_blank" rel="noopener">10.1038/nn1525</a> · optogenetics 奠基</span><span data-lang="en">DOI: <a href="https://doi.org/10.1038/nn1525" target="_blank" rel="noopener">10.1038/nn1525</a> · Founding paper of optogenetics.</span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Chan ED, Chan MM, Chan MM.</span>
+    <span class="ref-title"> Pulse oximetry: understanding its basic principles facilitates appreciation of its limitations.</span>
+    <em>Respir Med</em> 107, 789–799 (2013).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1016/j.rmed.2013.02.004" target="_blank" rel="noopener">10.1016/j.rmed.2013.02.004</a> · Beer-Lambert / 雙波長原理綜述</span><span data-lang="en">DOI: <a href="https://doi.org/10.1016/j.rmed.2013.02.004" target="_blank" rel="noopener">10.1016/j.rmed.2013.02.004</a> · Review of Beer-Lambert and dual-wavelength principles.</span></span>
+  </li>
+  <li><span class="ref-tag standard">STANDARD</span>
+    <span class="ref-author">U.S. FDA / IEC.</span>
+    <span class="ref-title"> 21 CFR 1040 — Performance Standards for Light-Emitting Products &amp; IEC 60825-1:2014 Laser product safety classification.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.fda.gov/radiation-emitting-products/radiation-emitting-products-and-procedures/laser-products-and-instruments" target="_blank" rel="noopener">FDA laser products</a></span><span data-lang="en"><a href="https://www.fda.gov/radiation-emitting-products/radiation-emitting-products-and-procedures/laser-products-and-instruments" target="_blank" rel="noopener">FDA laser products</a></span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== E1 neural-engineering ===================== -->
+<section class="section section-anchor" id="e1">
+<div class="section-label" data-zh="第 E1 章" data-en="Chapter E1">Chapter E1</div>
+<h2 data-zh="神經工程與腦機介面" data-en="Neural Engineering & BCI">神經工程與腦機介面 / Neural Engineering &amp; BCI</h2>
+
+<div class="callout warn">
+  <div class="callout-icon">⚠️</div>
+  <div>
+    <strong>勘誤 · Errata — Argus II 視網膜植入物停產 / Argus II discontinuation.</strong>
+    Second Sight 於 <strong>2019 年 3 月宣布停產 Argus II</strong>（首個 FDA 通過的視網膜假體, 2013）並裁員 80%，2020 年與 Pixium Vision 合併。已植入患者面對軟體更新與支援終止的長期不確定性 — 是「植入式醫療裝置 lifecycle responsibility」的關鍵案例。<br>
+    <em>Second Sight discontinued Argus II in 2019, leaving implanted patients without long-term support — a key case study for implantable device lifecycle obligations.</em>
+  </div>
+</div>
+
+<ul class="ref-list">
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Hochberg LR, Bacher D, Jarosiewicz B, et al.</span>
+    <span class="ref-title"> Reach and grasp by people with tetraplegia using a neurally controlled robotic arm (BrainGate2).</span>
+    <em>Nature</em> 485, 372–375 (2012).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1038/nature11076" target="_blank" rel="noopener">10.1038/nature11076</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1038/nature11076" target="_blank" rel="noopener">10.1038/nature11076</a></span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Maynard EM, Nordhausen CT, Normann RA.</span>
+    <span class="ref-title"> The Utah intracortical electrode array: a recording structure for potential brain–computer interfaces.</span>
+    <em>Electroencephalogr Clin Neurophysiol</em> 102, 228–239 (1997).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1016/S0013-4694(96)95176-0" target="_blank" rel="noopener">10.1016/S0013-4694(96)95176-0</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1016/S0013-4694(96)95176-0" target="_blank" rel="noopener">10.1016/S0013-4694(96)95176-0</a></span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">Neuralink Corp.</span>
+    <span class="ref-title"> PRIME (Precise Robotically Implanted Brain-Computer Interface) Study — N1 Implant feasibility.</span>
+    NCT06429735.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://clinicaltrials.gov/study/NCT06429735" target="_blank" rel="noopener">clinicaltrials.gov/NCT06429735</a> · 2025: 9 受試者跨美/加/英/UAE</span><span data-lang="en"><a href="https://clinicaltrials.gov/study/NCT06429735" target="_blank" rel="noopener">clinicaltrials.gov/NCT06429735</a> · 2025: 9 participants across the U.S., Canada, U.K., and UAE.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Mitchell P, Lee SCM, Yoo PE, et al.</span>
+    <span class="ref-title"> Assessment of safety of a fully implanted endovascular brain-computer interface for severe paralysis (Synchron Stentrode, COMMAND).</span>
+    <em>JAMA Neurol</em> 80, 270–278 (2023).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1001/jamaneurol.2022.4847" target="_blank" rel="noopener">10.1001/jamaneurol.2022.4847</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1001/jamaneurol.2022.4847" target="_blank" rel="noopener">10.1001/jamaneurol.2022.4847</a></span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Wilson BS, Dorman MF.</span>
+    <span class="ref-title"> Cochlear implants: a remarkable past and a brilliant future.</span>
+    <em>Hear Res</em> 242, 3–21 (2008).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1016/j.heares.2008.06.005" target="_blank" rel="noopener">10.1016/j.heares.2008.06.005</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1016/j.heares.2008.06.005" target="_blank" rel="noopener">10.1016/j.heares.2008.06.005</a></span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Lozano AM, Lipsman N, Bergman H, et al.</span>
+    <span class="ref-title"> Deep brain stimulation: current challenges and future directions.</span>
+    <em>Nat Rev Neurol</em> 15, 148–160 (2019).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1038/s41582-018-0128-2" target="_blank" rel="noopener">10.1038/s41582-018-0128-2</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1038/s41582-018-0128-2" target="_blank" rel="noopener">10.1038/s41582-018-0128-2</a></span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== E2 gene-cell-therapy-eng ===================== -->
+<section class="section section-anchor" id="e2">
+<div class="section-label" data-zh="第 E2 章" data-en="Chapter E2">Chapter E2</div>
+<h2 data-zh="基因與細胞治療工程" data-en="Gene & Cell Therapy Engineering">基因與細胞治療工程 / Gene &amp; Cell Therapy Engineering</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">June CH, O'Connor RS, Kawalekar OU, Ghassemi S, Milone MC.</span>
+    <span class="ref-title"> CAR T cell immunotherapy for human cancer.</span>
+    <em>Science</em> 359, 1361–1365 (2018).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1126/science.aar6711" target="_blank" rel="noopener">10.1126/science.aar6711</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1126/science.aar6711" target="_blank" rel="noopener">10.1126/science.aar6711</a></span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">U.S. FDA.</span>
+    <span class="ref-title"> Casgevy (exagamglogene autotemcel) — first CRISPR-edited cell therapy approval for sickle cell disease.</span>
+    BLA approval, 08 Dec 2023.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.fda.gov/news-events/press-announcements/fda-approves-first-gene-therapies-treat-patients-sickle-cell-disease" target="_blank" rel="noopener">FDA announcement</a></span><span data-lang="en"><a href="https://www.fda.gov/news-events/press-announcements/fda-approves-first-gene-therapies-treat-patients-sickle-cell-disease" target="_blank" rel="noopener">FDA announcement</a></span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Jinek M, Chylinski K, Fonfara I, et al.</span>
+    <span class="ref-title"> A programmable dual-RNA-guided DNA endonuclease in adaptive bacterial immunity.</span>
+    <em>Science</em> 337, 816–821 (2012).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1126/science.1225829" target="_blank" rel="noopener">10.1126/science.1225829</a> · Doudna/Charpentier 諾貝爾獎 2020</span><span data-lang="en">DOI: <a href="https://doi.org/10.1126/science.1225829" target="_blank" rel="noopener">10.1126/science.1225829</a> · Doudna/Charpentier · Nobel Prize 2020.</span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">U.S. FDA.</span>
+    <span class="ref-title"> Removal of Risk Evaluation and Mitigation Strategies (REMS) for autologous BCMA- and CD19-directed CAR-T products.</span>
+    27 Jun 2025.
+    <span class="ref-meta"><span data-lang="zh">六項自體 CAR-T 商品化簡化監控要求 (Yescarta/Tecartus/Kymriah/Breyanzi/Abecma/Carvykti)</span><span data-lang="en">Simplified monitoring requirements for six commercialized autologous CAR-T products (Yescarta/Tecartus/Kymriah/Breyanzi/Abecma/Carvykti).</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Verve Therapeutics, Inc.</span>
+    <span class="ref-title"> VERVE-101 / VERVE-102 — In vivo base editing of PCSK9 for heterozygous familial hypercholesterolemia (Heart-1 / Heart-2).</span>
+    <em>NEJM</em> 391, 1685–1696 (2024).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1056/NEJMoa2406029" target="_blank" rel="noopener">10.1056/NEJMoa2406029</a> · 首個 in-vivo 鹼基編輯臨床數據</span><span data-lang="en">DOI: <a href="https://doi.org/10.1056/NEJMoa2406029" target="_blank" rel="noopener">10.1056/NEJMoa2406029</a> · First clinical data for in vivo base editing.</span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Wang D, Tai PWL, Gao G.</span>
+    <span class="ref-title"> Adeno-associated virus vector as a platform for gene therapy delivery.</span>
+    <em>Nat Rev Drug Discov</em> 18, 358–378 (2019).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1038/s41573-019-0012-9" target="_blank" rel="noopener">10.1038/s41573-019-0012-9</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1038/s41573-019-0012-9" target="_blank" rel="noopener">10.1038/s41573-019-0012-9</a></span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Anzalone AV, Randolph PB, Davis JR, et al.</span>
+    <span class="ref-title"> Search-and-replace genome editing without double-strand breaks or donor DNA (prime editing).</span>
+    <em>Nature</em> 576, 149–157 (2019).
+    <span class="ref-meta"><span data-lang="zh">DOI: <a href="https://doi.org/10.1038/s41586-019-1711-4" target="_blank" rel="noopener">10.1038/s41586-019-1711-4</a></span><span data-lang="en">DOI: <a href="https://doi.org/10.1038/s41586-019-1711-4" target="_blank" rel="noopener">10.1038/s41586-019-1711-4</a></span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== E3 surgical-robotics-ai ===================== -->
+<section class="section section-anchor" id="e3">
+<div class="section-label" data-zh="第 E3 章" data-en="Chapter E3">Chapter E3</div>
+<h2 data-zh="手術機器人與 AI 醫療" data-en="Surgical Robotics & AI in Medicine">手術機器人與 AI 醫療 / Surgical Robotics &amp; AI in Medicine</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">Intuitive Surgical, Inc.</span>
+    <span class="ref-title"> da Vinci 5 — fifth-generation multiport robotic surgery platform launched Feb 2024 (FDA cleared) with broad rollout Feb 2025.</span>
+    <span class="ref-meta"><span data-lang="zh">10,000+ sensor force feedback · 整合 Intuitive Hub · 2025 年裝機數超越 1,100</span><span data-lang="en">10,000+ sensor force feedback · Integrated with Intuitive Hub · Installed base exceeded 1,100 in 2025.</span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">Stryker Corp.</span>
+    <span class="ref-title"> Mako SmartRobotics platform — expanded indications (Spine TBT/Endo, Shoulder) Jun 2024–2025.</span>
+    <span class="ref-meta"><span data-lang="zh">累計超過 200 萬例手術 (Q4 2024)</span><span data-lang="en">Cumulative total of over 2 million surgeries (Q4 2024).</span></span>
+  </li>
+  <li><span class="ref-tag db">DB</span>
+    <span class="ref-author">U.S. FDA CDRH.</span>
+    <span class="ref-title"> Artificial Intelligence and Machine Learning (AI/ML)-Enabled Medical Devices.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-enabled-medical-devices" target="_blank" rel="noopener">fda.gov/AI-enabled-medical-devices</a> · 累計 1,451 件至 2025/12</span><span data-lang="en"><a href="https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-enabled-medical-devices" target="_blank" rel="noopener">fda.gov/AI-enabled-medical-devices</a> · Cumulative 1,451 clearances through 2025/12.</span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">Aidoc Medical.</span>
+    <span class="ref-title"> CARE1 — first FDA-cleared clinical foundation-model AI for radiology.</span>
+    FDA 510(k) K243678, Feb 2025.
+    <span class="ref-meta"><span data-lang="zh">通用 CT/MR foundation model · 從窄式 narrow AI 邁向通用模型的臨床里程碑</span><span data-lang="en">General-purpose CT/MR foundation model · Clinical milestone in moving from narrow AI to general models.</span></span>
+  </li>
+  <li><span class="ref-tag paper">PAPER</span>
+    <span class="ref-author">Singhal K, Tu T, Gottweis J, et al.</span>
+    <span class="ref-title"> Towards expert-level medical question answering with large language models (Med-PaLM 2).</span>
+    <em>Nat Med</em> 31, 1153–1163 (2025); arXiv:2305.09617 (2023).
+    <span class="ref-meta"><span data-lang="zh">arXiv: <a href="https://arxiv.org/abs/2305.09617" target="_blank" rel="noopener">2305.09617</a> · USMLE 86.5%</span><span data-lang="en">arXiv: <a href="https://arxiv.org/abs/2305.09617" target="_blank" rel="noopener">2305.09617</a> · USMLE 86.5%.</span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">Anthropic.</span>
+    <span class="ref-title"> Introducing the Model Context Protocol (MCP).</span>
+    25 Nov 2024.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">anthropic.com/news/model-context-protocol</a> · LLM 與臨床工具連結的開放協議</span><span data-lang="en"><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">anthropic.com/news/model-context-protocol</a> · Open protocol for connecting LLMs with clinical tools.</span></span>
+  </li>
+  <li><span class="ref-tag doc">DOC</span>
+    <span class="ref-author">Strickland E.</span>
+    <span class="ref-title"> MedTech Dive AI Tracker — quarterly review of AI medical device clearances.</span>
+    MedTech Dive, 2024–2025.
+    <span class="ref-meta"><span data-lang="zh">2025 Q4 新增 122 件 · 心血管影像 + 病理為最大類別</span><span data-lang="en">2025 Q4 added 122 clearances · Cardiovascular imaging and pathology are the largest categories.</span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== E4 regulation-ethics ===================== -->
+<section class="section section-anchor" id="e4">
+<div class="section-label" data-zh="第 E4 章" data-en="Chapter E4">Chapter E4</div>
+<h2 data-zh="法規、倫理與品質系統" data-en="Regulation, Ethics & Quality Systems">法規、倫理與品質系統 / Regulation, Ethics &amp; Quality Systems</h2>
+<ul class="ref-list">
+  <li><span class="ref-tag standard">STANDARD</span>
+    <span class="ref-author">U.S. FDA.</span>
+    <span class="ref-title"> Quality Management System Regulation (QMSR) Final Rule — amends 21 CFR Part 820 to harmonize with ISO 13485:2016.</span>
+    Federal Register, 02 Feb 2024; effective 02 Feb 2026.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.federalregister.gov/d/2024-01709" target="_blank" rel="noopener">federalregister.gov/d/2024-01709</a></span><span data-lang="en"><a href="https://www.federalregister.gov/d/2024-01709" target="_blank" rel="noopener">federalregister.gov/d/2024-01709</a></span></span>
+  </li>
+  <li><span class="ref-tag standard">STANDARD</span>
+    <span class="ref-author">ISO.</span>
+    <span class="ref-title"> ISO 13485:2016 — Medical devices: Quality management systems — Requirements for regulatory purposes.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.iso.org/standard/59752.html" target="_blank" rel="noopener">iso.org/standard/59752</a> · 全球醫材 QMS 主軸</span><span data-lang="en"><a href="https://www.iso.org/standard/59752.html" target="_blank" rel="noopener">iso.org/standard/59752</a> · Core global QMS standard for medical devices.</span></span>
+  </li>
+  <li><span class="ref-tag standard">STANDARD</span>
+    <span class="ref-author">ISO.</span>
+    <span class="ref-title"> ISO 14971:2019 + A11:2021 — Medical devices: Application of risk management to medical devices.</span>
+    Confirmed via systematic review March 2025.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.iso.org/standard/72704.html" target="_blank" rel="noopener">iso.org/standard/72704</a> · 配 TR 24971</span><span data-lang="en"><a href="https://www.iso.org/standard/72704.html" target="_blank" rel="noopener">iso.org/standard/72704</a> · Used together with TR 24971.</span></span>
+  </li>
+  <li><span class="ref-tag standard">STANDARD</span>
+    <span class="ref-author">IEC.</span>
+    <span class="ref-title"> IEC 62304 Edition 2.0 — Medical device software: Software life cycle processes (with new Clause 5.1.15 AI/ML lifecycle plan).</span>
+    Publication target September 2026.
+    <span class="ref-meta"><span data-lang="zh">取代 Edition 1.1 (2015) · 醫療軟體開發核心標準</span><span data-lang="en">Replaces Edition 1.1 (2015) · Core standard for medical software development.</span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">European Parliament / Council.</span>
+    <span class="ref-title"> Regulation (EU) 2024/1689 — Artificial Intelligence Act.</span>
+    Entered into force 01 Aug 2024; high-risk obligations from 02 Aug 2026.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" target="_blank" rel="noopener">EUR-Lex 32024R1689</a> · 全球首部全面 AI 法</span><span data-lang="en"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689" target="_blank" rel="noopener">EUR-Lex 32024R1689</a> · World's first comprehensive AI law.</span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">U.S. FDA, Health Canada, UK MHRA.</span>
+    <span class="ref-title"> Good Machine Learning Practice (GMLP) for Medical Device Development: Guiding Principles.</span>
+    October 2021.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles" target="_blank" rel="noopener">FDA GMLP</a> · 10 guiding principles</span><span data-lang="en"><a href="https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles" target="_blank" rel="noopener">FDA GMLP</a> · 10 guiding principles.</span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">U.S. National Commission for the Protection of Human Subjects.</span>
+    <span class="ref-title"> The Belmont Report — Ethical Principles and Guidelines for the Protection of Human Subjects of Research.</span>
+    Department of Health, Education &amp; Welfare, 1979.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.hhs.gov/ohrp/regulations-and-policy/belmont-report/" target="_blank" rel="noopener">hhs.gov/ohrp/belmont-report</a> · Autonomy / Beneficence / Justice</span><span data-lang="en"><a href="https://www.hhs.gov/ohrp/regulations-and-policy/belmont-report/" target="_blank" rel="noopener">hhs.gov/ohrp/belmont-report</a> · Autonomy / Beneficence / Justice.</span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">World Medical Association.</span>
+    <span class="ref-title"> Declaration of Helsinki — Ethical Principles for Medical Research Involving Human Subjects.</span>
+    Revised 2013 (64th WMA General Assembly, Fortaleza).
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.wma.net/policies-post/wma-declaration-of-helsinki-ethical-principles-for-medical-research-involving-human-subjects/" target="_blank" rel="noopener">wma.net</a></span><span data-lang="en"><a href="https://www.wma.net/policies-post/wma-declaration-of-helsinki-ethical-principles-for-medical-research-involving-human-subjects/" target="_blank" rel="noopener">wma.net</a></span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">U.S. Congress.</span>
+    <span class="ref-title"> Health Insurance Portability and Accountability Act of 1996 (HIPAA), Public Law 104-191.</span>
+    <span class="ref-meta"><span data-lang="zh">Privacy Rule (2003) · Security Rule · 45 CFR Parts 160–164</span><span data-lang="en">Privacy Rule (2003) · Security Rule · 45 CFR Parts 160–164.</span></span>
+  </li>
+  <li><span class="ref-tag policy">POLICY</span>
+    <span class="ref-author">International Committee of Medical Journal Editors.</span>
+    <span class="ref-title"> Recommendations for the Conduct, Reporting, Editing, and Publication of Scholarly Work in Medical Journals.</span>
+    Updated January 2025.
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.icmje.org/recommendations/" target="_blank" rel="noopener">icmje.org/recommendations</a> · 作者貢獻、AI 揭露條款</span><span data-lang="en"><a href="https://www.icmje.org/recommendations/" target="_blank" rel="noopener">icmje.org/recommendations</a> · Authorship contribution and AI disclosure clauses.</span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== Best Practices ===================== -->
+<section class="section section-anchor" id="bestpractices">
+<div class="section-label" data-zh="綜論" data-en="BEST PRACTICES">綜論 · Best Practices</div>
+<h2 data-zh="⭐ 主要綜述期刊與會議" data-en="⭐ Key Review Journals & Conferences">⭐ 主要綜述期刊與會議 / Key Review Journals &amp; Conferences</h2>
+<p data-lang="zh">當你需要快速掌握 BME 某一子領域的最新進展，這些 venue 是建議起點。</p>
+<p data-lang="en">When you need to get up to speed on the latest developments in a BME subfield, these venues are a recommended starting point.</p>
+<ul class="ref-list">
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Annual Review of Biomedical Engineering.</span>
+    <span class="ref-title"> 1999–present.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.annualreviews.org/journal/bioeng" target="_blank" rel="noopener">annualreviews.org/journal/bioeng</a> · 領域旗艦綜述期刊</span><span data-lang="en"><a href="https://www.annualreviews.org/journal/bioeng" target="_blank" rel="noopener">annualreviews.org/journal/bioeng</a> · The field's flagship review journal.</span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Nature Biomedical Engineering.</span>
+    <span class="ref-title"> 2017–present.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.nature.com/natbiomedeng/" target="_blank" rel="noopener">nature.com/natbiomedeng</a> · 高影響力 BME 期刊</span><span data-lang="en"><a href="https://www.nature.com/natbiomedeng/" target="_blank" rel="noopener">nature.com/natbiomedeng</a> · High-impact BME journal.</span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">IEEE Transactions on Biomedical Engineering (TBME).</span>
+    <span class="ref-title"> 1954–present.</span>
+    <span class="ref-meta"><span data-lang="zh">心電/腦電/影像/裝置工程經典期刊</span><span data-lang="en">Classic journal for ECG, EEG, imaging, and device engineering.</span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">MICCAI — Medical Image Computing and Computer Assisted Intervention.</span>
+    <span class="ref-title"> Annual conference, 1998–present.</span>
+    <span class="ref-meta"><span data-lang="zh"><a href="https://www.miccai.org/" target="_blank" rel="noopener">miccai.org</a> · 醫學影像 AI 旗艦會議</span><span data-lang="en"><a href="https://www.miccai.org/" target="_blank" rel="noopener">miccai.org</a> · Flagship conference for medical-imaging AI.</span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">IEEE EMBC — Engineering in Medicine and Biology Conference.</span>
+    <span class="ref-title"> Annual flagship conference of IEEE EMBS.</span>
+    <span class="ref-meta"><span data-lang="zh">廣涵生醫工程全領域</span><span data-lang="en">Broad coverage spanning all of biomedical engineering.</span></span>
+  </li>
+  <li><span class="ref-tag bestp">★ BEST</span>
+    <span class="ref-author">Nature Reviews Drug Discovery / Nature Reviews Neurology / Nature Reviews Materials.</span>
+    <span class="ref-title"> Cross-domain BME reviews.</span>
+    <span class="ref-meta"><span data-lang="zh">藥物遞送、神經工程、生醫材料的權威綜述</span><span data-lang="en">Authoritative reviews on drug delivery, neural engineering, and biomaterials.</span></span>
+  </li>
+</ul>
+</section>
+
+<!-- ===================== Books ===================== -->
+<section class="section section-anchor" id="books">
+<div class="section-label" data-zh="教科書" data-en="BOOKS">教科書 · Books</div>
+<h2 data-zh="📚 核心教科書彙整" data-en="📚 Consolidated Textbook List">📚 核心教科書彙整 / Consolidated Textbook List</h2>
+<p data-lang="zh">本教學引用的所有教科書集中於此，便於整體採購與參考。</p>
+<p data-lang="en">All textbooks cited in this tutorial are consolidated here for convenient acquisition and reference.</p>
+<ul class="ref-list">
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Saltzman WM.</span> <span class="ref-title"> Biomedical Engineering: Bridging Medicine and Technology (2nd ed.).</span> Cambridge UP, 2015. <span class="ref-meta"><span data-lang="zh">A1</span><span data-lang="en">Chapter A1.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Enderle JD, Bronzino JD.</span> <span class="ref-title"> Introduction to Biomedical Engineering (3rd ed.).</span> Academic Press, 2012. <span class="ref-meta"><span data-lang="zh">A1</span><span data-lang="en">Chapter A1.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Hall JE, Hall ME.</span> <span class="ref-title"> Guyton and Hall Textbook of Medical Physiology (14th ed.).</span> Elsevier, 2020. <span class="ref-meta"><span data-lang="zh">A2</span><span data-lang="en">Chapter A2.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Boron WF, Boulpaep EL.</span> <span class="ref-title"> Medical Physiology (3rd ed.).</span> Elsevier, 2016. <span class="ref-meta"><span data-lang="zh">A2</span><span data-lang="en">Chapter A2.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Klabunde RE.</span> <span class="ref-title"> Cardiovascular Physiology Concepts (3rd ed.).</span> Wolters Kluwer, 2021. <span class="ref-meta"><span data-lang="zh">A2</span><span data-lang="en">Chapter A2.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Strang G.</span> <span class="ref-title"> Introduction to Linear Algebra (5th ed.).</span> Wellesley-Cambridge, 2016. <span class="ref-meta"><span data-lang="zh">A3</span><span data-lang="en">Chapter A3.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Oppenheim AV, Schafer RW.</span> <span class="ref-title"> Discrete-Time Signal Processing (3rd ed.).</span> Pearson, 2009. <span class="ref-meta"><span data-lang="zh">A3 · B2</span><span data-lang="en">Chapters A3 · B2.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Boyd S, Vandenberghe L.</span> <span class="ref-title"> Introduction to Applied Linear Algebra.</span> Cambridge UP, 2018. <span class="ref-meta"><span data-lang="zh">A3 · 線上免費</span><span data-lang="en">Chapter A3 · Free online.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Bishop CM.</span> <span class="ref-title"> Pattern Recognition and Machine Learning.</span> Springer, 2006. <span class="ref-meta"><span data-lang="zh">A3 · B4</span><span data-lang="en">Chapters A3 · B4.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Goodfellow I, Bengio Y, Courville A.</span> <span class="ref-title"> Deep Learning.</span> MIT Press, 2016. <span class="ref-meta"><span data-lang="zh">A3 · B4 · 線上免費</span><span data-lang="en">Chapters A3 · B4 · Free online.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Ratner BD, Hoffman AS, Schoen FJ, Lemons JE (eds.).</span> <span class="ref-title"> Biomaterials Science (4th ed.).</span> Elsevier, 2020. <span class="ref-meta"><span data-lang="zh">A4</span><span data-lang="en">Chapter A4.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Webster JG.</span> <span class="ref-title"> Medical Instrumentation: Application and Design (4th ed.).</span> Wiley, 2009. <span class="ref-meta"><span data-lang="zh">B1</span><span data-lang="en">Chapter B1.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Bronzino JD, Peterson DR.</span> <span class="ref-title"> Biomedical Engineering Handbook (4th ed.).</span> CRC Press, 2015. <span class="ref-meta"><span data-lang="zh">B1</span><span data-lang="en">Chapter B1.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Bruce EN.</span> <span class="ref-title"> Biomedical Signal Processing and Signal Modeling.</span> Wiley, 2001. <span class="ref-meta"><span data-lang="zh">B2</span><span data-lang="en">Chapter B2.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Mallat S.</span> <span class="ref-title"> A Wavelet Tour of Signal Processing (3rd ed.).</span> Academic Press, 2008. <span class="ref-meta"><span data-lang="zh">B2</span><span data-lang="en">Chapter B2.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Hyvärinen A, Karhunen J, Oja E.</span> <span class="ref-title"> Independent Component Analysis.</span> Wiley, 2001. <span class="ref-meta"><span data-lang="zh">B2</span><span data-lang="en">Chapter B2.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Bushberg JT, et al.</span> <span class="ref-title"> The Essential Physics of Medical Imaging (4th ed.).</span> Wolters Kluwer, 2020. <span class="ref-meta"><span data-lang="zh">B3</span><span data-lang="en">Chapter B3.</span></span></li>
+  <li><span class="ref-tag book">BOOK</span> <span class="ref-author">Fung YC.</span> <span class="ref-title"> Biomechanics: Mechanical Properties of Living Tissues (2nd ed.).</span> Springer, 1993. <span class="ref-meta"><span data-lang="zh">C1</span><span data-lang="en">Chapter C1.</span></span></li>
+</ul>
+</section>
+
+<!-- ===================== Errata ===================== -->
+<section class="section section-anchor" id="errata">
+<div class="section-label" data-zh="教學註記" data-en="TUTORIAL NOTES">教學註記</div>
+<h2 data-zh="📌 教學註記與細節" data-en="📌 Tutorial Notes & Details">📌 教學註記與細節</h2>
+<p data-zh="以下整理 BME 教學中常見的誤解、法規易混淆條款、benchmark 結果不一致之處。並非否定原工具或標準，而是補充使用情境上的限制。" data-en="The following compiles common misunderstandings in BME pedagogy, easily-confused regulatory clauses, and conflicting benchmark conclusions. None of these invalidate the underlying tools or standards — they scope the conditions under which they apply.">以下整理 BME 教學中常見的誤解、法規易混淆條款、benchmark 結果不一致之處。<strong>並非否定原工具或標準，而是補充使用情境上的限制。</strong></p>
+
+<div class="errata">
+
+  <span class="errata-label" data-zh="補充說明" data-en="Notes" style="display:inline-block;background:#e0e7ff;color:#3730a3;padding:2px 10px;border-radius:4px;font-size:.72rem;font-weight:700;letter-spacing:.5px;margin-bottom:8px">補充說明 · Notes</span>
+  <h4 data-zh="B3 MRI vs CT：對比機制不同，影像不可互換" data-en="B3 MRI vs CT: distinct contrast mechanisms, images are not interchangeable">B3 MRI vs CT：對比機制不同，影像不可互換</h4>
+</div>
+
+<div class="errata">
+  <span class="errata-label" data-zh="補充說明" data-en="Notes" style="display:inline-block;background:#e0e7ff;color:#3730a3;padding:2px 10px;border-radius:4px;font-size:.72rem;font-weight:700;letter-spacing:.5px;margin-bottom:8px">補充說明 · Notes</span>
+  <h4 data-zh="生物感測器：選擇性 vs 靈敏度（IUPAC 定義）" data-en="Biosensors: selectivity vs sensitivity (IUPAC definitions)">生物感測器：選擇性 vs 靈敏度（IUPAC 定義）</h4>
+  <p data-zh="教學報告中 selectivity（選擇性）與 sensitivity（靈敏度）常被混用。依 IUPAC Recommendations (Thévenot 2001, Pure Appl. Chem. 71:2333；後續 IUPAC Compendium 修訂)：selectivity 指感測器在干擾物 (interferents) 存在下仍能特異性辨認目標分析物的能力，量化通常用 selectivity coefficient (k_AB) 或 cross-reactivity %；sensitivity 則為校正曲線斜率 (response per unit concentration, dR/dC)，與 LOD (limit of detection)、LOQ (limit of quantification) 有關。" data-en="In tutorial-style reports, selectivity and sensitivity are often confused. Per IUPAC Recommendations (Thévenot 2001, Pure Appl. Chem. 71:2333; later IUPAC Compendium revisions): selectivity is the sensor's ability to specifically recognise the target analyte in the presence of interferents — typically quantified as a selectivity coefficient (k_AB) or cross-reactivity %; sensitivity is the slope of the calibration curve (response per unit concentration, dR/dC), related to LOD (limit of detection) and LOQ (limit of quantification).">教學報告中 selectivity（選擇性）與 sensitivity（靈敏度）常被混用。依 IUPAC Recommendations (Thévenot 2001, Pure Appl. Chem. 71:2333；後續 IUPAC Compendium 修訂)：selectivity 指感測器在干擾物 (interferents) 存在下仍能特異性辨認目標分析物的能力，量化通常用 selectivity coefficient (k_AB) 或 cross-reactivity %；sensitivity 則為校正曲線斜率 (response per unit concentration, dR/dC)，與 LOD (limit of detection)、LOQ (limit of quantification) 有關。</p>
+  <p data-zh="兩者並無必然相關：高 sensitivity（小斜率變化即可偵測）若 selectivity 差，反而會放大假陽性訊號。臨床診斷脈絡（如 ELISA、血糖機）的 sensitivity / specificity 是不同概念（屬於 confusion matrix 之 TPR / TNR），不可與分析化學之 sensitivity 混為一談。建議：報告生物感測器性能時，須同時給出 (a) LOD / LOQ；(b) 線性範圍與斜率；(c) 干擾測試的 k_AB 表；(d) 與既有金標準 (gold standard) 比對的 Bland-Altman 分析。" data-en="The two are not coupled: high analytical sensitivity (small concentration changes detectable) combined with poor selectivity merely amplifies false-positive signal. In a clinical-diagnostic context (ELISA, glucose meters), sensitivity/specificity refer to TPR/TNR of a confusion matrix — a different concept from analytical-chemistry sensitivity. Reporting biosensor performance should always include: (a) LOD / LOQ; (b) linear range and slope; (c) interferent k_AB table; (d) Bland-Altman comparison versus a gold-standard method.">兩者並無必然相關：高 sensitivity（小斜率變化即可偵測）若 selectivity 差，反而會放大假陽性訊號。臨床診斷脈絡（如 ELISA、血糖機）的 sensitivity / specificity 是不同概念（屬於 confusion matrix 之 TPR / TNR），不可與分析化學之 sensitivity 混為一談。建議：報告生物感測器性能時，須同時給出 (a) LOD / LOQ；(b) 線性範圍與斜率；(c) 干擾測試的 k_AB 表；(d) 與既有金標準 (gold standard) 比對的 Bland-Altman 分析。</p>
+  <p>Reference: Thévenot D.R. et al. <em>Pure Appl. Chem.</em> 71(12):2333–2348, 2001. <a href="https://doi.org/10.1351/pac199971122333">10.1351/pac199971122333</a></p>
+</div>
+
+<div class="errata">
+  <span class="errata-label" data-zh="補充說明" data-en="Notes" style="display:inline-block;background:#e0e7ff;color:#3730a3;padding:2px 10px;border-radius:4px;font-size:.72rem;font-weight:700;letter-spacing:.5px;margin-bottom:8px">補充說明 · Notes</span>
+  <h4 data-zh="組織工程 scaffold：天然 vs 合成材料" data-en="Tissue engineering scaffolds: natural vs synthetic materials">組織工程 scaffold：天然 vs 合成材料</h4>
+  <p data-zh="組織工程 scaffold 材料常被簡化為「天然好 / 合成壞」或反之，實際取捨更複雜。Hubbell (2009, Curr. Opin. Biotechnol. 20:481) 的綜述歸納：天然材料（collagen、fibrin、hyaluronic acid、decellularized ECM、alginate、chitosan）含內生整合素結合位點 (RGD) 與蛋白酶可降解序列，生物相容性與細胞反應佳，但批間差異大、機械強度低、純化困難、潛在免疫原性（殘留 DNA / 蛋白）。" data-en="Tissue-engineering scaffold materials are often oversimplified as 'natural good / synthetic bad' or vice versa; the real trade-offs are more nuanced. Hubbell's review (2009, Curr. Opin. Biotechnol. 20:481) summarises: natural materials (collagen, fibrin, hyaluronic acid, decellularized ECM, alginate, chitosan) carry endogenous integrin-binding sites (RGD) and protease-cleavable sequences, giving excellent biocompatibility and cell response, but suffer from batch-to-batch variability, low mechanical strength, difficult purification, and potential immunogenicity (residual DNA / protein).">組織工程 scaffold 材料常被簡化為「天然好 / 合成壞」或反之，實際取捨更複雜。Hubbell (2009, Curr. Opin. Biotechnol. 20:481) 的綜述歸納：天然材料（collagen、fibrin、hyaluronic acid、decellularized ECM、alginate、chitosan）含內生整合素結合位點 (RGD) 與蛋白酶可降解序列，生物相容性與細胞反應佳，但批間差異大、機械強度低、純化困難、潛在免疫原性（殘留 DNA / 蛋白）。</p>
+  <p data-zh="合成材料（PLA、PGA、PLGA、PCL、PEG、polyurethane）可精確控制機械、降解速率、孔洞結構與消毒，但本身缺乏細胞辨認位點，需化學修飾接 RGD / IKVAV peptide；降解產物可能酸化局部 pH（PLA、PLGA 之乳酸 / 乙醇酸）影響細胞活性。現代趨勢為混合 (composite) 材料 + bioactive cue：例如 PEG 水凝膠接 MMP-cleavable + RGD 序列、PLGA 微球封裝 growth factor、3D-bioprinted GelMA / collagen + 合成增強相。選擇 rubric：機械承重組織（骨、軟骨）→ 合成或合成主導 composite；軟組織 / blood vessel / 神經 → 天然或天然主導。" data-en="Synthetic materials (PLA, PGA, PLGA, PCL, PEG, polyurethane) allow precise control of mechanics, degradation kinetics, pore architecture, and sterilisation, but lack intrinsic cell-recognition sites and require chemical conjugation of RGD / IKVAV peptides; their degradation products can acidify local pH (lactic / glycolic acid from PLA, PLGA) and reduce cell viability. The modern trend is composite materials with bioactive cues — PEG hydrogels with MMP-cleavable + RGD sequences, PLGA microspheres encapsulating growth factors, 3D-bioprinted GelMA / collagen blended with reinforcing synthetics. Selection rubric: load-bearing tissues (bone, cartilage) → synthetic or synthetic-dominant composite; soft tissues / blood vessel / nerve → natural or natural-dominant.">合成材料（PLA、PGA、PLGA、PCL、PEG、polyurethane）可精確控制機械、降解速率、孔洞結構與消毒，但本身缺乏細胞辨認位點，需化學修飾接 RGD / IKVAV peptide；降解產物可能酸化局部 pH（PLA、PLGA 之乳酸 / 乙醇酸）影響細胞活性。現代趨勢為混合 (composite) 材料 + bioactive cue：例如 PEG 水凝膠接 MMP-cleavable + RGD 序列、PLGA 微球封裝 growth factor、3D-bioprinted GelMA / collagen + 合成增強相。選擇 rubric：機械承重組織（骨、軟骨）→ 合成或合成主導 composite；軟組織 / blood vessel / 神經 → 天然或天然主導。</p>
+  <p>Reference: Hubbell J.A. <em>Curr. Opin. Biotechnol.</em> 20(5):481–487, 2009. <a href="https://doi.org/10.1016/j.copbio.2009.10.007">10.1016/j.copbio.2009.10.007</a></p>
+</div>
+
+<div class="errata">
+  <span class="errata-label" data-zh="補充說明" data-en="Notes" style="display:inline-block;background:#e0e7ff;color:#3730a3;padding:2px 10px;border-radius:4px;font-size:.72rem;font-weight:700;letter-spacing:.5px;margin-bottom:8px">補充說明 · Notes</span>
+  <h4 data-zh="FDA 醫材：510(k) cleared vs PMA approved 不可混用" data-en="FDA medical devices: 510(k) cleared vs PMA approved are not interchangeable">FDA 醫材：510(k) cleared vs PMA approved 不可混用</h4>
+  <p data-zh="行銷文宣常把「FDA cleared」與「FDA approved」混用，法規上是不同途徑、不同證據門檻。510(k) Premarket Notification（21 CFR Part 807 Subpart E）適用於 Class II 多數醫材：廠商證明新產品與「合法上市」的 predicate device 具備「實質等效」(substantial equivalence, SE) 即可上市，不需獨立 clinical trial，FDA 給予「cleared」狀態。PMA (Premarket Approval, 21 CFR Part 814) 適用於 Class III 高風險醫材（如植入式心律調節器、人工心瓣）：需證明 reasonable assurance of safety and effectiveness，通常含 pivotal clinical trial，FDA 給予「approved」狀態。" data-en="Marketing copy often blurs 'FDA cleared' and 'FDA approved', but they are different regulatory pathways with different evidence thresholds. 510(k) Premarket Notification (21 CFR Part 807 Subpart E) covers most Class II devices: the manufacturer demonstrates substantial equivalence (SE) to a legally marketed predicate device, without requiring an independent clinical trial — FDA grants 'cleared' status. PMA (Premarket Approval, 21 CFR Part 814) applies to Class III high-risk devices (implantable pacemakers, prosthetic heart valves): the manufacturer must show reasonable assurance of safety and effectiveness, typically through a pivotal clinical trial — FDA grants 'approved' status.">行銷文宣常把「FDA cleared」與「FDA approved」混用，法規上是不同途徑、不同證據門檻。510(k) Premarket Notification（21 CFR Part 807 Subpart E）適用於 Class II 多數醫材：廠商證明新產品與「合法上市」的 predicate device 具備「實質等效」(substantial equivalence, SE) 即可上市，不需獨立 clinical trial，FDA 給予「cleared」狀態。PMA (Premarket Approval, 21 CFR Part 814) 適用於 Class III 高風險醫材（如植入式心律調節器、人工心瓣）：需證明 reasonable assurance of safety and effectiveness，通常含 pivotal clinical trial，FDA 給予「approved」狀態。</p>
+  <p data-zh="其他重要途徑：De Novo（新型低 / 中度風險、無 predicate）、HDE（罕病 Humanitarian Device Exemption）、IDE（investigational use）。常見誤區：(a) 把 510(k) cleared 講成 approved；(b) 引用 predicate 鏈無限延伸（predicate creep）；(c) AI / SaMD 取得 510(k) 後做 model update 須評估是否觸發新 510(k)（見 GMLP 2021 / PCCP 2024）。實務寫作建議：FDA 公開資料庫 (510(k) database、PMA database、AccessGUDID) 為 ground truth。" data-en="Other key pathways: De Novo (novel low / moderate-risk devices with no predicate), HDE (Humanitarian Device Exemption for rare diseases), IDE (investigational use). Common pitfalls: (a) writing 510(k) cleared as approved; (b) extending predicate chains indefinitely (predicate creep); (c) AI / SaMD that obtained 510(k) clearance must reassess whether model updates trigger a new 510(k) (see GMLP 2021 / PCCP 2024). For accuracy, always cross-check the FDA public databases (510(k), PMA, AccessGUDID) as ground truth.">其他重要途徑：De Novo（新型低 / 中度風險、無 predicate）、HDE（罕病 Humanitarian Device Exemption）、IDE（investigational use）。常見誤區：(a) 把 510(k) cleared 講成 approved；(b) 引用 predicate 鏈無限延伸（predicate creep）；(c) AI / SaMD 取得 510(k) 後做 model update 須評估是否觸發新 510(k)（見 GMLP 2021 / PCCP 2024）。實務寫作建議：FDA 公開資料庫 (510(k) database、PMA database、AccessGUDID) 為 ground truth。</p>
+  <p>References: 21 CFR Part 807 Subpart E (510(k)) · 21 CFR Part 814 (PMA) · FDA. <em>The 510(k) Program: Evaluating Substantial Equivalence in Premarket Notifications</em>. Guidance, 2014. <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/510k-program-evaluating-substantial-equivalence-premarket-notifications-510k">fda.gov</a></p>
+</div>
+
+<div class="errata">
+  <span class="errata-label" data-zh="補充說明" data-en="Notes" style="display:inline-block;background:#e0e7ff;color:#3730a3;padding:2px 10px;border-radius:4px;font-size:.72rem;font-weight:700;letter-spacing:.5px;margin-bottom:8px">補充說明 · Notes</span>
+  <h4 data-zh="醫材法規：IEC 60601 是產品標準，ISO 13485 是品質系統" data-en="Medical-device regulation: IEC 60601 is a product standard, ISO 13485 is a QMS standard">醫材法規：IEC 60601 是產品標準，ISO 13485 是品質系統</h4>
+  <p data-zh="IEC 60601-1（Medical electrical equipment — Part 1: General requirements for basic safety and essential performance；目前 Ed. 3.2 + Amd.2:2020）為「產品標準」，規範醫療電氣設備的電氣安全 (leakage current、insulation)、機械安全、輻射安全與 essential performance；含 collateral standards（如 60601-1-2 EMC、60601-1-6 usability、60601-1-9 environmentally conscious design）與 particular standards（60601-2-xx 針對 ECG、defibrillator、infusion pump 等具體設備）。" data-en="IEC 60601-1 (Medical electrical equipment — Part 1: General requirements for basic safety and essential performance; currently Ed. 3.2 + Amd.2:2020) is a product standard governing electrical safety (leakage current, insulation), mechanical safety, radiation safety, and essential performance of medical electrical equipment. It includes collateral standards (e.g. 60601-1-2 EMC, 60601-1-6 usability, 60601-1-9 environmentally conscious design) and particular standards (60601-2-xx covering ECGs, defibrillators, infusion pumps, etc.).">IEC 60601-1（Medical electrical equipment — Part 1: General requirements for basic safety and essential performance；目前 Ed. 3.2 + Amd.2:2020）為「產品標準」，規範醫療電氣設備的電氣安全 (leakage current、insulation)、機械安全、輻射安全與 essential performance；含 collateral standards（如 60601-1-2 EMC、60601-1-6 usability、60601-1-9 environmentally conscious design）與 particular standards（60601-2-xx 針對 ECG、defibrillator、infusion pump 等具體設備）。</p>
+  <p data-zh="ISO 13485:2016（Medical devices — Quality management systems — Requirements for regulatory purposes）為「品質管理系統 (QMS) 標準」，規範組織如何系統性管理 design control、risk management (連動 ISO 14971)、CAPA、supplier control、post-market surveillance、UDI、滅菌驗證、軟體 lifecycle (連動 IEC 62304)。兩者並不衝突而是「正交」：一家醫材公司同時通過 ISO 13485 認證（QMS），並對單一產品取得 IEC 60601-1 測試報告。常見誤區：把通過 ISO 13485 當作產品「被認證」；事實上 ISO 13485 認證對象是組織，不是產品。" data-en="ISO 13485:2016 (Medical devices — Quality management systems — Requirements for regulatory purposes) is a quality-management-system (QMS) standard covering design control, risk management (linked to ISO 14971), CAPA, supplier control, post-market surveillance, UDI, sterilisation validation, and software lifecycle (linked to IEC 62304). The two are orthogonal, not in conflict: a medical-device company holds ISO 13485 certification for its QMS while obtaining an IEC 60601-1 test report for each product. A common misconception is to treat ISO 13485 certification as product certification — but ISO 13485 certifies organisations, not products.">ISO 13485:2016（Medical devices — Quality management systems — Requirements for regulatory purposes）為「品質管理系統 (QMS) 標準」，規範組織如何系統性管理 design control、risk management (連動 ISO 14971)、CAPA、supplier control、post-market surveillance、UDI、滅菌驗證、軟體 lifecycle (連動 IEC 62304)。兩者並不衝突而是「正交」：一家醫材公司同時通過 ISO 13485 認證（QMS），並對單一產品取得 IEC 60601-1 測試報告。常見誤區：把通過 ISO 13485 當作產品「被認證」；事實上 ISO 13485 認證對象是組織，不是產品。</p>
+  <p>References: IEC 60601-1 Ed. 3.2:2020. International Electrotechnical Commission. <a href="https://webstore.iec.ch/publication/67497">webstore.iec.ch/67497</a> · ISO 13485:2016. International Organization for Standardization. <a href="https://www.iso.org/standard/59752.html">iso.org/59752</a></p>
+</div>
+
+<div class="errata">
+  <span class="errata-label" data-zh="補充說明" data-en="Notes" style="display:inline-block;background:#e0e7ff;color:#3730a3;padding:2px 10px;border-radius:4px;font-size:.72rem;font-weight:700;letter-spacing:.5px;margin-bottom:8px">補充說明 · Notes</span>
+  <h4 data-zh="AI/ML SaMD：Locked vs Adaptive、GMLP 2021 與 PCCP 2024" data-en="AI/ML SaMD: locked vs adaptive, GMLP 2021 and PCCP 2024">AI/ML SaMD：Locked vs Adaptive、GMLP 2021 與 PCCP 2024</h4>
+  <p data-zh="Software as a Medical Device (SaMD) 內含 AI / ML 模型者，FDA 區分 locked algorithm（部署後參數固定）與 adaptive algorithm（部署後可持續學習 / 更新）。傳統 510(k) / PMA 框架預設 locked，每次顯著演算法變更須重新提交 — 對 AI 模型而言成本巨大。FDA 自 2019 起發布 discussion paper, 2021 年正式發布 Good Machine Learning Practice (GMLP) 10 條原則（與 Health Canada、MHRA 共同），涵蓋資料代表性、人因設計、模型解釋性、部署後監控等。" data-en="When Software as a Medical Device (SaMD) embeds AI / ML, FDA distinguishes locked algorithms (parameters fixed after deployment) from adaptive algorithms (continuously learn / update post-deployment). The traditional 510(k) / PMA framework assumes locked behaviour and requires resubmission for any significant algorithm change — prohibitively expensive for AI models. FDA released a discussion paper in 2019 and finalised Good Machine Learning Practice (GMLP) 10 principles in 2021 (jointly with Health Canada and MHRA), covering data representativeness, human-factors design, model explainability, and post-deployment monitoring.">Software as a Medical Device (SaMD) 內含 AI / ML 模型者，FDA 區分 locked algorithm（部署後參數固定）與 adaptive algorithm（部署後可持續學習 / 更新）。傳統 510(k) / PMA 框架預設 locked，每次顯著演算法變更須重新提交 — 對 AI 模型而言成本巨大。FDA 自 2019 起發布 discussion paper, 2021 年正式發布 Good Machine Learning Practice (GMLP) 10 條原則（與 Health Canada、MHRA 共同），涵蓋資料代表性、人因設計、模型解釋性、部署後監控等。</p>
+  <p data-zh="2024 年 12 月 FDA 發布最終 guidance：Marketing Submission Recommendations for a Predetermined Change Control Plan (PCCP) for AI-Enabled Device Software Functions。廠商可在原 510(k) / De Novo / PMA 中預先聲明「未來計畫修改的演算法範圍、方法與驗證計畫」，FDA 一次核可，後續落入 PCCP 範圍內的更新無需新提交。教學中常見誤區：(a) 把 GMLP 當法規（其為原則 / soft guidance）；(b) 以為 adaptive AI 在美國尚不可行（PCCP 已可行）；(c) 把歐盟 EU AI Act / MDR Annex XVI 等同 FDA SaMD 框架（不同司法管轄、不同風險分類）。" data-en="In December 2024 FDA finalised guidance: 'Marketing Submission Recommendations for a Predetermined Change Control Plan (PCCP) for AI-Enabled Device Software Functions'. Manufacturers can pre-declare the scope, methods, and validation plan for planned future algorithm changes inside the original 510(k) / De Novo / PMA submission; FDA approves once, and updates falling within the PCCP do not require new submissions. Common misconceptions in tutorials: (a) treating GMLP as binding regulation (it is principle-level / soft guidance); (b) believing adaptive AI is not yet viable in the US (PCCP enables it); (c) equating the EU AI Act / MDR Annex XVI with FDA's SaMD framework (different jurisdictions, different risk classifications).">2024 年 12 月 FDA 發布最終 guidance：Marketing Submission Recommendations for a Predetermined Change Control Plan (PCCP) for AI-Enabled Device Software Functions。廠商可在原 510(k) / De Novo / PMA 中預先聲明「未來計畫修改的演算法範圍、方法與驗證計畫」，FDA 一次核可，後續落入 PCCP 範圍內的更新無需新提交。教學中常見誤區：(a) 把 GMLP 當法規（其為原則 / soft guidance）；(b) 以為 adaptive AI 在美國尚不可行（PCCP 已可行）；(c) 把歐盟 EU AI Act / MDR Annex XVI 等同 FDA SaMD 框架（不同司法管轄、不同風險分類）。</p>
+  <p>References: FDA, Health Canada, MHRA. <em>Good Machine Learning Practice for Medical Device Development: Guiding Principles</em>, 2021. <a href="https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles">fda.gov/GMLP</a> · FDA. <em>Marketing Submission Recommendations for a Predetermined Change Control Plan for AI-Enabled Device Software Functions</em>, final guidance, December 2024. <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/marketing-submission-recommendations-predetermined-change-control-plan-artificial">fda.gov/PCCP-2024</a></p>
+</div>
+
+<div class="errata">
+  <span class="errata-label" data-zh="補充說明" data-en="Notes" style="display:inline-block;background:#e0e7ff;color:#3730a3;padding:2px 10px;border-radius:4px;font-size:.72rem;font-weight:700;letter-spacing:.5px;margin-bottom:8px">補充說明 · Notes</span>
+  <h4 data-zh="組織工程：decellularized ECM 的殘留 DNA 標準 (Crapo 2011)" data-en="Tissue engineering: residual DNA criteria for decellularized ECM (Crapo 2011)">組織工程：decellularized ECM 的殘留 DNA 標準 (Crapo 2011)</h4>
+  <p data-zh="Decellularized extracellular matrix (dECM) 為近代組織工程關鍵 scaffold 之一：保留組織原生結構與生化線索（collagen、glycosaminoglycan、growth factors），同時去除供體細胞以降低免疫原性。但「去除多少才算夠」是設計門檻問題。Crapo, Gilbert, Badylak (2011, Biomaterials 32:3233) 整合大量文獻提出三項量化最低標準：(a) 殘留 dsDNA < 50 ng/mg dry tissue；(b) DNA fragment 長度 < 200 bp；(c) DAPI 或 H&amp;E 染色無可見細胞核。" data-en="Decellularized extracellular matrix (dECM) is a key modern tissue-engineering scaffold: it preserves native architecture and biochemical cues (collagen, glycosaminoglycans, growth factors) while removing donor cells to reduce immunogenicity. Yet 'how much is enough' is a design threshold. Crapo, Gilbert, and Badylak (2011, Biomaterials 32:3233) synthesised the literature into three minimum quantitative criteria: (a) residual dsDNA < 50 ng/mg dry tissue; (b) DNA fragment length < 200 bp; (c) no visible nuclei on DAPI or H&amp;E staining.">Decellularized extracellular matrix (dECM) 為近代組織工程關鍵 scaffold 之一：保留組織原生結構與生化線索（collagen、glycosaminoglycan、growth factors），同時去除供體細胞以降低免疫原性。但「去除多少才算夠」是設計門檻問題。Crapo, Gilbert, Badylak (2011, Biomaterials 32:3233) 整合大量文獻提出三項量化最低標準：(a) 殘留 dsDNA &lt; 50 ng/mg dry tissue；(b) DNA fragment 長度 &lt; 200 bp；(c) DAPI 或 H&amp;E 染色無可見細胞核。</p>
+  <p data-zh="此「Crapo criteria」已被廣泛採為 dECM 出版品基本門檻。但實務注意：(a) 三項皆是 minimum，非充分條件——尚有 α-Gal epitope、SDS / Triton X-100 殘留洗滌劑、ECM 結構破壞程度（GAG 流失、collagen 變性）需個別評估；(b) 不同組織（心臟、肝、肺、皮膚、神經）clearing 條件差異極大，不能套用單一 SOP；(c) 量測 dsDNA 需用 PicoGreen 或 qPCR（spectrophotometer A260 過高估計），fragment 長度需用 agarose gel 或 Bioanalyzer；(d) 商品化產品（如 SIS、MatriStem、AlloDerm）仍經 FDA 510(k) 或 PMA 監管，臨床等級需獨立驗證。" data-en="These 'Crapo criteria' have become the de facto baseline for dECM publications. Practical caveats: (a) all three are minimum, not sufficient — additional checks (α-Gal epitope, residual SDS / Triton X-100 detergent, structural damage to ECM including GAG loss and collagen denaturation) are still needed; (b) clearing protocols differ greatly across tissues (heart, liver, lung, skin, nerve) — no single SOP fits all; (c) dsDNA quantification requires PicoGreen or qPCR (A260 spectrophotometry overestimates), and fragment length needs agarose gel or Bioanalyzer; (d) commercial products (SIS, MatriStem, AlloDerm) remain under FDA 510(k) or PMA oversight — clinical-grade material requires independent validation.">此「Crapo criteria」已被廣泛採為 dECM 出版品基本門檻。但實務注意：(a) 三項皆是 minimum，非充分條件——尚有 α-Gal epitope、SDS / Triton X-100 殘留洗滌劑、ECM 結構破壞程度（GAG 流失、collagen 變性）需個別評估；(b) 不同組織（心臟、肝、肺、皮膚、神經）clearing 條件差異極大，不能套用單一 SOP；(c) 量測 dsDNA 需用 PicoGreen 或 qPCR（spectrophotometer A260 過高估計），fragment 長度需用 agarose gel 或 Bioanalyzer；(d) 商品化產品（如 SIS、MatriStem、AlloDerm）仍經 FDA 510(k) 或 PMA 監管，臨床等級需獨立驗證。</p>
+  <p>Reference: Crapo P.M., Gilbert T.W., Badylak S.F. <em>Biomaterials</em> 32(12):3233–3243, 2011. <a href="https://doi.org/10.1016/j.biomaterials.2011.01.057">10.1016/j.biomaterials.2011.01.057</a></p>
+</div>
+
+</section>
+<nav class="page-nav">
+  <a href="../index.html"><span class="nav-dir" data-zh="← 教學首頁" data-en="← Tutorial home">← 教學首頁</span><span class="nav-title" data-zh="回到主教學頁" data-en="Back to tutorial hub">回到主教學頁</span></a>
+  <a href="../bme-intro-quiz/index.html" target="_blank" rel="noopener"><span class="nav-dir" data-zh="互動考題 →" data-en="Interactive quiz →">互動考題 →</span><span class="nav-title" data-zh="互動式考題" data-en="Interactive Quiz">互動式考題</span></a>
+</nav>
+
+</main>
+<script src="../i18n.js"></script>
+</body>
+</html>

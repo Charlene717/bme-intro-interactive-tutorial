@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>A4: 生醫材料 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html" class="active">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER A4 · BLOCK A FOUNDATIONS</div>
+<h1 data-zh="生醫材料" data-en="Biomaterials">生醫材料</h1>
+<p class="subtitle" data-lang="zh">從鈦合金髖關節到 PEG 水凝膠 BLA、從可吸收支架到 PEEK 3D 列印——本章帶你掌握 4 大材料家族與 ISO 10993 生物相容性測試。</p>
+<p class="subtitle" data-lang="en">From Ti hip implants to PEG hydrogels, bioresorbable stents to PEEK 3D printing — master the four material families and ISO 10993 biocompatibility testing.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="定義" data-en="DEFINITION">定義</div>
+<h2 data-zh="一、什麼是生醫材料？" data-en="I. What is a Biomaterial?">一、什麼是生醫材料？</h2>
+<div data-lang="zh">
+<p><strong>生醫材料（Biomaterial）</strong>是「設計用於與生物系統交互、達成診斷／治療目的的天然或人造材料」（Williams, 1987 並由 ESB 2018 重新校準）。它不是「對人體無害的材料」這麼狹義，而是涵蓋了主動引發生物響應（如骨整合、藥物釋放、組織再生）的所有設計過的材料。</p>
+<p>從心血管支架、人工髖關節、骨水泥、隱形眼鏡、人工瓣膜、CGM 感測膜、可植入電極、藥物緩釋微粒、3D 列印氣管支架、到 mRNA 疫苗的脂質奈米粒——這些「東西」的核心都是生醫材料。</p>
+</div>
+<div data-lang="en">
+<p>A <strong>biomaterial</strong> is "a natural or synthetic material designed to interact with biological systems for diagnostic or therapeutic purposes" (Williams 1987, recalibrated by ESB 2018). It's not just "harmless to humans" — it covers all engineered materials that actively elicit biological responses (osseointegration, drug release, tissue regen).</p>
+<p>Cardiovascular stents, hip implants, bone cement, contact lenses, prosthetic valves, CGM sensor membranes, implantable electrodes, drug-release microparticles, 3D-printed tracheal scaffolds, mRNA-vaccine lipid nanoparticles — at the core of all these "things" are biomaterials.</p>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>三大設計目標：</strong>(1) <em>生物相容性（biocompatibility）</em>——身體接受它；(2) <em>機械適配（mechanical fit）</em>——剛度/強度匹配所替代的組織；(3) <em>功能性（functionality）</em>——能完成預期的醫療任務（承載、釋放、傳訊、再生）。</span>
+<span data-lang="en"><strong>Three design goals:</strong> (1) <em>Biocompatibility</em> — the body accepts it; (2) <em>Mechanical fit</em> — stiffness/strength matches the replaced tissue; (3) <em>Functionality</em> — performs its medical task (load-bearing, release, signaling, regeneration).</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="四大家族" data-en="FOUR FAMILIES">四大家族</div>
+<h2 data-zh="二、生醫材料的四大家族" data-en="II. The Four Material Families">二、四大家族</h2>
+<table class="comp-table"><thead><tr><th data-zh="家族" data-en="Family">家族</th><th data-zh="代表材料" data-en="Examples">代表材料</th><th data-zh="楊氏模數 E" data-en="Young's E">楊氏模數</th><th data-zh="典型應用" data-en="Application">典型應用</th></tr></thead><tbody>
+<tr><td><strong data-zh="金屬" data-en="Metals">金屬</strong></td><td>Ti-6Al-4V, CoCrMo, 316L SS, Mg, Nitinol</td><td>110–220 GPa<br>(Mg: 45)</td><td data-zh="承重植入物：骨釘、人工髖/膝、心臟支架（Nitinol/CoCr）" data-en="Load-bearing: bone screws, hip/knee, stents (Nitinol/CoCr)">承重植入物、支架</td></tr>
+<tr><td><strong data-zh="陶瓷" data-en="Ceramics">陶瓷</strong></td><td>HA (羥磷灰石), ZrO₂, Al₂O₃, TCP, bioglass</td><td>70–410 GPa</td><td data-zh="牙科植體、骨填料、髖臼襯墊（陶瓷頭）" data-en="Dental implants, bone fillers, hip cup liners">牙植體、骨填料</td></tr>
+<tr><td><strong data-zh="高分子" data-en="Polymers">高分子</strong></td><td>PEEK, PE, PMMA, PLGA, PLA, PCL, PEG, Silicone, PU</td><td>0.5–8 GPa</td><td data-zh="縫線、骨水泥、隱形眼鏡、藥物載體、可吸收支架" data-en="Sutures, bone cement, contact lenses, drug carriers, BVS">縫線、骨水泥、藥物載體</td></tr>
+<tr><td><strong data-zh="複合材料" data-en="Composites">複合材料</strong></td><td>CFR-PEEK, GFR-PMMA, HA/PLA, 細胞 + 支架</td><td data-zh="可調" data-en="Tunable">可調</td><td data-zh="脊椎融合 cage、3D 生物列印組織支架" data-en="Spinal fusion cages, 3D bioprinted scaffolds">脊椎 cage、組織支架</td></tr>
+</tbody></table>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>Stress shielding：</strong>金屬 Ti（E ≈ 110 GPa）比骨頭（E ≈ 17 GPa）剛很多，植入後骨頭「不再承擔負荷」會逐漸萎縮（Wolff's law）。對策：使用低模數合金、porous Ti、3D 列印晶格、複合材料。</span>
+<span data-lang="en"><strong>Stress shielding:</strong> Ti (E ≈ 110 GPa) is far stiffer than bone (E ≈ 17 GPa). Once implanted, bone "stops bearing load" and atrophies (Wolff's law). Solutions: low-modulus alloys, porous Ti, 3D-printed lattices, composites.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖" data-en="INTERACTIVE">互動圖</div>
+<h2 data-zh="三、材料-組織模數對比互動圖" data-en="III. Material-Tissue Modulus Comparison">三、材料-組織模數對比</h2>
+<div data-lang="zh"><p>下圖比較常見生醫材料與人體組織的楊氏模數（Young's modulus, GPa）。注意縱軸為 log 刻度——人體組織橫跨 6 個數量級（軟組織 ~kPa → 骨頭 ~GPa）。</p></div>
+<div data-lang="en"><p>Young's modulus comparison (log scale). Human tissues span 6 orders of magnitude — soft tissue (~kPa) → bone (~GPa).</p></div>
+<div class="interactive-panel">
+<div class="chart-container" style="height:380px"><canvas id="modulusChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">紅色：金屬；橘：陶瓷；紫：高分子；灰：人體組織（log 刻度，GPa）</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Red: metals · Orange: ceramics · Purple: polymers · Gray: tissues (log scale, GPa)</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="生物相容性" data-en="BIOCOMPATIBILITY">生物相容性</div>
+<h2 data-zh="四、ISO 10993 生物相容性測試矩陣" data-en="IV. ISO 10993 Biocompatibility Test Matrix">四、ISO 10993 測試矩陣</h2>
+<div data-lang="zh">
+<p>ISO 10993 系列把所有醫療器材依「接觸性質 × 接觸時間」分類，建議對應的生物相容性測試。三大接觸維度：</p>
+<ol>
+<li><strong>表面接觸（surface）</strong>：完整皮膚 / 黏膜 / 受損體表</li>
+<li><strong>外部通訊（external communicating）</strong>：血液通路 / 組織骨頭（短期暴露） / 循環血液</li>
+<li><strong>植入（implant）</strong>：組織骨頭 / 血液（永久）</li>
+</ol>
+<p>接觸時間分 ≤24 h、>24 h~30 d、>30 d。風險越高，測試項目越多。</p>
+</div>
+<div data-lang="en">
+<p>The ISO 10993 series classifies all medical devices by "contact type × duration" and recommends corresponding biocompatibility tests. Three contact dimensions:</p>
+<ol>
+<li><strong>Surface</strong>: intact skin / mucosa / breached surface</li>
+<li><strong>External communicating</strong>: blood path / tissue-bone (short) / circulating blood</li>
+<li><strong>Implant</strong>: tissue-bone / blood (permanent)</li>
+</ol>
+<p>Duration: ≤24 h, &gt;24 h~30 d, &gt;30 d. Higher risk → more tests.</p>
+</div>
+<table class="comp-table"><thead><tr><th data-zh="測試項目" data-en="Test">測試</th><th data-zh="部分編號" data-en="Part">編號</th><th data-zh="評估" data-en="Evaluates">評估</th></tr></thead><tbody>
+<tr><td><strong data-zh="細胞毒性" data-en="Cytotoxicity">細胞毒性</strong></td><td>ISO 10993-5</td><td data-zh="L929 細胞 MTT/XTT；最基本，幾乎所有器材都做" data-en="L929 cells MTT/XTT; almost universal">L929 MTT；最基本</td></tr>
+<tr><td><strong data-zh="致敏性" data-en="Sensitization">致敏性</strong></td><td>ISO 10993-10</td><td data-zh="GPMT、LLNA；皮膚與黏膜接觸器材" data-en="GPMT, LLNA; skin/mucosa contact">GPMT/LLNA</td></tr>
+<tr><td><strong data-zh="刺激性" data-en="Irritation">刺激性</strong></td><td>ISO 10993-23</td><td data-zh="兔皮膚或眼刺激測試" data-en="Rabbit skin/eye irritation">兔皮膚/眼</td></tr>
+<tr><td><strong data-zh="全身毒性" data-en="Systemic Tox">全身毒性</strong></td><td>ISO 10993-11</td><td data-zh="急性 / 亞慢性 / 慢性" data-en="Acute / subacute / chronic">急性/慢性</td></tr>
+<tr><td><strong data-zh="基因毒性" data-en="Genotoxicity">基因毒性</strong></td><td>ISO 10993-3</td><td data-zh="Ames、micronucleus、HPRT" data-en="Ames, micronucleus, HPRT">Ames、MN</td></tr>
+<tr><td><strong data-zh="致癌性" data-en="Carcinogenicity">致癌性</strong></td><td>ISO 10993-3</td><td data-zh="長期植入物需評估" data-en="For long-term implants">長期植入</td></tr>
+<tr><td><strong data-zh="血液相容性" data-en="Hemocompatibility">血液相容性</strong></td><td>ISO 10993-4</td><td data-zh="溶血、凝血、補體、血小板；血液接觸器材" data-en="Hemolysis, coagulation, complement, platelets; blood-contact">溶血、凝血、補體</td></tr>
+<tr><td><strong data-zh="植入反應" data-en="Implantation">植入反應</strong></td><td>ISO 10993-6</td><td data-zh="動物植入後組織病理（被囊厚度、發炎）" data-en="In vivo implantation histopath">組織病理</td></tr>
+<tr><td><strong data-zh="化學表徵" data-en="Chem Char">化學表徵</strong></td><td>ISO 10993-18</td><td data-zh="可萃取物 / 可遷移物 (E/L)；近年 FDA 強推重點" data-en="Extractables/Leachables — FDA priority">E/L 分析</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="降解與表面工程" data-en="DEGRADATION &amp; SURFACE">降解與表面</div>
+<h2 data-zh="五、可吸收材料與表面工程" data-en="V. Bioresorbable Materials &amp; Surface Engineering">五、可吸收與表面</h2>
+<div class="card-grid cols-2">
+<div class="card"><h4>♻️ <span data-zh="可吸收高分子" data-en="Bioresorbable Polymers">可吸收高分子</span></h4>
+<div data-lang="zh"><p>PLA（聚乳酸，6–24 月）、PGA（1–4 月）、PLGA（可調 0.5–24 月）、PCL（&gt; 2 年）、PEG（水溶性）。水解切斷酯鍵 → 乳酸/羥乙酸 → CO₂ + H₂O。應用：骨釘、可吸收支架（Abbott Absorb 已退市，新一代 Magmaris 鎂支架）、藥物緩釋。</p></div>
+<div data-lang="en"><p>PLA (6–24 mo), PGA (1–4 mo), PLGA (tunable 0.5–24 mo), PCL (&gt;2 yr), PEG (water-soluble). Hydrolysis cleaves esters → lactic/glycolic acid → CO₂ + H₂O. Apps: bone screws, BVS (Abbott Absorb withdrawn; newer Magmaris Mg), drug release.</p></div></div>
+<div class="card"><h4>🛡️ <span data-zh="表面塗層與改質" data-en="Surface Coatings">表面塗層與改質</span></h4>
+<div data-lang="zh"><p>骨整合 → HA / TiO₂ 多孔塗層；抗凝血 → heparin / PEG / 抗凝肝素；抗菌 → 銀奈米、antibiotic-loaded、PEG；可降解 → 親水化、cell-attractive 蜜蜂蛋白（RGD）。</p></div>
+<div data-lang="en"><p>Osseointegration: HA/TiO₂ porous coatings. Antithrombogenic: heparin/PEG. Antimicrobial: Ag nanoparticles, antibiotic-loaded. Cell-attractive: RGD peptide.</p></div></div>
+<div class="card"><h4>🌐 <span data-zh="水凝膠" data-en="Hydrogels">水凝膠</span></h4>
+<div data-lang="zh"><p>含水量 70–99%；天然（明膠、algiate、HA、fibrin、膠原蛋白）或合成（PEG、PHEMA、PNIPAM）。應用：隱形眼鏡（PHEMA）、傷口敷料、藥物緩釋、3D 生物列印 bioink、組織工程 scaffold。</p></div>
+<div data-lang="en"><p>70–99% water; natural (gelatin, alginate, HA, fibrin, collagen) or synthetic (PEG, PHEMA, PNIPAM). Apps: contact lenses (PHEMA), dressings, drug release, bioinks, scaffolds.</p></div></div>
+<div class="card"><h4>🧠 <span data-zh="神經友善材料" data-en="Neural-Friendly">神經友善材料</span></h4>
+<div data-lang="zh"><p>傳統 Pt-Ir/IrOx 微電極與腦組織 E 差 6 個量級，刺激會引發 gliosis；新一代用 PEDOT-PSS 導電高分子、carbon fiber、graphene、softgel polymer 把模數降下來。Neuralink 用 4 μm 厚的柔性絲。</p></div>
+<div data-lang="en"><p>Conventional Pt-Ir/IrOx microelectrodes are 10⁶× stiffer than brain — provoke gliosis. Next-gen: PEDOT-PSS, carbon fiber, graphene, softgel polymers reduce stiffness. Neuralink uses 4 μm flexible threads.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="六、給定臨床問題，怎麼選材料？" data-en="VI. How to Choose Material for a Clinical Problem">六、材料選擇決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="材料選擇 4 問" data-en="4 Questions for Material Selection">材料選擇 4 問</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">是否需要承載骨頭/牙齒級別的負荷？<span class="dt-arrow">→</span> Ti 合金 / CoCr / PEEK；E 接近骨頭，避免 stress shielding。</span><span data-lang="en">Need bone/dental load-bearing? <span class="dt-arrow">→</span> Ti alloy / CoCr / PEEK; aim for bone-like E to avoid stress shielding.</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">是否與血液直接接觸？<span class="dt-arrow">→</span> heparinized PU、ePTFE、PEG 塗層；ISO 10993-4 hemo 必做。</span><span data-lang="en">Blood contact? <span class="dt-arrow">→</span> Heparinized PU, ePTFE, PEG coatings; ISO 10993-4 hemo required.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">是否暫時性、希望最終被吸收？<span class="dt-arrow">→</span> PLA/PLGA/PCL；調整分子量與比例控制降解速率。</span><span data-lang="en">Temporary &amp; should resorb? <span class="dt-arrow">→</span> PLA/PLGA/PCL; tune MW &amp; ratio to control rate.</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">是否做為「活組織支架」？<span class="dt-arrow">→</span> 水凝膠（明膠/HA/PEG-RGD）+ 細胞 + bioreactor；組織工程章節深入。</span><span data-lang="en">Living-tissue scaffold? <span class="dt-arrow">→</span> Hydrogels (gelatin/HA/PEG-RGD) + cells + bioreactor; see TE chapter.</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="2026 趨勢" data-en="2025–2026 TRENDS">2026 趨勢</div>
+<h2 data-zh="七、2025–2026 趨勢與重要產品" data-en="VII. 2025–2026 Trends &amp; Notable Products">七、2025–2026 趨勢</h2>
+<div data-lang="zh">
+<ul>
+<li><strong>3D 列印金屬植入物：</strong>Stryker / Zimmer / Materialise / 4WEB Medical 推出 EBM 鈦合金多孔脊椎 cage，FDA 已累計 100+ 件 3D 列印植入物核准。</li>
+<li><strong>可吸收金屬支架：</strong>Biotronik Magmaris Mg 支架在歐洲商用，下一代 Freesolve 已 CE。</li>
+<li><strong>LNP 載體擴張：</strong>mRNA 疫苗 LNP（Moderna/BioNTech）→ Onpattro (patisiran) → CAR-T 體內遞送（CRISPR）→ 2025/2026 多家公司基於 LNP 開發體內治療。</li>
+<li><strong>PEEK + AI 客製化：</strong>顱骨 PEEK 植入物用病人 CT 影像 AI 自動設計，1-2 週交付。</li>
+<li><strong>「Smart」生醫材料：</strong>形狀記憶（SMA Nitinol）、自修復、感測整合（CGM 膜上長 enzyme）。</li>
+<li><strong>FDA E/L 要求收緊：</strong>2024 起 FDA 強調 ISO 10993-17 toxicological risk assessment + ISO 10993-18 chemical characterization，所有植入物與長期接觸器材都需做。</li>
+</ul>
+</div>
+<div data-lang="en">
+<ul>
+<li><strong>3D-printed metal implants:</strong> Stryker/Zimmer/Materialise/4WEB Medical ship EBM Ti porous spinal cages; FDA has cleared 100+ 3D-printed implants.</li>
+<li><strong>Bioresorbable metal stents:</strong> Biotronik Magmaris (Mg) is CE-marked; next-gen Freesolve CE-cleared.</li>
+<li><strong>LNPs everywhere:</strong> mRNA vaccines (Moderna/BioNTech) → Onpattro → in-vivo CAR-T (CRISPR) — multiple 2025-2026 LNP-based therapies in development.</li>
+<li><strong>PEEK + AI custom implants:</strong> Patient-CT → AI-designed PEEK cranial plates, 1-2 week turnaround.</li>
+<li><strong>"Smart" biomaterials:</strong> shape memory (SMA Nitinol), self-healing, sensor-integrated (enzymes on CGM membranes).</li>
+<li><strong>FDA tightens E/L:</strong> Since 2024, FDA emphasizes ISO 10993-17 toxicological risk + ISO 10993-18 chemical characterization for all implants and long-term contact devices.</li>
+</ul>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="八、PLGA 降解曲線模擬" data-en="VIII. PLGA Degradation Curve Simulation">八、PLGA 降解曲線</h2>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="comment"># Simplified bulk hydrolysis: dMW/dt = -k * MW, k depends on LA:GA ratio</span>
+t = np.<span class="func">linspace</span>(<span class="num">0</span>,<span class="num">180</span>,<span class="num">200</span>)   <span class="comment"># days</span>
+ratios = {<span class="str">"50:50 PLGA"</span>:<span class="num">0.060</span>, <span class="str">"75:25 PLGA"</span>:<span class="num">0.020</span>, <span class="str">"85:15 PLGA"</span>:<span class="num">0.011</span>, <span class="str">"100:0 PLA"</span>:<span class="num">0.005</span>}
+
+<span class="kw">for</span> name,k <span class="kw">in</span> ratios.items():
+    mw0 = <span class="num">50000</span>
+    mw  = mw0*np.<span class="func">exp</span>(-k*t)
+    plt.<span class="func">plot</span>(t, <span class="num">100</span>*mw/mw0, label=name)
+
+plt.<span class="func">xlabel</span>(<span class="str">"Days"</span>); plt.<span class="func">ylabel</span>(<span class="str">"Remaining MW (%)"</span>)
+plt.<span class="func">title</span>(<span class="str">"PLGA hydrolysis vs LA:GA ratio"</span>)
+plt.<span class="func">legend</span>(); plt.<span class="func">grid</span>(alpha=<span class="num">0.3</span>); plt.<span class="func">show</span>()</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre>t  = <span class="num">0</span>:<span class="num">1</span>:<span class="num">180</span>;
+k_vec=[<span class="num">0.060</span> <span class="num">0.020</span> <span class="num">0.011</span> <span class="num">0.005</span>];
+labels={<span class="str">'50:50'</span>,<span class="str">'75:25'</span>,<span class="str">'85:15'</span>,<span class="str">'100:0 PLA'</span>};
+<span class="kw">for</span> i=<span class="num">1</span>:<span class="num">4</span>
+  mw=<span class="num">100</span>*<span class="func">exp</span>(-k_vec(i)*t);
+  <span class="func">plot</span>(t,mw,<span class="str">'LineWidth'</span>,<span class="num">1.5</span>); <span class="func">hold on</span>;
+<span class="kw">end</span>
+<span class="func">xlabel</span>(<span class="str">'Days'</span>); <span class="func">ylabel</span>(<span class="str">'Remaining MW (%)'</span>);
+<span class="func">legend</span>(labels); <span class="func">grid on</span>;</pre></div>
+</div>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q1. 「Stress shielding」現象通常發生在使用哪種材料替代骨頭時？</span><span data-lang="en">Q1. "Stress shielding" typically occurs when using which material to replace bone?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. PLGA 可吸收聚合物</span><span data-lang="en">A. Bioresorbable PLGA</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. PHEMA 水凝膠</span><span data-lang="en">B. PHEMA hydrogel</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. Ti-6Al-4V 鈦合金（E ≈ 110 GPa）</span><span data-lang="en">C. Ti-6Al-4V (E ≈ 110 GPa)</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 鎂可吸收支架</span><span data-lang="en">D. Mg bioresorbable stent</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="0"><p><span data-lang="zh">Q2. ISO 10993-5 規範的是哪一類生物相容性測試？</span><span data-lang="en">Q2. ISO 10993-5 covers which biocompatibility test?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 細胞毒性（cytotoxicity）</span><span data-lang="en">A. Cytotoxicity</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 致敏性（sensitization）</span><span data-lang="en">B. Sensitization</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 血液相容性（hemocompatibility）</span><span data-lang="en">C. Hemocompatibility</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 化學表徵（E/L）</span><span data-lang="en">D. Chemical characterization (E/L)</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q3. PLGA 50:50 與 PLGA 85:15 相比，下列何者正確？</span><span data-lang="en">Q3. Comparing PLGA 50:50 vs PLGA 85:15:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 兩者降解速率相同</span><span data-lang="en">A. Same degradation rate</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 85:15 降解較快</span><span data-lang="en">B. 85:15 degrades faster</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 50:50 降解較快（GA 多 → 水解較快、更親水）</span><span data-lang="en">C. 50:50 degrades faster (more GA → faster hydrolysis, more hydrophilic)</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 兩者都不可吸收</span><span data-lang="en">D. Both are non-resorbable</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="engineering-math.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="A3 · 生醫工程數學" data-en="A3 · Engineering Math">A3 · 生醫工程數學</span></a>
+<a href="biosignals.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="B1 · 生醫訊號" data-en="B1 · Biosignals">B1 · 生醫訊號</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · A4 Biomaterials</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// Modulus chart
+const matData={
+  labels:['Brain','Skin','Cartilage','Tendon','Cortical Bone','PLGA','PEEK','PMMA','HA Ceramic','Ti-6Al-4V','CoCrMo','Al₂O₃'],
+  values:[0.0001, 0.001, 0.01, 1.2, 17, 2, 4, 3, 100, 110, 220, 380],
+  colors:['#94a3b8','#94a3b8','#94a3b8','#94a3b8','#94a3b8','#a855f7','#a855f7','#a855f7','#f97316','#dc2626','#dc2626','#f97316']
+};
+const labelsEN={'Brain':'Brain','Skin':'Skin','Cartilage':'Cartilage','Tendon':'Tendon','Cortical Bone':'Cortical Bone','PLGA':'PLGA','PEEK':'PEEK','PMMA':'PMMA','HA Ceramic':'HA','Ti-6Al-4V':'Ti-6Al-4V','CoCrMo':'CoCrMo','Al₂O₃':'Al₂O₃'};
+const labelsZH={'Brain':'腦','Skin':'皮膚','Cartilage':'軟骨','Tendon':'肌腱','Cortical Bone':'皮質骨','PLGA':'PLGA','PEEK':'PEEK','PMMA':'PMMA','HA Ceramic':'HA 陶瓷','Ti-6Al-4V':'Ti-6Al-4V','CoCrMo':'CoCrMo','Al₂O₃':'Al₂O₃'};
+let modChart=null;
+function drawMod(){
+  if(modChart)modChart.destroy();
+  const lang=I18n.get();
+  modChart=new Chart(document.getElementById('modulusChart').getContext('2d'),{
+    type:'bar',
+    data:{labels:matData.labels.map(l=>lang==='zh'?labelsZH[l]:labelsEN[l]),
+          datasets:[{label:lang==='zh'?'楊氏模數 (GPa)':'Young\'s modulus (GPa)',data:matData.values,backgroundColor:matData.colors}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false}},
+             scales:{x:{type:'logarithmic',title:{display:true,text:'GPa (log)'}}}}
+  });
+}
+drawMod();
+document.addEventListener('langchange',drawMod);
+</script>
+</body></html>

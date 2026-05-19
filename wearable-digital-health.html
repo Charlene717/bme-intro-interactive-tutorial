@@ -1,0 +1,457 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>D3: 穿戴式裝置與數位健康 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html" class="active">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER D3 · BLOCK D DEVICES &amp; INTERFACES</div>
+<h1 data-zh="穿戴式裝置與數位健康" data-en="Wearables &amp; Digital Health">穿戴式裝置與數位健康</h1>
+<p class="subtitle" data-lang="zh">從 Fitbit 計步到 Apple Watch ECG／AFib 通知、從 30 天 Holter patch 到 1 年植入式 CGM、從 SaMD 到 PCCP——穿戴式與數位健康正在改寫「醫療」與「日常」的界線。</p>
+<p class="subtitle" data-lang="en">From Fitbit step counts to Apple Watch ECG/AFib alerts, 30-day Holter patches to 1-year implantable CGMs, SaMD to PCCP — wearables and digital health are rewriting the line between "medical" and "everyday."</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="分類" data-en="CATEGORIZATION">分類</div>
+<h2 data-zh="一、穿戴式裝置的分類：消費級 vs 醫療級" data-en="I. Consumer Wellness vs Medical-Grade Wearables">一、分類：消費級 vs 醫療級</h2>
+<div data-lang="zh">
+<p>穿戴式裝置（wearable）依「監管定位」可分為兩大族群：<strong>消費級健康（consumer wellness）</strong>與<strong>醫療級（medical-grade）</strong>。兩者硬體可能高度相似（同一顆光學感測器、同一個 IMU），但<strong>意圖用途（intended use）</strong>決定了它是否需要 FDA 510(k) / De Novo / PMA 核可、是否能在臨床決策中被引用。</p>
+<ul>
+<li><strong>消費級健康：</strong>Fitbit（Charge 6 / Inspire 3 / Versa 4，Google 2021 收購）、Garmin（Forerunner / Fenix / Venu 3）、Whoop（4.0 / MG，無螢幕訂閱制，2024 推出 Whoop MG 含 ECG）、Oura Ring（Gen 3 / Gen 4 2024，睡眠 + HRV + 體溫）。標榜「健康（wellness）」而非「醫療」，FDA 一般採 Enforcement Discretion，不要求註冊。</li>
+<li><strong>醫療級：</strong>Apple Watch ECG / AFib 通知（510(k) De Novo 2018）、Withings ScanWatch（FDA 2022，ECG + SpO₂）、AliveCor KardiaMobile（單導 / 6-導 ECG，2014 FDA-cleared 並持續迭代；2022 Six 6-導/AFib + Hyperkalemia 神經網路）、Zio XT / Zio AT（iRhythm 30 天連續 ECG patch，510(k)）、Medtronic LinQ II（皮下植入 loop recorder，最長 4.5 年）。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p>Wearables split by <em>regulatory positioning</em> into two camps: <strong>consumer wellness</strong> and <strong>medical-grade</strong>. The hardware may be near-identical (same PPG sensor, same IMU); the <strong>intended use</strong> determines whether it needs FDA 510(k)/De Novo/PMA and whether it can be cited in clinical decisions.</p>
+<ul>
+<li><strong>Consumer wellness:</strong> Fitbit (Charge 6 / Inspire 3 / Versa 4, acquired by Google 2021), Garmin (Forerunner / Fenix / Venu 3), Whoop (4.0 / MG screen-less subscription; 2024 Whoop MG added ECG), Oura Ring (Gen 3 / Gen 4 2024, sleep + HRV + temperature). Marketed as "wellness," not "medical" — FDA applies Enforcement Discretion.</li>
+<li><strong>Medical-grade:</strong> Apple Watch ECG/AFib notification (510(k) De Novo 2018); Withings ScanWatch (FDA 2022, ECG + SpO₂); AliveCor KardiaMobile (single-lead/6-lead ECG; FDA-cleared 2014, 2022 Six with 6-lead AFib + hyperkalemia NN); Zio XT/AT (iRhythm 30-day continuous ECG patch); Medtronic LinQ II (subcutaneous loop recorder, up to 4.5 yr battery).</li>
+</ul>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>同一硬體，兩種命運：</strong>Apple Watch 上的「PPG 心率」是 wellness（不需 FDA），但「不規則心律通知」與「ECG App」必須走 510(k) De Novo（已於 2018 取得）。Whoop 與 Oura 即明確避開「診斷」字眼，以保持 wellness 路徑。Withings ScanWatch 與 Apple Watch 同時提供 wellness 與 medical 兩種功能。</span>
+<span data-lang="en"><strong>Same hardware, two fates:</strong> Apple Watch's "PPG heart rate" is wellness (no FDA), but "irregular rhythm notification" and "ECG App" required 510(k) De Novo (granted 2018). Whoop and Oura explicitly avoid "diagnostic" claims to stay on the wellness path. Withings ScanWatch carries both wellness and medical features.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="比較表" data-en="COMPARISON">比較表</div>
+<h2 data-zh="二、主流穿戴式裝置技術規格比較" data-en="II. Specifications of Leading Wearables">二、主流穿戴式比較表</h2>
+<table class="comp-table"><thead><tr><th data-zh="裝置" data-en="Device">裝置</th><th data-zh="形態" data-en="Form factor">形態</th><th data-zh="核心感測" data-en="Core sensors">核心感測</th><th data-zh="醫療級功能" data-en="Medical features">醫療級功能</th><th data-zh="FDA 狀態" data-en="FDA status">FDA 狀態</th></tr></thead><tbody>
+<tr><td><strong>Apple Watch Series 10 / Ultra 2</strong></td><td data-zh="智慧手錶" data-en="Smartwatch">智慧手錶</td><td>PPG, ECG (Lead I), SpO₂, IMU, temp, depth</td><td data-zh="ECG、AFib 歷史、睡眠呼吸中止通知（2024）、Crash/Fall Detection" data-en="ECG, AFib History, Sleep Apnea Notification (2024), Crash/Fall">ECG, AFib, 睡眠呼吸中止</td><td>510(k) De Novo 2018, 多項 510(k) 追加</td></tr>
+<tr><td><strong>Withings ScanWatch 2 / Nova</strong></td><td data-zh="混合（指針 + 螢幕）" data-en="Hybrid (analog + display)">混合錶</td><td>PPG, ECG, SpO₂, temp, IMU</td><td data-zh="ECG、AFib、夜間 SpO₂、睡眠呼吸中止篩查" data-en="ECG, AFib, nocturnal SpO₂, sleep apnea screen">ECG, AFib, 睡眠呼吸中止</td><td>FDA 510(k) 2022 / CE</td></tr>
+<tr><td><strong>AliveCor KardiaMobile 6L / Six</strong></td><td data-zh="拇指接觸卡片" data-en="Thumb-contact card">指接觸卡</td><td data-zh="6 導 ECG" data-en="6-lead ECG">6 導 ECG</td><td data-zh="AFib、QTc、KardiaAI 高血鉀 NN" data-en="AFib, QTc, KardiaAI hyperkalemia NN">AFib, QTc, 高血鉀</td><td>510(k) 多項；2022 Six 加註</td></tr>
+<tr><td><strong>iRhythm Zio XT / AT</strong></td><td data-zh="單片 ECG patch" data-en="Single ECG patch">ECG patch</td><td data-zh="單導連續 ECG（14 天 / Zio AT 即時 30 天）" data-en="Single-lead continuous ECG (14 d / Zio AT 30 d realtime)">14–30 天連續 ECG</td><td data-zh="心律不整定量診斷報告" data-en="Quantified arrhythmia report">心律不整診斷</td><td>510(k); CPT 93241–93248</td></tr>
+<tr><td><strong>Medtronic LINQ II / Abbott Confirm Rx</strong></td><td data-zh="皮下植入" data-en="Subcutaneous implant">皮下植入</td><td data-zh="連續 ECG（最長 4.5 年）" data-en="Continuous ECG (up to 4.5 yr)">連續 ECG (≤4.5 yr)</td><td data-zh="原因不明暈厥／隱性 AFib／中風後監測" data-en="Cryptogenic syncope / occult AFib / post-stroke">隱性 AFib、暈厥</td><td>PMA</td></tr>
+<tr><td><strong>Whoop 4.0 / MG</strong></td><td data-zh="腕帶（無螢幕）" data-en="Strap (screen-less)">腕帶</td><td>PPG, SpO₂, temp, IMU; MG: ECG</td><td data-zh="MG: AFib 通知（2024 FDA-cleared）" data-en="MG: AFib notification (2024 FDA-cleared)">MG: AFib</td><td>MG 2024 FDA-cleared</td></tr>
+<tr><td><strong>Oura Ring Gen 4</strong></td><td data-zh="戒指" data-en="Ring">戒指</td><td>PPG, SpO₂, temp (skin), IMU</td><td data-zh="Wellness 為主（無 FDA 醫療宣稱）" data-en="Wellness only (no FDA medical claim)">Wellness only</td><td data-zh="不適用（wellness）" data-en="N/A (wellness)">N/A</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="ECG 個案" data-en="ECG CASE">ECG</div>
+<h2 data-zh="三、Apple Watch ECG / AFib 深入解析" data-en="III. Apple Watch ECG / AFib: A Deep Dive">三、Apple Watch ECG / AFib 深入解析</h2>
+<div data-lang="zh">
+<p><strong>Apple Watch ECG App</strong>（Series 4 起）是首支獲 FDA <strong>De Novo（DEN180044, 2018-09-11）</strong>核可的消費級穿戴 ECG。原理：使用者把手指放在數位錶冠形成「左手指（電極 1）-左手腕（電極 2）」的迴路，即構成<strong>單導 Lead I</strong>，採樣率 512 Hz、解析度 ~1 μV，30 秒記錄。內建分類器把節律分為：</p>
+<ul>
+<li><strong>Sinus Rhythm（竇性節律）</strong></li>
+<li><strong>Atrial Fibrillation（心房顫動，AFib）</strong></li>
+<li><strong>Low / High HR</strong>（&lt;50 或 &gt;150 bpm，無法分類）</li>
+<li><strong>Inconclusive</strong>（雜訊太多或波形未達標準）</li>
+</ul>
+<p>同時 Series 4 起持續啟用<strong>Irregular Rhythm Notification</strong>：背景每 2-3 小時用光學 PPG（不是 ECG）抽 60 秒脈搏，連續 5-6 次都偵測到不規則才推播。Apple Heart Study（419,297 受試者，2019 NEJM）顯示：在收到通知者中，34% 的後續 ECG patch 確診 AFib；陽性預測值 ~ 84%。</p>
+<p><strong>Series 9 / 10 與 Watch Ultra 2 新增功能（2023-2024）：</strong></p>
+<ul>
+<li><strong>睡眠呼吸中止通知（Sleep Apnea Notification, 2024-09）</strong>：用加速度計偵測「呼吸擾動 (breathing disturbances)」，每 30 天聚合分析；FDA De Novo 2024-09。</li>
+<li><strong>Watch Ultra 2 dive computer</strong>：可下潛至 40 m，包含 Oceanic+ App 提供完整 dive computer 介面。</li>
+<li><strong>Crash Detection / Fall Detection</strong>：IMU + 氣壓計 + 麥克風融合。</li>
+<li><strong>Cycle Tracking 體溫追蹤</strong>：手腕背側皮膚溫，可估排卵期。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p>The <strong>Apple Watch ECG App</strong> (Series 4+) was the first consumer wearable ECG cleared by FDA <strong>De Novo (DEN180044, 2018-09-11)</strong>. Principle: placing a finger on the Digital Crown closes a circuit "left-hand finger (electrode 1) — left-wrist (electrode 2)," forming a single <strong>Lead I</strong>; 512 Hz sampling, ~1 μV resolution, 30-second recording. The on-device classifier labels:</p>
+<ul>
+<li><strong>Sinus rhythm</strong></li>
+<li><strong>Atrial fibrillation (AFib)</strong></li>
+<li><strong>Low / high HR</strong> (&lt;50 or &gt;150 bpm, unclassifiable)</li>
+<li><strong>Inconclusive</strong> (too noisy or non-standard morphology)</li>
+</ul>
+<p>From Series 4 onward, <strong>Irregular Rhythm Notification</strong> runs continuously: background optical PPG (not ECG) takes 60 s pulse samples every 2-3 h; only 5-6 consecutive irregular reads trigger a push. The <strong>Apple Heart Study</strong> (419,297 enrolled, NEJM 2019) found 34% of notified users had AFib on subsequent ECG patch; PPV ~84%.</p>
+<p><strong>Series 9 / 10 and Watch Ultra 2 (2023-2024) additions:</strong></p>
+<ul>
+<li><strong>Sleep Apnea Notification (2024-09):</strong> accelerometer detects "breathing disturbances" aggregated over 30 days; FDA De Novo 2024-09.</li>
+<li><strong>Watch Ultra 2 dive computer:</strong> 40 m depth, full dive computer via Oceanic+ App.</li>
+<li><strong>Crash / Fall Detection:</strong> IMU + barometer + microphone fusion.</li>
+<li><strong>Cycle tracking with wrist-skin temperature:</strong> aids ovulation estimation.</li>
+</ul>
+</div>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>單導 ECG 的本質限制：</strong>Lead I 只看「左-右心房去極化向量」的水平分量，<strong>無法判讀 ST 段缺血、QRS 異常、束支傳導阻滯</strong>。它對 AFib 有用（不規則 + 無 P 波），但對心肌梗塞無用。臨床醫師仍需 12 導 ECG 做完整心臟診斷。Apple Watch 的價值在於「平時不會做 ECG 的健康人，第一次篩出 AFib」。</span>
+<span data-lang="en"><strong>Limits of single-lead:</strong> Lead I sees only the horizontal projection of atrial depolarization — <strong>cannot read ST-segment ischemia, abnormal QRS, or bundle-branch block</strong>. It is useful for AFib (irregular + no P-wave) but useless for MI. A 12-lead ECG remains the diagnostic standard. The Watch's value: "first-time AFib detection in healthy people who would otherwise never get an ECG."</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="連續監測演進" data-en="MONITORING EVOLUTION">連續監測</div>
+<h2 data-zh="四、連續監測的時程演進：24 hr → 30 d → 4.5 yr" data-en="IV. Continuous Monitoring Evolution: 24 h → 30 d → 4.5 yr">四、連續監測的時程演進</h2>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">🎞️</div><h4>① <span data-zh="24 小時 Holter（1957→今）" data-en="24-hr Holter (1957→today)">24 小時 Holter</span></h4>
+<div data-lang="zh"><p>Norman J. Holter 於 1957 發明，磁帶式連續 ECG 紀錄器。今多為固態記憶體、3-5 條導線、24-48 小時黏貼在胸部，事後離線分析。<strong>缺點：</strong>短期事件偵測率低（陣發性 AFib 24 小時內僅 ~ 10-15% 捕獲機率）；佩戴不便。</p></div>
+<div data-lang="en"><p>Invented by Norman J. Holter (1957) — magnetic-tape continuous ECG. Today's units are solid-state, 3-5 leads, 24-48 h stick-on, offline analysis. <strong>Cons:</strong> low diagnostic yield for paroxysmal events (24-h yield for paroxysmal AFib only ~10-15%); cumbersome.</p></div></div>
+
+<div class="card"><div class="card-icon">🩹</div><h4>② <span data-zh="30 天 patch（Zio XT/AT, BodyGuardian）" data-en="30-day patch (Zio XT/AT, BodyGuardian)">30 天 patch</span></h4>
+<div data-lang="zh"><p><strong>iRhythm Zio XT</strong>（510(k) 2009-2011, 升級多代）：單片黏貼 7-14 天，事後寄回，AI 分析後出具報告。<strong>Zio AT</strong>（2017+）：加 BLE/cell 即時上傳，可達 30 天監測。在 2019 BMJ mSToPS RCT 中，Zio XT 在 4 個月內偵測 AFib 的能力比一般護理高 9 倍。</p></div>
+<div data-lang="en"><p><strong>iRhythm Zio XT</strong> (510(k) 2009-2011, multiple updates): single 7-14 day adhesive patch, mailed back for AI report. <strong>Zio AT</strong> (2017+) adds BLE/cellular real-time upload, extends to 30 days. The 2019 BMJ mSToPS RCT showed Zio XT detected 9× more AFib over 4 months than usual care.</p></div></div>
+
+<div class="card"><div class="card-icon">💎</div><h4>③ <span data-zh="植入式 loop recorder（LinQ II, Confirm Rx）" data-en="Implantable loop recorder (LinQ II, Confirm Rx)">植入式 loop recorder</span></h4>
+<div data-lang="zh"><p><strong>Medtronic LinQ II / Reveal LinQ</strong>（皮下植入，&lt; 1.5 cc）：透過注射式植入器一分鐘內置於前胸皮下，電池 4.5 年連續監測。AccuRhythm AI 演算法（2021）可降低偽陽性 AFib 通知 74%。應用：<strong>cryptogenic stroke 後的隱性 AFib</strong>、不明原因暈厥、心悸後 30 天 patch 仍陰性者。Abbott Confirm Rx 為類似裝置。</p></div>
+<div data-lang="en"><p><strong>Medtronic LinQ II / Reveal LinQ</strong> (subcutaneous, &lt;1.5 cc) — injected in &lt;1 min subcutaneously over the chest; 4.5 yr battery. AccuRhythm AI (2021) cut false-positive AFib alerts by 74%. Use cases: <strong>occult AFib after cryptogenic stroke</strong>, unexplained syncope, palpitations with negative 30-day patch. Abbott Confirm Rx is the competing device.</p></div></div>
+
+<div class="card"><div class="card-icon">⏱️</div><h4>④ <span data-zh="Mobile cardiac telemetry (MCT)" data-en="Mobile cardiac telemetry (MCT)">MCT 行動心臟遙測</span></h4>
+<div data-lang="zh"><p>BioTel / Preventice BodyGuardian、Bardy CAM patch：即時 ECG + 演算法自動偵測 + 觸發 7×24 監測中心人工複核。比 Holter 敏感度高、比 ILR 創傷小，適合症狀頻繁但未明的患者。CPT 93228/93229 計費，30 天為一個 episode。</p></div>
+<div data-lang="en"><p>BioTel / Preventice BodyGuardian, Bardy CAM patch: real-time ECG with auto-detection + 24/7 monitoring-center review. More sensitive than Holter, less invasive than ILR; for frequent symptomatic but undiagnosed patients. Billed under CPT 93228/93229; 30-day episodes.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="睡眠與呼吸" data-en="SLEEP &amp; BREATHING">睡眠與呼吸</div>
+<h2 data-zh="五、穿戴式睡眠與呼吸監測" data-en="V. Wearable Sleep &amp; Breathing Monitoring">五、睡眠與呼吸監測</h2>
+<div data-lang="zh">
+<p>多項睡眠多項生理檢查（polysomnography, PSG）是<strong>金標準</strong>但需到實驗室、貼 20+ 電極、單夜 USD 800-3000。穿戴式正在以「便宜、可家用、可多夜重複」的策略侵蝕篩查市場：</p>
+<ul>
+<li><strong>SpO₂ 連續取樣：</strong>夜間 PPG 反覆量測 SpO₂，計算<strong>ODI（oxygen desaturation index, ≥3% / ≥4%）</strong>。SpO₂ 連續下降 + 上升 = 阻塞性睡眠呼吸中止（OSA）的代理指標。</li>
+<li><strong>打鼾偵測：</strong>麥克風 + AI 分類器；許多智慧手機 app（SnoreLab、Sleep Cycle）即此原理。</li>
+<li><strong>睡眠呼吸中止篩查：</strong>Withings Sleep mat（床下感應墊，FDA 510(k) 2020 加註 sleep apnea detection；2024-11 美國上市）；Apple Watch breathing disturbances（2024，30 天聚合呼吸擾動）；Samsung Galaxy Watch（2024 FDA 認可 OSA 偵測）。這些皆為「篩查（screening）」而非「診斷」——陽性者仍需 PSG 確認。</li>
+<li><strong>Withings ScanWatch：</strong>HRV 變異 + SpO₂ + 加速度計三因子聯合估 OSA。</li>
+</ul>
+<p>2024 是穿戴式睡眠的「監管元年」：Apple、Samsung、Withings 同年皆獲 FDA 對 OSA notification 的核可，預期將大幅增加 OSA 的早期診斷率（目前 80% 的 OSA 患者未被診斷）。</p>
+</div>
+<div data-lang="en">
+<p>Polysomnography (PSG) is the <strong>gold standard</strong> but requires a lab, 20+ electrodes, and USD 800-3000 per night. Wearables are eating the screening market via "cheap, home-based, multi-night":</p>
+<ul>
+<li><strong>Continuous SpO₂:</strong> nightly PPG samples compute <strong>ODI (oxygen desaturation index, ≥3% / ≥4%)</strong>. Repeated drop-rise patterns proxy obstructive sleep apnea (OSA).</li>
+<li><strong>Snore detection:</strong> microphone + AI classifier; many smartphone apps (SnoreLab, Sleep Cycle).</li>
+<li><strong>Sleep-apnea screening:</strong> Withings Sleep mat (under-mattress, FDA 510(k) 2020 with sleep-apnea detection; US launch 2024-11); Apple Watch breathing disturbances (2024, 30-day aggregate); Samsung Galaxy Watch (FDA 2024 for OSA detection). All are <strong>screening</strong>, not diagnostic — positives still need PSG.</li>
+<li><strong>Withings ScanWatch:</strong> joint HRV + SpO₂ + accelerometer for OSA estimation.</li>
+</ul>
+<p>2024 was the "regulatory year" for wearable sleep — Apple, Samsung, and Withings each received FDA clearance for OSA notification. Given 80% of OSA cases are currently undiagnosed, this is expected to drive a large surge in early diagnoses.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="OTC CGM" data-en="OTC CGM">OTC CGM</div>
+<h2 data-zh="六、OTC CGM 元年（2024）與 1 年植入式 CGM（2025）" data-en="VI. The OTC CGM Year (2024) and the 1-Year Implantable CGM (2025)">六、OTC CGM 與 1 年植入式 CGM</h2>
+<div data-lang="zh">
+<p>2024 是 CGM 跨越「糖尿病治療」邊界進入「健康消費品」的轉折年。FDA 在 2024 上半年連續核可三款 <strong>OTC（over-the-counter，無需處方）</strong>CGM：</p>
+<ul>
+<li><strong>Dexcom Stelo</strong>（2024-03 FDA-cleared，首支 OTC CGM）：15 天佩戴、適用於 18 歲以上未使用胰島素的人；訂閱 USD 99/mo (2 sensors)；不顯示低血糖警報、無連線胰島素幫浦。</li>
+<li><strong>Abbott Lingo</strong>（2024-06 美國上市）：源自 Libre 平台、瞄準健康者（運動員、生活型態最佳化）；專屬 Lingo Count 分數、與 Lingo app 整合。</li>
+<li><strong>Abbott Libre Rio</strong>（2024-06 FDA-cleared）：第二支 OTC，瞄準成人非胰島素使用糖尿病前期者。15 天佩戴。</li>
+</ul>
+<p>「OTC CGM」開放了原本被處方限制壓抑的市場，估計可觸及全美 9300 萬非胰島素使用者（健康、糖尿病前期、第二型早期）。市場分析師預估 2030 年 OTC CGM 全球市場規模超過 USD 100 億。</p>
+<p><strong>Ascensia Eversense 365</strong>（2024-09 FDA 核可、2025 上市）為另一突破：<strong>首支植入 365 天</strong>的 CGM。皮下植入螢光感測器（基於 boronic acid 與葡萄糖可逆結合的螢光改變），上臂體外貼有 transmitter（含光源 + 偵測器 + 藍牙），每天需 1 次指尖校正。MARD ≈ 8.5%。植入需 5 分鐘 outpatient 程序，1 年後取出換新。對於不喜歡每 10-15 天換感測器的長期使用者具吸引力。</p>
+</div>
+<div data-lang="en">
+<p>2024 was the year CGM crossed from "diabetes therapy" into "health consumer good." FDA cleared three <strong>OTC (over-the-counter, no prescription)</strong> CGMs in the first half of 2024:</p>
+<ul>
+<li><strong>Dexcom Stelo</strong> (FDA-cleared 2024-03, first OTC CGM): 15-day wear; for adults ≥18 not on insulin; subscription USD 99/mo (2 sensors); no low-glucose alerts, no pump integration.</li>
+<li><strong>Abbott Lingo</strong> (US launch 2024-06): Libre-platform-based, targeted at healthy users (athletes, lifestyle optimizers); proprietary Lingo Count score, Lingo app.</li>
+<li><strong>Abbott Libre Rio</strong> (FDA-cleared 2024-06): second OTC, for adults with non-insulin-using prediabetes/T2D; 15-day wear.</li>
+</ul>
+<p>OTC opens a market previously suppressed by prescription gatekeeping — an estimated 93 M non-insulin users in the US (healthy, prediabetes, early T2D). Analysts project the OTC CGM market exceeds USD 10 B globally by 2030.</p>
+<p><strong>Ascensia Eversense 365</strong> (FDA 2024-09, launch 2025) is another breakthrough: the <strong>first 365-day implantable</strong> CGM. A fluorescent sensor (boronic-acid reversibly binding glucose, modulating fluorescence) is implanted subdermally on the upper arm; an external transmitter (LED + photodiode + BLE) sits on the skin. 1 fingerstick/day for calibration; MARD ≈ 8.5%. Implant procedure ~5 min outpatient; replaced annually. Attractive to long-term users who dislike sensor changes every 10-15 days.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="遠距醫療" data-en="TELEMEDICINE">遠距醫療</div>
+<h2 data-zh="七、遠距醫療與 RPM 計費架構" data-en="VII. Telemedicine &amp; RPM Reimbursement">七、遠距醫療與 RPM 計費</h2>
+<div class="card-grid cols-2">
+<div class="card"><h4>📹 <span data-zh="同步視訊（Synchronous）" data-en="Synchronous video">同步視訊</span></h4>
+<div data-lang="zh"><p><strong>Teladoc Health、Amwell（American Well）、MDLive、Doxy.me、Zoom for Healthcare。</strong>COVID-19 期間使用量爆增 38 倍。CMS 2020 起多項 telehealth CPT 碼可比照面對面付費；2024 年延長過渡期至 2024-12-31，2025 多項 telehealth waiver 進入立法討論。</p></div>
+<div data-lang="en"><p><strong>Teladoc Health, Amwell, MDLive, Doxy.me, Zoom for Healthcare.</strong> COVID-19 drove a 38× surge. CMS allowed many telehealth CPT codes at parity with in-person from 2020; the waiver was extended through 2024-12-31, with multiple bills under 2025 legislative consideration.</p></div></div>
+
+<div class="card"><h4>💬 <span data-zh="非同步（Asynchronous, store-and-forward）" data-en="Asynchronous (store-and-forward)">非同步</span></h4>
+<div data-lang="zh"><p><strong>Hims &amp; Hers、Ro、Nurx、Lemonaid。</strong>線上問卷 + 圖片上傳 → 醫師非同步審核 → 處方寄送。皮膚科、男性健康、避孕、減重藥（GLP-1）為主戰場。2024 GLP-1（semaglutide / tirzepatide）為非同步處方平台帶來爆發式營收。</p></div>
+<div data-lang="en"><p><strong>Hims &amp; Hers, Ro, Nurx, Lemonaid.</strong> Online questionnaire + photo upload → async physician review → mail Rx. Dermatology, men's health, contraception, and weight-loss drugs (GLP-1) dominate. 2024 GLP-1s (semaglutide, tirzepatide) drove explosive revenue.</p></div></div>
+
+<div class="card"><h4>📡 <span data-zh="Remote Patient Monitoring (RPM)" data-en="Remote Patient Monitoring (RPM)">遠距病人監測 (RPM)</span></h4>
+<div data-lang="zh"><p>由病人在家用 BP cuff、體重計、CGM、Pulse oximeter、ECG patch 等裝置上傳資料，每月由臨床端團隊複核。CMS 2019 起承認以下 CPT 碼計費：<strong>99453</strong>（裝置設置 + 病人教育，一次性）、<strong>99454</strong>（每 30 天裝置／傳輸監測）、<strong>99457</strong>（每月首 20 分鐘臨床互動）、<strong>99458</strong>（每追加 20 分鐘）。每月每位病人約 USD 100-180 可計費。</p></div>
+<div data-lang="en"><p>Patient uses BP cuffs, scales, CGMs, pulse oximeters, or ECG patches at home; data are uploaded and reviewed monthly. CMS recognizes these CPT codes from 2019: <strong>99453</strong> (setup + patient education, one-time), <strong>99454</strong> (per 30-day device + data), <strong>99457</strong> (first 20 min clinician time/month), <strong>99458</strong> (each additional 20 min). About USD 100-180/patient/month billable.</p></div></div>
+
+<div class="card"><h4>🧠 <span data-zh="Remote Therapeutic Monitoring (RTM)" data-en="Remote Therapeutic Monitoring (RTM)">遠距治療監測 (RTM)</span></h4>
+<div data-lang="zh"><p>CPT 98975-98981 於 2022 推出，涵蓋呼吸系統、肌骨、CBT、藥物遵從性的非生理資料監測（病人自填 vs RPM 的儀器資料）。GLP-1 / 復健 / 心理健康應用程式（如 Akili、Pear、Headspace Health）多走 RTM。</p></div>
+<div data-lang="en"><p>CPT 98975-98981 introduced 2022, covering respiratory, MSK, CBT, and medication-adherence non-physiologic data (patient-reported vs RPM device data). GLP-1, rehab, and mental-health apps (Akili, Pear, Headspace Health) typically use RTM.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="SaMD 與 DTx" data-en="SaMD &amp; DTx">SaMD / DTx</div>
+<h2 data-zh="八、SaMD 監管與數位治療（DTx）" data-en="VIII. SaMD Regulation &amp; Digital Therapeutics (DTx)">八、SaMD 與 DTx</h2>
+<div data-lang="zh">
+<p><strong>SaMD（Software as a Medical Device）</strong>是 IMDRF 2013 定義的監管類別：「軟體本身即為醫療器材，且其用途不依附於硬體裝置」。任何穿戴式 + 雲端應用的「智能演算法」皆屬於此。FDA 主要途徑：</p>
+<ul>
+<li><strong>FDA Software Pre-Cert Pilot</strong>（2017-2022）：嘗試把「組織 quality」當審核單位、而非個別產品；2022-09 FDA 公告 pilot 結束，認為現行法規不支援；改以 Predetermined Change Control Plan (PCCP) 路徑替代。</li>
+<li><strong>AI/ML SaMD Action Plan</strong>（2021-01）：列出 5 大原則，包含 Good Machine Learning Practice（GMLP）、預先決定變更控制計畫（PCCP）、real-world performance monitoring。</li>
+<li><strong>PCCP 指引（draft 2023-04 / final 2024-12）</strong>：允許廠商在<strong>原核可時就預先聲明未來會做哪些 AI 模型更新</strong>（資料、特徵、閾值、再訓練頻率），核可後即可在不重新 510(k) 的情況下更新。是 AI/ML SaMD 的監管突破。</li>
+<li><strong>累積至 2025 年底，FDA 核可 AI/ML 醫材達 1,451 件</strong>，年度新增 295 件（2025），約 75% 為放射影像。</li>
+</ul>
+<p><strong>數位治療（Digital Therapeutics, DTx）</strong>是 SaMD 中的「治療性」子集：經臨床試驗驗證、需 FDA 核可、可由醫師處方的軟體治療。代表：</p>
+<ul>
+<li><strong>Akili EndeavorRx</strong>（2020 FDA De Novo）：首個 FDA-cleared 視訊遊戲式 DTx，treating 8-12 歲 ADHD；STARS-Adolescent RCT 顯示注意力分數改善。</li>
+<li><strong>Pear Therapeutics（reSET、reSET-O、Somryst）</strong>：reSET 為首個 PDT-cleared 物質使用障礙 DTx（2017）。Pear 於 2023-04 申請破產（reimbursement 困難），標示 DTx 商業化的艱辛。</li>
+<li><strong>Click Therapeutics CT-152</strong>（Otsuka 合作，2024 FDA-cleared 治療 MDD）：首個處方 DTx 治療憂鬱症。</li>
+<li><strong>Big Health Daylight / Sleepio</strong>：CBT-I 失眠 DTx，NICE 認可。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p><strong>SaMD (Software as a Medical Device)</strong> is the IMDRF 2013 category: "software that itself is a medical device, not dependent on hardware." Any wearable + cloud "smart algorithm" falls here. FDA pathways:</p>
+<ul>
+<li><strong>FDA Software Pre-Cert Pilot</strong> (2017-2022): tried to certify the <em>organization</em> rather than each product; FDA ended the pilot 2022-09, citing legal-authority limits, and pivoted to PCCP.</li>
+<li><strong>AI/ML SaMD Action Plan</strong> (2021-01): 5 principles including GMLP, Predetermined Change Control Plan (PCCP), real-world performance monitoring.</li>
+<li><strong>PCCP guidance (draft 2023-04, final 2024-12):</strong> manufacturers may <strong>pre-declare planned AI updates</strong> (data, features, thresholds, retraining cadence) at initial clearance; later updates within the plan don't trigger a new 510(k). A regulatory breakthrough for AI/ML SaMD.</li>
+<li><strong>By end-2025 FDA had cleared 1,451 AI/ML devices total, 295 added in 2025 alone</strong> — about 75% are radiology.</li>
+</ul>
+<p><strong>Digital Therapeutics (DTx)</strong> is a "therapeutic" subset of SaMD: clinically validated, FDA-cleared, and physician-prescribed software therapy. Notables:</p>
+<ul>
+<li><strong>Akili EndeavorRx</strong> (FDA De Novo 2020): first FDA-cleared video-game DTx for ADHD ages 8-12; STARS-Adolescent RCT showed attention improvements.</li>
+<li><strong>Pear Therapeutics (reSET, reSET-O, Somryst):</strong> reSET was the first PDT-cleared DTx for substance use disorder (2017). Pear filed Ch.11 bankruptcy 2023-04 amid reimbursement struggles — a cautionary tale for DTx commercialization.</li>
+<li><strong>Click Therapeutics CT-152</strong> (with Otsuka, FDA-cleared 2024 for MDD): first prescription DTx for depression.</li>
+<li><strong>Big Health Daylight / Sleepio:</strong> CBT-I insomnia DTx, NICE-recommended.</li>
+</ul>
+</div>
+<div class="callout danger"><span class="callout-icon">🚨</span><div>
+<span data-lang="zh"><strong>DTx 商業化困境（2023-2024）：</strong>Pear（2023-04）與 Akili（2023 裁員 + 2024 退市轉成消費級）相繼受挫，暴露三大問題：(1) <strong>保險給付</strong>困難——多數商業保險拒絕給付，CMS 仍在 CPT 編碼中；(2) <strong>處方流程</strong>不熟悉——醫師需要新工作流程；(3) <strong>使用者持續性</strong>——數位 app 6 個月內中斷率超 50%。DTx 的「臨床試驗成本（如真藥）+ 商業模式（如 app）」混合體仍在尋找答案。</span>
+<span data-lang="en"><strong>DTx commercialization crisis (2023-2024):</strong> Pear (Ch.11 2023-04) and Akili (2023 layoffs, 2024 pivot to consumer) exposed three problems: (1) <strong>reimbursement</strong> — most commercial payers refused; CMS still coding; (2) <strong>prescribing workflow</strong> — physicians lack the new workflow; (3) <strong>user retention</strong> — &gt;50% drop-off within 6 months. DTx's "drug-like trial cost + app-like business" hybrid is still seeking its model.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="網路安全與隱私" data-en="CYBERSECURITY &amp; PRIVACY">資安與隱私</div>
+<h2 data-zh="九、網路安全與隱私：HIPAA 之外的灰色地帶" data-en="IX. Cybersecurity &amp; Privacy: Beyond HIPAA">九、資安與隱私</h2>
+<div data-lang="zh">
+<p>連網醫材安全自 2017 St. Jude 心律調節器漏洞、2018 Medtronic 胰島素幫浦漏洞起，受到嚴格監管：</p>
+<ul>
+<li><strong>FDA Cybersecurity Premarket Guidance（final 2023-10）</strong>：替代 2014 版本，明訂 510(k) / De Novo / PMA 都必須提交：<strong>SBOM（Software Bill of Materials）</strong>列出第三方元件版本、<strong>威脅模型（STRIDE / 攻擊樹）</strong>、上市後 vulnerability disclosure 程序。</li>
+<li><strong>Section 524B（FD&amp;C Act）：Refuse-to-Accept（RTA）門檻自 2023-10-01 起，未含 cybersecurity plan 的提交將直接退件不審。</strong></li>
+<li><strong>21st Century Cures Act（2016）→ ONC EHR Information Blocking Rule（2020-04 / 2024-08 修訂罰則）：</strong>醫療資訊提供者「不得阻擋」電子病歷分享。對病人 portal、HIE、FHIR API 影響甚大。</li>
+<li><strong>HIPAA 不涵蓋大部分穿戴式：</strong>HIPAA 限定 covered entities（醫療機構、保險、healthcare clearinghouse）+ business associates。直接賣給消費者的 Apple Watch、Fitbit、Oura 不在 HIPAA 範圍——FTC Act 與州法（CCPA、Washington My Health My Data Act 2024）才適用。</li>
+<li><strong>2024 FTC GoodRx / BetterHelp / Cerebral 處罰案：</strong>未經同意把使用者健康資料賣給 Meta / Google ads 廣告平台被裁罰 USD 7.8M / 7.8M / 7.0M，揭示 health-tech 公司的隱私責任。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p>Connected medical-device security came under intense scrutiny after the 2017 St. Jude pacemaker and 2018 Medtronic insulin-pump vulnerabilities:</p>
+<ul>
+<li><strong>FDA Cybersecurity Premarket Guidance (final 2023-10):</strong> replaces the 2014 version. 510(k)/De Novo/PMA must include <strong>SBOM (Software Bill of Materials)</strong>, <strong>threat model (STRIDE / attack trees)</strong>, post-market vulnerability disclosure.</li>
+<li><strong>Section 524B (FD&amp;C Act):</strong> from 2023-10-01, the Refuse-to-Accept (RTA) threshold rejects submissions lacking a cybersecurity plan outright.</li>
+<li><strong>21st Century Cures Act (2016) → ONC EHR Information Blocking Rule (2020-04 / penalties 2024-08):</strong> health-information providers "shall not block" electronic record sharing. Major impact on patient portals, HIEs, FHIR APIs.</li>
+<li><strong>HIPAA does NOT cover most wearables:</strong> HIPAA applies to covered entities (providers, payers, clearinghouses) + business associates. D2C Apple Watch, Fitbit, Oura fall outside — FTC Act and state laws (CCPA, Washington My Health My Data Act 2024) apply.</li>
+<li><strong>2024 FTC actions:</strong> GoodRx / BetterHelp / Cerebral fined USD 7.8M / 7.8M / 7.0M for selling health data to Meta/Google ad platforms without consent — a wake-up call for health-tech privacy.</li>
+</ul>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖" data-en="INTERACTIVE">互動圖</div>
+<h2 data-zh="十、HRV 趨勢模擬器（休息 vs 運動 vs 病前）" data-en="X. HRV Trend Simulator (Rest vs Exercise vs Pre-illness)">十、HRV 趨勢模擬</h2>
+<div data-lang="zh"><p>下圖模擬 24 小時內的 HRV（心率變異性，以 RMSSD ms 表示）。可切換「正常作息」、「高強度訓練後」、「感染前 1-2 天」。Whoop、Oura、Apple Watch 皆以這類 HRV 動態作為「身體準備度（recovery score）」核心指標。</p></div>
+<div data-lang="en"><p>Simulated 24-hour HRV (RMSSD in ms). Toggle "Normal day," "Post hard workout," and "Pre-illness 1-2 days." Whoop, Oura, and Apple Watch all use such HRV dynamics as the core of their "recovery / readiness" scores.</p></div>
+<div class="interactive-panel">
+<div class="toggle-row">
+  <button class="toggle-btn active" data-mode="normal" data-zh="正常作息" data-en="Normal day">正常作息</button>
+  <button class="toggle-btn" data-mode="exercise" data-zh="高強度訓練後" data-en="Post hard workout">高強度訓練後</button>
+  <button class="toggle-btn" data-mode="illness" data-zh="感染前 1-2 天" data-en="Pre-illness 1-2 days">感染前 1-2 天</button>
+</div>
+<div class="chart-container"><canvas id="hrvChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">紫線：HRV (RMSSD ms)；綠線：平均 RHR (bpm)；標題顯示 readiness 分數。</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Purple: HRV (RMSSD ms) · Green: avg RHR (bpm); title shows readiness score.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="十一、給定臨床/健康需求，怎麼選穿戴式裝置？" data-en="XI. Which Wearable for Which Need?">十一、穿戴式選擇決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="穿戴式裝置選擇 5 問" data-en="Wearable Selection: 5 Questions">穿戴式裝置選擇 5 問</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">用途是「臨床診斷」或「治療決策」？<span class="dt-arrow">→</span> 必須為 FDA-cleared 醫療級（Apple Watch ECG、Zio XT、KardiaMobile）。</span><span data-lang="en">For "clinical diagnosis" or "treatment decision"? <span class="dt-arrow">→</span> Must be FDA-cleared medical-grade (Apple Watch ECG, Zio XT, KardiaMobile).</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">需偵測陣發性 AFib 但 24 hr Holter 已陰性？<span class="dt-arrow">→</span> 30 天 ECG patch（Zio XT/AT）或植入式 ILR（LinQ II）。</span><span data-lang="en">Need paroxysmal AFib detection but 24-h Holter negative? <span class="dt-arrow">→</span> 30-day patch (Zio XT/AT) or implantable ILR (LinQ II).</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">非胰島素使用者想看自己血糖反應？<span class="dt-arrow">→</span> OTC CGM（Stelo / Lingo / Libre Rio）。</span><span data-lang="en">Non-insulin user curious about glucose response? <span class="dt-arrow">→</span> OTC CGM (Stelo / Lingo / Libre Rio).</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">疑似睡眠呼吸中止但不想去 PSG 中心？<span class="dt-arrow">→</span> Apple Watch / Samsung Galaxy Watch / Withings ScanWatch（陽性者仍需 PSG 確診）。</span><span data-lang="en">Suspected OSA but want to avoid lab PSG? <span class="dt-arrow">→</span> Apple Watch / Samsung Galaxy Watch / Withings ScanWatch (positives still need PSG to confirm).</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">健康者想做訓練 / 恢復追蹤？<span class="dt-arrow">→</span> Whoop（無螢幕、訂閱制）、Oura（戒指、低侵入）、Garmin（運動數據細）。</span><span data-lang="en">Healthy user tracking training/recovery? <span class="dt-arrow">→</span> Whoop (screenless, subscription), Oura (low-profile ring), Garmin (rich sports data).</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="十二、讀取 Apple Watch HR CSV 並計算 HRV (RMSSD)" data-en="XII. Loading Apple Watch HR CSV &amp; Computing HRV (RMSSD)">十二、計算 HRV (RMSSD)</h2>
+<div data-lang="zh"><p>RMSSD（Root Mean Square of Successive Differences）是 HRV 的時間域指標：對相鄰 RR 間期之差平方平均後開根，反映副交感（迷走神經）活性。下例載入「heart_rate.csv」（時間戳、bpm），把 bpm 轉成 RR、計算 5 分鐘窗的 RMSSD。</p></div>
+<div data-lang="en"><p>RMSSD (root mean square of successive differences) is a time-domain HRV index — square-root-mean of squared adjacent RR-interval differences; reflects parasympathetic (vagal) tone. Below: load "heart_rate.csv" (timestamp, bpm), convert bpm→RR, compute 5-min-window RMSSD.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="comment"># Apple Health export → heart_rate.csv (timestamp, bpm)</span>
+df = pd.<span class="func">read_csv</span>(<span class="str">'heart_rate.csv'</span>, parse_dates=[<span class="str">'timestamp'</span>])
+df = df.<span class="func">sort_values</span>(<span class="str">'timestamp'</span>).<span class="func">reset_index</span>(drop=<span class="kw">True</span>)
+
+<span class="comment"># Convert bpm to RR interval (ms): RR = 60000 / bpm</span>
+df[<span class="str">'rr_ms'</span>] = <span class="num">60000.0</span> / df[<span class="str">'bpm'</span>]
+df[<span class="str">'diff_rr'</span>] = df[<span class="str">'rr_ms'</span>].<span class="func">diff</span>()
+
+<span class="comment"># Drop physiologic outliers (RR &lt; 300 ms or &gt; 1600 ms)</span>
+mask = (df[<span class="str">'rr_ms'</span>] &gt; <span class="num">300</span>) &amp; (df[<span class="str">'rr_ms'</span>] &lt; <span class="num">1600</span>)
+df = df[mask].<span class="func">reset_index</span>(drop=<span class="kw">True</span>)
+
+<span class="comment"># 5-minute rolling RMSSD</span>
+<span class="kw">def</span> <span class="func">rmssd</span>(x):
+    d = np.<span class="func">diff</span>(x.dropna())
+    <span class="kw">return</span> np.<span class="func">sqrt</span>(np.<span class="func">mean</span>(d**<span class="num">2</span>)) <span class="kw">if</span> len(d) &gt; <span class="num">1</span> <span class="kw">else</span> np.nan
+
+df = df.<span class="func">set_index</span>(<span class="str">'timestamp'</span>)
+hrv = df[<span class="str">'rr_ms'</span>].<span class="func">rolling</span>(<span class="str">'5min'</span>).<span class="func">apply</span>(rmssd, raw=<span class="kw">False</span>)
+
+<span class="func">print</span>(f<span class="str">'Mean RMSSD: {hrv.mean():.1f} ms'</span>)
+<span class="func">print</span>(f<span class="str">'Mean HR    : {df.bpm.mean():.1f} bpm'</span>)
+
+fig,ax=plt.<span class="func">subplots</span>(<span class="num">2</span>,<span class="num">1</span>,figsize=(<span class="num">10</span>,<span class="num">6</span>),sharex=<span class="kw">True</span>)
+ax[<span class="num">0</span>].<span class="func">plot</span>(df.index, df[<span class="str">'bpm'</span>], c=<span class="str">'#0d9488'</span>); ax[<span class="num">0</span>].<span class="func">set_ylabel</span>(<span class="str">'HR (bpm)'</span>)
+ax[<span class="num">1</span>].<span class="func">plot</span>(hrv.index, hrv, c=<span class="str">'#7c3aed'</span>);   ax[<span class="num">1</span>].<span class="func">set_ylabel</span>(<span class="str">'RMSSD (ms)'</span>)
+ax[<span class="num">1</span>].<span class="func">set_xlabel</span>(<span class="str">'time'</span>); plt.<span class="func">tight_layout</span>(); plt.<span class="func">show</span>()</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% Load Apple Watch CSV exported from Health</span>
+T = <span class="func">readtable</span>(<span class="str">'heart_rate.csv'</span>);
+T.timestamp = <span class="func">datetime</span>(T.timestamp);
+T = <span class="func">sortrows</span>(T,<span class="str">'timestamp'</span>);
+
+<span class="comment">% bpm -&gt; RR (ms)</span>
+T.rr_ms = <span class="num">60000</span>./T.bpm;
+mask = (T.rr_ms &gt; <span class="num">300</span>) &amp; (T.rr_ms &lt; <span class="num">1600</span>);
+T = T(mask,:);
+
+<span class="comment">% 5-min rolling RMSSD via retime + movmean trick</span>
+TT = <span class="func">table2timetable</span>(T(:,{<span class="str">'timestamp'</span>,<span class="str">'rr_ms'</span>}));
+dRR = [NaN; <span class="func">diff</span>(TT.rr_ms)];
+TT.rmssd = <span class="func">sqrt</span>(<span class="func">movmean</span>(dRR.^<span class="num">2</span>, <span class="func">minutes</span>(<span class="num">5</span>), <span class="str">'SamplePoints'</span>, TT.timestamp));
+
+<span class="func">fprintf</span>(<span class="str">'Mean RMSSD: %.1f ms\n'</span>, <span class="func">mean</span>(TT.rmssd,<span class="str">'omitnan'</span>));
+<span class="func">fprintf</span>(<span class="str">'Mean HR   : %.1f bpm\n'</span>, <span class="func">mean</span>(T.bpm));
+
+<span class="func">subplot</span>(<span class="num">2</span>,<span class="num">1</span>,<span class="num">1</span>); <span class="func">plot</span>(T.timestamp, T.bpm); <span class="func">ylabel</span>(<span class="str">'HR (bpm)'</span>);
+<span class="func">subplot</span>(<span class="num">2</span>,<span class="num">1</span>,<span class="num">2</span>); <span class="func">plot</span>(TT.timestamp, TT.rmssd); <span class="func">ylabel</span>(<span class="str">'RMSSD (ms)'</span>);
+<span class="func">xlabel</span>(<span class="str">'time'</span>);</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十三、本章關鍵術語" data-en="XIII. Key Terms">十三、關鍵術語</h2>
+<p><span class="term">SaMD<span class="term-tip">Software as a Medical Device — 軟體本身即為醫療器材，IMDRF 2013 定義。</span></span> &nbsp;
+<span class="term">PCCP<span class="term-tip">Predetermined Change Control Plan — 預先決定變更控制計畫，FDA 2024-12 final guidance，AI/ML SaMD 主要監管路徑。</span></span> &nbsp;
+<span class="term">DTx<span class="term-tip">Digital Therapeutics — 數位治療，SaMD 中具治療意圖、需臨床試驗 + FDA 核可。</span></span> &nbsp;
+<span class="term">De Novo<span class="term-tip">FDA 路徑：novel low/moderate risk device 無 predicate，可建立新分類；Apple Watch ECG 即此路徑。</span></span> &nbsp;
+<span class="term">Lead I<span class="term-tip">12 導 ECG 的「左手臂 - 右手臂」導程；Apple Watch ECG 取單導 Lead I。</span></span> &nbsp;
+<span class="term">RMSSD<span class="term-tip">Root Mean Square of Successive Differences — HRV 時間域指標，反映副交感活性。</span></span> &nbsp;
+<span class="term">ODI<span class="term-tip">Oxygen Desaturation Index — 睡眠中 SpO₂ 下降 ≥3% / 4% 的每小時次數。</span></span> &nbsp;
+<span class="term">RPM<span class="term-tip">Remote Patient Monitoring — CMS CPT 99453/54/57/58 計費。</span></span> &nbsp;
+<span class="term">RTM<span class="term-tip">Remote Therapeutic Monitoring — CMS CPT 98975-98981 (2022)，治療性資料監測。</span></span> &nbsp;
+<span class="term">ILR<span class="term-tip">Implantable Loop Recorder — 皮下植入式心律記錄器（LinQ II / Confirm Rx），可達 4.5 年。</span></span> &nbsp;
+<span class="term">MCT<span class="term-tip">Mobile Cardiac Telemetry — 行動心臟遙測，即時 ECG + AI + 監測中心人工複核。</span></span> &nbsp;
+<span class="term">OTC CGM<span class="term-tip">Over-the-counter Continuous Glucose Monitor — 2024 三款（Stelo / Lingo / Libre Rio）為首批。</span></span> &nbsp;
+<span class="term">SBOM<span class="term-tip">Software Bill of Materials — FDA cybersecurity guidance 2023 要求列出第三方元件。</span></span> &nbsp;
+<span class="term">HIPAA<span class="term-tip">Health Insurance Portability and Accountability Act — 限定 covered entities，不涵蓋大部分穿戴式。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q1. Apple Watch ECG App 量測的是哪一個導程？</span><span data-lang="en">Q1. Which ECG lead does the Apple Watch ECG App record?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 12 導完整 ECG</span><span data-lang="en">A. Full 12-lead ECG</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 胸導 V1-V6</span><span data-lang="en">B. Precordial V1-V6</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 單導 Lead I（手指 + 手腕）</span><span data-lang="en">C. Single-lead Lead I (finger + wrist)</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. Lead II</span><span data-lang="en">D. Lead II</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="3"><p><span data-lang="zh">Q2. 2024 美國 FDA 核可的「Predetermined Change Control Plan (PCCP)」主要目的為何？</span><span data-lang="en">Q2. The 2024 FDA-finalized Predetermined Change Control Plan (PCCP) is primarily intended to:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 取代 510(k) 路徑</span><span data-lang="en">A. Replace the 510(k) pathway</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 規範手術機器人</span><span data-lang="en">B. Regulate surgical robots</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 規範可植入式心律調節器</span><span data-lang="en">C. Regulate implantable pacemakers</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 允許 AI/ML SaMD 在預先聲明範圍內持續更新而不需重新 510(k)</span><span data-lang="en">D. Allow AI/ML SaMD to update within a pre-declared envelope without new 510(k)</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q3. 下列哪一款 CGM 為 2024 FDA 首批核可的 OTC（非處方）連續血糖監測器之一？</span><span data-lang="en">Q3. Which CGM was among the first FDA-cleared OTC continuous glucose monitors in 2024?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. Dexcom G7</span><span data-lang="en">A. Dexcom G7</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. Dexcom Stelo</span><span data-lang="en">B. Dexcom Stelo</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. Medtronic Simplera</span><span data-lang="en">C. Medtronic Simplera</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. Ascensia Eversense 365</span><span data-lang="en">D. Ascensia Eversense 365</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="biosensors.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="D2 · 生醫感測器" data-en="D2 · Biosensors">D2 · 生醫感測器</span></a>
+<a href="biophotonics.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="D4 · 生醫光電" data-en="D4 · Biophotonics">D4 · 生醫光電</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · D3 Wearables &amp; Digital Health</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// HRV chart
+const HOURS = 24;
+const hLabels = Array.from({length:HOURS*2},(_,i)=>((i/2)).toFixed(1)+'h');
+function genHRV(mode){
+  const hrv=[], rhr=[];
+  for(let i=0;i<HOURS*2;i++){
+    const t = i/2;  // hours 0..24
+    // Circadian: HRV high at night (vagal), low daytime
+    const circ = 12*Math.cos((t-3)/24*2*Math.PI);  // peak at 3am
+    let base=45, hrBase=58;
+    if(mode==='exercise'){ base=28; hrBase=68; }
+    else if(mode==='illness'){ base=22; hrBase=72; }
+    const hrvVal = Math.max(8, base + circ + 3*(Math.random()-0.5));
+    const hrVal  = hrBase - 0.25*circ + 2*(Math.random()-0.5);
+    hrv.push(hrvVal.toFixed(1));
+    rhr.push(hrVal.toFixed(1));
+  }
+  return {hrv,rhr};
+}
+function readinessScore(mode){
+  if(mode==='normal')return 86;
+  if(mode==='exercise')return 54;
+  return 38;
+}
+let hrvChart=null;
+function drawHRV(mode){
+  if(hrvChart)hrvChart.destroy();
+  const d=genHRV(mode);
+  const lang=I18n.get();
+  const r=readinessScore(mode);
+  const titleTxt = lang==='zh'
+    ? `Readiness ≈ ${r} / 100　（平均 RMSSD ${(d.hrv.reduce((a,b)=>a+ +b,0)/d.hrv.length).toFixed(1)} ms）`
+    : `Readiness ≈ ${r} / 100　(mean RMSSD ${(d.hrv.reduce((a,b)=>a+ +b,0)/d.hrv.length).toFixed(1)} ms)`;
+  hrvChart=new Chart(document.getElementById('hrvChart').getContext('2d'),{
+    type:'line',
+    data:{labels:hLabels,
+      datasets:[
+        {label:'HRV RMSSD (ms)',data:d.hrv,borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,.1)',pointRadius:0,tension:.3,borderWidth:2,yAxisID:'y'},
+        {label:'RHR (bpm)',     data:d.rhr,borderColor:'#0d9488',pointRadius:0,tension:.3,borderWidth:2,yAxisID:'y1'}
+      ]},
+    options:{
+      plugins:{legend:{display:true},title:{display:true,text:titleTxt}},
+      scales:{
+        x:{title:{display:true,text:'hour of day'},ticks:{maxTicksLimit:8}},
+        y:{type:'linear',position:'left',title:{display:true,text:'RMSSD (ms)'},min:0,max:80},
+        y1:{type:'linear',position:'right',title:{display:true,text:'RHR (bpm)'},min:45,max:85,grid:{drawOnChartArea:false}}
+      }
+    }
+  });
+}
+drawHRV('normal');
+document.querySelectorAll('.toggle-btn[data-mode]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.toggle-btn[data-mode]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); drawHRV(b.dataset.mode);
+}));
+document.addEventListener('langchange',()=>{
+  const cur=document.querySelector('.toggle-btn[data-mode].active').dataset.mode;
+  drawHRV(cur);
+});
+</script>
+</body></html>

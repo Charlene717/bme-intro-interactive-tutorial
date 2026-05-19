@@ -1,0 +1,356 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>A1: 生醫工程簡介與學科版圖 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html" class="active">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER A1 · BLOCK A FOUNDATIONS</div>
+<h1 data-zh="生醫工程簡介與學科版圖" data-en="What is Biomedical Engineering? History &amp; Landscape">生醫工程簡介與學科版圖</h1>
+<p class="subtitle" data-lang="zh">從心臟去顫器到 CAR-T 細胞工廠——生醫工程是把工程方法用於生命與健康的跨領域學科，本章帶你建立全局地圖。</p>
+<p class="subtitle" data-lang="en">From defibrillators to CAR-T cell factories — BME applies engineering to life and health. This chapter gives you the big-picture map.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="定義" data-en="DEFINITION">定義</div>
+<h2 data-zh="什麼是生醫工程（BME）？" data-en="What is Biomedical Engineering (BME)?">什麼是生醫工程（BME）？</h2>
+<div data-lang="zh">
+<p><strong>生醫工程（Biomedical Engineering, BME）</strong>是一門將<strong>工程的原理、設計方法與運算技術</strong>應用於<strong>生命科學與醫療照護</strong>的跨領域學科。它的目標不是「研究生命本身」（那是生物學），而是「為了診斷、治療、復健、預防疾病，打造能在人體上安全有效運作的裝置、系統、材料與演算法」。</p>
+<p>BME 工程師同時要熟悉：(1) 工程基礎（力學、電子、訊號、控制、材料、計算）、(2) 生命科學（解剖、生理、生化、藥理、細胞分子）、(3) 臨床情境（病人安全、使用者經驗、法規與倫理）。這種「三重根基」是 BME 區別於其他工程領域的特徵。</p>
+</div>
+<div data-lang="en">
+<p><strong>Biomedical Engineering (BME)</strong> applies the <strong>principles, design methods, and computation of engineering</strong> to <strong>life sciences and healthcare</strong>. The goal is not to "study life itself" (that's biology) but rather to "build devices, systems, materials, and algorithms that safely and effectively operate on/in the human body — for diagnosis, treatment, rehabilitation, and prevention."</p>
+<p>A BME engineer must be fluent in three pillars at once: (1) engineering fundamentals (mechanics, electronics, signals, control, materials, computation); (2) life sciences (anatomy, physiology, biochemistry, pharmacology, cell &amp; molecular biology); (3) clinical context (patient safety, user experience, regulation, ethics). This "triple foundation" is what distinguishes BME from other engineering disciplines.</p>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>定位辨析：</strong>BME 偏「裝置/系統設計與品質工程」；<strong>生物資訊（Bioinformatics）</strong>偏「資料／演算法」；<strong>生物技術（Biotech）</strong>偏「生物製程／治療開發」；<strong>醫學物理（Medical Physics）</strong>偏「放射、治療物理」。三者高度重疊，BME 的核心是<em>工程化解決醫療問題</em>。</span>
+<span data-lang="en"><strong>Distinguishing terms:</strong> BME emphasizes <em>device/system design + quality engineering</em>; <strong>Bioinformatics</strong> focuses on <em>data &amp; algorithms</em>; <strong>Biotech</strong> centers on <em>bioprocesses &amp; therapeutics</em>; <strong>Medical Physics</strong> focuses on <em>radiation/therapy physics</em>. They overlap heavily; BME's core is <em>engineering solutions to medical problems</em>.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="歷史" data-en="HISTORY">歷史</div>
+<h2 data-zh="一、生醫工程簡史（300 年濃縮版）" data-en="I. A Brief History of BME (300 years in 1 page)">一、生醫工程簡史</h2>
+<div class="workflow">
+  <div class="workflow-step" data-step="1791"><h4 data-zh="Galvani 動物電流" data-en="Galvani's Animal Electricity">Galvani 動物電流</h4>
+    <p data-lang="zh">蛙腿在金屬接觸下抽搐，發現「動物電」，奠定了電生理學與後世<strong>心律調節、神經刺激</strong>的概念基礎。</p>
+    <p data-lang="en">Frog legs twitching on metal contact revealed "animal electricity," laying conceptual groundwork for <strong>cardiac pacing</strong> and <strong>neural stimulation</strong>.</p></div>
+  <div class="workflow-step" data-step="1895"><h4 data-zh="Röntgen X 射線" data-en="Röntgen Discovers X-rays">Röntgen X 射線</h4>
+    <p data-lang="zh">第一張人體 X-ray 影像（手骨）讓「不切開人體就看見內部」成真，是醫學影像學的起點。</p>
+    <p data-lang="en">The first human X-ray image (hand bones) made "seeing inside without cutting" a reality — the birth of medical imaging.</p></div>
+  <div class="workflow-step" data-step="1903"><h4 data-zh="Einthoven 心電圖" data-en="Einthoven's ECG">Einthoven 心電圖</h4>
+    <p data-lang="zh">用 string galvanometer 記下第一份臨床心電圖；命名 P-Q-R-S-T 波形，後獲 1924 年諾貝爾獎。</p>
+    <p data-lang="en">First clinical ECG via string galvanometer; named the P-Q-R-S-T waves. Earned the 1924 Nobel Prize.</p></div>
+  <div class="workflow-step" data-step="1953"><h4 data-zh="人工心肺機 (Gibbon)" data-en="Heart-Lung Machine (Gibbon)">人工心肺機 (Gibbon)</h4>
+    <p data-lang="zh">第一次體外循環手術成功，打開了心臟外科時代，也奠定 ECMO 的工程基礎。</p>
+    <p data-lang="en">First successful cardiopulmonary bypass — opened the era of open-heart surgery; the engineering ancestor of ECMO.</p></div>
+  <div class="workflow-step" data-step="1958"><h4 data-zh="可植入心律調節器 (Senning)" data-en="Implantable Pacemaker (Senning)">可植入心律調節器</h4>
+    <p data-lang="zh">Arne Larsson 成為第一個植入 pacemaker 的患者；以工程裝置「補位」失能器官。</p>
+    <p data-lang="en">Arne Larsson became the first implant recipient — engineering "stands in for" a failing organ.</p></div>
+  <div class="workflow-step" data-step="1971"><h4 data-zh="CT 掃描問世 (Hounsfield)" data-en="CT Scanning (Hounsfield)">CT 掃描問世</h4>
+    <p data-lang="zh">EMI Mark I 完成首例腦部 CT；數位計算 + X-ray 投影 = 斷層影像，1979 年諾貝爾獎。</p>
+    <p data-lang="en">EMI Mark I delivered the first brain CT — digital computation + X-ray projections = tomographic imaging. Nobel 1979.</p></div>
+  <div class="workflow-step" data-step="1977"><h4 data-zh="MRI 應用於人體 (Damadian/Lauterbur)" data-en="MRI on Humans">MRI 應用於人體</h4>
+    <p data-lang="zh">無輻射的軟組織成像，後續演進為 fMRI、擴散影像（DTI）、心臟 MRI。</p>
+    <p data-lang="en">Non-ionizing soft-tissue imaging; evolved into fMRI, DTI, and cardiac MRI.</p></div>
+  <div class="workflow-step" data-step="2000"><h4 data-zh="da Vinci 手術機器人 FDA 批准" data-en="da Vinci Surgical Robot FDA Approval">da Vinci 手術機器人 FDA 批准</h4>
+    <p data-lang="zh">微創 + 高靈活度 + 3D 視覺，至 2025 年 Intuitive Surgical 市佔 >70%。</p>
+    <p data-lang="en">Minimally invasive + dexterity + 3D vision. By 2025 Intuitive Surgical holds &gt;70% market share.</p></div>
+  <div class="workflow-step" data-step="2017"><h4 data-zh="首例 CAR-T 細胞療法獲批 (Kymriah)" data-en="First CAR-T Therapy (Kymriah)">首例 CAR-T 細胞療法獲批</h4>
+    <p data-lang="zh">把工程過的 T 細胞做成「活的藥」，BME 跨入細胞工程與精準免疫治療。</p>
+    <p data-lang="en">Engineered T cells as a "living drug" — BME ventures into cell engineering and precision immunotherapy.</p></div>
+  <div class="workflow-step" data-step="2024"><h4 data-zh="Casgevy CRISPR 療法 / Neuralink 首例植入" data-en="Casgevy CRISPR / First Neuralink Implant">Casgevy CRISPR / Neuralink 首例植入</h4>
+    <p data-lang="zh">首支 CRISPR 基因編輯療法獲批治療鐮刀型貧血；Neuralink 完成首例人腦植入。</p>
+    <p data-lang="en">First CRISPR-edited therapy approved (sickle cell); Neuralink's first human implant.</p></div>
+  <div class="workflow-step" data-step="2025–2026"><h4 data-zh="AI/ML SaMD 大爆發" data-en="AI/ML SaMD Explosion">AI/ML SaMD 大爆發</h4>
+    <p data-lang="zh">FDA 累計核准 1,451 件 AI/ML 裝置（截至 2025 底），2025 一年新增 295 件（史上最多）；IEC 62304 Ed.2 於 2026/9 發表，新增 AI 計畫條款 5.1.15。</p>
+    <p data-lang="en">FDA's cumulative AI/ML clearances reach 1,451 by end-2025; 295 added in 2025 alone (record); IEC 62304 Ed.2 publishes Sep 2026 with new AI Plan clause 5.1.15.</p></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="學科版圖" data-en="LANDSCAPE">學科版圖</div>
+<h2 data-zh="二、生醫工程的子領域版圖" data-en="II. BME Sub-Disciplines">二、生醫工程的子領域版圖</h2>
+<div data-lang="zh"><p>當代生醫工程約可分為 7 大主流子領域，每個子領域對應到不同的臨床應用、工程技能與職涯路徑。</p></div>
+<div data-lang="en"><p>Modern BME spans roughly seven major sub-disciplines, each with distinct clinical applications, engineering skills, and career paths.</p></div>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">📈</div><h4 data-zh="① 生醫訊號與儀器" data-en="① Biosignals &amp; Instrumentation">① 生醫訊號與儀器</h4>
+<div data-lang="zh"><p>ECG/EEG/EMG/PPG 等訊號擷取、濾波、特徵抽取；放大器、電極、生醫儀器設計。職涯：醫療儀器商、植入器材公司、可穿戴。</p></div>
+<div data-lang="en"><p>Acquiring/filtering/feature-extracting ECG, EEG, EMG, PPG; amplifier, electrode, instrument design. Careers: medtech, implants, wearables.</p></div></div>
+
+<div class="card"><div class="card-icon">🩻</div><h4 data-zh="② 醫學影像" data-en="② Medical Imaging">② 醫學影像</h4>
+<div data-lang="zh"><p>CT/MRI/超音波/PET 等成像原理、重建、影像分析、AI 診斷。職涯：影像設備商（GE/Siemens/Philips/Canon）、影像 AI 新創。</p></div>
+<div data-lang="en"><p>Imaging modalities (CT/MRI/US/PET), reconstruction, analysis, AI diagnostics. Careers: GE/Siemens/Philips/Canon, imaging AI startups.</p></div></div>
+
+<div class="card"><div class="card-icon">🦴</div><h4 data-zh="③ 生物力學與骨骼/復健工程" data-en="③ Biomechanics &amp; Rehab Engineering">③ 生物力學與骨骼/復健工程</h4>
+<div data-lang="zh"><p>骨骼肌肉建模、步態分析、人工關節、外骨骼、義肢、有限元素分析。職涯：Stryker/Zimmer/Össur、復健機器人。</p></div>
+<div data-lang="en"><p>MSK modeling, gait analysis, joint replacements, exoskeletons, prosthetics, FEA. Careers: Stryker/Zimmer/Össur, rehab robotics.</p></div></div>
+
+<div class="card"><div class="card-icon">🧱</div><h4 data-zh="④ 生醫材料與組織工程" data-en="④ Biomaterials &amp; Tissue Engineering">④ 生醫材料與組織工程</h4>
+<div data-lang="zh"><p>金屬/陶瓷/高分子/水凝膠、生物相容性、3D 生物列印、類器官、再生醫學。職涯：植入物公司、3D bioprinting 新創、再生醫學。</p></div>
+<div data-lang="en"><p>Metals/ceramics/polymers/hydrogels, biocompatibility, 3D bioprinting, organoids, regenerative medicine. Careers: implants, bioprinting startups.</p></div></div>
+
+<div class="card"><div class="card-icon">⚙️</div><h4 data-zh="⑤ 醫療裝置與植入物" data-en="⑤ Medical Devices &amp; Implants">⑤ 醫療裝置與植入物</h4>
+<div data-lang="zh"><p>心律調節器、人工關節、心臟支架、隱形眼鏡、人工耳蝸；產品設計、品質系統、法規（FDA/CE）。職涯：Medtronic/Abbott/BSC、QA/RA 工程師。</p></div>
+<div data-lang="en"><p>Pacemakers, joints, stents, contact lenses, cochlear implants; product design, QMS, regulatory (FDA/CE). Careers: Medtronic/Abbott/BSC, QA/RA.</p></div></div>
+
+<div class="card"><div class="card-icon">🧬</div><h4 data-zh="⑥ 細胞與基因治療工程" data-en="⑥ Cell &amp; Gene Therapy Engineering">⑥ 細胞與基因治療工程</h4>
+<div data-lang="zh"><p>CAR-T 製程、AAV/LNP 載體、mRNA 疫苗、生物反應器、GMP；屬高度成長的 cell &amp; gene 領域。職涯：Novartis/BMS/Gilead/Moderna/BioNTech、CDMO。</p></div>
+<div data-lang="en"><p>CAR-T manufacturing, AAV/LNP vectors, mRNA vaccines, bioreactors, GMP — booming cell &amp; gene sector. Careers: Novartis/BMS/Gilead/Moderna/BioNTech, CDMOs.</p></div></div>
+
+<div class="card"><div class="card-icon">🧠</div><h4 data-zh="⑦ 神經工程與腦機介面" data-en="⑦ Neural Engineering &amp; BCI">⑦ 神經工程與腦機介面</h4>
+<div data-lang="zh"><p>人工耳蝸、DBS、Utah array、Neuralink、SEEG、神經調控。橫跨電生理、訊號處理、AI 解碼。職涯：Medtronic Neuro、Neuralink、Synchron、Blackrock。</p></div>
+<div data-lang="en"><p>Cochlear implants, DBS, Utah array, Neuralink, SEEG, neuromodulation. Crosses electrophysiology, signal processing, AI decoding. Careers: Medtronic Neuro, Neuralink, Synchron, Blackrock.</p></div></div>
+
+<div class="card"><div class="card-icon">🤖</div><h4 data-zh="⑧ AI 醫療與健康資訊" data-en="⑧ AI in Medicine &amp; Health Informatics">⑧ AI 醫療與健康資訊</h4>
+<div data-lang="zh"><p>影像 AI、臨床決策支援、醫療 LLM（MedGemma、OpenEvidence）、SaMD 法規；橫跨 BME 與資工。職涯：影像 AI 公司、健康資訊系統、EMR 廠商。</p></div>
+<div data-lang="en"><p>Imaging AI, clinical decision support, medical LLMs (MedGemma, OpenEvidence), SaMD regulation. Crosses BME with CS. Careers: imaging AI, HIS, EMR vendors.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖表" data-en="INTERACTIVE">互動圖表</div>
+<h2 data-zh="三、產業規模一覽（2025 年數據）" data-en="III. Market Snapshot (2025)">三、產業規模一覽</h2>
+<div data-lang="zh"><p>下圖為 2025 年生醫工程主要次市場估值（單位：十億美元 USD）。透過下方按鈕可切換不同視角。</p></div>
+<div data-lang="en"><p>The chart below shows 2025 sub-market sizes in BME (USD billions). Use the buttons below to switch perspectives.</p></div>
+<div class="interactive-panel">
+<div class="toggle-row">
+  <button class="toggle-btn active" data-view="size" data-zh="市場規模" data-en="Market Size">市場規模</button>
+  <button class="toggle-btn" data-view="growth" data-zh="CAGR 成長率" data-en="CAGR Growth">CAGR 成長率</button>
+</div>
+<div class="chart-container"><canvas id="marketChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">數據來源：Grand View Research、Coherent Market Insights、SNS Insider（2025–2026 報告）。</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Sources: Grand View Research, Coherent Market Insights, SNS Insider (2025–2026 reports).</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="四、我該選哪個 BME 子領域？" data-en="IV. Which BME Sub-discipline Should I Pick?">四、我該選哪個 BME 子領域？</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="興趣與技能比對決策樹" data-en="Interest &amp; Skill Match Decision Tree">興趣與技能比對決策樹</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">喜歡「拆機器、做電路、寫程式」？<span class="dt-arrow">→</span> 訊號儀器 / 影像 / 醫療裝置 / AI 醫療。</span><span data-lang="en">Love taking apart hardware, building circuits, writing code? <span class="dt-arrow">→</span> Signals/instruments, imaging, devices, or AI in medicine.</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">熱愛「材料、化學、生物分子」？<span class="dt-arrow">→</span> 生醫材料 / 組織工程 / 藥物遞送。</span><span data-lang="en">Excited by materials, chemistry, biomolecules? <span class="dt-arrow">→</span> Biomaterials / tissue engineering / drug delivery.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">想做「物理／力學／模擬」？<span class="dt-arrow">→</span> 生物力學 / 復健工程 / 醫療機器人。</span><span data-lang="en">Drawn to physics, mechanics, simulation? <span class="dt-arrow">→</span> Biomechanics / rehab engineering / surgical robotics.</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">對「細胞、基因、新藥」最興奮？<span class="dt-arrow">→</span> 細胞與基因治療工程；需熟悉 GMP、bioprocess。</span><span data-lang="en">Most excited about cells/genes/new drugs? <span class="dt-arrow">→</span> Cell &amp; gene therapy engineering; GMP + bioprocess essential.</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">著迷於「大腦、思考、人機介面」？<span class="dt-arrow">→</span> 神經工程 / 腦機介面；需 EE + 訊號 + AI。</span><span data-lang="en">Fascinated by brain, cognition, human-machine? <span class="dt-arrow">→</span> Neural engineering / BCI; needs EE + DSP + AI.</span></div>
+<div class="dt-node"><span class="dt-q">Q6.</span><span data-lang="zh">喜歡「文件、流程、品質控管」？<span class="dt-arrow">→</span> 法規（RA）/ 品質（QA）/ 臨床評估；ISO 13485、IEC 62304、FDA 510(k)。</span><span data-lang="en">Enjoy documentation, processes, QC? <span class="dt-arrow">→</span> RA/QA/Clinical Evaluation; ISO 13485, IEC 62304, FDA 510(k).</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="工程程序" data-en="ENGINEERING PROCESS">工程程序</div>
+<h2 data-zh="五、生醫工程設計流程（Design Controls）" data-en="V. BME Design Process (Design Controls)">五、生醫工程設計流程</h2>
+<div data-lang="zh"><p>不同於一般電子產品，醫療器材的設計必須遵循 <strong>FDA 21 CFR 820.30 Design Controls</strong> 與 <strong>ISO 13485:2016</strong>。下列 7 步驟是核心：</p></div>
+<div data-lang="en"><p>Unlike consumer electronics, medical device design must follow <strong>FDA 21 CFR 820.30 Design Controls</strong> and <strong>ISO 13485:2016</strong>. The seven steps below are the core:</p></div>
+<ol class="numbered">
+<li><strong data-zh="使用者需求（User Needs）" data-en="User Needs">使用者需求</strong> — <span data-lang="zh">病人、臨床醫師、護理人員、技師、保險公司，皆為利害關係人。「想做什麼」轉成「應該做什麼」。</span><span data-lang="en">Stakeholders: patient, physician, nurse, technician, payer. Translate "what we want to do" into "what must be done."</span></li>
+<li><strong data-zh="設計輸入（Design Inputs）" data-en="Design Inputs">設計輸入</strong> — <span data-lang="zh">把使用者需求量化為可驗證的工程規格（accuracy, sensitivity, power, weight, IP67…）。</span><span data-lang="en">Translate user needs into verifiable engineering specs (accuracy, sensitivity, power, weight, IP67…).</span></li>
+<li><strong data-zh="設計輸出（Design Outputs）" data-en="Design Outputs">設計輸出</strong> — <span data-lang="zh">圖紙、BOM、軟體源碼、製造程序、IFU、Labeling 等可生產的成果物。</span><span data-lang="en">Drawings, BOM, source code, manufacturing procedures, IFU, labeling — the producible deliverables.</span></li>
+<li><strong data-zh="設計驗證（Verification）" data-en="Verification">設計驗證</strong> — <span data-lang="zh">「<em>是否照著規格做出來？</em>」單元測試、整合測試、效能測試、IEC 60601 電氣安規等。</span><span data-lang="en">"Did we build it to spec?" Unit/integration/performance tests, IEC 60601 electrical safety, etc.</span></li>
+<li><strong data-zh="設計確認（Validation）" data-en="Validation">設計確認</strong> — <span data-lang="zh">「<em>有沒有滿足使用者需求？</em>」實際病人/臨床環境試驗。HMI 與人因（IEC 62366）。</span><span data-lang="en">"Did we build the right thing?" Real patient/clinical-environment trials; HMI + human factors (IEC 62366).</span></li>
+<li><strong data-zh="風險管理（ISO 14971）" data-en="Risk Management (ISO 14971)">風險管理</strong> — <span data-lang="zh">識別 hazard → 估算 risk → 控制 → 殘餘風險評估 → 風險效益分析（benefit-risk）。</span><span data-lang="en">Identify hazards → assess risk → control → residual risk → benefit-risk analysis.</span></li>
+<li><strong data-zh="設計轉移（Design Transfer）" data-en="Design Transfer">設計轉移</strong> — <span data-lang="zh">把驗證後的設計交給量產，建立 DHF（Design History File）與 DMR（Device Master Record）。</span><span data-lang="en">Hand the validated design to manufacturing; establish DHF (Design History File) and DMR (Device Master Record).</span></li>
+</ol>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>常見誤解：</strong>Verification ≠ Validation。Verification 問「我做對東西了嗎」(did we build it right)，Validation 問「我做對的東西嗎」(did we build the right thing)。兩者都必要。</span>
+<span data-lang="en"><strong>Common mistake:</strong> Verification ≠ Validation. Verification asks "<em>did we build it right?</em>" Validation asks "<em>did we build the right thing?</em>" Both are required.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵法規" data-en="KEY REGULATIONS">關鍵法規</div>
+<h2 data-zh="六、必懂的 8 個法規與標準" data-en="VI. 8 Essential Regulations &amp; Standards">六、必懂的 8 個法規與標準</h2>
+<table class="comp-table"><thead><tr><th data-zh="標準/法規" data-en="Standard">標準</th><th data-zh="範疇" data-en="Scope">範疇</th><th data-zh="重點" data-en="Key Point">重點</th></tr></thead><tbody>
+<tr><td><strong>FDA 21 CFR 820</strong></td><td data-zh="美國 QSR / QMSR" data-en="US Quality System">美國品質系統</td><td data-zh="2024 公告改名為 QMSR，將於 2026/2/2 生效，與 ISO 13485 對齊。" data-en="Renamed QMSR in 2024, effective 2026-02-02, harmonized with ISO 13485.">2024 改名 QMSR，2026/2/2 生效，與 ISO 13485 對齊</td></tr>
+<tr><td><strong>ISO 13485:2016</strong></td><td data-zh="醫療器材品質管理" data-en="Medical Device QMS">醫療器材 QMS</td><td data-zh="全球醫療器材公司的 QMS 標準；2025 確認、2026 預計檢視。" data-en="Global QMS standard for medical device firms; reviewed in 2025, next review 2026.">2025 已確認；下次檢視 2026</td></tr>
+<tr><td><strong>ISO 14971:2019</strong></td><td data-zh="風險管理" data-en="Risk Management">風險管理</td><td data-zh="風險矩陣、benefit-risk、上市後監測；2025/3 再次確認、無更新。" data-en="Risk matrix, benefit-risk, post-market surveillance; reconfirmed Mar 2025, no changes.">2025/3 確認，未更新</td></tr>
+<tr><td><strong>IEC 62304</strong></td><td data-zh="醫療器材軟體" data-en="Medical Device Software">醫療器材軟體</td><td data-zh="Edition 2 於 2026/9 發表；以「process rigour levels」取代舊 A/B/C；新增 5.1.15 AI Plan 條款。" data-en="Edition 2 publishes Sep 2026; replaces A/B/C with process rigour levels; new clause 5.1.15 for AI plans.">Ed.2 (2026/9) 新增 AI Plan</td></tr>
+<tr><td><strong>IEC 60601-1</strong></td><td data-zh="醫用電氣安全" data-en="Medical Electrical Safety">醫用電氣安全</td><td data-zh="所有有電的醫療器材必須通過；漏電流、絕緣、耐壓、ESD。" data-en="All powered medical devices must comply; leakage current, insulation, dielectric, ESD.">漏電流、絕緣、耐壓、ESD</td></tr>
+<tr><td><strong>IEC 62366-1</strong></td><td data-zh="人因工程" data-en="Usability Engineering">人因工程</td><td data-zh="使用者錯誤可能致死，必須做 formative/summative usability test。" data-en="Use errors can kill — formative + summative usability tests required.">formative + summative usability</td></tr>
+<tr><td><strong>ISO 10993</strong></td><td data-zh="生物相容性" data-en="Biocompatibility">生物相容性</td><td data-zh="材料安全評估，依接觸時間 / 部位（皮膚 / 黏膜 / 植入）有不同測試矩陣。" data-en="Material safety; test matrix varies by contact duration / site (skin / mucosa / implant).">皮膚 / 黏膜 / 植入測試</td></tr>
+<tr><td><strong>EU MDR 2017/745</strong></td><td data-zh="歐盟醫療器材法規" data-en="EU Medical Device Reg">歐盟法規</td><td data-zh="CE 認證；取代舊 MDD；UDI、PMS、PMCF、Eudamed 上線。" data-en="CE marking; replaced MDD; UDI, PMS, PMCF, Eudamed.">UDI / PMS / Eudamed</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="七、最小可執行範例：生成模擬 ECG" data-en="VII. Minimal Example: Synthesize an ECG">七、最小可執行範例：生成模擬 ECG</h2>
+<div data-lang="zh"><p>本書的 Python 範例需要 <code>numpy</code>、<code>scipy</code>、<code>matplotlib</code>、<code>neurokit2</code>（生理訊號工具）。MATLAB 範例使用 Signal Processing Toolbox。</p></div>
+<div data-lang="en"><p>The Python examples in this book require <code>numpy</code>, <code>scipy</code>, <code>matplotlib</code>, and <code>neurokit2</code> (physiological signals). MATLAB examples use the Signal Processing Toolbox.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns">
+    <button class="code-tab-btn active" data-tab="py">Python</button>
+    <button class="code-tab-btn" data-tab="mat">MATLAB</button>
+  </div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="comment"># Synthesize and plot a 10-second ECG at 250 Hz</span>
+<span class="kw">import</span> neurokit2 <span class="kw">as</span> nk
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+fs = <span class="num">250</span>        <span class="comment"># sampling rate (Hz)</span>
+T  = <span class="num">10</span>         <span class="comment"># duration (s)</span>
+hr = <span class="num">75</span>         <span class="comment"># heart rate (bpm)</span>
+
+<span class="comment"># Realistic ECG with PQRST morphology + baseline noise</span>
+ecg = nk.<span class="func">ecg_simulate</span>(duration=T, sampling_rate=fs,
+                       heart_rate=hr, method=<span class="str">"ecgsyn"</span>)
+
+plt.<span class="func">figure</span>(figsize=(<span class="num">10</span>,<span class="num">3</span>))
+plt.<span class="func">plot</span>(ecg, lw=<span class="num">0.9</span>)
+plt.<span class="func">title</span>(<span class="str">"Simulated ECG"</span>)
+plt.<span class="func">xlabel</span>(<span class="str">"Samples (250 Hz)"</span>); plt.<span class="func">ylabel</span>(<span class="str">"mV"</span>)
+plt.<span class="func">grid</span>(alpha=<span class="num">0.3</span>); plt.<span class="func">show</span>()</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% Synthesize ECG using built-in MIT-BIH–like model</span>
+fs = <span class="num">250</span>; T = <span class="num">10</span>; t = <span class="num">0</span>:<span class="num">1</span>/fs:T-<span class="num">1</span>/fs;
+hr = <span class="num">75</span>;  rr = <span class="num">60</span>/hr;
+beats = floor(T/rr);
+
+<span class="comment">% Simple superposition of P-QRS-T Gaussians per beat</span>
+ecg = <span class="func">zeros</span>(<span class="num">1</span>,length(t));
+<span class="kw">for</span> k = <span class="num">0</span>:beats
+  c = k*rr;
+  ecg = ecg + <span class="num">0.15</span>*<span class="func">exp</span>(-((t-c-<span class="num">0.15</span>)/<span class="num">0.025</span>).^<span class="num">2</span>)...    <span class="comment">% P</span>
+            - <span class="num">0.10</span>*<span class="func">exp</span>(-((t-c-<span class="num">0.20</span>)/<span class="num">0.015</span>).^<span class="num">2</span>)...   <span class="comment">% Q</span>
+            + <span class="num">1.20</span>*<span class="func">exp</span>(-((t-c-<span class="num">0.22</span>)/<span class="num">0.015</span>).^<span class="num">2</span>)...   <span class="comment">% R</span>
+            - <span class="num">0.25</span>*<span class="func">exp</span>(-((t-c-<span class="num">0.24</span>)/<span class="num">0.015</span>).^<span class="num">2</span>)...   <span class="comment">% S</span>
+            + <span class="num">0.30</span>*<span class="func">exp</span>(-((t-c-<span class="num">0.40</span>)/<span class="num">0.045</span>).^<span class="num">2</span>);     <span class="comment">% T</span>
+<span class="kw">end</span>
+<span class="func">plot</span>(t,ecg); <span class="func">grid on</span>; <span class="func">xlabel</span>(<span class="str">'s'</span>); <span class="func">ylabel</span>(<span class="str">'mV'</span>);</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="八、本章關鍵術語" data-en="VIII. Key Terms">八、本章關鍵術語</h2>
+<p><span class="term">SaMD<span class="term-tip">Software as a Medical Device — 軟體本身即為醫療器材，不需嵌入硬體即受法規監管。</span></span> &nbsp;
+<span class="term">510(k)<span class="term-tip">美國 FDA 上市前許可路徑之一，需證明與已上市的 predicate device「實質等同」。</span></span> &nbsp;
+<span class="term">PMA<span class="term-tip">Premarket Approval — Class III 高風險裝置的嚴格上市路徑，需臨床試驗。</span></span> &nbsp;
+<span class="term">De Novo<span class="term-tip">創新型 Class I/II 裝置且無 predicate，可透過此路徑風險分類後上市。</span></span> &nbsp;
+<span class="term">UDI<span class="term-tip">Unique Device Identification — 醫療器材的全球唯一識別碼，FDA/EU MDR 強制。</span></span> &nbsp;
+<span class="term">PMS<span class="term-tip">Post-Market Surveillance — 上市後監測；蒐集真實世界使用資料、不良事件、效能。</span></span> &nbsp;
+<span class="term">CDRH<span class="term-tip">Center for Devices and Radiological Health — FDA 負責醫療器材的部門。</span></span> &nbsp;
+<span class="term">QMSR<span class="term-tip">Quality Management System Regulation — 取代舊 QSR、與 ISO 13485 對齊；2026/2/2 生效。</span></span> &nbsp;
+<span class="term">DHF<span class="term-tip">Design History File — 醫療器材整個開發歷程的完整文件包。</span></span> &nbsp;
+<span class="term">CDMO<span class="term-tip">Contract Development &amp; Manufacturing Organization — 委託開發與製造服務商，cell &amp; gene 領域常見。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check (3 questions)">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2">
+<p><span data-lang="zh">Q1. 在醫療器材設計流程中，「Validation」最貼切的問句是？</span><span data-lang="en">Q1. In the medical device design process, the question best matching "Validation" is:</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 我們是否按照規格把產品做出來了？</span><span data-lang="en">A. Did we build the product to spec?</span></div>
+<div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 產品是否通過 IEC 60601 電氣安全？</span><span data-lang="en">B. Does the product pass IEC 60601?</span></div>
+<div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 產品是否真正滿足了使用者的臨床需求？</span><span data-lang="en">C. Does the product truly meet the user's clinical needs?</span></div>
+<div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 產品是否取得 510(k)？</span><span data-lang="en">D. Has the product received 510(k) clearance?</span></div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+<div class="quiz-q" data-correct="1">
+<p><span data-lang="zh">Q2. 下列哪一項<strong>不是</strong> ISO 14971 的核心要求？</span><span data-lang="en">Q2. Which is <strong>NOT</strong> a core requirement of ISO 14971?</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 風險識別與評估</span><span data-lang="en">A. Risk identification and analysis</span></div>
+<div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 軟體單元測試覆蓋率達到 80%</span><span data-lang="en">B. 80% unit-test coverage for software</span></div>
+<div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 風險控制（風險降低）措施</span><span data-lang="en">C. Risk control (mitigation)</span></div>
+<div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 上市後監測與風險再評估</span><span data-lang="en">D. Post-market surveillance and risk reassessment</span></div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+<div class="quiz-q" data-correct="2">
+<p><span data-lang="zh">Q3. 截至 2025 年底，FDA 累計核可的 AI/ML 醫療器材數量約為？</span><span data-lang="en">Q3. By end-2025, the cumulative count of FDA-authorized AI/ML medical devices is approximately:</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 約 100 件</span><span data-lang="en">A. ~100</span></div>
+<div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 約 500 件</span><span data-lang="en">B. ~500</span></div>
+<div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 約 1,450 件，其中 2025 年新增 295 件（史上最多）</span><span data-lang="en">C. ~1,450, with 295 added in 2025 alone (record year)</span></div>
+<div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 超過 5,000 件</span><span data-lang="en">D. Over 5,000</span></div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+</section>
+
+<div class="page-nav">
+<div class="placeholder"></div>
+<a href="human-physiology.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="A2 · 人體生理基礎" data-en="A2 · Human Physiology">A2 · 人體生理基礎</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · A1 Intro to BME</footer>
+<script src="i18n.js"></script>
+<script>
+// Quiz logic
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  const correct=q.dataset.correct;
+  q.querySelectorAll('.quiz-opt').forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      if(q.dataset.done)return;
+      q.dataset.done='1';
+      const chosen=opt.dataset.opt;
+      const fb=q.querySelector('.quiz-feedback');
+      if(chosen===correct){
+        opt.classList.add('correct');
+        fb.classList.add('show','correct-fb');
+        fb.textContent= I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';
+      } else {
+        opt.classList.add('wrong');
+        q.querySelector(`[data-opt="${correct}"]`).classList.add('correct');
+        fb.classList.add('show','wrong-fb');
+        fb.textContent= I18n.get()==='zh'?'✗ 不正確。正解已標示。':'✗ Incorrect. Correct answer highlighted.';
+      }
+    });
+  });
+});
+// Code tabs
+document.querySelectorAll('.code-tabs').forEach(box=>{
+  box.querySelectorAll('.code-tab-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const t=btn.dataset.tab;
+      box.querySelectorAll('.code-tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+      box.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===t));
+    });
+  });
+});
+
+// Chart
+const data={
+  size:{labels:['醫學影像','體外診斷','手術機器人','心血管裝置','骨科植入','穿戴健康','細胞與基因治療','AI 醫療'],
+        values:[47, 109, 12.93, 65, 56, 73, 19.5, 28]},
+  growth:{labels:['醫學影像','體外診斷','手術機器人','心血管裝置','骨科植入','穿戴健康','細胞與基因治療','AI 醫療'],
+          values:[6.5, 6.0, 16.5, 7.2, 5.8, 13.4, 21.5, 38.0]}
+};
+const labelsEN={'醫學影像':'Medical Imaging','體外診斷':'IVD','手術機器人':'Surgical Robots','心血管裝置':'Cardiovascular','骨科植入':'Orthopedic Implants','穿戴健康':'Wearables','細胞與基因治療':'Cell & Gene','AI 醫療':'AI in Medicine'};
+let chart;
+function draw(view){
+  const d=data[view];
+  const ctx=document.getElementById('marketChart').getContext('2d');
+  const lang=I18n.get();
+  const labs=d.labels.map(l=>lang==='zh'?l:labelsEN[l]);
+  if(chart) chart.destroy();
+  chart=new Chart(ctx,{type:'bar',
+    data:{labels:labs,datasets:[{label:view==='size'?(lang==='zh'?'市場規模 (USD B, 2025)':'Market Size (USD B, 2025)'):(lang==='zh'?'CAGR % (2025-2030)':'CAGR % (2025-2030)'),
+      data:d.values,backgroundColor:'rgba(131,24,67,.75)',borderColor:'#500724',borderWidth:1}]},
+    options:{plugins:{legend:{display:true}},
+      scales:{y:{beginAtZero:true,title:{display:true,text:view==='size'?'USD Billion':'CAGR %'}}}}});
+}
+draw('size');
+document.querySelectorAll('.toggle-btn[data-view]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.toggle-btn[data-view]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active'); draw(b.dataset.view);
+  });
+});
+document.addEventListener('langchange',()=>{
+  const cur=document.querySelector('.toggle-btn[data-view].active').dataset.view;
+  draw(cur);
+});
+</script>
+</body></html>

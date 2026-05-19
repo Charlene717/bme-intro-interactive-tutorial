@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>A3: 生醫工程數學 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html" class="active">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER A3 · BLOCK A FOUNDATIONS</div>
+<h1 data-zh="生醫工程數學" data-en="Engineering Math for BME">生醫工程數學</h1>
+<p class="subtitle" data-lang="zh">線代、微積分、ODE、傅立葉/拉普拉斯、統計、機器學習——5 大數學工具如何串起 BME 的訊號、影像、控制與建模。</p>
+<p class="subtitle" data-lang="en">Linear algebra, calculus, ODEs, Fourier/Laplace, statistics &amp; ML — five math toolkits that connect signals, imaging, control, and modeling in BME.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="ABET 要求" data-en="ABET REQUIREMENT">ABET 要求</div>
+<h2 data-zh="一、為什麼 BME 數學門檻特別嚴格？" data-en="I. Why is BME Math Particularly Demanding?">一、為什麼 BME 數學門檻特別嚴格？</h2>
+<div data-lang="zh">
+<p>根據 ABET 2025-2026 生醫工程認可標準，BME 學程必須包含<strong>微分方程</strong>等級的微積分、線性代數、機率統計，以及 ≥ 30 學分數學/科學 + ≥ 45 學分工程主題。這是因為 BME 同時涉及：</p>
+<ul>
+<li>連續系統建模（生理控制 → ODE/PDE）</li>
+<li>離散訊號處理（ECG/EEG → DFT, z 轉換）</li>
+<li>影像重建（CT → Radon, MRI → Fourier）</li>
+<li>反問題（impedance tomography, source localization）</li>
+<li>不確定性量化（臨床試驗 → 統計、Bayesian）</li>
+<li>高維特徵抽取（基因表現 → PCA, manifold）</li>
+<li>非線性、隨機、自適應（神經元、群體動態）</li>
+</ul>
+</div>
+<div data-lang="en">
+<p>Per ABET 2025-2026 BME criteria, programs must cover calculus through <strong>differential equations</strong>, linear algebra, probability/statistics, plus ≥30 math/science credits + ≥45 engineering credits. BME spans:</p>
+<ul>
+<li>Continuous-system modeling (physiology control → ODEs/PDEs)</li>
+<li>Discrete signal processing (ECG/EEG → DFT, z-transform)</li>
+<li>Image reconstruction (CT → Radon, MRI → Fourier)</li>
+<li>Inverse problems (impedance tomography, source localization)</li>
+<li>Uncertainty (clinical trials → stats, Bayesian)</li>
+<li>High-dim features (gene expression → PCA, manifolds)</li>
+<li>Nonlinear/stochastic/adaptive (neurons, population dynamics)</li>
+</ul>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="線性代數" data-en="LINEAR ALGEBRA">線性代數</div>
+<h2 data-zh="二、線性代數：BME 萬用語言" data-en="II. Linear Algebra: The Universal BME Language">二、線性代數</h2>
+<table class="comp-table"><thead><tr><th data-zh="概念" data-en="Concept">概念</th><th data-zh="BME 應用" data-en="BME Application">BME 應用</th><th data-zh="範例" data-en="Example">範例</th></tr></thead><tbody>
+<tr><td><strong>Matrix-Vector Product</strong></td><td data-zh="線性系統、影像變換" data-en="Linear systems, image transforms">線性系統、影像變換</td><td>y = Ax — <span data-zh="MRI k-space → 影像" data-en="MRI k-space → image">MRI k-space → image</span></td></tr>
+<tr><td><strong>Eigen-decomposition</strong></td><td data-zh="主成分（PCA）、模態分析" data-en="PCA, modal analysis">PCA、模態分析</td><td>A = QΛQᵀ — <span data-zh="EEG ICA、心臟肌肉模態" data-en="EEG ICA, cardiac modes">EEG ICA、心肌模態</span></td></tr>
+<tr><td><strong>SVD</strong></td><td data-zh="降維、降噪、影像壓縮" data-en="Dim reduction, denoise, compression">降維、降噪</td><td>A = UΣVᵀ — <span data-zh="MRI 加速 (SENSE/GRAPPA)" data-en="MRI acceleration">MRI 加速</span></td></tr>
+<tr><td><strong>Pseudoinverse (A⁺)</strong></td><td data-zh="最小二乘、反問題" data-en="Least squares, inverse problems">最小二乘、反問題</td><td>x̂ = A⁺y — <span data-zh="EEG source localization" data-en="EEG source localization">EEG 源定位</span></td></tr>
+<tr><td><strong>Convolution</strong></td><td data-zh="濾波、影像 kernel、PSF" data-en="Filtering, image kernels, PSF">濾波、PSF</td><td>y = h * x — <span data-zh="CT 反捲積、影像 deblur" data-en="CT deconvolution, deblur">影像 deblur</span></td></tr>
+</tbody></table>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>核心觀念：</strong>BME 工程師看到大型資料集（影像、訊號、基因表現矩陣），第一個直覺應該是「這背後的線性結構是什麼？」SVD 與 PCA 幾乎是萬用第一步。</span>
+<span data-lang="en"><strong>Key intuition:</strong> Seeing any big dataset (images, signals, gene matrices), the BME engineer's first instinct should be "what's the linear structure here?" SVD/PCA is almost always the right first step.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="微積分與 ODE" data-en="CALCULUS &amp; ODE">微積分與 ODE</div>
+<h2 data-zh="三、微積分與微分方程" data-en="III. Calculus &amp; Differential Equations">三、微積分與 ODE</h2>
+<div data-lang="zh"><p>幾乎所有「連續時間的生理過程」都用 ODE 描述：藥物代謝（compartmental model）、神經元動作電位（Hodgkin-Huxley）、心血管循環（Windkessel）、傳染病（SIR）、組織擴散（Fick）。</p></div>
+<div data-lang="en"><p>Almost every "continuous-time physiological process" is described by ODEs: drug PK (compartmental), action potentials (Hodgkin-Huxley), circulation (Windkessel), epidemics (SIR), tissue diffusion (Fick).</p></div>
+<div class="card-grid cols-2">
+<div class="card"><h4 data-zh="一階線性 (藥物代謝 PK)" data-en="1st-order Linear (Drug PK)">一階線性</h4>
+<div class="formula">dC/dt = –k·C &nbsp;⇒&nbsp; <em>C(t) = C₀·e<sup>–kt</sup></em></div>
+<div data-lang="zh"><p>藥物在血液的「一階消除」。半衰期 t₁/₂ = ln 2 / k。BME 應用：給藥間隔設計、CGM 模型、TDM。</p></div>
+<div data-lang="en"><p>"First-order elimination" of drugs. Half-life t₁/₂ = ln 2 / k. BME applications: dosing intervals, CGM modeling, TDM.</p></div></div>
+
+<div class="card"><h4 data-zh="二階阻尼 (心血管 Windkessel)" data-en="2nd-order Damped (Windkessel)">二階阻尼</h4>
+<div class="formula">C·dP/dt + P/R = Q(t)</div>
+<div data-lang="zh"><p>主動脈彈性（C） + 周邊阻力（R）  → 模擬血壓波形。BME：人工瓣膜、CFD 邊界條件。</p></div>
+<div data-lang="en"><p>Aortic compliance (C) + peripheral resistance (R) — models BP waveforms. BME: prosthetic valves, CFD BCs.</p></div></div>
+
+<div class="card"><h4 data-zh="非線性 (動作電位 HH)" data-en="Nonlinear (HH AP)">非線性</h4>
+<div class="formula">C·dV/dt = –ΣI<sub>ion</sub>(V,t) + I<sub>stim</sub></div>
+<div data-lang="zh"><p>Hodgkin-Huxley 4 維 ODE 系統，可產生 spike、震盪、bistability。</p></div>
+<div data-lang="en"><p>4D ODE system; produces spikes, oscillations, bistability.</p></div></div>
+
+<div class="card"><h4 data-zh="PDE (擴散 / 反應-擴散)" data-en="PDE (Diffusion / Reaction-Diffusion)">PDE 擴散</h4>
+<div class="formula">∂C/∂t = D∇²C – kC</div>
+<div data-lang="zh"><p>藥物在組織中的擴散、氧氣濃度場、神經電位場。BME：藥物遞送設計、tumor growth、cardiac propagation。</p></div>
+<div data-lang="en"><p>Drug diffusion in tissue, O₂ field, neural potential field. BME: drug delivery, tumor growth, cardiac propagation.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="傅立葉與拉普拉斯" data-en="FOURIER &amp; LAPLACE">傅立葉與拉普拉斯</div>
+<h2 data-zh="四、Fourier / Laplace：從時域到頻域" data-en="IV. Fourier / Laplace: From Time to Frequency">四、Fourier / Laplace</h2>
+<div data-lang="zh">
+<p><strong>Fourier 轉換</strong>把訊號分解為不同頻率的正弦波組合。三個版本：<em>CTFT</em>（連續時間）、<em>DTFT</em>（離散時間）、<em>DFT/FFT</em>（離散有限長）。在 BME 中：</p>
+<ul>
+<li>ECG：心跳頻率 ~1 Hz、心電波形含到 50 Hz</li>
+<li>EEG：δ (0.5-4) / θ (4-8) / α (8-13) / β (13-30) / γ (30-80) Hz</li>
+<li>MRI：k-space ↔ image 用 2D FFT 互換</li>
+<li>CT：Radon 變換 → Fourier slice theorem → reconstruct</li>
+</ul>
+<p><strong>Laplace 轉換</strong> X(s) = ∫₀<sup>∞</sup> x(t)·e<sup>–st</sup>dt 是 Fourier 的延伸（含衰減）。線性時不變（LTI）系統的傳輸函數 H(s) 在 Laplace 域是有理多項式比，這讓控制系統的穩定性（極點位置）變得可視。</p>
+</div>
+<div data-lang="en">
+<p><strong>Fourier transform</strong> decomposes signals into sinusoids. Three versions: <em>CTFT</em>, <em>DTFT</em>, <em>DFT/FFT</em>. In BME:</p>
+<ul>
+<li>ECG: heart rate ~1 Hz, waveforms up to 50 Hz</li>
+<li>EEG: δ (0.5-4) / θ (4-8) / α (8-13) / β (13-30) / γ (30-80) Hz</li>
+<li>MRI: k-space ↔ image via 2D FFT</li>
+<li>CT: Radon transform → Fourier slice theorem → reconstruct</li>
+</ul>
+<p><strong>Laplace transform</strong> extends Fourier (adds decay). H(s) of LTI systems is a rational polynomial — pole locations make stability visible.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動模擬" data-en="INTERACTIVE">互動模擬</div>
+<h2 data-zh="五、FFT 互動模擬器" data-en="V. Interactive FFT Demo">五、FFT 互動模擬器</h2>
+<div data-lang="zh"><p>合成訊號 = sin(2π·f₁·t) + sin(2π·f₂·t) + 雜訊。觀察 FFT 後兩個峰值是否能被解析出來。</p></div>
+<div data-lang="en"><p>Synthesize = sin(2π·f₁·t) + sin(2π·f₂·t) + noise. See whether FFT resolves the two peaks.</p></div>
+<div class="interactive-panel">
+<div class="slider-group"><label><span>f₁ (Hz)</span> <span id="vF1">5</span></label><input type="range" id="sF1" min="1" max="40" value="5" step="0.5"></div>
+<div class="slider-group"><label><span>f₂ (Hz)</span> <span id="vF2">12</span></label><input type="range" id="sF2" min="1" max="40" value="12" step="0.5"></div>
+<div class="slider-group"><label><span data-zh="雜訊振幅" data-en="Noise amplitude">雜訊</span> <span id="vN">0.5</span></label><input type="range" id="sN" min="0" max="2" value="0.5" step="0.1"></div>
+<div class="chart-container" style="height:200px"><canvas id="timeChart"></canvas></div>
+<div class="chart-container" style="height:200px"><canvas id="fftChart"></canvas></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="統計與機率" data-en="STATISTICS">統計與機率</div>
+<h2 data-zh="六、統計與機率：臨床研究的基石" data-en="VI. Statistics &amp; Probability: Foundation of Clinical Research">六、統計與機率</h2>
+<div class="card-grid cols-2">
+<div class="card"><h4 data-zh="📊 描述統計" data-en="📊 Descriptive">描述統計</h4>
+<div data-lang="zh"><p>平均/中位/眾數、標準差、IQR、boxplot；分佈型態（常態、Poisson、bimodal）。</p></div>
+<div data-lang="en"><p>Mean/median/mode, SD, IQR, boxplot; distribution shapes (normal, Poisson, bimodal).</p></div></div>
+<div class="card"><h4 data-zh="🎲 推論統計" data-en="🎲 Inferential">推論統計</h4>
+<div data-lang="zh"><p>t-test、ANOVA、χ²、Wilcoxon、Mann-Whitney；α、β、power、effect size。</p></div>
+<div data-lang="en"><p>t-test, ANOVA, χ², Wilcoxon, Mann-Whitney; α, β, power, effect size.</p></div></div>
+<div class="card"><h4 data-zh="📈 臨床指標" data-en="📈 Clinical Metrics">臨床指標</h4>
+<div data-lang="zh"><p>Sensitivity（真陽率）、Specificity（真陰率）、PPV、NPV、ROC-AUC、likelihood ratio。AI 醫療裝置 FDA 認證關鍵指標。</p></div>
+<div data-lang="en"><p>Sensitivity, specificity, PPV, NPV, ROC-AUC, likelihood ratio — key metrics for FDA AI device clearance.</p></div></div>
+<div class="card"><h4 data-zh="🔢 Bayesian" data-en="🔢 Bayesian">Bayesian</h4>
+<div data-lang="zh"><p>P(disease | test+) = P(test+ | disease) × P(disease) / P(test+)；先驗分佈、後驗分佈、可信區間。臨床決策核心思維。</p></div>
+<div data-lang="en"><p>P(disease | test+) = P(test+ | disease) × P(disease) / P(test+); priors, posteriors, credible intervals — core to clinical reasoning.</p></div></div>
+</div>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>易錯：</strong> Sensitivity 95% 不等於「測陽性的 95% 是真的」。Bayes 計算下，疾病罕見（prevalence 1%）+ 高敏感度測試，可能 PPV 只有 16%。設計 AI 診斷時 prevalence 不能忽略。</span>
+<span data-lang="en"><strong>Common mistake:</strong> Sensitivity 95% does NOT mean "95% of positives are true." If prevalence is 1%, even a 95% sensitive + 95% specific test gives PPV ≈ 16%. AI diagnostic design must account for prevalence.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="ML 基礎" data-en="ML BASICS">機器學習基礎</div>
+<h2 data-zh="七、機器學習：BME 的新標配" data-en="VII. Machine Learning: New Standard for BME">七、機器學習基礎</h2>
+<div data-lang="zh"><p>截至 2025 年底 FDA 已批准 1,451 件 AI/ML 醫療器材，其中 76% 為放射影像。BME 工程師至少要掌握：</p></div>
+<div data-lang="en"><p>By end-2025, FDA has authorized 1,451 AI/ML medical devices (76% radiology imaging). Every BME engineer should know:</p></div>
+<table class="comp-table"><thead><tr><th data-zh="方法" data-en="Method">方法</th><th data-zh="BME 用途" data-en="BME use">BME 用途</th><th data-zh="關鍵字" data-en="Key idea">關鍵字</th></tr></thead><tbody>
+<tr><td><strong>Logistic Regression</strong></td><td data-zh="風險評分（CHADS₂、APACHE）" data-en="Risk scores (CHADS₂, APACHE)">風險評分</td><td>sigmoid(βᵀx)</td></tr>
+<tr><td><strong>Random Forest / XGBoost</strong></td><td data-zh="表格資料（EHR）" data-en="Tabular data (EHR)">EHR 表格</td><td data-zh="決策樹集成" data-en="Tree ensembles">決策樹集成</td></tr>
+<tr><td><strong>CNN (U-Net / nnU-Net)</strong></td><td data-zh="醫學影像分割" data-en="Imaging segmentation">影像分割</td><td>encoder + skip</td></tr>
+<tr><td><strong>Transformer (ViT / SAM 2)</strong></td><td data-zh="病理、視訊、prompt 分割" data-en="Pathology, video, prompt seg">病理、視訊</td><td>self-attention</td></tr>
+<tr><td><strong>LSTM / Mamba</strong></td><td data-zh="ECG/EEG 時序、ICU 預測" data-en="ECG/EEG, ICU prediction">時序預測</td><td>recurrent / SSM</td></tr>
+<tr><td><strong>Foundation Models</strong></td><td data-zh="MedGemma、CARE1、Virchow" data-en="MedGemma, CARE1, Virchow">基礎模型</td><td data-zh="預訓練 + 微調" data-en="Pretrain + finetune">預訓練 + 微調</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="八、計算 ECG 的頻譜（FFT）與 ROC" data-en="VIII. Compute ECG Spectrum (FFT) and ROC">八、計算 ECG 頻譜與 ROC</h2>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.fft <span class="kw">import</span> rfft, rfftfreq
+<span class="kw">from</span> sklearn.metrics <span class="kw">import</span> roc_curve, roc_auc_score
+
+fs=<span class="num">250</span>; t=np.<span class="func">arange</span>(<span class="num">0</span>,<span class="num">10</span>,<span class="num">1</span>/fs)
+<span class="comment"># Fake ECG: 1.2 Hz heart, 50 Hz powerline, baseline 0.3 Hz wander</span>
+ecg = np.<span class="func">sin</span>(<span class="num">2</span>*np.pi*<span class="num">1.2</span>*t) + <span class="num">0.4</span>*np.<span class="func">sin</span>(<span class="num">2</span>*np.pi*<span class="num">50</span>*t) + <span class="num">0.3</span>*np.<span class="func">sin</span>(<span class="num">2</span>*np.pi*<span class="num">0.3</span>*t)
+
+freqs = rfftfreq(len(ecg), <span class="num">1</span>/fs)
+mag   = np.<span class="func">abs</span>(rfft(ecg))
+<span class="func">print</span>(<span class="str">"Dominant peaks (Hz):"</span>, freqs[np.<span class="func">argsort</span>(mag)[-<span class="num">3</span>:]])
+
+<span class="comment"># ROC for a clinical classifier</span>
+y_true = np.<span class="func">array</span>([<span class="num">0</span>,<span class="num">0</span>,<span class="num">1</span>,<span class="num">1</span>,<span class="num">1</span>,<span class="num">0</span>,<span class="num">1</span>,<span class="num">0</span>])
+y_score= np.<span class="func">array</span>([<span class="num">0.1</span>,<span class="num">0.3</span>,<span class="num">0.7</span>,<span class="num">0.8</span>,<span class="num">0.6</span>,<span class="num">0.2</span>,<span class="num">0.9</span>,<span class="num">0.4</span>])
+fpr,tpr,_ = roc_curve(y_true, y_score)
+<span class="func">print</span>(<span class="str">"AUC ="</span>, <span class="func">round</span>(roc_auc_score(y_true,y_score),<span class="num">3</span>))</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre>fs=<span class="num">250</span>; t=<span class="num">0</span>:<span class="num">1</span>/fs:<span class="num">10</span>-<span class="num">1</span>/fs;
+ecg = <span class="func">sin</span>(<span class="num">2</span>*pi*<span class="num">1.2</span>*t) + <span class="num">0.4</span>*<span class="func">sin</span>(<span class="num">2</span>*pi*<span class="num">50</span>*t) + <span class="num">0.3</span>*<span class="func">sin</span>(<span class="num">2</span>*pi*<span class="num">0.3</span>*t);
+N=length(ecg);
+Y=<span class="func">fft</span>(ecg); mag=<span class="func">abs</span>(Y(<span class="num">1</span>:floor(N/<span class="num">2</span>)+<span class="num">1</span>));
+f=(<span class="num">0</span>:floor(N/<span class="num">2</span>))*fs/N;
+<span class="func">plot</span>(f,mag); <span class="func">xlabel</span>(<span class="str">'Hz'</span>); <span class="func">ylabel</span>(<span class="str">'|X(f)|'</span>);
+
+<span class="comment">% ROC (requires Statistics &amp; ML Toolbox)</span>
+y_true=[<span class="num">0</span> <span class="num">0</span> <span class="num">1</span> <span class="num">1</span> <span class="num">1</span> <span class="num">0</span> <span class="num">1</span> <span class="num">0</span>];
+y_sc  =[<span class="num">0.1</span> <span class="num">0.3</span> <span class="num">0.7</span> <span class="num">0.8</span> <span class="num">0.6</span> <span class="num">0.2</span> <span class="num">0.9</span> <span class="num">0.4</span>];
+[X,Y,T,AUC]=<span class="func">perfcurve</span>(y_true,y_sc,<span class="num">1</span>);
+fprintf(<span class="str">'AUC = %.3f\n'</span>, AUC);</pre></div>
+</div>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q1. EEG 中 α 波（alpha）的典型頻率範圍是？</span><span data-lang="en">Q1. The typical EEG alpha band is:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0">A. 0.5–4 Hz</div><div class="quiz-opt" data-opt="1">B. 8–13 Hz</div><div class="quiz-opt" data-opt="2">C. 13–30 Hz</div><div class="quiz-opt" data-opt="3">D. 30–80 Hz</div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q2. 一個診斷檢驗的敏感度 95%、特異度 95%，在 prevalence = 1% 的族群中陽性預測值 PPV 約為？</span><span data-lang="en">Q2. A test with Sn = Sp = 95%, applied to a 1% prevalence population, gives PPV ≈ ?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0">A. ~ 95%</div><div class="quiz-opt" data-opt="1">B. ~ 50%</div><div class="quiz-opt" data-opt="2">C. ~ 16%</div><div class="quiz-opt" data-opt="3">D. ~ 1%</div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q3. MRI 影像重建時，k-space 與影像之間的數學關係是？</span><span data-lang="en">Q3. The relationship between MRI k-space and image is:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. Radon 變換</span><span data-lang="en">A. Radon transform</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. Laplace 變換</span><span data-lang="en">B. Laplace transform</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 2D 傅立葉變換</span><span data-lang="en">C. 2D Fourier transform</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. Hilbert 變換</span><span data-lang="en">D. Hilbert transform</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="human-physiology.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="A2 · 人體生理基礎" data-en="A2 · Human Physiology">A2 · 人體生理基礎</span></a>
+<a href="biomaterials.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="A4 · 生醫材料" data-en="A4 · Biomaterials">A4 · 生醫材料</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · A3 Engineering Math</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// FFT demo
+const sF1=document.getElementById('sF1'),sF2=document.getElementById('sF2'),sN=document.getElementById('sN');
+const vF1=document.getElementById('vF1'),vF2=document.getElementById('vF2'),vN=document.getElementById('vN');
+let tChart=null,fChart=null;
+function fft(x){
+  const N=x.length; const re=new Float64Array(N),im=new Float64Array(N);
+  for(let k=0;k<N;k++){let r=0,i=0;for(let n=0;n<N;n++){const a=-2*Math.PI*k*n/N;r+=x[n]*Math.cos(a);i+=x[n]*Math.sin(a);}re[k]=r;im[k]=i;}
+  const mag=new Float64Array(N/2);for(let k=0;k<N/2;k++)mag[k]=Math.sqrt(re[k]*re[k]+im[k]*im[k]);
+  return mag;
+}
+function update(){
+  const f1=parseFloat(sF1.value),f2=parseFloat(sF2.value),n=parseFloat(sN.value);
+  vF1.textContent=f1; vF2.textContent=f2; vN.textContent=n.toFixed(1);
+  const fs=128,N=128,t=Array.from({length:N},(_,i)=>i/fs);
+  const sig=t.map(ti=>Math.sin(2*Math.PI*f1*ti)+Math.sin(2*Math.PI*f2*ti)+n*(Math.random()-0.5)*2);
+  const mag=fft(sig);
+  const freq=Array.from({length:N/2},(_,k)=>(k*fs/N).toFixed(1));
+  if(tChart)tChart.destroy(); if(fChart)fChart.destroy();
+  tChart=new Chart(document.getElementById('timeChart').getContext('2d'),{type:'line',data:{labels:t.map(x=>x.toFixed(2)),datasets:[{label:I18n.get()==='zh'?'時域訊號':'Time domain',data:sig,borderColor:'#831843',pointRadius:0,tension:0.1,borderWidth:1.5}]},options:{plugins:{legend:{display:true}},scales:{x:{title:{display:true,text:'t (s)'}}}}});
+  fChart=new Chart(document.getElementById('fftChart').getContext('2d'),{type:'bar',data:{labels:freq,datasets:[{label:I18n.get()==='zh'?'頻譜 |X(f)|':'Spectrum |X(f)|',data:Array.from(mag),backgroundColor:'rgba(219,39,119,.7)'}]},options:{plugins:{legend:{display:true}},scales:{x:{title:{display:true,text:'Hz'}}}}});
+}
+[sF1,sF2,sN].forEach(s=>s.addEventListener('input',update));
+document.addEventListener('langchange',update);
+update();
+</script>
+</body></html>

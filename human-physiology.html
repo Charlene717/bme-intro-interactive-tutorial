@@ -1,0 +1,283 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>A2: 人體生理基礎 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html" class="active">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER A2 · BLOCK A FOUNDATIONS</div>
+<h1 data-zh="人體生理基礎（工程觀點）" data-en="Human Physiology Foundations (Engineering View)">人體生理基礎（工程觀點）</h1>
+<p class="subtitle" data-lang="zh">把人體看作多尺度、多迴路、多時域的系統——本章帶你建立 BME 工程師必備的生理地圖。</p>
+<p class="subtitle" data-lang="en">View the body as a multi-scale, multi-loop, multi-timescale system — this chapter builds the physiology map every BME engineer needs.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="尺度層級" data-en="HIERARCHY">尺度層級</div>
+<h2 data-zh="一、從分子到系統的多尺度觀" data-en="I. From Molecules to Systems: A Multi-scale View">一、從分子到系統的多尺度觀</h2>
+<div data-lang="zh">
+<p>BME 工程師在設計裝置時，必須意識到所有臨床問題都跨越多個尺度。一個心律調節器同時面對：(1) 心肌細胞層級的離子通道（μm, ms），(2) 心臟整體電活動（cm, 100 ms），(3) 全身循環迴路（m, s–min），(4) 終生壽命管理（年）。</p>
+</div>
+<div data-lang="en">
+<p>Every clinical problem spans multiple scales. A pacemaker simultaneously handles: (1) ion channels in cardiomyocytes (μm, ms), (2) whole-heart electrical activity (cm, 100 ms), (3) systemic circulation (m, s–min), and (4) lifetime device management (years).</p>
+</div>
+<table class="comp-table"><thead><tr><th data-zh="尺度" data-en="Scale">尺度</th><th data-zh="特徵長度" data-en="Length">特徵長度</th><th data-zh="特徵時間" data-en="Time">特徵時間</th><th data-zh="工程關注" data-en="Engineering Focus">工程關注</th></tr></thead><tbody>
+<tr><td data-zh="分子" data-en="Molecular">分子</td><td>0.1–10 nm</td><td>ps–μs</td><td data-zh="蛋白質摺疊、藥物-受體結合、酶動力學" data-en="Protein folding, drug-receptor binding, enzyme kinetics">酶動力學、受體結合</td></tr>
+<tr><td data-zh="細胞" data-en="Cellular">細胞</td><td>1–100 μm</td><td>ms–min</td><td data-zh="離子通道、動作電位、訊號傳遞、細胞培養" data-en="Ion channels, action potentials, signaling, cell culture">動作電位、培養</td></tr>
+<tr><td data-zh="組織" data-en="Tissue">組織</td><td>0.1–10 mm</td><td>s–hr</td><td data-zh="組織機械、組織工程支架、藥物擴散" data-en="Tissue mechanics, scaffolds, drug diffusion">支架、擴散</td></tr>
+<tr><td data-zh="器官" data-en="Organ">器官</td><td>1–30 cm</td><td>s–day</td><td data-zh="器官級生理控制、影像、植入物" data-en="Organ-level control, imaging, implants">影像、植入物</td></tr>
+<tr><td data-zh="系統" data-en="System">系統</td><td>0.5–2 m</td><td>min–years</td><td data-zh="循環、呼吸、神經系統、慢性病管理" data-en="Circulation, respiration, nervous system, chronic care">慢性病、復健</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="心血管系統" data-en="CARDIOVASCULAR">心血管系統</div>
+<h2 data-zh="二、心血管系統：BME 的核心舞台" data-en="II. The Cardiovascular System: BME's Main Stage">二、心血管系統：BME 的核心舞台</h2>
+<div class="card-grid cols-2">
+<div class="card"><h4>🫀 <span data-zh="心臟泵浦" data-en="The Heart as a Pump">心臟泵浦</span></h4>
+<div data-lang="zh"><p>四腔室結構（左/右心房、左/右心室），主要循環迴路為：右心 → 肺 → 左心 → 體循環 → 右心。心搏輸出量 (CO) ≈ HR × SV ≈ 75 × 70 mL ≈ 5 L/min；運動可達 25 L/min。</p></div>
+<div data-lang="en"><p>Four chambers (L/R atrium, L/R ventricle). Circuit: right heart → lungs → left heart → systemic → right heart. Cardiac output (CO) ≈ HR × SV ≈ 75 × 70 mL ≈ 5 L/min at rest; up to 25 L/min during exercise.</p></div></div>
+
+<div class="card"><h4>⚡ <span data-zh="電傳導系統" data-en="Conduction System">電傳導系統</span></h4>
+<div data-lang="zh"><p>SA node（竇房結，60-100 bpm pacemaker）→ AV node（房室結，延遲 ~120 ms）→ His bundle → Purkinje 纖維 → 心室。<strong>動作電位</strong>來自 Na⁺/Ca²⁺/K⁺ 離子通道協調開閉。</p></div>
+<div data-lang="en"><p>SA node (60–100 bpm pacemaker) → AV node (~120 ms delay) → His bundle → Purkinje fibers → ventricles. <strong>Action potential</strong> emerges from coordinated Na⁺/Ca²⁺/K⁺ ion channels.</p></div></div>
+
+<div class="card"><h4>💉 <span data-zh="血液流變學" data-en="Hemorheology">血液流變學</span></h4>
+<div data-lang="zh"><p>血液為非牛頓流體（粘度 ≈ 3-4 cP，水 ≈ 1 cP）。Reynolds 數在主動脈約 4000，多數血管為層流。動脈壓 ~120/80 mmHg、靜脈 ~10 mmHg、肺動脈 ~25/10 mmHg。</p></div>
+<div data-lang="en"><p>Blood is non-Newtonian (μ ≈ 3-4 cP, water ≈ 1 cP). Reynolds in aorta ≈ 4000; most vessels laminar. Pressures: arterial ~120/80, venous ~10, pulmonary ~25/10 mmHg.</p></div></div>
+
+<div class="card"><h4>📊 <span data-zh="氧氣輸送" data-en="Oxygen Transport">氧氣輸送</span></h4>
+<div data-lang="zh"><p>每 100 mL 動脈血約攜帶 20 mL O₂（97% 結合於血紅素、3% 溶解）。Hb 飽和曲線是 sigmoid（合作性），P50 ≈ 26 mmHg；可被 pH、CO₂、2,3-BPG 右/左移（Bohr 效應）。</p></div>
+<div data-lang="en"><p>Each 100 mL arterial blood carries ~20 mL O₂ (97% bound to Hb, 3% dissolved). Hb-O₂ saturation is sigmoidal (cooperativity), P50 ≈ 26 mmHg; shifted by pH, CO₂, 2,3-BPG (Bohr effect).</p></div></div>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>BME 應用：</strong>幾乎所有心血管裝置（人工瓣膜、支架、左心室輔助器 LVAD、ECMO、心律調節器、ICD、Holter）都要求工程師熟悉這些參數。</span>
+<span data-lang="en"><strong>BME relevance:</strong> Almost every cardiovascular device (prosthetic valves, stents, LVAD, ECMO, pacemakers, ICDs, Holters) requires the engineer to understand these parameters.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動模擬" data-en="INTERACTIVE">互動模擬</div>
+<h2 data-zh="三、Hb-O₂ 飽和曲線模擬器" data-en="III. Hb-O₂ Saturation Curve Simulator">三、Hb-O₂ 飽和曲線模擬器</h2>
+<div data-lang="zh"><p>調整 pH、PCO₂、溫度，觀察氧解離曲線左/右移。臨床意義：發燒、運動、酸中毒 → 右移（組織放氧更易）；鹼中毒、低溫 → 左移（Hb 抱緊氧）。</p></div>
+<div data-lang="en"><p>Adjust pH, PCO₂, temperature and watch the curve shift. Clinical meaning: fever, exercise, acidosis → rightward shift (easier O₂ release to tissues); alkalosis, hypothermia → leftward shift (Hb holds O₂).</p></div>
+<div class="interactive-panel">
+<div class="slider-group"><label><span data-zh="pH" data-en="pH">pH</span> <span id="valPh">7.40</span></label><input type="range" id="sliderPh" min="7.10" max="7.70" value="7.40" step="0.01"></div>
+<div class="slider-group"><label><span data-zh="溫度 (°C)" data-en="Temperature (°C)">溫度</span> <span id="valT">37</span></label><input type="range" id="sliderT" min="32" max="42" value="37" step="0.5"></div>
+<div class="slider-group"><label><span data-zh="2,3-BPG (mmol/L)" data-en="2,3-BPG (mmol/L)">2,3-BPG</span> <span id="valBpg">5.0</span></label><input type="range" id="sliderBpg" min="2" max="10" value="5" step="0.1"></div>
+<div class="chart-container"><canvas id="hbChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;"><span data-zh="P50（飽和度=50%對應的 PO₂）" data-en="P50 (PO₂ at 50% saturation)">P50</span>: <strong id="p50Val">26 mmHg</strong></p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="神經系統" data-en="NERVOUS SYSTEM">神經系統</div>
+<h2 data-zh="四、神經系統：訊號的高速公路" data-en="IV. Nervous System: The Signaling Highway">四、神經系統：訊號的高速公路</h2>
+<div data-lang="zh">
+<p>中樞神經（CNS = 腦 + 脊髓）+ 周邊神經（PNS）= 約 86 億神經元，連接 ≈ 100 兆突觸。神經元以<strong>動作電位（AP）</strong>傳遞訊號：靜息電位 –70 mV，閾值 –55 mV，去極化至 +30 mV，再復極化。傳導速度依有/無髓鞘、軸突直徑差別極大（0.5–120 m/s）。</p>
+<p>工程上，神經訊號可從體表（EEG）、皮層（ECoG）、腦內（深部電極、Utah array）擷取。每一種介面都涉及訊號雜訊比、空間解析度、慢性穩定性與生物相容性的權衡。</p>
+</div>
+<div data-lang="en">
+<p>CNS (brain + cord) + PNS = ~86 billion neurons, ~100 trillion synapses. Neurons transmit signals via <strong>action potentials</strong>: resting –70 mV, threshold –55 mV, depolarize to +30 mV, then repolarize. Conduction speed varies widely (0.5–120 m/s) by myelination and axon diameter.</p>
+<p>Engineers acquire neural signals from the scalp (EEG), cortex (ECoG), or deep tissue (depth electrodes, Utah arrays). Each interface trades SNR, spatial resolution, chronic stability, and biocompatibility.</p>
+</div>
+<table class="comp-table"><thead><tr><th data-zh="記錄方式" data-en="Modality">方式</th><th data-zh="位置" data-en="Location">位置</th><th data-zh="空間解析度" data-en="Spatial Res">空間</th><th data-zh="頻寬" data-en="Bandwidth">頻寬</th><th data-zh="侵入性" data-en="Invasiveness">侵入</th></tr></thead><tbody>
+<tr><td><strong>EEG</strong></td><td data-zh="頭皮表面" data-en="Scalp">頭皮</td><td>~ 5 cm</td><td>0.5–80 Hz</td><td data-zh="無" data-en="None">無</td></tr>
+<tr><td><strong>fNIRS</strong></td><td data-zh="頭皮（光學）" data-en="Scalp (optical)">頭皮</td><td>~ 1 cm</td><td>~ 1 Hz</td><td data-zh="無" data-en="None">無</td></tr>
+<tr><td><strong>ECoG / sEEG</strong></td><td data-zh="皮層表面 / 深部" data-en="Cortex / depth">皮層</td><td>2–10 mm / 1 mm</td><td>0.5–500 Hz</td><td data-zh="開顱" data-en="Craniotomy">開顱</td></tr>
+<tr><td><strong>Utah array (MEA)</strong></td><td data-zh="皮層浸入" data-en="Penetrating">皮層浸入</td><td>~ 400 μm</td><td>spike + LFP</td><td data-zh="侵入" data-en="Invasive">侵入</td></tr>
+<tr><td><strong>Neuralink N1</strong></td><td data-zh="皮層浸入（柔性絲）" data-en="Flexible threads">柔性絲</td><td>~ 50 μm</td><td>spike + LFP</td><td data-zh="侵入" data-en="Invasive">侵入</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="呼吸與代謝" data-en="RESPIRATION &amp; METABOLISM">呼吸與代謝</div>
+<h2 data-zh="五、呼吸系統與內分泌、腎臟、消化系統速覽" data-en="V. Respiratory, Endocrine, Renal &amp; Digestive — Quick Tour">五、呼吸、內分泌、腎臟與消化</h2>
+<div class="card-grid cols-2">
+<div class="card"><h4>🫁 <span data-zh="呼吸系統" data-en="Respiratory">呼吸系統</span></h4>
+<div data-lang="zh"><p>潮氣容積 ~ 500 mL；肺活量 ~ 4.5 L；TLC ~ 6 L；FEV₁/FVC < 70% 提示阻塞性病（COPD/氣喘）。氣體交換靠肺泡-毛細管擴散，呼吸頻率 12–20 /min（成人）。BME 應用：呼吸器、CPAP/BiPAP、SpO₂ 監測。</p></div>
+<div data-lang="en"><p>Tidal vol ~500 mL; VC ~4.5 L; TLC ~6 L; FEV₁/FVC &lt; 70% suggests obstructive disease (COPD/asthma). Gas exchange by alveolar-capillary diffusion; RR 12–20/min in adults. BME: ventilators, CPAP/BiPAP, SpO₂ monitoring.</p></div></div>
+
+<div class="card"><h4>🧪 <span data-zh="內分泌與糖代謝" data-en="Endocrine &amp; Glucose">內分泌與糖代謝</span></h4>
+<div data-lang="zh"><p>胰臟 β 細胞分泌胰島素、α 細胞分泌升糖素。空腹血糖正常 70–100 mg/dL，糖尿病 ≥ 126 mg/dL。BME 應用：血糖計、CGM（Dexcom Stelo、Abbott Lingo OTC 2024）、人工胰臟 closed-loop pump（如 Tandem Control-IQ）。</p></div>
+<div data-lang="en"><p>Pancreatic β cells secrete insulin, α cells secrete glucagon. Fasting glucose 70–100 mg/dL; diabetes ≥126. BME: glucometers, CGM (Dexcom Stelo, Abbott Lingo OTC 2024), closed-loop artificial pancreas (e.g., Tandem Control-IQ).</p></div></div>
+
+<div class="card"><h4>🧬 <span data-zh="腎臟與電解質" data-en="Kidney &amp; Electrolytes">腎臟與電解質</span></h4>
+<div data-lang="zh"><p>每分鐘約 1.2 L 血通過腎臟（CO 約 20%）。腎絲球過濾率 GFR ~ 90-120 mL/min/1.73 m²。腎衰竭時靠透析（血液 HD / 腹膜 PD）。BME 應用：透析機、人工腎臟（wearable artificial kidney 研究中）。</p></div>
+<div data-lang="en"><p>~1.2 L/min blood flow (20% of CO). GFR ~90-120 mL/min/1.73 m². Renal failure → dialysis (HD/PD). BME: dialysis machines, wearable artificial kidneys (in research).</p></div></div>
+
+<div class="card"><h4>🍽️ <span data-zh="消化系統" data-en="Digestive">消化系統</span></h4>
+<div data-lang="zh"><p>食道-胃-小腸-大腸，吸收靠絨毛微絨毛（總面積 ~ 250 m²）。胃 pH 1.5–2、小腸 pH 6–7。BME 應用：膠囊內視鏡（PillCam）、可吞嚥感測器、胰島素口服奈米遞送。</p></div>
+<div data-lang="en"><p>Esophagus-stomach-small intestine-colon; absorption via villi/microvilli (~250 m² surface). Gastric pH 1.5–2, intestinal pH 6–7. BME: capsule endoscopy (PillCam), ingestible sensors, oral insulin nanodelivery.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="骨骼肌肉" data-en="MSK">骨骼肌肉</div>
+<h2 data-zh="六、骨骼肌肉系統與運動控制" data-en="VI. Musculoskeletal System &amp; Motor Control">六、骨骼肌肉系統</h2>
+<div data-lang="zh">
+<p>206 塊骨頭 + 600 多條肌肉。骨頭兼具強度（壓縮 ~170 MPa）與韌性，由膠原蛋白 + 羥磷灰石組成。肌肉纖維可分慢肌（type I，耐力）與快肌（type IIa/IIb，爆發）。<strong>運動單位（motor unit）</strong>= 1 個運動神經元 + 它支配的所有肌纖維，這是力量分級的基本單位。</p>
+<p>步態週期分為 stance phase（站立期，60%）與 swing phase（擺盪期，40%）。BME 應用：人工關節（髖、膝）、義肢（如 Össur 智能膝、Otto Bock Genium、Open Bionics Hero Arm）、外骨骼（ReWalk、Ekso）。</p>
+</div>
+<div data-lang="en">
+<p>206 bones + 600+ muscles. Bone combines strength (~170 MPa compressive) and toughness via collagen + hydroxyapatite. Muscles split into slow (type I, endurance) and fast (type IIa/IIb, power). A <strong>motor unit</strong> = 1 motoneuron + all fibers it innervates — the basic unit of force grading.</p>
+<p>Gait cycle: stance phase (60%) + swing phase (40%). BME applications: joint replacements (hip, knee), prosthetics (Össur, Otto Bock Genium, Open Bionics Hero Arm), exoskeletons (ReWalk, Ekso).</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="控制理論" data-en="CONTROL THEORY">控制理論</div>
+<h2 data-zh="七、把生理當作控制系統" data-en="VII. Physiology as a Control System">七、把生理當作控制系統</h2>
+<div data-lang="zh">
+<p>人體幾乎所有平衡（恆定）都靠<strong>負回饋（negative feedback）</strong>維持：體溫、血糖、血壓、pH、滲透壓、激素濃度…等。控制理論的圖式可直接套用：</p>
+</div>
+<div data-lang="en">
+<p>Almost every homeostatic variable is maintained by <strong>negative feedback</strong>: temperature, glucose, BP, pH, osmolality, hormones, etc. The control-theory block diagram applies directly:</p>
+</div>
+<div class="formula">
+<em data-zh="設定點 (Setpoint)" data-en="Setpoint">Setpoint</em> → <strong>±</strong> → <em data-zh="控制器（下視丘/腦幹）" data-en="Controller (hypothalamus/brainstem)">Controller</em> → <em data-zh="致動器（激素/神經）" data-en="Actuator (hormone/neural)">Actuator</em> → <em data-zh="受控系統（人體）" data-en="Plant (the body)">Plant</em> → <strong>y(t)</strong> → <em data-zh="感測器（化學/壓力/溫度）" data-en="Sensor">Sensor</em> →
+</div>
+<div data-lang="zh"><p><strong>例：血糖閉迴路控制。</strong>感測（CGM）→ 控制器（PID/MPC 演算法）→ 致動器（胰島素幫浦）→ 受控系統（病人）→ CGM 再量。這就是<em>artificial pancreas</em>（如 Tandem Control-IQ、Medtronic 780G、iLet Bionic Pancreas）的工程核心。</p></div>
+<div data-lang="en"><p><strong>Example: Closed-loop glucose control.</strong> Sense (CGM) → Controller (PID/MPC) → Actuate (insulin pump) → Plant (patient) → Sense again. This is the engineering heart of the <em>artificial pancreas</em> (Tandem Control-IQ, Medtronic 780G, iLet Bionic Pancreas).</p></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="八、Hodgkin-Huxley 神經元動作電位" data-en="VIII. Hodgkin-Huxley Action Potential">八、Hodgkin-Huxley 神經元動作電位</h2>
+<div data-lang="zh"><p>HH 模型是現代電生理的基石（1952 諾貝爾獎工作），用 Na⁺/K⁺ 離子通道 ODE 模擬神經元動作電位。完整版見 1.20 萬條公式，這裡示範最小可跑版本：</p></div>
+<div data-lang="en"><p>The HH model is the foundation of electrophysiology (Nobel-winning work, 1952). It uses Na⁺/K⁺ channel ODEs to simulate AP. A minimal runnable version:</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.integrate <span class="kw">import</span> odeint
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="comment"># HH parameters (squid axon, original 1952 values)</span>
+gNa,gK,gL=<span class="num">120</span>,<span class="num">36</span>,<span class="num">0.3</span>; ENa,EK,EL=<span class="num">50</span>,-<span class="num">77</span>,-<span class="num">54.4</span>; C=<span class="num">1.0</span>
+
+<span class="kw">def</span> <span class="func">alpha_n</span>(V): <span class="kw">return</span> <span class="num">0.01</span>*(V+<span class="num">55</span>)/(<span class="num">1</span>-np.<span class="func">exp</span>(-(V+<span class="num">55</span>)/<span class="num">10</span>))
+<span class="kw">def</span> <span class="func">beta_n</span>(V):  <span class="kw">return</span> <span class="num">0.125</span>*np.<span class="func">exp</span>(-(V+<span class="num">65</span>)/<span class="num">80</span>)
+<span class="kw">def</span> <span class="func">alpha_m</span>(V): <span class="kw">return</span> <span class="num">0.1</span>*(V+<span class="num">40</span>)/(<span class="num">1</span>-np.<span class="func">exp</span>(-(V+<span class="num">40</span>)/<span class="num">10</span>))
+<span class="kw">def</span> <span class="func">beta_m</span>(V):  <span class="kw">return</span> <span class="num">4</span>*np.<span class="func">exp</span>(-(V+<span class="num">65</span>)/<span class="num">18</span>)
+<span class="kw">def</span> <span class="func">alpha_h</span>(V): <span class="kw">return</span> <span class="num">0.07</span>*np.<span class="func">exp</span>(-(V+<span class="num">65</span>)/<span class="num">20</span>)
+<span class="kw">def</span> <span class="func">beta_h</span>(V):  <span class="kw">return</span> <span class="num">1</span>/(<span class="num">1</span>+np.<span class="func">exp</span>(-(V+<span class="num">35</span>)/<span class="num">10</span>))
+
+<span class="kw">def</span> <span class="func">hh</span>(y,t,I):
+    V,n,m,h=y
+    dV=(I - gNa*m**<span class="num">3</span>*h*(V-ENa) - gK*n**<span class="num">4</span>*(V-EK) - gL*(V-EL))/C
+    dn=alpha_n(V)*(<span class="num">1</span>-n)-beta_n(V)*n
+    dm=alpha_m(V)*(<span class="num">1</span>-m)-beta_m(V)*m
+    dh=alpha_h(V)*(<span class="num">1</span>-h)-beta_h(V)*h
+    <span class="kw">return</span> [dV,dn,dm,dh]
+
+t=np.<span class="func">linspace</span>(<span class="num">0</span>,<span class="num">50</span>,<span class="num">5000</span>)
+sol=odeint(hh,[-<span class="num">65</span>,<span class="num">0.32</span>,<span class="num">0.05</span>,<span class="num">0.6</span>],t,args=(<span class="num">10</span>,))  <span class="comment"># inject 10 μA/cm²</span>
+plt.<span class="func">plot</span>(t,sol[:,<span class="num">0</span>]); plt.<span class="func">xlabel</span>(<span class="str">"ms"</span>); plt.<span class="func">ylabel</span>(<span class="str">"V (mV)"</span>); plt.<span class="func">show</span>()</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% MATLAB HH model — same equations</span>
+gNa=<span class="num">120</span>; gK=<span class="num">36</span>; gL=<span class="num">0.3</span>; ENa=<span class="num">50</span>; EK=-<span class="num">77</span>; EL=-<span class="num">54.4</span>; C=<span class="num">1</span>; I=<span class="num">10</span>;
+an=@(V) <span class="num">0.01</span>*(V+<span class="num">55</span>)./(<span class="num">1</span>-<span class="func">exp</span>(-(V+<span class="num">55</span>)/<span class="num">10</span>));
+bn=@(V) <span class="num">0.125</span>*<span class="func">exp</span>(-(V+<span class="num">65</span>)/<span class="num">80</span>);
+am=@(V) <span class="num">0.1</span>*(V+<span class="num">40</span>)./(<span class="num">1</span>-<span class="func">exp</span>(-(V+<span class="num">40</span>)/<span class="num">10</span>));
+bm=@(V) <span class="num">4</span>*<span class="func">exp</span>(-(V+<span class="num">65</span>)/<span class="num">18</span>);
+ah=@(V) <span class="num">0.07</span>*<span class="func">exp</span>(-(V+<span class="num">65</span>)/<span class="num">20</span>);
+bh=@(V) <span class="num">1</span>./(<span class="num">1</span>+<span class="func">exp</span>(-(V+<span class="num">35</span>)/<span class="num">10</span>));
+ode=@(t,y)[(I-gNa*y(<span class="num">3</span>).^<span class="num">3</span>*y(<span class="num">4</span>)*(y(<span class="num">1</span>)-ENa)-gK*y(<span class="num">2</span>)^<span class="num">4</span>*(y(<span class="num">1</span>)-EK)-gL*(y(<span class="num">1</span>)-EL))/C;
+            an(y(<span class="num">1</span>))*(<span class="num">1</span>-y(<span class="num">2</span>))-bn(y(<span class="num">1</span>))*y(<span class="num">2</span>);
+            am(y(<span class="num">1</span>))*(<span class="num">1</span>-y(<span class="num">3</span>))-bm(y(<span class="num">1</span>))*y(<span class="num">3</span>);
+            ah(y(<span class="num">1</span>))*(<span class="num">1</span>-y(<span class="num">4</span>))-bh(y(<span class="num">1</span>))*y(<span class="num">4</span>)];
+[t,y]=<span class="func">ode45</span>(ode,[<span class="num">0</span> <span class="num">50</span>],[-<span class="num">65</span>;<span class="num">0.32</span>;<span class="num">0.05</span>;<span class="num">0.6</span>]);
+<span class="func">plot</span>(t,y(:,<span class="num">1</span>)); <span class="func">xlabel</span>(<span class="str">'ms'</span>); <span class="func">ylabel</span>(<span class="str">'V (mV)'</span>);</pre></div>
+</div>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check (3 questions)">📝 本章自測</h3>
+<div class="quiz-q" data-correct="1">
+<p><span data-lang="zh">Q1. 一位 70 公斤成年人，心跳每分鐘 75、stroke volume 70 mL，靜息心搏輸出量約為？</span><span data-lang="en">Q1. A 70 kg adult, HR 75, SV 70 mL — resting cardiac output is approximately:</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0">A. ~ 1 L/min</div>
+<div class="quiz-opt" data-opt="1">B. ~ 5 L/min</div>
+<div class="quiz-opt" data-opt="2">C. ~ 15 L/min</div>
+<div class="quiz-opt" data-opt="3">D. ~ 30 L/min</div>
+</div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="2">
+<p><span data-lang="zh">Q2. 下列哪一項<strong>不是</strong>負回饋恆定的例子？</span><span data-lang="en">Q2. Which is <strong>NOT</strong> an example of negative-feedback homeostasis?</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 體溫調控（下視丘）</span><span data-lang="en">A. Body temperature (hypothalamus)</span></div>
+<div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 血糖調控（胰島素 / 升糖素）</span><span data-lang="en">B. Blood glucose (insulin/glucagon)</span></div>
+<div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 動作電位的爆發式去極化（Na⁺ 內流）</span><span data-lang="en">C. The explosive depolarization of an action potential (Na⁺ influx)</span></div>
+<div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 血壓壓力感受反射（baroreflex）</span><span data-lang="en">D. Baroreflex</span></div>
+</div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="3">
+<p><span data-lang="zh">Q3. 下列關於神經訊號介面，何者<strong>侵入性最高、空間解析度最佳</strong>？</span><span data-lang="en">Q3. Which neural interface is <strong>most invasive but with the best spatial resolution</strong>?</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0">A. EEG</div>
+<div class="quiz-opt" data-opt="1">B. fNIRS</div>
+<div class="quiz-opt" data-opt="2">C. ECoG</div>
+<div class="quiz-opt" data-opt="3">D. <span data-lang="zh">Utah array / Neuralink 柔性絲</span><span data-lang="en">D. Utah array / Neuralink flexible threads</span></div>
+</div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="intro-bme.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="A1 · 生醫工程簡介" data-en="A1 · What is BME?">A1 · 生醫工程簡介</span></a>
+<a href="engineering-math.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="A3 · 生醫工程數學" data-en="A3 · Engineering Math">A3 · 生醫工程數學</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · A2 Human Physiology</footer>
+<script src="i18n.js"></script>
+<script>
+// quiz
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。正解已標示。':'✗ Incorrect.';}}))});
+// code tabs
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+// Hb-O2 simulator
+const sliderPh=document.getElementById('sliderPh'),sliderT=document.getElementById('sliderT'),sliderBpg=document.getElementById('sliderBpg');
+const valPh=document.getElementById('valPh'),valT=document.getElementById('valT'),valBpg=document.getElementById('valBpg'),p50Val=document.getElementById('p50Val');
+let hbChart=null;
+function curveAt(ph,T,bpg){
+  // Compute shifted P50 (Hill equation, n≈2.7)
+  const dph = 7.40 - ph;            // acidosis shifts right (lower pH -> higher P50)
+  const dT  = T - 37;
+  const dbpg= bpg - 5.0;
+  const p50 = 26 * Math.pow(10, 0.48*dph) * Math.pow(1.024, dT) * Math.pow(1.05, dbpg);
+  const xs=[]; const ys=[];
+  for(let p=0;p<=110;p+=2){
+    const sat = Math.pow(p,2.7)/(Math.pow(p,2.7)+Math.pow(p50,2.7))*100;
+    xs.push(p); ys.push(sat);
+  }
+  return {p50, xs, ys};
+}
+function update(){
+  const ph=parseFloat(sliderPh.value),T=parseFloat(sliderT.value),bpg=parseFloat(sliderBpg.value);
+  valPh.textContent=ph.toFixed(2); valT.textContent=T.toFixed(1); valBpg.textContent=bpg.toFixed(1);
+  const c=curveAt(ph,T,bpg);
+  p50Val.textContent=c.p50.toFixed(1)+' mmHg';
+  const ref=curveAt(7.40,37,5.0);
+  if(hbChart) hbChart.destroy();
+  const ctx=document.getElementById('hbChart').getContext('2d');
+  hbChart=new Chart(ctx,{type:'line',
+    data:{labels:c.xs,
+          datasets:[
+            {label:I18n.get()==='zh'?'目前條件':'Current',data:c.ys,borderColor:'#831843',backgroundColor:'rgba(131,24,67,.1)',pointRadius:0,tension:.2,fill:true,borderWidth:2.5},
+            {label:I18n.get()==='zh'?'生理參考 (pH 7.40 / 37℃)':'Ref (pH 7.40 / 37℃)',data:ref.ys,borderColor:'#94a3b8',pointRadius:0,borderDash:[6,4],tension:.2,fill:false,borderWidth:1.5}
+          ]},
+    options:{plugins:{legend:{display:true}},
+             scales:{x:{title:{display:true,text:'PO₂ (mmHg)'}},
+                     y:{min:0,max:100,title:{display:true,text:'SO₂ (%)'}}}}});
+}
+[sliderPh,sliderT,sliderBpg].forEach(s=>s.addEventListener('input',update));
+document.addEventListener('langchange',update);
+update();
+</script>
+</body></html>

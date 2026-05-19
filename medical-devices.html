@@ -1,0 +1,374 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>D1: 醫療器材設計與分類 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html" class="active">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER D1 · BLOCK D DEVICES &amp; INTERFACES</div>
+<h1 data-zh="醫療器材設計與分類" data-en="Medical Device Design &amp; Classification">醫療器材設計與分類</h1>
+<p class="subtitle" data-lang="zh">從 Class I 牙線到 Class III 心律調節器、從 510(k) 到 PMA、從 QMSR 到 EU MDR、從 IEC 60601 到 UDI——本章帶你建立全球醫療器材法規地圖與設計流程。</p>
+<p class="subtitle" data-lang="en">From Class I dental floss to Class III pacemakers, 510(k) to PMA, QMSR to EU MDR, IEC 60601 to UDI — build a global map of medical device regulation and the design lifecycle.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="定義" data-en="DEFINITION">定義</div>
+<h2 data-zh="一、什麼是醫療器材？" data-en="I. What Counts as a Medical Device?">一、什麼是醫療器材？</h2>
+<div data-lang="zh">
+<p>依美國 FDA《食品藥物化妝品法》(FD&amp;C Act) Section 201(h) 的定義，<strong>醫療器材</strong>是「用於診斷、治療、緩解、預防疾病，或影響身體結構/功能的儀器、機械、植入物、體外試劑、軟體」——且其主要作用<strong>不是經由化學/代謝路徑</strong>達成（否則屬於藥品 drug）。</p>
+<p>關鍵分界：藥品（drug）以化學作用治病、生物製劑（biologic）以細胞/蛋白質作用、醫療器材（device）以<strong>物理/機械/電子/光學</strong>作用達成診療目的。實務上有「組合產品 combination product」例外：藥物洗脫支架（drug-eluting stent）、自動注射筆、預充式注射器、CAR-T 製造設備皆屬之。</p>
+</div>
+<div data-lang="en">
+<p>Per US FDA's FD&amp;C Act Section 201(h), a <strong>medical device</strong> is "an instrument, apparatus, implant, in-vitro reagent, or software intended for diagnosis, cure, mitigation, treatment, or prevention of disease, or for altering body structure/function" — and whose primary mode of action is <strong>not chemical or metabolic</strong> (otherwise it's a drug).</p>
+<p>Key distinction: drugs act chemically, biologics act via cells/proteins, devices act <strong>physically, mechanically, electrically, or optically</strong>. "Combination products" sit in the middle: drug-eluting stents, auto-injectors, prefilled syringes, CAR-T manufacturing equipment.</p>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>SaMD（Software as a Medical Device）：</strong>2017 年起 IMDRF 正式承認軟體本身可作為醫療器材，不需綁定硬體；典型例子如 Apple Watch AFib 偵測 App、Caption Health AI 超音波導引、IDx-DR 糖尿病視網膜病變診斷。FDA 將其與一般醫療軟體分開監管。</span>
+<span data-lang="en"><strong>SaMD (Software as a Medical Device):</strong> Since 2017 IMDRF formally recognizes software itself as a medical device — no hardware tether required. Examples: Apple Watch AFib detection app, Caption Health AI ultrasound guidance, IDx-DR diabetic retinopathy diagnosis. FDA regulates SaMD separately from in-device software.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="風險分類" data-en="RISK CLASSIFICATION">風險分類</div>
+<h2 data-zh="二、FDA 三級風險分類" data-en="II. FDA's Three-Tier Risk Classification">二、FDA 三級風險分類</h2>
+<div data-lang="zh"><p>FDA 依「<strong>對使用者/病人造成傷害的風險</strong>」把醫療器材分為三級。風險越高，上市要求越嚴格。</p></div>
+<div data-lang="en"><p>FDA classifies devices into three tiers by the <strong>risk of harm to the user/patient</strong>. Higher risk → stricter market-entry requirements.</p></div>
+<table class="comp-table"><thead><tr><th data-zh="級別" data-en="Class">級別</th><th data-zh="風險" data-en="Risk">風險</th><th data-zh="管制" data-en="Controls">管制</th><th data-zh="代表器材" data-en="Examples">代表器材</th><th data-zh="上市路徑" data-en="Pathway">上市路徑</th></tr></thead><tbody>
+<tr><td><strong>Class I</strong></td><td data-zh="低風險" data-en="Low">低</td><td data-zh="一般管制（GMP、標籤、記錄）" data-en="General controls (GMP, labeling, records)">一般管制</td><td data-zh="牙線、彈性繃帶、電動牙刷、聽診器、舌壓板、檢查手套" data-en="Dental floss, elastic bandages, electric toothbrushes, stethoscopes, tongue depressors, exam gloves">牙線、繃帶、聽診器</td><td data-zh="多數 510(k) 豁免" data-en="Most exempt from 510(k)">多數 510(k) 豁免</td></tr>
+<tr><td><strong>Class II</strong></td><td data-zh="中風險" data-en="Moderate">中</td><td data-zh="一般管制 + 特殊管制（效能標準、上市後監測）" data-en="General + special controls (performance standards, PMS)">一般 + 特殊管制</td><td data-zh="輸液泵、X 光機、CT、超音波、隱形眼鏡、手術蓋布、胰島素筆、避孕器" data-en="Infusion pumps, X-ray, CT, ultrasound, contact lenses, surgical drapes, insulin pens, IUDs">輸液泵、X 光、CT、超音波</td><td><strong>510(k)</strong> <span data-zh="為主" data-en="primary">為主</span></td></tr>
+<tr><td><strong>Class III</strong></td><td data-zh="高風險" data-en="High">高</td><td data-zh="一般 + 特殊 + 上市前核准；維持生命、預防重大傷害" data-en="General + special + premarket approval; life-sustaining or unreasonable risk">一般 + 特殊 + PMA</td><td data-zh="心律調節器、植入式去顫器（ICD）、藥物洗脫支架、人工心臟瓣膜、深部腦刺激、人工耳蝸、LVAD" data-en="Pacemakers, ICDs, drug-eluting stents, prosthetic heart valves, DBS, cochlear implants, LVADs">心律調節器、ICD、DES、人工瓣膜、DBS</td><td><strong>PMA</strong></td></tr>
+</tbody></table>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>510(k) 豁免 ≠ 不需註冊。</strong>Class I 多數豁免 510(k) 上市前審查，但仍須完成 FDA establishment registration、device listing、遵守 QMSR/GMP、不良事件 MDR 通報、標籤要求。</span>
+<span data-lang="en"><strong>510(k)-exempt ≠ unregulated.</strong> Most Class I devices are exempt from premarket 510(k) review, but must still complete FDA establishment registration, device listing, comply with QMSR/GMP, report adverse events (MDR), and meet labeling.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="上市路徑" data-en="PATHWAYS">上市路徑</div>
+<h2 data-zh="三、FDA 五大上市路徑" data-en="III. FDA's Five Premarket Pathways">三、FDA 五大上市路徑</h2>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">📋</div><h4>510(k) — <span data-zh="實質等同" data-en="Substantial Equivalence">實質等同</span></h4>
+<div data-lang="zh"><p>適用 Class II 與少數 Class III。需證明與已上市的「predicate device」<strong>實質等同（substantial equivalence）</strong>——相同用途 + 相同/相似技術特徵。FDA 每年核可 10,000+ 件，平均審查 90–180 天，使用者規費 2025 約 USD 24,335（標準）/ 6,083（小公司）。</p></div>
+<div data-lang="en"><p>For Class II and a few Class III. Must demonstrate <strong>substantial equivalence</strong> to a marketed "predicate device" — same intended use + same/similar technological characteristics. FDA clears 10,000+ per year, average review 90–180 days; FY2025 user fee ~USD 24,335 (standard) / 6,083 (small business).</p></div></div>
+
+<div class="card"><div class="card-icon">🆕</div><h4>De Novo — <span data-zh="新型低/中風險" data-en="Novel low/moderate-risk">新型低/中風險</span></h4>
+<div data-lang="zh"><p>2018 年 FDARA 制度化的路徑：新穎的低/中風險裝置但<strong>無 predicate</strong> 可比，避免被迫走 PMA。經 De Novo 獲准後即建立新的 generic category，後續同類產品可走 510(k)。例：IDx-DR（首支 AI 診斷）、Apple Watch ECG（2018）。</p></div>
+<div data-lang="en"><p>Codified by 2018 FDARA: novel low/moderate-risk devices <strong>with no predicate</strong>, avoiding forced PMA. Once granted, De Novo establishes a new generic category — subsequent similar products can use 510(k). Examples: IDx-DR (first AI diagnostic), Apple Watch ECG (2018).</p></div></div>
+
+<div class="card"><div class="card-icon">🏥</div><h4>PMA — <span data-zh="上市前核准" data-en="Premarket Approval">上市前核准</span></h4>
+<div data-lang="zh"><p>Class III 的「黃金標準」路徑：需獨立臨床試驗證明安全有效；2025 標準規費 USD ~520,000（小公司 ~130,000）。審查時間 1–3 年；通過後產品稱為 PMA-approved（非 cleared）。例：HeartMate III LVAD、Tandem t:slim X2 with Control-IQ。</p></div>
+<div data-lang="en"><p>Gold-standard pathway for Class III: requires independent clinical trial proving safety + effectiveness; FY2025 standard fee ~USD 520k (small business ~130k). Review 1–3 yr; products are PMA-<em>approved</em> (not cleared). Examples: HeartMate III LVAD, Tandem t:slim X2 with Control-IQ.</p></div></div>
+
+<div class="card"><div class="card-icon">💎</div><h4>HDE — <span data-zh="人道醫療豁免" data-en="Humanitarian Device Exemption">人道醫療豁免</span></h4>
+<div data-lang="zh"><p>Humanitarian Device Exemption：罕見疾病（年盛行率 ≤ 8,000 美國人口）裝置的縮減版 PMA，只需證明「合理安全性 + 可能受益」。例：兒童 LVAD Berlin Heart EXCOR、視網膜植入 Argus II（已退市）。</p></div>
+<div data-lang="en"><p>For rare-disease devices (US prevalence ≤8,000/yr): a reduced PMA requiring "reasonable safety + probable benefit." Examples: Berlin Heart EXCOR pediatric VAD, Argus II retinal implant (discontinued).</p></div></div>
+
+<div class="card"><div class="card-icon">🧬</div><h4>HCT/Ps — <span data-zh="人體細胞/組織" data-en="Human Cells/Tissues">人體細胞/組織</span></h4>
+<div data-lang="zh"><p>21 CFR 1271 規範：「最低操作 minimal manipulation + 同源使用 homologous use」者走 361 路徑（無需上市前審查）；否則須走 BLA。例：心臟同種異體瓣膜、骨同種異體移植；不適用 CAR-T（屬 BLA）。</p></div>
+<div data-lang="en"><p>21 CFR 1271 framework: "minimally manipulated + homologously used" go through 361 pathway (no premarket review); otherwise need BLA. Examples: allograft heart valves, allograft bone; CAR-T does NOT qualify (it's a BLA).</p></div></div>
+
+<div class="card"><div class="card-icon">⚡</div><h4>EUA — <span data-zh="緊急使用授權" data-en="Emergency Use Authorization">緊急使用授權</span></h4>
+<div data-lang="zh"><p>公共衛生緊急狀態下啟用（COVID-19、Mpox）。FDA Commissioner 可在沒有完整 510(k)/PMA 下授權；COVID 期間累計核可 2,400+ 件診斷與裝置。緊急狀態結束後須轉正規路徑或下市。</p></div>
+<div data-lang="en"><p>Activated during public-health emergency (COVID-19, Mpox). FDA Commissioner can authorize without full 510(k)/PMA; 2,400+ COVID diagnostics/devices were issued EUAs. Must transition to regular pathway or be withdrawn after emergency ends.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="QMSR" data-en="QMSR">QMSR</div>
+<h2 data-zh="四、QSR → QMSR：FDA 與 ISO 13485 整合" data-en="IV. QSR → QMSR: FDA Harmonizes with ISO 13485">四、QSR → QMSR：FDA 與 ISO 13485 整合</h2>
+<div data-lang="zh">
+<p><strong>21 CFR Part 820（Quality System Regulation, QSR）</strong>自 1996 年起為美國醫療器材品質管理的法源。但與全球業界遵循的 <strong>ISO 13485:2016</strong> 重複度高、術語不一致，造成出口廠商雙重負擔。</p>
+<p>2024 年 2 月 2 日，FDA 公告 final rule，將 21 CFR Part 820 改名為 <strong>Quality Management System Regulation (QMSR)</strong>，明文「by reference」<strong>incorporates ISO 13485:2016</strong>，加上少量 FDA 特殊要求（如 MDR 不良事件通報、UDI、records 部分）。生效日為 <strong>2026 年 2 月 2 日</strong>，給業界 2 年轉換期。</p>
+<ul>
+<li>術語對齊：Design History File (DHF) ≈ Medical Device File (MDF)；Device Master Record (DMR) ≈ MDF；management responsibility 用 ISO 章節編號。</li>
+<li>原 21 CFR 820 大幅刪減（820.30 Design Controls、820.50 Purchasing 等併入 ISO 7.3/7.4）。</li>
+<li>影響：跨國公司可使用單一 QMS 系統；ISO 13485 認證稽核員需熟悉 FDA 特殊條款；新 inspection 模式 ISO 13485-aligned。</li>
+</ul>
+</div>
+<div data-lang="en">
+<p><strong>21 CFR Part 820 (Quality System Regulation, QSR)</strong> has governed US medical device quality since 1996. But it overlapped heavily with industry's global standard <strong>ISO 13485:2016</strong>, causing duplication for exporters.</p>
+<p>On 2024-02-02 FDA published a final rule renaming 21 CFR Part 820 to <strong>Quality Management System Regulation (QMSR)</strong>, formally "by reference" <strong>incorporating ISO 13485:2016</strong>, plus a few FDA-specific extras (MDR reporting, UDI, records). Effective <strong>2026-02-02</strong>, giving industry a 2-year transition.</p>
+<ul>
+<li>Terminology aligned: Design History File (DHF) ≈ Medical Device File (MDF); Device Master Record (DMR) ≈ MDF; management responsibility uses ISO chapter numbering.</li>
+<li>Much of old 21 CFR 820 deleted (820.30 Design Controls, 820.50 Purchasing → ISO 7.3/7.4).</li>
+<li>Impact: multinationals can run a single QMS; ISO 13485 auditors must learn FDA add-ons; new inspection model is ISO 13485-aligned.</li>
+</ul>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="全球法規" data-en="GLOBAL REGULATIONS">全球法規</div>
+<h2 data-zh="五、其他主要法規體系" data-en="V. Other Major Global Regulators">五、其他主要法規體系</h2>
+<div class="card-grid cols-2">
+<div class="card"><h4>🇪🇺 <span data-zh="EU MDR 2017/745" data-en="EU MDR 2017/745">EU MDR 2017/745</span></h4>
+<div data-lang="zh"><p>2017 年通過、2021/5/26 生效，取代舊版 MDD 93/42/EEC。核心改變：(1) 重新分類，許多 MDD 的 Class IIa/IIb 升級為 III；(2) <strong>UDI</strong> 強制；(3) <strong>PMS / PMCF</strong> 上市後監測與臨床追蹤強制；(4) <strong>Eudamed</strong> 資料庫；(5) <strong>Notified Body</strong> 稽核更嚴；(6) CE marking。MDCG 指引文件持續發布。</p></div>
+<div data-lang="en"><p>Adopted 2017, effective 2021-05-26; replaced MDD 93/42/EEC. Key changes: (1) reclassification (many MDD IIa/IIb → III); (2) mandatory <strong>UDI</strong>; (3) mandatory <strong>PMS / PMCF</strong>; (4) <strong>Eudamed</strong> database; (5) stricter <strong>Notified Body</strong> audits; (6) CE marking. MDCG guidance documents updated continuously.</p></div></div>
+
+<div class="card"><h4>🇯🇵 <span data-zh="PMDA（日本）" data-en="PMDA (Japan)">PMDA（日本）</span></h4>
+<div data-lang="zh"><p>Pharmaceuticals and Medical Devices Agency，依《藥機法》分四級（I/II/III/IV）。Class I 屆出（self-declaration）、Class II 多數由 PMDA 認證機構處理、Class III/IV 由 PMDA 本部審查。再生醫療有獨立「條件期限承認」快速通道（2014 起）。</p></div>
+<div data-lang="en"><p>Pharmaceuticals and Medical Devices Agency, four classes (I–IV) under PMD Act. Class I: self-declaration; Class II: mostly Registered Certification Bodies; Class III/IV: PMDA HQ. Regenerative medicine has its own conditional/term-limited approval fast track (since 2014).</p></div></div>
+
+<div class="card"><h4>🇨🇳 <span data-zh="NMPA（中國）" data-en="NMPA (China)">NMPA（中國）</span></h4>
+<div data-lang="zh"><p>National Medical Products Administration（原 CFDA），三級分類。Class I 屆出、II 省級審查、III 中央審查。2017 加入 ICH；2020/2021 醫療器材監督管理條例改革；2024 起接受 RWE 真實世界資料；本土創新通道加速。</p></div>
+<div data-lang="en"><p>National Medical Products Administration (formerly CFDA), three-class system. Class I: filing; II: provincial; III: central. Joined ICH in 2017; 2020/2021 device regulation reform; from 2024 RWE accepted; domestic innovation pathway accelerated.</p></div></div>
+
+<div class="card"><h4>🇹🇼 <span data-zh="TFDA（台灣）" data-en="TFDA (Taiwan)">TFDA（台灣）</span></h4>
+<div data-lang="zh"><p>衛福部食品藥物管理署，依《醫療器材管理法》（2021/5/1 施行）分三級。多採 reliance / harmonization 路徑（參考 FDA / EU / Japan 核可可加速）；GMP 認可 ISO 13485。SaMD、AI 醫療裝置近年新增專案審查。</p></div>
+<div data-lang="en"><p>MOHW TFDA, three-class system under Medical Device Act (effective 2021-05-01). Often uses reliance / harmonization (FDA/EU/Japan approvals accelerate review); ISO 13485 accepted as GMP. Recent dedicated review tracks for SaMD and AI devices.</p></div></div>
+
+<div class="card"><h4>🇨🇦 <span data-zh="Health Canada" data-en="Health Canada">Health Canada</span></h4>
+<div data-lang="zh"><p>Medical Devices Regulations (MDR, SOR/98-282)，四級分類（I/II/III/IV）。Class II–IV 需 Medical Device Licence (MDL)；要求 MDSAP 認證（單一稽核覆蓋加/美/巴/澳/日）。Class I 只需 Establishment Licence (MDEL)。</p></div>
+<div data-lang="en"><p>Medical Devices Regulations (MDR, SOR/98-282), four classes (I–IV). Class II–IV need a Medical Device Licence (MDL); MDSAP certification required (single audit covers CA/US/BR/AU/JP). Class I needs only an Establishment Licence (MDEL).</p></div></div>
+
+<div class="card"><h4>🇦🇺 <span data-zh="TGA（澳洲）" data-en="TGA (Australia)">TGA（澳洲）</span></h4>
+<div data-lang="zh"><p>Therapeutic Goods Administration。器材依風險分 Class I → IV + Active Implantable + IVD。多用 EU CE 或 MDSAP 報告加速。SaMD 自 2021/2 起特別規範；2024 起 AI/ML SaMD 上市後變更新指引。</p></div>
+<div data-lang="en"><p>Therapeutic Goods Administration. Devices classified I → IV + Active Implantable + IVD. Often accepts EU CE or MDSAP reports for acceleration. SaMD specifically regulated since 2021-02; 2024 new guidance on AI/ML SaMD post-market changes.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="IEC 60601" data-en="IEC 60601">IEC 60601</div>
+<h2 data-zh="六、IEC 60601 醫用電氣安全標準家族" data-en="VI. IEC 60601 Family — Medical Electrical Safety">六、IEC 60601 標準家族</h2>
+<div data-lang="zh"><p>所有「插電 / 電池供電」的醫療器材都必須通過 <strong>IEC 60601</strong> 系列認證。FDA 把 60601-1 列為 recognized consensus standard；EU MDR 透過 harmonized standard 機制承認。</p></div>
+<div data-lang="en"><p>Every "powered" medical device (mains or battery) must comply with the <strong>IEC 60601</strong> family. FDA recognizes 60601-1 as a consensus standard; EU MDR recognizes it via harmonized-standard mechanism.</p></div>
+<table class="comp-table"><thead><tr><th data-zh="標準" data-en="Standard">標準</th><th data-zh="範疇" data-en="Scope">範疇</th><th data-zh="重點" data-en="Key Points">重點</th></tr></thead><tbody>
+<tr><td><strong>IEC 60601-1</strong></td><td data-zh="一般要求" data-en="General requirements">一般要求（Ed. 3.2 / Ed. 4 在制定中）</td><td data-zh="漏電流（patient leakage current）、絕緣、耐壓 / 介電強度、工作電壓、應用部分分類 (B/BF/CF)、機械強度" data-en="Patient leakage current, insulation, dielectric strength, working voltage, applied part classification (B/BF/CF), mechanical">漏電流、絕緣、耐壓、應用部分 B/BF/CF</td></tr>
+<tr><td><strong>IEC 60601-1-2</strong></td><td data-zh="EMC 電磁相容" data-en="EMC">電磁相容</td><td data-zh="Ed. 4.1 (2020)：免疫力 / 發射；2025 EU 強制適用；新增無線共存性 (wireless coexistence) 與防射頻干擾 (RF immunity)" data-en="Ed. 4.1 (2020): immunity + emissions; mandatory in EU 2025; added wireless coexistence + RF immunity">Ed. 4.1 (2020)；wireless 共存</td></tr>
+<tr><td><strong>IEC 60601-1-6</strong></td><td data-zh="可用性" data-en="Usability">可用性</td><td data-zh="與 IEC 62366-1 對齊；formative + summative usability test" data-en="Aligned with IEC 62366-1; formative + summative usability test">對齊 IEC 62366</td></tr>
+<tr><td><strong>IEC 60601-1-8</strong></td><td data-zh="警報系統" data-en="Alarms">警報系統</td><td data-zh="alarm 優先順序、視覺/聽覺特徵；ICU 設備尤為關鍵" data-en="Priority levels, visual/audio specs; critical for ICU equipment">優先順序、視聽特徵</td></tr>
+<tr><td><strong>IEC 60601-1-9</strong></td><td data-zh="環境設計" data-en="Eco design">環境設計</td><td data-zh="生命週期環境影響；歐盟強制" data-en="Lifecycle environmental impact; mandatory in EU">生命週期環境</td></tr>
+<tr><td><strong>IEC 60601-1-11</strong></td><td data-zh="家用環境" data-en="Home healthcare">家用環境</td><td data-zh="家用醫療器材（CPAP、輸液泵、PERS）的環境耐受要求" data-en="Environmental requirements for home devices (CPAP, infusion pumps, PERS)">家用設備</td></tr>
+<tr><td><strong>IEC 60601-2-25</strong></td><td data-zh="心電圖" data-en="ECG">心電圖（collateral）</td><td data-zh="ECG 機/監護儀效能與安全要求" data-en="ECG performance + safety">ECG 效能</td></tr>
+<tr><td><strong>IEC 60601-2-24</strong></td><td data-zh="輸液泵" data-en="Infusion pumps">輸液泵</td><td data-zh="流速精度、occlusion 偵測、警報" data-en="Flow accuracy, occlusion detection, alarms">流速、occlusion</td></tr>
+<tr><td><strong>IEC 60601-2-4</strong></td><td data-zh="心臟去顫器" data-en="Defibrillators">去顫器</td><td data-zh="能量輸出、波形、AED 自動分析準確度" data-en="Energy output, waveform, AED auto-analysis accuracy">能量、波形</td></tr>
+</tbody></table>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>應用部分（Applied Part）三分類：</strong><br>
+&bull; <strong>Type B</strong>：非直接電氣連接病人（檢查燈、推床）；<br>
+&bull; <strong>Type BF</strong>：直接接觸但不接心臟（ECG 電極、血壓袖帶）；漏電流 ≤ 100 μA；<br>
+&bull; <strong>Type CF</strong>：可接觸心臟或心血管系統（侵入式血壓 IBP、心導管 catheter）；漏電流 ≤ 10 μA，最嚴格。<br>
+判別圖示分別為人形 (B)、人形帶框 (BF)、心臟 (CF)。</span>
+<span data-lang="en"><strong>Applied Part 3 types:</strong><br>
+&bull; <strong>Type B</strong>: no direct electrical contact (exam lamp, bed);<br>
+&bull; <strong>Type BF</strong>: direct skin contact, no heart (ECG, BP cuff); leakage ≤ 100 μA;<br>
+&bull; <strong>Type CF</strong>: cardiac/cardiovascular contact (invasive BP, catheter); leakage ≤ 10 μA, strictest.<br>
+Symbols: person (B), boxed person (BF), heart (CF).</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="七、我的器材該走哪條路徑？" data-en="VII. Which Pathway Does My Device Need?">七、上市路徑決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="FDA 上市路徑決策樹" data-en="FDA Pathway Decision Tree">FDA 上市路徑決策樹</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">是「不維持生命、不造成不合理風險」的低風險器材（如棉花棒、繃帶）？<span class="dt-arrow">→</span> <strong>Class I</strong>，多數 510(k) 豁免，但仍需 establishment registration + listing。</span><span data-lang="en">Low-risk, non-life-sustaining (cotton swabs, bandages)? <span class="dt-arrow">→</span> <strong>Class I</strong>, mostly 510(k)-exempt; still need establishment registration + listing.</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">有 predicate device（同用途、同技術）？<span class="dt-arrow">→</span> <strong>510(k)</strong>，平均 90–180 天 cleared。</span><span data-lang="en">Has a predicate device (same use + same tech)? <span class="dt-arrow">→</span> <strong>510(k)</strong>, average 90–180 days clearance.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">沒有 predicate 但風險中/低、可由 special controls 管理？<span class="dt-arrow">→</span> <strong>De Novo</strong>，建立新 generic category。</span><span data-lang="en">No predicate but moderate/low risk, manageable by special controls? <span class="dt-arrow">→</span> <strong>De Novo</strong>, creates new generic category.</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">維持生命、預防重大傷害（心律調節器、人工瓣膜）？<span class="dt-arrow">→</span> <strong>Class III / PMA</strong>，需 pivotal clinical trial。</span><span data-lang="en">Life-sustaining / supports critical function (pacemaker, valve)? <span class="dt-arrow">→</span> <strong>Class III / PMA</strong>, needs pivotal clinical trial.</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">針對罕病（年盛行率 ≤ 8,000）？<span class="dt-arrow">→</span> <strong>HDE</strong>，可享規費減免與較寬鬆證據門檻。</span><span data-lang="en">For rare disease (US prevalence ≤ 8,000/yr)? <span class="dt-arrow">→</span> <strong>HDE</strong>, fee waivers + lower evidence bar.</span></div>
+<div class="dt-node"><span class="dt-q">Q6.</span><span data-lang="zh">純軟體不含硬體？<span class="dt-arrow">→</span> <strong>SaMD</strong>，分類依 IMDRF 框架（State of healthcare situation × Significance of information）。</span><span data-lang="en">Software only, no hardware? <span class="dt-arrow">→</span> <strong>SaMD</strong>, classify by IMDRF framework (situation × significance).</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖" data-en="INTERACTIVE">互動圖</div>
+<h2 data-zh="八、FDA 510(k) 與 PMA 核可數量趨勢" data-en="VIII. FDA 510(k) vs PMA Clearance Trends">八、FDA 核可量趨勢</h2>
+<div data-lang="zh"><p>下圖顯示 FDA 過去 6 年 510(k) clearance 與 PMA approval 的年度件數（依 openFDA 統計）。按鈕可切換不同視角。</p></div>
+<div data-lang="en"><p>Annual FDA 510(k) clearances vs PMA approvals over the past 6 years (openFDA data). Buttons switch views.</p></div>
+<div class="interactive-panel">
+<div class="toggle-row">
+  <button class="toggle-btn active" data-view="count" data-zh="件數" data-en="Counts">件數</button>
+  <button class="toggle-btn" data-view="ai" data-zh="AI/ML 累積件數" data-en="AI/ML Cumulative">AI/ML 累積</button>
+</div>
+<div class="chart-container"><canvas id="fdaChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">數據來源：openFDA、FDA AI/ML-Enabled Device List（2025/12）</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Sources: openFDA, FDA AI/ML-Enabled Device List (Dec 2025)</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="重要產品" data-en="NOTABLE PRODUCTS">重要產品</div>
+<h2 data-zh="九、代表性 Class III 裝置" data-en="IX. Notable Class III Devices">九、代表性 Class III 裝置</h2>
+<table class="comp-table"><thead><tr><th data-zh="類別" data-en="Category">類別</th><th data-zh="代表產品" data-en="Products">代表產品</th><th data-zh="廠商" data-en="Manufacturers">廠商</th><th data-zh="臨床用途" data-en="Use">臨床用途</th></tr></thead><tbody>
+<tr><td data-zh="心律調節器" data-en="Pacemakers">心律調節器</td><td>Azure / Micra / Galaxy</td><td>Medtronic / Abbott / Boston Scientific</td><td data-zh="緩脈、AV block；Micra 無導線設計" data-en="Bradycardia, AV block; Micra is leadless">緩脈、AV block</td></tr>
+<tr><td data-zh="植入式去顫器" data-en="ICD">ICD</td><td>Emblem S-ICD / Aurora EV-ICD</td><td>Boston Scientific / Medtronic</td><td data-zh="預防 sudden cardiac death；S-ICD 完全皮下" data-en="Prevent SCD; S-ICD fully subcutaneous">預防 SCD</td></tr>
+<tr><td data-zh="左心室輔助" data-en="LVAD">LVAD</td><td>HeartMate 3 / HeartWare (停產)</td><td>Abbott (Thoratec)</td><td data-zh="末期心衰、destination therapy / BTT" data-en="End-stage HF; destination therapy / BTT">末期心衰</td></tr>
+<tr><td data-zh="經導管主動脈瓣置換" data-en="TAVR">TAVR</td><td>SAPIEN 3 Ultra RESILIA / Evolut FX / ACURATE neo2</td><td>Edwards / Medtronic / Boston Scientific</td><td data-zh="高/中/低風險主動脈狹窄" data-en="High/intermediate/low risk AS">主動脈狹窄</td></tr>
+<tr><td data-zh="藥物洗脫支架" data-en="DES">藥物洗脫支架</td><td>Synergy / Xience / Resolute Onyx</td><td>BSC / Abbott / Medtronic</td><td data-zh="冠狀動脈介入" data-en="Coronary intervention">冠狀動脈</td></tr>
+<tr><td data-zh="深部腦刺激" data-en="DBS">深部腦刺激</td><td>Activa / Percept PC / Vercise Genus</td><td>Medtronic / Boston Scientific</td><td data-zh="帕金森、原發性顫抖、肌張力不全；Percept PC 含 BrainSense 感測" data-en="Parkinson's, essential tremor, dystonia; Percept PC has BrainSense sensing">帕金森、ET</td></tr>
+<tr><td data-zh="脊髓電刺激" data-en="SCS">脊髓電刺激</td><td>HFX iQ (Nevro) / Inceptiv (Medtronic) / WaveWriter Alpha</td><td>Nevro / Medtronic / Boston Scientific</td><td data-zh="慢性背痛、糖尿病周邊神經痛" data-en="Chronic back pain, painful diabetic neuropathy">慢性疼痛</td></tr>
+<tr><td data-zh="人工耳蝸" data-en="Cochlear">人工耳蝸</td><td>Nucleus 8 / Sonnet 2 / Naída CI</td><td>Cochlear / MED-EL / Advanced Bionics</td><td data-zh="重度感音性聾" data-en="Severe-profound sensorineural deafness">感音性聾</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="生命週期" data-en="LIFECYCLE">生命週期</div>
+<h2 data-zh="十、器材生命週期與召回" data-en="X. Device Lifecycle &amp; Recalls">十、生命週期與召回</h2>
+<div data-lang="zh">
+<p>醫療器材生命週期 = 「設計 → 製造 → 上市 → 監控 → 召回/退市」全程受 FDA / 競爭機關監管。</p>
+<ol class="numbered">
+<li><strong>設計管制 21 CFR 820.30</strong> — 需建立 DHF（Design History File）紀錄所有 design input/output/V&amp;V/risk。</li>
+<li><strong>製造管制（DMR, Device Master Record）</strong> — 批次紀錄、QC 規格、IFU、標籤、UDI。</li>
+<li><strong>MDR（Medical Device Reporting, 21 CFR 803）</strong> — 製造商須在 30 天內回報嚴重不良事件（死亡、重傷、可能再發）；5 日內回報需立即矯正的事件。</li>
+<li><strong>上市後監測 PMS</strong> — 收集真實世界使用資料；FDA Sentinel、MAUDE 公開資料庫。EU MDR 強制 PMCF（上市後臨床追蹤）。</li>
+<li><strong>召回分級：</strong>
+<ul><li><strong>Class I 召回</strong>：可能致死或重大傷害（最嚴重）</li>
+<li><strong>Class II</strong>：可能造成暫時性或可逆性健康問題</li>
+<li><strong>Class III</strong>：違規但不致造成健康問題</li></ul></li>
+</ol>
+</div>
+<div data-lang="en">
+<p>Device lifecycle = "design → manufacture → market → monitor → recall/withdrawal" — fully regulated by FDA / competent authorities.</p>
+<ol class="numbered">
+<li><strong>Design Controls 21 CFR 820.30</strong> — DHF (Design History File) documents all design input/output/V&amp;V/risk.</li>
+<li><strong>Manufacturing (DMR, Device Master Record)</strong> — batch records, QC specs, IFU, labeling, UDI.</li>
+<li><strong>MDR (Medical Device Reporting, 21 CFR 803)</strong> — manufacturer must report serious adverse events (death, serious injury, recurrence-possible) within 30 days; events needing immediate correction within 5 days.</li>
+<li><strong>Post-market surveillance (PMS)</strong> — real-world use data; FDA Sentinel + public MAUDE database. EU MDR mandates PMCF.</li>
+<li><strong>Recall classes:</strong>
+<ul><li><strong>Class I recall</strong>: may cause death/serious injury (most severe)</li>
+<li><strong>Class II</strong>: may cause temporary or reversible health problems</li>
+<li><strong>Class III</strong>: violation unlikely to cause health problems</li></ul></li>
+</ol>
+</div>
+<div class="callout danger"><span class="callout-icon">🚨</span><div>
+<span data-lang="zh"><strong>個案：Philips Respironics CPAP / BiPAP 召回（2021）</strong><br>
+2021 年 6 月 Philips 公告召回 1,500+ 萬台 CPAP/BiPAP/ventilator 含 polyester-based polyurethane (PE-PUR) 消音泡棉，可能降解釋出毒性微粒/化學物。FDA 列為 Class I 召回。Philips 後與美國司法部簽署 consent decree，賠償 11 億美元；Respironics 業務 2024 暫停美國銷售。教訓：材料生物相容性測試（ISO 10993）+ 加速老化測試的重要性。</span>
+<span data-lang="en"><strong>Case: Philips Respironics CPAP/BiPAP recall (2021)</strong><br>
+June 2021 Philips recalled 15M+ CPAP/BiPAP/ventilators containing PE-PUR sound-abatement foam that could degrade into toxic particles/chemicals. FDA classified as Class I recall. Philips later signed a consent decree with DOJ, paid $1.1B settlement; Respironics paused US sales 2024. Lesson: biocompatibility testing (ISO 10993) + accelerated aging are critical.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="十一、查詢 FDA 510(k) 公開資料（openFDA API）" data-en="XI. Querying the openFDA 510(k) API">十一、查詢 openFDA 510(k) 資料</h2>
+<div data-lang="zh"><p>openFDA 提供免費 REST API 查詢 510(k)、PMA、recall、device events 等。下例查詢某產品代碼最新 10 件 510(k) clearance。</p></div>
+<div data-lang="en"><p>openFDA provides a free REST API for 510(k), PMA, recalls, device events, and more. The example below queries the 10 most recent 510(k) clearances for a product code.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> requests, pandas <span class="kw">as</span> pd
+
+<span class="comment"># Product code DQA = Continuous Glucose Monitor</span>
+url = <span class="str">"https://api.fda.gov/device/510k.json"</span>
+params = {
+    <span class="str">"search"</span>: <span class="str">"product_code:DQA"</span>,
+    <span class="str">"sort"</span>:   <span class="str">"decision_date:desc"</span>,
+    <span class="str">"limit"</span>:  <span class="num">10</span>,
+}
+r = requests.<span class="func">get</span>(url, params=params, timeout=<span class="num">30</span>)
+r.<span class="func">raise_for_status</span>()
+records = r.<span class="func">json</span>()[<span class="str">"results"</span>]
+
+df = pd.<span class="func">DataFrame</span>([{
+    <span class="str">"k_number"</span>:     x[<span class="str">"k_number"</span>],
+    <span class="str">"applicant"</span>:    x[<span class="str">"applicant"</span>],
+    <span class="str">"device_name"</span>:  x[<span class="str">"device_name"</span>],
+    <span class="str">"decision"</span>:     x[<span class="str">"decision_description"</span>],
+    <span class="str">"date"</span>:         x[<span class="str">"decision_date"</span>],
+} <span class="kw">for</span> x <span class="kw">in</span> records])
+<span class="func">print</span>(df.<span class="func">head</span>(<span class="num">10</span>))</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% openFDA 510(k) query in MATLAB</span>
+url = <span class="str">'https://api.fda.gov/device/510k.json'</span>;
+opts = <span class="func">weboptions</span>(<span class="str">'Timeout'</span>,<span class="num">30</span>);
+params = {<span class="str">'search'</span>,<span class="str">'product_code:DQA'</span>, ...
+          <span class="str">'sort'</span>,  <span class="str">'decision_date:desc'</span>, ...
+          <span class="str">'limit'</span>, <span class="str">'10'</span>};
+data = <span class="func">webread</span>(url, params{:}, opts);
+
+T = <span class="func">struct2table</span>(data.results);
+<span class="func">disp</span>(T(:, {<span class="str">'k_number'</span>,<span class="str">'applicant'</span>,<span class="str">'device_name'</span>,<span class="str">'decision_date'</span>}));</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十二、本章關鍵術語" data-en="XII. Key Terms">十二、關鍵術語</h2>
+<p><span class="term">510(k)<span class="term-tip">FDA 上市前許可，需證明與已上市 predicate device 實質等同。</span></span> &nbsp;
+<span class="term">PMA<span class="term-tip">Premarket Approval — Class III 高風險裝置嚴格上市路徑，需獨立臨床試驗。</span></span> &nbsp;
+<span class="term">De Novo<span class="term-tip">創新低/中風險、無 predicate 的裝置可走的路徑，建立新 generic category。</span></span> &nbsp;
+<span class="term">HDE<span class="term-tip">Humanitarian Device Exemption — 罕病裝置（年盛行率 ≤ 8,000）的縮減版 PMA。</span></span> &nbsp;
+<span class="term">QMSR<span class="term-tip">Quality Management System Regulation — 取代 21 CFR 820 QSR，與 ISO 13485:2016 對齊；2026/2/2 生效。</span></span> &nbsp;
+<span class="term">UDI<span class="term-tip">Unique Device Identification — 醫療器材全球唯一識別碼。</span></span> &nbsp;
+<span class="term">PMS<span class="term-tip">Post-Market Surveillance — 上市後監測，蒐集真實世界資料、不良事件。</span></span> &nbsp;
+<span class="term">PMCF<span class="term-tip">Post-Market Clinical Follow-up — EU MDR 強制的臨床追蹤。</span></span> &nbsp;
+<span class="term">Eudamed<span class="term-tip">European Database on Medical Devices — EU MDR 中央資料庫。</span></span> &nbsp;
+<span class="term">MDR<span class="term-tip">兩種意義：(1) EU Medical Device Regulation 2017/745；(2) US Medical Device Reporting (21 CFR 803)。</span></span> &nbsp;
+<span class="term">DHF<span class="term-tip">Design History File — 完整記錄設計歷程的文件包。</span></span> &nbsp;
+<span class="term">DMR<span class="term-tip">Device Master Record — 量產所需完整製造紀錄。</span></span> &nbsp;
+<span class="term">IEC 60601<span class="term-tip">醫用電氣設備安全國際標準家族，含 EMC、可用性等 collateral 與 200+ 特定設備子標準。</span></span> &nbsp;
+<span class="term">Applied Part<span class="term-tip">直接或間接接觸病人的器材部位，分 B / BF / CF 三類。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q1. 下列哪一項裝置最可能被歸為 FDA Class III？</span><span data-lang="en">Q1. Which device is most likely Class III?</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 電動牙刷</span><span data-lang="en">A. Electric toothbrush</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 一般彈性繃帶</span><span data-lang="en">B. Standard elastic bandage</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 植入式心臟去顫器（ICD）</span><span data-lang="en">C. Implantable cardioverter-defibrillator (ICD)</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 棉花棒</span><span data-lang="en">D. Cotton swab</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q2. 關於 FDA QMSR（2024 final rule, 2026/2/2 生效），下列何者正確？</span><span data-lang="en">Q2. About FDA QMSR (2024 final rule, effective 2026-02-02):</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 全面取代 ISO 13485:2016</span><span data-lang="en">A. Fully replaces ISO 13485:2016</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 將 ISO 13485:2016 以 by-reference 方式併入 21 CFR Part 820，加上 FDA 特殊要求</span><span data-lang="en">B. Incorporates ISO 13485:2016 by reference into 21 CFR Part 820, with FDA-specific extras</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 只適用於 Class III 裝置</span><span data-lang="en">C. Applies only to Class III</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 廢除 MDR 不良事件通報</span><span data-lang="en">D. Abolishes MDR adverse-event reporting</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="3"><p><span data-lang="zh">Q3. 心導管（catheter）介入血液與心臟，其應用部分（Applied Part）應為哪一型？</span><span data-lang="en">Q3. A cardiac catheter contacts the heart/circulation. Its Applied Part type is:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. Type B</span><span data-lang="en">A. Type B</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. Type AP</span><span data-lang="en">B. Type AP</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. Type BF</span><span data-lang="en">C. Type BF</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. Type CF（漏電流 ≤ 10 μA）</span><span data-lang="en">D. Type CF (leakage ≤ 10 μA)</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="drug-delivery.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="C4 · 藥物遞送" data-en="C4 · Drug Delivery">C4 · 藥物遞送</span></a>
+<a href="biosensors.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="D2 · 生醫感測器" data-en="D2 · Biosensors">D2 · 生醫感測器</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · D1 Medical Devices</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// FDA chart
+const fdaData={
+  count:{labels:['2019','2020','2021','2022','2023','2024'],
+         k510:[3727,3937,4435,4400,4642,4894],
+         pma:[42,38,49,45,52,58]},
+  ai:   {labels:['2019','2020','2021','2022','2023','2024','2025'],
+         cum:[200,343,521,692,882,1156,1451]}
+};
+let fdaChart=null;
+function drawFDA(view){
+  if(fdaChart)fdaChart.destroy();
+  const lang=I18n.get();
+  const ctx=document.getElementById('fdaChart').getContext('2d');
+  if(view==='count'){
+    fdaChart=new Chart(ctx,{type:'bar',
+      data:{labels:fdaData.count.labels,
+        datasets:[
+          {label:lang==='zh'?'510(k) 件數':'510(k) clearances',data:fdaData.count.k510,backgroundColor:'rgba(13,148,136,.75)'},
+          {label:lang==='zh'?'PMA 核可數':'PMA approvals',data:fdaData.count.pma,backgroundColor:'rgba(131,24,67,.8)',yAxisID:'y2'}
+        ]},
+      options:{plugins:{legend:{display:true}},
+        scales:{y:{beginAtZero:true,title:{display:true,text:'510(k)'}},
+                y2:{beginAtZero:true,position:'right',title:{display:true,text:'PMA'},grid:{drawOnChartArea:false}}}}});
+  } else {
+    fdaChart=new Chart(ctx,{type:'line',
+      data:{labels:fdaData.ai.labels,datasets:[{label:lang==='zh'?'AI/ML 累積核可':'Cumulative AI/ML clearances',
+        data:fdaData.ai.cum,borderColor:'#831843',backgroundColor:'rgba(131,24,67,.18)',fill:true,tension:.25,pointRadius:5}]},
+      options:{plugins:{legend:{display:true}},scales:{y:{beginAtZero:true,title:{display:true,text:'cumulative count'}}}}});
+  }
+}
+drawFDA('count');
+document.querySelectorAll('.toggle-btn[data-view]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.toggle-btn[data-view]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); drawFDA(b.dataset.view);
+}));
+document.addEventListener('langchange',()=>{
+  const cur=document.querySelector('.toggle-btn[data-view].active').dataset.view;
+  drawFDA(cur);
+});
+</script>
+</body></html>

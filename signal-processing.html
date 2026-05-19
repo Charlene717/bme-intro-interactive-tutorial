@@ -1,0 +1,343 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>B2: 訊號處理 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html" class="active">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER B2 · BLOCK B SIGNALS &amp; IMAGES</div>
+<h1 data-zh="訊號處理：從原始波形到臨床特徵" data-en="Signal Processing: From Raw Waveform to Clinical Feature">訊號處理</h1>
+<p class="subtitle" data-lang="zh">取樣、濾波、頻譜、偵測、特徵抽取——把雜亂的 ECG / EEG 變成可診斷、可分類、可預測的數字。</p>
+<p class="subtitle" data-lang="en">Sampling, filtering, spectra, detection, feature extraction — turning noisy ECG/EEG into diagnostic, classifiable, predictive numbers.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="取樣與量化" data-en="SAMPLING &amp; QUANTIZATION">取樣與量化</div>
+<h2 data-zh="一、Nyquist 取樣定理、量化與混疊" data-en="I. Nyquist Sampling, Quantization, Aliasing">一、取樣、量化與混疊</h2>
+<div data-lang="zh">
+<p><strong>Nyquist–Shannon 取樣定理</strong>：若連續訊號 x(t) 的頻寬 ≤ f<sub>max</sub>，則用 f<sub>s</sub> ≥ 2·f<sub>max</sub> 取樣即可完美還原；其中 f<sub>s</sub>/2 稱為 <em>Nyquist 頻率</em>。低於此率取樣會造成<strong>混疊（aliasing）</strong>——高頻訊號偽裝成低頻、永久污染。實務防混疊措施：在 ADC 前面放 <strong>類比抗混疊低通濾波器</strong>，截止 ≈ 0.4·f<sub>s</sub>。</p>
+<p><strong>量化（quantization）</strong>是把連續振幅映射到有限位元的離散階梯。N bit ADC 提供 2<sup>N</sup> 階；量化雜訊功率為 Δ²/12（Δ = 量化步階），故動態範圍 ≈ 6.02·N + 1.76 dB。醫療 ECG/EEG 常用 12–24 bit ΣΔ ADC，動態範圍 ≥ 110 dB。</p>
+</div>
+<div data-lang="en">
+<p><strong>Nyquist–Shannon theorem:</strong> a signal of bandwidth ≤ f<sub>max</sub> can be perfectly reconstructed if sampled at f<sub>s</sub> ≥ 2·f<sub>max</sub>; f<sub>s</sub>/2 is the <em>Nyquist frequency</em>. Under-sampling causes <strong>aliasing</strong> — high frequencies masquerade as low and permanently contaminate the signal. The fix: an <strong>analog anti-aliasing low-pass</strong> ahead of the ADC, cutoff ≈ 0.4·f<sub>s</sub>.</p>
+<p><strong>Quantization</strong> maps continuous amplitude to a finite-bit ladder. An N-bit ADC has 2<sup>N</sup> steps; quantization-noise power = Δ²/12, so dynamic range ≈ 6.02·N + 1.76 dB. Medical ECG/EEG use 12–24-bit ΣΔ ADCs with ≥ 110 dB dynamic range.</p>
+</div>
+<div class="callout danger"><span class="callout-icon">🚫</span><div>
+<span data-lang="zh"><strong>致命錯誤：</strong>沒有抗混疊濾波器卻直接低 f<sub>s</sub> 取樣 ECG，60 Hz 工頻雜訊可能混疊成 10 Hz 偽訊號，疊在心跳波形上完全無法區分——軟體濾波<em>無法救回</em>。混疊必須在類比端就攔截。</span>
+<span data-lang="en"><strong>Fatal pitfall:</strong> sampling ECG below f<sub>s</sub> without an analog anti-aliasing filter — 60 Hz power-line can alias to 10 Hz, indistinguishable from heartbeat content. Software filtering <em>cannot recover</em> this. Aliasing must be stopped in the analog domain.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="濾波器" data-en="FILTERS">濾波器</div>
+<h2 data-zh="二、濾波器：FIR vs IIR、四大原型" data-en="II. Filters: FIR vs IIR, Four Prototypes">二、濾波器類型</h2>
+<table class="comp-table"><thead><tr><th data-zh="比較項" data-en="Criterion">比較項</th><th>FIR</th><th>IIR</th></tr></thead><tbody>
+<tr><td data-zh="差分方程" data-en="Difference equation">差分方程</td><td>y[n] = Σ b<sub>k</sub>·x[n−k]</td><td>y[n] = Σ b<sub>k</sub>·x[n−k] − Σ a<sub>k</sub>·y[n−k]</td></tr>
+<tr><td data-zh="穩定性" data-en="Stability">穩定性</td><td data-zh="永遠穩定（無遞迴）" data-en="Always stable (non-recursive)">永遠穩定</td><td data-zh="需檢查極點在單位圓內" data-en="Poles must lie inside unit circle">需檢查極點位置</td></tr>
+<tr><td data-zh="相位" data-en="Phase">相位</td><td data-zh="可做線性相位（不失真）" data-en="Linear phase achievable">可線性相位</td><td data-zh="非線性相位，造成 QRS 失真" data-en="Nonlinear phase — distorts QRS">非線性</td></tr>
+<tr><td data-zh="階數需求" data-en="Order required">階數</td><td data-zh="高（同 spec 需 10×～100× 階）" data-en="High (10×–100× of IIR for same spec)">高</td><td data-zh="低（少階即達陡邊）" data-en="Low (steep with few stages)">低</td></tr>
+<tr><td data-zh="計算量 / 記憶" data-en="Compute / memory">計算量</td><td data-zh="高" data-en="Higher">高</td><td data-zh="低（適合嵌入式 / wearables）" data-en="Lower (great for embedded / wearables)">低</td></tr>
+<tr><td data-zh="ECG 偏好" data-en="ECG preference">ECG 偏好</td><td data-zh="✓（保留 QRS 形狀）" data-en="✓ (preserves QRS shape)">✓ 形狀重要時</td><td data-zh="只用於即時、不上傳波形時" data-en="Only when waveform shape isn't reported">即時嵌入</td></tr>
+</tbody></table>
+<div data-lang="zh"><p>四大 IIR 原型在「過渡帶陡度 vs 通帶/阻帶漣波」做出不同折衷：</p>
+<ul><li><strong>Butterworth</strong>：通帶最平坦，過渡帶緩；最常用於監測級 ECG。</li>
+<li><strong>Chebyshev I</strong>：通帶有漣波、阻帶平坦；同階比 Butterworth 更陡。</li>
+<li><strong>Chebyshev II</strong>：通帶平坦、阻帶有漣波；EMG 高通常見。</li>
+<li><strong>Elliptic（Cauer）</strong>：通帶與阻帶都有漣波、過渡帶最陡；同階性能最佳但相位最非線性。</li></ul></div>
+<div data-lang="en"><p>The four classic IIR prototypes trade off "transition steepness vs passband/stopband ripple":</p>
+<ul><li><strong>Butterworth</strong>: maximally flat passband, gentle transition — the workhorse for monitoring-grade ECG.</li>
+<li><strong>Chebyshev I</strong>: ripple in passband, flat stopband — steeper than Butterworth at the same order.</li>
+<li><strong>Chebyshev II</strong>: flat passband, ripple in stopband — common for EMG high-pass.</li>
+<li><strong>Elliptic (Cauer)</strong>: ripples in both bands, steepest transition — best performance per order, worst phase linearity.</li></ul></div>
+<div class="card-grid cols-2">
+<div class="card"><div class="card-icon">⬇️</div><h4 data-zh="Lowpass (LPF)" data-en="Lowpass (LPF)">Lowpass</h4>
+<div data-lang="zh"><p>保留低頻、抑制高頻。ECG 監測常用 40 Hz、診斷用 150 Hz；移除 EMG 噪聲。</p></div>
+<div data-lang="en"><p>Keep low, attenuate high. ECG monitoring uses 40 Hz; diagnostic 150 Hz. Removes EMG noise.</p></div></div>
+<div class="card"><div class="card-icon">⬆️</div><h4 data-zh="Highpass (HPF)" data-en="Highpass (HPF)">Highpass</h4>
+<div data-lang="zh"><p>移除基線漂移（呼吸 0.3 Hz、出汗）；ECG HPF 截止 0.05–0.5 Hz。</p></div>
+<div data-lang="en"><p>Remove baseline wander (respiration 0.3 Hz, sweating). ECG HPF cutoff 0.05–0.5 Hz.</p></div></div>
+<div class="card"><div class="card-icon">⇅</div><h4 data-zh="Bandpass (BPF)" data-en="Bandpass (BPF)">Bandpass</h4>
+<div data-lang="zh"><p>留下特定頻段；QRS 偵測用 5–15 Hz、EEG α 用 8–13 Hz、EMG 用 20–450 Hz。</p></div>
+<div data-lang="en"><p>Keep a band. QRS detection 5–15 Hz, EEG α 8–13 Hz, EMG 20–450 Hz.</p></div></div>
+<div class="card"><div class="card-icon">⊘</div><h4 data-zh="Notch (50/60 Hz)" data-en="Notch (50/60 Hz)">Notch</h4>
+<div data-lang="zh"><p>窄阻帶，移除單一頻率（工頻）。Q 值越高、阻帶越窄、暫態振盪越大。</p></div>
+<div data-lang="en"><p>Narrow stop, removes a single frequency (mains). Higher Q = narrower stop but worse transient ringing.</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="頻譜分析" data-en="SPECTRAL ANALYSIS">頻譜分析</div>
+<h2 data-zh="三、FFT、STFT、Wavelet：三種頻域工具" data-en="III. FFT, STFT, Wavelet: Three Frequency Tools">三、FFT、STFT 與 Wavelet</h2>
+<table class="comp-table"><thead><tr><th data-zh="方法" data-en="Method">方法</th><th data-zh="時間解析度" data-en="Time resolution">時間解析度</th><th data-zh="頻率解析度" data-en="Freq resolution">頻率解析度</th><th data-zh="適用場景" data-en="Use when…">適用</th></tr></thead><tbody>
+<tr><td><strong>FFT</strong></td><td data-zh="無（全段平均）" data-en="None (whole-signal average)">無</td><td data-zh="高（Δf = f<sub>s</sub>/N）" data-en="High (Δf = f<sub>s</sub>/N)">高</td><td data-zh="平穩訊號；EEG 靜息分頻、HRV 頻域" data-en="Stationary signals; resting EEG bands, HRV freq-domain">平穩訊號</td></tr>
+<tr><td><strong>STFT</strong></td><td data-zh="固定（視窗大小）" data-en="Fixed (window size)">固定</td><td data-zh="固定（與時間互逆）" data-en="Fixed (Heisenberg trade-off)">固定</td><td data-zh="近似平穩訊號；spectrogram、語音、EEG 事件" data-en="Near-stationary; spectrogram, speech, EEG events">近似平穩</td></tr>
+<tr><td><strong>CWT (連續小波)</strong></td><td data-zh="高頻細、低頻粗（多解析度）" data-en="Multi-resolution (fine at HF, coarse at LF)">多解析度</td><td data-zh="與時間互補" data-en="Complement to time">多解析度</td><td data-zh="非平穩；QRS 形狀分析、ECG 心律不整、癲癇尖波" data-en="Non-stationary; QRS shape, arrhythmia, epileptic spikes">非平穩</td></tr>
+<tr><td><strong>DWT (離散小波)</strong></td><td data-zh="多解析度 + 高效" data-en="Multi-resolution, efficient">多解析度 + 高效</td><td data-zh="八度切分" data-en="Octave bands">八度</td><td data-zh="去噪、壓縮、特徵抽取（JPEG2000、ECG 去工頻）" data-en="Denoising, compression, features (JPEG2000, ECG line-noise)">去噪、壓縮</td></tr>
+</tbody></table>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>選擇原則：</strong>(1) 訊號統計性質不變 → FFT；(2) 訊號分段平穩 → STFT；(3) 訊號含瞬時事件、需要「高頻段時間細、低頻段頻率細」→ wavelet。常見錯誤是對 ECG 整段做一次 FFT 就下結論，這在心律不整下完全失效。</span>
+<span data-lang="en"><strong>Choosing:</strong> (1) statistics invariant → FFT; (2) piecewise stationary → STFT; (3) transient events with "fine time at HF, fine freq at LF" needs → wavelet. A common mistake is running one big FFT over an arrhythmic ECG — that hides the very arrhythmia you're chasing.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="偵測演算法" data-en="DETECTION">偵測演算法</div>
+<h2 data-zh="四、事件偵測：Pan-Tompkins、Hilbert envelope、雙閾值" data-en="IV. Event Detection: Pan-Tompkins, Hilbert Envelope, Dual Threshold">四、事件偵測</h2>
+<div class="card-grid cols-2">
+<div class="card"><h4 data-zh="🔺 Pan-Tompkins (QRS)" data-en="🔺 Pan-Tompkins (QRS)">🔺 Pan-Tompkins</h4>
+<div data-lang="zh"><p>1985 年提出，至今仍是 QRS 偵測黃金基準：5–15 Hz 帶通 → 微分 → 平方 → 150 ms 移動平均 → 自適應雙閾值（SPK<sub>I</sub>、NPK<sub>I</sub>）+ 200 ms 不應期 + 搜尋回退（searchback）。MIT-BIH 上敏感度 99.3%、PPV 99.5%。</p></div>
+<div data-lang="en"><p>Proposed in 1985, still the QRS gold benchmark: 5–15 Hz BP → differentiate → square → 150 ms MA → adaptive dual thresholds (SPK<sub>I</sub>, NPK<sub>I</sub>) + 200 ms refractory + searchback. On MIT-BIH: Sn 99.3%, PPV 99.5%.</p></div></div>
+<div class="card"><h4 data-zh="📈 Hilbert envelope" data-en="📈 Hilbert Envelope">📈 Hilbert 包絡</h4>
+<div data-lang="zh"><p>解析訊號 x<sub>a</sub>(t) = x(t) + j·H{x(t)}；其模 |x<sub>a</sub>| 即為訊號包絡。用於 EMG 強度、心音 S1/S2 起始點、語音語段偵測。</p></div>
+<div data-lang="en"><p>Analytic signal x<sub>a</sub>(t) = x(t) + j·H{x(t)}; its magnitude |x<sub>a</sub>| is the envelope. Used for EMG amplitude, heart-sound S1/S2 onsets, voice-activity detection.</p></div></div>
+<div class="card"><h4 data-zh="⚖️ Threshold + Refractory" data-en="⚖️ Threshold + Refractory">⚖️ 閾值 + 不應期</h4>
+<div data-lang="zh"><p>簡單但極實用：求局部峰 → 設振幅閾值 → 強制連續兩偵測間距 ≥ T<sub>refr</sub>（QRS 0.2 s、EEG spike 0.25 s）。配自適應閾值可抗振幅漂移。</p></div>
+<div data-lang="en"><p>Simple but very effective: find local peaks → amplitude threshold → enforce minimum inter-peak distance T<sub>refr</sub> (QRS 0.2 s, EEG spike 0.25 s). Adaptive thresholds handle amplitude drift.</p></div></div>
+<div class="card"><h4 data-zh="🧠 Template matching" data-en="🧠 Template Matching">🧠 模板匹配</h4>
+<div data-lang="zh"><p>把已知 QRS / spike 模板與訊號做 cross-correlation，極值即為事件。對形狀變化敏感；深度學習版本即「1D CNN」。</p></div>
+<div data-lang="en"><p>Cross-correlate a known QRS / spike template against the signal; correlation peaks mark events. Sensitive to shape; the modern DL version is a "1D CNN."</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="特徵抽取" data-en="FEATURES">特徵抽取</div>
+<h2 data-zh="五、特徵：時域、頻域、非線性" data-en="V. Features: Time-, Frequency-, Nonlinear-Domain">五、特徵抽取</h2>
+<table class="comp-table"><thead><tr><th data-zh="類別" data-en="Domain">類別</th><th data-zh="特徵" data-en="Feature">特徵</th><th data-zh="定義 / 公式" data-en="Definition">定義</th><th data-zh="臨床用途" data-en="Clinical use">臨床用途</th></tr></thead><tbody>
+<tr><td rowspan="3"><strong data-zh="時域" data-en="Time">時域</strong></td><td>Mean / RMS</td><td>μ = Σx/N ; RMS = √(Σx²/N)</td><td data-zh="EMG 強度、長期 ECG 漂移" data-en="EMG amplitude, ECG drift">EMG 強度</td></tr>
+<tr><td>SDNN</td><td data-zh="連續 R-R 間期標準差" data-en="SD of NN intervals">SDNN</td><td data-zh="HRV 總變異；&lt; 50 ms 為心血管風險" data-en="Total HRV; &lt; 50 ms = cardiovascular risk">HRV 總變異</td></tr>
+<tr><td>RMSSD</td><td>√(Σ(ΔRR)²/N)</td><td data-zh="副交感活性；睡眠 / 恢復指標" data-en="Parasympathetic; sleep / recovery">副交感活性</td></tr>
+<tr><td rowspan="3"><strong data-zh="頻域" data-en="Freq">頻域</strong></td><td>LF / HF</td><td data-zh="LF 0.04–0.15 Hz；HF 0.15–0.4 Hz" data-en="LF 0.04–0.15 Hz; HF 0.15–0.4 Hz">LF / HF 功率比</td><td data-zh="交感 / 副交感平衡" data-en="Sympathetic / parasympathetic balance">交感 / 副交感</td></tr>
+<tr><td data-zh="EEG 波段功率" data-en="EEG band power">EEG band power</td><td>δ / θ / α / β / γ</td><td data-zh="睡眠分期、麻醉、注意力" data-en="Sleep stages, anesthesia, attention">睡眠、麻醉</td></tr>
+<tr><td>Peak frequency</td><td data-zh="最大功率處的頻率" data-en="Frequency at PSD max">f<sub>peak</sub></td><td data-zh="EMG median freq → 疲勞" data-en="EMG median freq → fatigue">EMG 疲勞</td></tr>
+<tr><td rowspan="2"><strong data-zh="非線性" data-en="Nonlinear">非線性</strong></td><td>Sample Entropy</td><td data-zh="重複序列模式機率的負對數" data-en="−log of repeat-pattern probability">SampEn</td><td data-zh="心律規律度；癲癇預警" data-en="HR regularity; seizure forecasting">心律、癲癇</td></tr>
+<tr><td>DFA α<sub>1</sub></td><td data-zh="去趨勢波動分析的短期斜率" data-en="Short-range scaling of detrended fluctuations">DFA α<sub>1</sub></td><td data-zh="自律平衡、運動門檻" data-en="Autonomic balance, training threshold">運動門檻</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動實驗" data-en="INTERACTIVE">互動實驗</div>
+<h2 data-zh="六、濾波器 playground（時域 + 頻譜）" data-en="VI. Filter Playground (Time + Spectrum)">六、濾波器 playground</h2>
+<div data-lang="zh"><p>下圖為 ECG（1.2 Hz 主成分） + 0.3 Hz 漂移 + 50 Hz 工頻雜訊。選擇濾波器類型觀察「乾淨」訊號形狀與頻譜。</p></div>
+<div data-lang="en"><p>Below: ECG (1.2 Hz dominant) + 0.3 Hz wander + 50 Hz line. Pick a filter to see the cleaned waveform and spectrum.</p></div>
+<div class="interactive-panel">
+<div class="toggle-row">
+  <button class="toggle-btn active" data-filt="none" data-zh="原始" data-en="Raw">原始</button>
+  <button class="toggle-btn" data-filt="hpf" data-zh="HPF 0.5 Hz" data-en="HPF 0.5 Hz">HPF 0.5 Hz</button>
+  <button class="toggle-btn" data-filt="lpf" data-zh="LPF 40 Hz" data-en="LPF 40 Hz">LPF 40 Hz</button>
+  <button class="toggle-btn" data-filt="bpf" data-zh="BPF 0.5–40 Hz" data-en="BPF 0.5–40 Hz">BPF 0.5–40 Hz</button>
+  <button class="toggle-btn" data-filt="notch" data-zh="Notch 50 Hz" data-en="Notch 50 Hz">Notch 50 Hz</button>
+</div>
+<div class="chart-container" style="height:200px"><canvas id="timeChart"></canvas></div>
+<div class="chart-container" style="height:200px"><canvas id="freqChart"></canvas></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="ICA 與 EEG" data-en="ICA &amp; EEG">ICA 與 EEG</div>
+<h2 data-zh="七、Independent Component Analysis（ICA）" data-en="VII. Independent Component Analysis (ICA)">七、ICA 去 EEG 假影</h2>
+<div data-lang="zh">
+<p>多通道 EEG 是多個獨立來源（皮質網絡、眼動、心電、肌電）的<em>線性混合</em>：<strong>x = A·s</strong>。ICA 假設來源 s 統計獨立、非高斯，估出 unmixing matrix W ≈ A⁻¹，把眼動 blink、心電污染、線性電纜雜訊等成分逐一分離後刪除，再用 W⁻¹ 重建乾淨 EEG。</p>
+<p>主流算法：<strong>FastICA</strong>（負熵最大化）、<strong>Infomax</strong>（資訊最大化）、<strong>SOBI</strong>（二階統計）。常用工具：MNE-Python 的 <code>mne.preprocessing.ICA</code>、EEGLAB 的 runica。</p>
+</div>
+<div data-lang="en">
+<p>Multi-channel EEG is a <em>linear mixture</em> of independent sources (cortical networks, eye movement, cardiac, EMG): <strong>x = A·s</strong>. ICA assumes statistically independent, non-Gaussian sources and estimates the unmixing matrix W ≈ A⁻¹, then removes blink / cardiac / cable-noise components and reconstructs clean EEG via W⁻¹.</p>
+<p>Main algorithms: <strong>FastICA</strong> (negentropy max), <strong>Infomax</strong> (mutual-information max), <strong>SOBI</strong> (2nd-order). Tools: MNE-Python <code>mne.preprocessing.ICA</code>, EEGLAB <code>runica</code>.</p>
+</div>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>ICA 限制：</strong>(1) 來源必須非高斯；純白雜訊無法分離。(2) 訊號數需 ≥ 來源數，故 1–4 通道 EEG 不適合。(3) 成分順序不固定，需人或自動分類器辨識「眼動成分 vs 腦成分」。</span>
+<span data-lang="en"><strong>ICA caveats:</strong> (1) sources must be non-Gaussian — pure white noise can't be separated; (2) channels must ≥ sources, so 1–4-ch EEG isn't suitable; (3) component order is arbitrary — a human or automated classifier must label "blink vs cortex."</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="八、雜訊 → 濾波器決策樹" data-en="VIII. Noise → Filter Decision Tree">八、濾波器決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="雜訊類型 → 推薦濾波器" data-en="Noise Type → Recommended Filter">雜訊 → 濾波器</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">基線漂移（&lt; 0.5 Hz 呼吸/出汗）？<span class="dt-arrow">→</span> <strong>HPF</strong> 0.5 Hz；診斷級 0.05 Hz（避免 ST 段失真）。</span><span data-lang="en">Baseline wander (&lt; 0.5 Hz, breathing/sweating)? <span class="dt-arrow">→</span> <strong>HPF</strong> 0.5 Hz; diagnostic 0.05 Hz (to avoid ST distortion).</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">EMG 突發污染（20–500 Hz）？<span class="dt-arrow">→</span> <strong>LPF</strong> 35–40 Hz（監測級）。診斷 ECG 應改善病人放鬆而非加 LPF。</span><span data-lang="en">EMG burst (20–500 Hz)? <span class="dt-arrow">→</span> <strong>LPF</strong> 35–40 Hz (monitoring). For diagnostic ECG, relax the patient rather than apply LPF.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">50/60 Hz 工頻雜訊？<span class="dt-arrow">→</span> <strong>Notch</strong>（Q ≈ 30–50）；首選改善 CMRR 與 DRL。</span><span data-lang="en">50/60 Hz line interference? <span class="dt-arrow">→</span> <strong>Notch</strong> (Q ≈ 30–50); but first improve CMRR and DRL.</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">混合多種低/高/單頻雜訊？<span class="dt-arrow">→</span> <strong>BPF</strong>（HPF + LPF 串接）+ notch。串級設計 (cascaded biquad) 數值穩定。</span><span data-lang="en">Mixed low/high/single-freq noise? <span class="dt-arrow">→</span> <strong>BPF</strong> (HPF + LPF) + notch. Cascaded biquads stay numerically stable.</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">瞬態（電極 pop、肌肉抽搐）？<span class="dt-arrow">→</span> 線性濾波無法解決；改用 <strong>wavelet 去噪</strong>、形態學濾波或事件偵測 + 內插。</span><span data-lang="en">Transients (electrode pop, twitch)? <span class="dt-arrow">→</span> Linear filters fail; use <strong>wavelet denoising</strong>, morphological filter, or event detection + interpolation.</span></div>
+<div class="dt-node"><span class="dt-q">Q6.</span><span data-lang="zh">多通道 EEG 含眼動 / 心電污染？<span class="dt-arrow">→</span> <strong>ICA</strong>（FastICA 或 Infomax），刪除 blink / ECG IC 後重建。</span><span data-lang="en">Multi-ch EEG with blink / cardiac contamination? <span class="dt-arrow">→</span> <strong>ICA</strong> (FastICA or Infomax), reject blink/ECG ICs and reconstruct.</span></div>
+<div class="dt-node"><span class="dt-q">Q7.</span><span data-lang="zh">想保留 QRS 形狀的低延遲處理？<span class="dt-arrow">→</span> 用 <strong>FIR 線性相位</strong> 而非 IIR；不可用 zero-phase（雙向）filtfilt 於即時。</span><span data-lang="en">Need to preserve QRS shape with low latency? <span class="dt-arrow">→</span> Use <strong>FIR linear-phase</strong> filters; zero-phase filtfilt cannot run real-time.</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="九、ECG 帶通濾波 + Pan-Tompkins 偵測" data-en="IX. ECG Band-pass + Pan-Tompkins Detection">九、程式示例</h2>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.signal <span class="kw">import</span> butter, filtfilt, iirnotch, find_peaks
+<span class="kw">from</span> scipy.signal <span class="kw">import</span> welch
+
+fs = <span class="num">500</span>; t = np.<span class="func">arange</span>(<span class="num">0</span>, <span class="num">10</span>, <span class="num">1</span>/fs)
+<span class="comment"># Toy ECG with realistic contamination</span>
+ecg = (np.<span class="func">sin</span>(<span class="num">2</span>*np.pi*<span class="num">1.2</span>*t)
+       + <span class="num">0.3</span>*np.<span class="func">sin</span>(<span class="num">2</span>*np.pi*<span class="num">0.3</span>*t)            <span class="comment"># wander</span>
+       + <span class="num">0.4</span>*np.<span class="func">sin</span>(<span class="num">2</span>*np.pi*<span class="num">50</span>*t)             <span class="comment"># power-line</span>
+       + <span class="num">0.05</span>*np.random.<span class="func">randn</span>(len(t)))         <span class="comment"># white noise</span>
+
+<span class="comment"># 1) Notch 50 Hz</span>
+b0,a0 = iirnotch(<span class="num">50</span>, <span class="num">30</span>, fs)
+x = filtfilt(b0, a0, ecg)
+
+<span class="comment"># 2) Band-pass 0.5–40 Hz (Butterworth, 4th order)</span>
+b,a = butter(<span class="num">4</span>, [<span class="num">0.5</span>/(fs/<span class="num">2</span>), <span class="num">40</span>/(fs/<span class="num">2</span>)], btype=<span class="str">'band'</span>)
+x = filtfilt(b, a, x)
+
+<span class="comment"># 3) Pan-Tompkins: differentiate / square / integrate</span>
+b1,a1 = butter(<span class="num">2</span>, [<span class="num">5</span>/(fs/<span class="num">2</span>), <span class="num">15</span>/(fs/<span class="num">2</span>)], btype=<span class="str">'band'</span>)
+y    = filtfilt(b1, a1, x)
+y    = np.<span class="func">diff</span>(y, prepend=<span class="num">0</span>)**<span class="num">2</span>
+wlen = <span class="func">int</span>(<span class="num">0.150</span>*fs)
+mwi  = np.<span class="func">convolve</span>(y, np.<span class="func">ones</span>(wlen)/wlen, mode=<span class="str">'same'</span>)
+peaks,_ = find_peaks(mwi, distance=<span class="func">int</span>(<span class="num">0.25</span>*fs),
+                     height=<span class="num">0.4</span>*np.<span class="func">max</span>(mwi))
+hr = <span class="num">60</span>/np.<span class="func">mean</span>(np.<span class="func">diff</span>(peaks)/fs)
+
+<span class="comment"># 4) Welch PSD for HRV LF/HF</span>
+rr  = np.<span class="func">diff</span>(peaks)/fs
+f,P = welch(rr - rr.<span class="func">mean</span>(), fs=<span class="num">4.0</span>, nperseg=<span class="num">64</span>)
+LF  = P[(f&gt;<span class="num">0.04</span>)&amp;(f&lt;<span class="num">0.15</span>)].<span class="func">sum</span>()
+HF  = P[(f&gt;<span class="num">0.15</span>)&amp;(f&lt;<span class="num">0.4</span>)].<span class="func">sum</span>()
+<span class="func">print</span>(<span class="str">f"HR={hr:.1f} bpm,  LF/HF={LF/HF:.2f}"</span>)</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre>fs = <span class="num">500</span>; t = <span class="num">0</span>:<span class="num">1</span>/fs:<span class="num">10</span>-<span class="num">1</span>/fs;
+ecg = <span class="func">sin</span>(<span class="num">2</span>*pi*<span class="num">1.2</span>*t) + <span class="num">0.3</span>*<span class="func">sin</span>(<span class="num">2</span>*pi*<span class="num">0.3</span>*t) ...
+    + <span class="num">0.4</span>*<span class="func">sin</span>(<span class="num">2</span>*pi*<span class="num">50</span>*t) + <span class="num">0.05</span>*<span class="func">randn</span>(<span class="num">1</span>,length(t));
+
+<span class="comment">% Notch 50 Hz</span>
+[b0,a0] = <span class="func">iirnotch</span>(<span class="num">50</span>/(fs/<span class="num">2</span>), <span class="num">50</span>/(fs/<span class="num">2</span>)/<span class="num">30</span>);
+x = <span class="func">filtfilt</span>(b0,a0,ecg);
+
+<span class="comment">% Band-pass 0.5–40 Hz</span>
+[b,a] = <span class="func">butter</span>(<span class="num">4</span>, [<span class="num">0.5</span> <span class="num">40</span>]/(fs/<span class="num">2</span>), <span class="str">'bandpass'</span>);
+x = <span class="func">filtfilt</span>(b,a,x);
+
+<span class="comment">% Pan-Tompkins</span>
+[b1,a1] = <span class="func">butter</span>(<span class="num">2</span>, [<span class="num">5</span> <span class="num">15</span>]/(fs/<span class="num">2</span>), <span class="str">'bandpass'</span>);
+y = <span class="func">filtfilt</span>(b1,a1,x);
+y = [<span class="num">0</span> <span class="func">diff</span>(y)].^<span class="num">2</span>;
+mwi = <span class="func">movmean</span>(y, round(<span class="num">0.150</span>*fs));
+[~,locs] = <span class="func">findpeaks</span>(mwi, <span class="str">'MinPeakDistance'</span>, round(<span class="num">0.25</span>*fs), ...
+                          <span class="str">'MinPeakHeight'</span>, <span class="num">0.4</span>*max(mwi));
+hr = <span class="num">60</span>/<span class="func">mean</span>(<span class="func">diff</span>(locs)/fs);
+fprintf(<span class="str">'HR = %.1f bpm\n'</span>, hr);
+
+<span class="comment">% HRV LF/HF via pwelch (Signal Processing Toolbox)</span>
+rr = <span class="func">diff</span>(locs)/fs;
+[Pxx,F] = <span class="func">pwelch</span>(rr-mean(rr), [], [], [], <span class="num">4</span>);
+LF = sum(Pxx(F&gt;<span class="num">0.04</span>&amp;F&lt;<span class="num">0.15</span>));  HF = sum(Pxx(F&gt;<span class="num">0.15</span>&amp;F&lt;<span class="num">0.4</span>));
+fprintf(<span class="str">'LF/HF = %.2f\n'</span>, LF/HF);</pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十、本章關鍵術語" data-en="X. Key Terms">十、關鍵術語</h2>
+<p><span class="term">Nyquist<span class="term-tip">f<sub>s</sub>/2，可正確還原的最高頻率。</span></span> &nbsp;
+<span class="term">Aliasing<span class="term-tip">頻譜混疊：高頻訊號被取樣後偽裝成低頻。</span></span> &nbsp;
+<span class="term">FIR / IIR<span class="term-tip">有限脈衝響應 / 無限脈衝響應；FIR 穩、線性相位但階高，IIR 階低但相位非線性。</span></span> &nbsp;
+<span class="term">Butterworth<span class="term-tip">通帶最平坦的 IIR 原型；醫療最常用。</span></span> &nbsp;
+<span class="term">Notch<span class="term-tip">窄阻帶濾波器；專門移除工頻或單一干擾。</span></span> &nbsp;
+<span class="term">FFT<span class="term-tip">Fast Fourier Transform — O(N log N) 計算 DFT。</span></span> &nbsp;
+<span class="term">STFT<span class="term-tip">短時傅立葉變換：滑動視窗 FFT，得到 spectrogram。</span></span> &nbsp;
+<span class="term">CWT / DWT<span class="term-tip">連續 / 離散小波變換；多解析度時間-頻率分析。</span></span> &nbsp;
+<span class="term">Pan-Tompkins<span class="term-tip">1985 年提出的 QRS 偵測流程：BP → diff → square → MA → 雙閾值。</span></span> &nbsp;
+<span class="term">ICA<span class="term-tip">獨立成分分析；多通道訊號的盲源分離。</span></span> &nbsp;
+<span class="term">HRV<span class="term-tip">心率變異；SDNN、RMSSD、LF/HF。</span></span> &nbsp;
+<span class="term">Sample Entropy<span class="term-tip">衡量時間序列規律性；越大越不可預測。</span></span></p>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check (3 questions)">📝 本章自測</h3>
+<div class="quiz-q" data-correct="1">
+<p><span data-lang="zh">Q1. 要避免混疊，類比抗混疊低通濾波器的截止頻率通常設在？</span><span data-lang="en">Q1. The analog anti-aliasing low-pass cutoff is typically set at:</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0">A. f<sub>s</sub></div>
+<div class="quiz-opt" data-opt="1">B. ≈ 0.4·f<sub>s</sub>（<span data-zh="略低於 Nyquist" data-en="just below Nyquist">略低於 Nyquist</span>）</div>
+<div class="quiz-opt" data-opt="2">C. 2·f<sub>s</sub></div>
+<div class="quiz-opt" data-opt="3">D. f<sub>s</sub>/10</div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+<div class="quiz-q" data-correct="2">
+<p><span data-lang="zh">Q2. 一段 ECG 含 0.3 Hz 呼吸漂移、50 Hz 工頻干擾、20 Hz 肌電。最有效的線性處理組合？</span><span data-lang="en">Q2. An ECG has 0.3 Hz wander, 50 Hz line, 20 Hz EMG. Best linear combo?</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0">A. <span data-zh="只用 60 Hz notch" data-en="60 Hz notch only">只用 60 Hz notch</span></div>
+<div class="quiz-opt" data-opt="1">B. <span data-zh="只用 0.5 Hz HPF" data-en="0.5 Hz HPF only">只用 0.5 Hz HPF</span></div>
+<div class="quiz-opt" data-opt="2">C. <span data-zh="HPF 0.5 Hz + LPF 40 Hz + 50 Hz notch" data-en="HPF 0.5 Hz + LPF 40 Hz + 50 Hz notch">HPF 0.5 Hz + LPF 40 Hz + 50 Hz notch</span></div>
+<div class="quiz-opt" data-opt="3">D. <span data-zh="只用 50 Hz LPF" data-en="50 Hz LPF only">只用 50 Hz LPF</span></div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+<div class="quiz-q" data-correct="2">
+<p><span data-lang="zh">Q3. 想分析非平穩 EEG 的瞬時尖波（spike）並同時保留時間 + 頻率位置，最佳工具是？</span><span data-lang="en">Q3. For non-stationary EEG transient spikes (time + frequency localization), the best tool is:</span></p>
+<div class="quiz-options">
+<div class="quiz-opt" data-opt="0">A. <span data-zh="全段 FFT" data-en="Whole-signal FFT">全段 FFT</span></div>
+<div class="quiz-opt" data-opt="1">B. <span data-zh="自相關" data-en="Autocorrelation">自相關</span></div>
+<div class="quiz-opt" data-opt="2">C. <span data-zh="連續小波 CWT" data-en="Continuous wavelet (CWT)">連續小波 CWT</span></div>
+<div class="quiz-opt" data-opt="3">D. <span data-zh="Laplace 變換" data-en="Laplace transform">Laplace 變換</span></div>
+</div>
+<div class="quiz-feedback"></div>
+</div>
+</section>
+
+<div class="page-nav">
+<a href="biosignals.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="B1 · 生醫訊號" data-en="B1 · Biosignals">B1 · 生醫訊號</span></a>
+<a href="medical-imaging.html"><span class="nav-dir" data-zh="下一章 →" data-en="Next →">下一章 →</span><span class="nav-title" data-zh="B3 · 醫學影像" data-en="B3 · Medical Imaging">B3 · 醫學影像</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · B2 Signal Processing</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// Filter playground
+function dft(x){
+  const N=x.length, mag=new Float64Array(N/2);
+  for(let k=0;k<N/2;k++){let r=0,i=0;for(let n=0;n<N;n++){const a=-2*Math.PI*k*n/N;r+=x[n]*Math.cos(a);i+=x[n]*Math.sin(a);}mag[k]=Math.sqrt(r*r+i*i);}
+  return mag;
+}
+// Simple 1-pole RC filters; approximate enough for visualization
+function lpf(x,fc,fs){const a=Math.exp(-2*Math.PI*fc/fs);const y=new Array(x.length);y[0]=x[0];for(let i=1;i<x.length;i++)y[i]=a*y[i-1]+(1-a)*x[i];return y;}
+function hpf(x,fc,fs){const a=Math.exp(-2*Math.PI*fc/fs);const y=new Array(x.length);y[0]=x[0];for(let i=1;i<x.length;i++)y[i]=a*(y[i-1]+x[i]-x[i-1]);return y;}
+function notch(x,f0,Q,fs){const w0=2*Math.PI*f0/fs;const al=Math.sin(w0)/(2*Q);const b0=1,b1=-2*Math.cos(w0),b2=1,a0=1+al,a1=-2*Math.cos(w0),a2=1-al;const y=new Array(x.length).fill(0);for(let n=2;n<x.length;n++){y[n]=(b0*x[n]+b1*x[n-1]+b2*x[n-2]-a1*y[n-1]-a2*y[n-2])/a0;}return y;}
+const fs=256,N=512;
+const t=Array.from({length:N},(_,i)=>i/fs);
+const raw=t.map(ti=>Math.sin(2*Math.PI*1.2*ti)+0.3*Math.sin(2*Math.PI*0.3*ti)+0.4*Math.sin(2*Math.PI*50*ti)+0.05*(Math.random()*2-1));
+let tChart=null,fChart=null;
+function draw(filt){
+  let y=raw;
+  if(filt==='hpf')y=hpf(raw,0.5,fs);
+  else if(filt==='lpf')y=lpf(raw,40,fs);
+  else if(filt==='bpf')y=lpf(hpf(raw,0.5,fs),40,fs);
+  else if(filt==='notch')y=notch(raw,50,30,fs);
+  const mag=dft(y);
+  const freq=Array.from({length:N/2},(_,k)=>(k*fs/N).toFixed(1));
+  const lang=I18n.get();
+  if(tChart)tChart.destroy(); if(fChart)fChart.destroy();
+  tChart=new Chart(document.getElementById('timeChart').getContext('2d'),{type:'line',data:{labels:t.map(x=>x.toFixed(2)),datasets:[{label:lang==='zh'?'時域（mV）':'Time domain (mV)',data:y,borderColor:'#831843',pointRadius:0,tension:0.1,borderWidth:1.2}]},options:{plugins:{legend:{display:true}},scales:{x:{title:{display:true,text:'t (s)'},ticks:{maxTicksLimit:10}}}}});
+  fChart=new Chart(document.getElementById('freqChart').getContext('2d'),{type:'bar',data:{labels:freq,datasets:[{label:lang==='zh'?'頻譜 |X(f)|':'Spectrum |X(f)|',data:Array.from(mag),backgroundColor:'rgba(219,39,119,.7)'}]},options:{plugins:{legend:{display:true}},scales:{x:{title:{display:true,text:'Hz'},ticks:{maxTicksLimit:14}}}}});
+}
+document.querySelectorAll('.toggle-btn[data-filt]').forEach(b=>{
+  b.addEventListener('click',()=>{document.querySelectorAll('.toggle-btn[data-filt]').forEach(x=>x.classList.remove('active'));b.classList.add('active');draw(b.dataset.filt);});
+});
+draw('none');
+document.addEventListener('langchange',()=>{const cur=document.querySelector('.toggle-btn[data-filt].active').dataset.filt;draw(cur);});
+</script>
+</body></html>

@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>生醫工程概論 互動考題 / BME Introduction Interactive Quiz</title>
+<style>
+:root{
+  --bg:#f5f8fa; --card:#fff; --ink:#1a2733; --soft:#5a6b7b; --line:#e0e6eb;
+  --primary:#C62828; --primary-soft:#F4E1E1; --primary-dark:#551111;
+  --accent:#607D8B; --accent-soft:#E9EBEC;
+  --green:#2f9e44; --green-soft:#d3f9d8;
+  --red:#c92a2a; --red-soft:#ffe3e3;
+  --yellow:#d9a700; --yellow-soft:#fff4c2;
+  --grey:#f1f3f5; --grey-soft:#f8f9fa;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 4px 12px rgba(0,0,0,.04);
+  --radius:10px;
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{font-family:-apple-system,"Segoe UI","PingFang TC","Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;font-size:16px}
+header{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 60%,var(--accent) 100%);color:#fff;padding:14px 22px;position:sticky;top:0;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.h-row{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+h1{font-size:18px;margin:0;font-weight:700;display:flex;align-items:center;gap:8px}
+.homelink{color:#fff;text-decoration:none;font-size:13px;padding:5px 12px;border:1px solid rgba(255,255,255,.5);border-radius:999px;white-space:nowrap;cursor:pointer;background:transparent;font-family:inherit}
+.homelink:hover{background:rgba(255,255,255,.15);border-color:#fff}
+.lang-btn{margin-left:auto;background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:5px 14px;cursor:pointer;font-size:13px;font-weight:700}
+.lang-btn:hover{background:rgba(255,255,255,.28)}
+.stat{color:rgba(255,255,255,.95);font-size:13px}
+.stat strong{color:#fff;font-size:17px}
+
+main{max-width:1280px;margin:22px auto;padding:0 18px 40px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-bottom:18px}
+.panel h2{margin:0 0 6px;font-size:16px;font-weight:600}
+.panel .desc{color:var(--soft);font-size:13px;margin-bottom:14px}
+
+.global-prog{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--primary-soft);border:1px solid var(--primary);border-radius:8px;margin-bottom:14px;font-size:13px;flex-wrap:wrap}
+.global-prog .gp-label{color:var(--primary);font-weight:600;min-width:90px}
+.global-prog .gp-bar{flex:1;height:8px;background:#fff;border-radius:4px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line);min-width:160px}
+.global-prog .gp-fill{height:100%;background:var(--green);transition:width .35s;width:0%}
+.global-prog .gp-text{color:var(--ink);font-variant-numeric:tabular-nums}
+.global-prog .gp-reset{background:#fff;border:1px solid var(--red);color:var(--red);padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;font-family:inherit}
+.global-prog .gp-reset:hover{background:var(--red);color:#fff}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.ycard{background:var(--grey-soft);border:1px solid var(--line);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.ytitle{font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ytitle .ycount{color:var(--soft);font-weight:400;font-size:12px}
+.ystatus{font-size:12px;color:var(--soft)}
+.ystatus .badge-status{padding:2px 8px;border-radius:999px;font-weight:600;font-size:11px;margin-left:4px}
+.ystatus .badge-status.ip{background:var(--yellow-soft);color:#a06a00}
+.ystatus .badge-status.done{background:var(--green-soft);color:var(--green)}
+.action-row{display:flex;gap:6px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:999px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;border:1px solid var(--primary);background:var(--primary-soft);color:var(--primary-dark);flex:1;min-width:120px;justify-content:center;transition:all .12s}
+.chip:hover{background:var(--primary);color:#fff;transform:translateY(-1px)}
+
+/* Quiz view */
+.layout{display:grid;grid-template-columns:300px 1fr;gap:22px;max-width:1280px;margin:18px auto;padding:0 18px}
+@media (max-width:880px){.layout{grid-template-columns:1fr;padding:0 14px}.sidebar{order:2;position:static}}
+.sidebar{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px;height:fit-content;position:sticky;top:78px}
+.grid{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-bottom:12px}
+.gbtn{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--soft);font-size:13px;cursor:pointer;font-variant-numeric:tabular-nums;font-family:inherit}
+.gbtn:hover{border-color:var(--primary)}
+.gbtn.cur{background:var(--primary);color:#fff;border-color:var(--primary)}
+.gbtn.right{background:var(--green-soft);color:var(--green);border-color:var(--green)}
+.gbtn.wrong{background:var(--red-soft);color:var(--red);border-color:var(--red)}
+.legend{font-size:12px;color:var(--soft);display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:3px;vertical-align:middle;margin-right:4px;border:1px solid var(--line)}
+.dot.r{background:var(--green-soft);border-color:var(--green)}
+.dot.w{background:var(--red-soft);border-color:var(--red)}
+
+.main-col{display:flex;flex-direction:column;gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.qhead{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.qnum{font-size:22px;font-weight:700;color:var(--primary)}
+.qmeta{color:var(--soft);font-size:13px}
+.qtype{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.5px;border:1px solid var(--line)}
+.qtype.single{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+.qtype.multi{background:#f3e8ff;color:#7c3aed;border-color:#7c3aed}
+.qtype.tf{background:#fff7e6;color:#d97706;border-color:#d97706}
+.stem{font-size:16px;white-space:pre-wrap;word-break:break-word;margin-bottom:12px}
+.opts{display:flex;flex-direction:column;gap:8px;margin:14px 0 4px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;background:#fff;border:1px solid var(--line);border-radius:8px;cursor:pointer;text-align:left;font-size:15.5px;color:var(--ink);font-family:inherit;width:100%;transition:all .12s}
+.opt:hover:not(.locked){background:var(--primary-soft);border-color:var(--primary)}
+.opt.locked{cursor:default}
+.opt.selected{background:var(--accent-soft);border-color:var(--accent)}
+.opt .label{font-weight:700;min-width:22px}
+.opt.correct{background:var(--green-soft);border-color:var(--green);color:#186b29}
+.opt.wrong{background:var(--red-soft);border-color:var(--red);color:#861818}
+.submit-row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.btn{background:var(--primary);color:#fff;border:0;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:14px;font-family:inherit;transition:all .12s}
+.btn:hover:not(:disabled){background:var(--primary-dark);transform:translateY(-1px)}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--primary);color:var(--primary)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.verdict{margin-top:14px;padding:12px 14px;border-radius:8px;font-size:14px;line-height:1.7}
+.verdict.right{background:var(--green-soft);color:#186b29}
+.verdict.wrong{background:var(--red-soft);color:#861818}
+.verdict .ans-line{font-weight:600;margin-bottom:4px}
+.nav{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.footer{color:var(--soft);font-size:12px;text-align:center;margin:18px 0 28px}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-row">
+    <button class="homelink hidden" id="homeBtn" data-zh="← 回章節列表" data-en="← Back to list">← 回章節列表</button>
+    <h1 id="hdrTitle" data-zh="⚕️ 生醫工程概論 互動式考題" data-en="⚕️ Biomedical Engineering Intro Interactive Quiz">⚕️ 生醫工程概論 互動式考題</h1>
+    <button class="lang-btn" id="langToggle">EN</button>
+    <div class="stat" id="stat"></div>
+  </div>
+</header>
+
+<!-- Home view -->
+<main id="homeView">
+  <div class="panel">
+    <div class="global-prog">
+      <span class="gp-label" data-zh="總體進度" data-en="Progress">總體進度</span>
+      <div class="gp-bar"><div class="gp-fill" id="gpFill"></div></div>
+      <span class="gp-text" id="gpText" data-zh="尚未開始作答" data-en="Not started">尚未開始作答</span>
+      <button class="gp-reset" id="gpReset" data-zh="🗑️ 重置作答" data-en="🗑️ Reset answers">🗑️ 重置作答</button>
+    </div>
+    <h2 data-zh="章節列表" data-en="Chapter list">章節列表</h2>
+    <p class="desc" data-lang="zh">每章選擇單選 / 多選 / 是非。練習模式：每題立即顯示對錯與詳解。進度儲存在瀏覽器（localStorage），清除快取會遺失。</p>
+    <p class="desc" data-lang="en">Each chapter mixes single-choice / multi-select / true-false. Practice mode: per-question feedback with explanation. Progress is saved in your browser (localStorage); clearing cache will erase it.</p>
+    <a href="../index.html" class="homelink" style="display:inline-block;color:var(--primary);border-color:var(--primary);margin-bottom:14px" data-zh="← 回 BME 教學首頁" data-en="← Back to BME Tutorial">← 回 BME 教學首頁</a>
+  </div>
+  <div id="subjectsContainer"></div>
+  <div class="footer">
+    <span data-zh="共 " data-en="Total ">共 </span>
+    <span id="totalCount"></span>
+    <span data-zh=" 題 · 生醫工程概論 Interactive Tutorial" data-en=" questions · BME Introduction Interactive Tutorial"> 題 · 生醫工程概論 Interactive Tutorial</span>
+  </div>
+</main>
+
+<!-- Quiz view -->
+<div class="layout hidden" id="quizView">
+  <aside class="sidebar">
+    <div style="font-size:13px;color:var(--soft);margin-bottom:6px"><span id="sbTotal">— 題</span></div>
+    <div class="grid" id="grid"></div>
+    <div class="legend">
+      <span><i class="dot r"></i><span data-zh="答對" data-en="Correct">答對</span></span>
+      <span><i class="dot w"></i><span data-zh="答錯" data-en="Wrong">答錯</span></span>
+    </div>
+    <button id="resetBtn" class="btn ghost" style="margin-top:12px;width:100%;font-size:13px" data-zh="重置本卷作答" data-en="Reset this quiz">重置本卷作答</button>
+  </aside>
+  <main class="main-col" id="quizMain"></main>
+</div>
+
+<script src="data.js"></script>
+<script src="i18n.js"></script>
+<script>
+const DATA = window.QUIZ_DATA.bmeintro;
+const STORE_KEY = "bmeintro_quiz_progress_v1";
+
+function loadProg(){ try{return JSON.parse(localStorage.getItem(STORE_KEY))||{};}catch(e){return {};} }
+function saveProg(p){ localStorage.setItem(STORE_KEY, JSON.stringify(p)); }
+let progress = loadProg();
+let state = { section:null, chapter:null, index:0 };
+
+function getLang(){ return (window.I18n && window.I18n.get) ? window.I18n.get() : 'en'; }
+
+function getChapter(section, chapter){ return DATA.subjects[section][chapter]; }
+function chapterKey(section, chapter){ return section + "::" + chapter; }
+function chapterProg(section, chapter){
+  const k = chapterKey(section,chapter);
+  if(!progress[k]) progress[k] = { answers:{} };
+  return progress[k];
+}
+function chapterStats(section, chapter){
+  const list = getChapter(section, chapter);
+  const cp = chapterProg(section, chapter);
+  let answered=0, correct=0;
+  list.forEach((q,i)=>{
+    const a = cp.answers[i];
+    if(a){ answered++; if(a.correct) correct++; }
+  });
+  return { total:list.length, answered, correct };
+}
+function totalStats(){
+  let total=0, answered=0, correct=0;
+  Object.keys(DATA.subjects).forEach(sec=>{
+    Object.keys(DATA.subjects[sec]).forEach(ch=>{
+      const s = chapterStats(sec, ch);
+      total+=s.total; answered+=s.answered; correct+=s.correct;
+    });
+  });
+  return {total, answered, correct};
+}
+
+function renderHome(){
+  const L = getLang();
+  const ts = totalStats();
+  document.getElementById('totalCount').textContent = ts.total;
+  document.getElementById('gpFill').style.width = ts.total ? (ts.answered/ts.total*100).toFixed(1)+'%' : '0%';
+  const gpt = ts.answered===0
+    ? (L==='zh'?'尚未開始作答':'Not started')
+    : `${ts.answered}/${ts.total} ${L==='zh'?'答完':'answered'} · ${ts.correct} ${L==='zh'?'答對':'correct'} (${(ts.correct/ts.answered*100).toFixed(0)}%)`;
+  document.getElementById('gpText').textContent = gpt;
+
+  const cont = document.getElementById('subjectsContainer');
+  cont.innerHTML='';
+  Object.keys(DATA.subjects).forEach(sec=>{
+    const secName = (L==='en' && DATA.labels_en[sec]) ? DATA.labels_en[sec] : sec;
+    const wrap = document.createElement('div'); wrap.className='panel';
+    wrap.innerHTML = `<h2>${secName}</h2><div class="cards"></div>`;
+    const cards = wrap.querySelector('.cards');
+    Object.keys(DATA.subjects[sec]).forEach(ch=>{
+      const chName = (L==='en' && DATA.labels_en[ch]) ? DATA.labels_en[ch] : ch;
+      const s = chapterStats(sec, ch);
+      let badge='';
+      if(s.answered===0) badge='';
+      else if(s.answered<s.total) badge=`<span class="badge-status ip">${s.answered}/${s.total}</span>`;
+      else badge=`<span class="badge-status done">${s.correct}/${s.total} ✓</span>`;
+      const c=document.createElement('div'); c.className='ycard';
+      c.innerHTML = `
+        <div class="ytitle">${chName} <span class="ycount">· ${s.total} ${L==='zh'?'題':'qs'}</span></div>
+        <div class="ystatus">${L==='zh'?'狀態':'Status'}: ${badge||(L==='zh'?'<span style="color:var(--soft)">未開始</span>':'<span style="color:var(--soft)">Not started</span>')}</div>
+        <div class="action-row"><button class="chip" data-sec="${sec}" data-ch="${ch}">📝 ${L==='zh'?'開始練習':'Start practice'}</button></div>`;
+      cards.appendChild(c);
+    });
+    cont.appendChild(wrap);
+  });
+  cont.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{
+    state.section=b.dataset.sec; state.chapter=b.dataset.ch; state.index=0;
+    showQuiz();
+  }));
+}
+
+function showHome(){
+  document.getElementById('homeView').classList.remove('hidden');
+  document.getElementById('quizView').classList.add('hidden');
+  document.getElementById('homeBtn').classList.add('hidden');
+  renderHome();
+}
+function showQuiz(){
+  document.getElementById('homeView').classList.add('hidden');
+  document.getElementById('quizView').classList.remove('hidden');
+  document.getElementById('homeBtn').classList.remove('hidden');
+  renderQuiz();
+}
+
+function renderQuiz(){
+  const L = getLang();
+  const list = getChapter(state.section, state.chapter);
+  const cp = chapterProg(state.section, state.chapter);
+  const chName = (L==='en' && DATA.labels_en[state.chapter]) ? DATA.labels_en[state.chapter] : state.chapter;
+
+  // sidebar grid
+  document.getElementById('sbTotal').textContent = `${chName} · ${list.length} ${L==='zh'?'題':'qs'}`;
+  const grid = document.getElementById('grid'); grid.innerHTML='';
+  list.forEach((q,i)=>{
+    const a = cp.answers[i];
+    const b = document.createElement('button'); b.className='gbtn'; b.textContent=i+1;
+    if(i===state.index) b.classList.add('cur');
+    if(a){ b.classList.add(a.correct?'right':'wrong'); }
+    b.addEventListener('click',()=>{ state.index=i; renderQuiz(); });
+    grid.appendChild(b);
+  });
+
+  // main
+  const q = list[state.index];
+  const stem = (L==='en' && q.stem_en) ? q.stem_en : q.stem;
+  const main = document.getElementById('quizMain'); main.innerHTML='';
+  const stats = chapterStats(state.section, state.chapter);
+
+  const typeLabel = q.type==='single'?(L==='zh'?'單選':'Single'):q.type==='multi'?(L==='zh'?'多選':'Multi'):(L==='zh'?'是非':'T/F');
+  const headHTML = `
+    <div class="qhead">
+      <span class="qnum">${state.index+1}</span>
+      <span class="qtype ${q.type}">${typeLabel}</span>
+      <span class="qmeta">${L==='zh'?'共':'of'} ${list.length} ${L==='zh'?'題':''}</span>
+      <span class="qmeta" style="margin-left:auto">${stats.answered}/${stats.total} · ✓ ${stats.correct}</span>
+    </div>
+    <div class="stem">${stem}</div>
+    <div class="opts" id="opts"></div>
+    <div class="submit-row"><button class="btn" id="submitBtn">${L==='zh'?'送出答案':'Submit'}</button></div>
+    <div id="verdict"></div>
+    <div class="nav">
+      <button class="btn ghost" id="prevBtn" ${state.index===0?'disabled':''}>← ${L==='zh'?'上一題':'Prev'}</button>
+      <button class="btn ghost" id="nextBtn" ${state.index===list.length-1?'disabled':''}>${L==='zh'?'下一題':'Next'} →</button>
+    </div>`;
+  const cd = document.createElement('div'); cd.className='card'; cd.innerHTML=headHTML; main.appendChild(cd);
+
+  const opts = document.getElementById('opts');
+  const isMulti = q.type==='multi';
+  const isTF = q.type==='tf';
+  let labels;
+  if(isTF){ labels=['T','F']; }
+  else { labels = ['A','B','C','D'].filter(L=>q[L]); }
+  let userSel = []; // current selection (array of labels)
+  const prev = cp.answers[state.index]; // saved answer
+  const locked = !!prev;
+
+  labels.forEach(lab=>{
+    const text = isTF
+      ? (lab==='T'?(L==='zh'?'是 (T)':'True (T)'):(L==='zh'?'否 (F)':'False (F)'))
+      : ((L==='en' && q[lab+'_en']) ? q[lab+'_en'] : q[lab]);
+    const b = document.createElement('button'); b.className='opt'; b.dataset.label=lab;
+    b.innerHTML = `<span class="label">${lab}</span><span class="text">${text}</span>`;
+    if(locked){
+      b.classList.add('locked');
+      const userAns = prev.userAns;
+      const corr = q.ans;
+      const correctLabels = Array.isArray(corr)?corr:[corr];
+      if(correctLabels.includes(lab)) b.classList.add('correct');
+      if((Array.isArray(userAns)?userAns:[userAns]).includes(lab) && !correctLabels.includes(lab)) b.classList.add('wrong');
+    } else {
+      b.addEventListener('click',()=>{
+        if(isMulti){
+          if(userSel.includes(lab)) userSel = userSel.filter(x=>x!==lab);
+          else userSel.push(lab);
+          opts.querySelectorAll('.opt').forEach(o=>o.classList.toggle('selected', userSel.includes(o.dataset.label)));
+        } else {
+          userSel = [lab];
+          opts.querySelectorAll('.opt').forEach(o=>o.classList.toggle('selected', o.dataset.label===lab));
+        }
+      });
+    }
+    opts.appendChild(b);
+  });
+
+  // verdict if already answered
+  if(prev){
+    const v = document.getElementById('verdict');
+    const expTxt = (L==='en' && q.exp_en) ? q.exp_en : (q.exp||'');
+    const ansDisplay = Array.isArray(q.ans)?q.ans.join(', '):q.ans;
+    v.className = 'verdict '+(prev.correct?'right':'wrong');
+    v.innerHTML = `<div class="ans-line">${prev.correct?(L==='zh'?'✅ 答對':'✅ Correct'):(L==='zh'?'❌ 答錯':'❌ Wrong')} · ${L==='zh'?'正解':'Answer'}: ${ansDisplay}</div>${expTxt?`<div>${expTxt}</div>`:''}`;
+    document.getElementById('submitBtn').disabled = true;
+  }
+
+  document.getElementById('submitBtn').addEventListener('click',()=>{
+    if(!userSel.length) return;
+    const corr = q.ans;
+    const correctLabels = Array.isArray(corr)?corr.slice().sort():[corr];
+    const userSorted = userSel.slice().sort();
+    let isCorrect;
+    if(isMulti){
+      isCorrect = userSorted.length===correctLabels.length && userSorted.every((v,i)=>v===correctLabels[i]);
+    } else {
+      isCorrect = userSel[0] === corr;
+    }
+    cp.answers[state.index] = { userAns: isMulti?userSorted:userSel[0], correct: isCorrect };
+    saveProg(progress);
+    renderQuiz();
+  });
+  document.getElementById('prevBtn').addEventListener('click',()=>{ if(state.index>0){state.index--; renderQuiz();} });
+  document.getElementById('nextBtn').addEventListener('click',()=>{ if(state.index<list.length-1){state.index++; renderQuiz();} });
+}
+
+document.getElementById('homeBtn').addEventListener('click', showHome);
+document.getElementById('gpReset').addEventListener('click', ()=>{
+  if(confirm('Reset all progress? This cannot be undone.')){ progress={}; saveProg(progress); renderHome(); }
+});
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  if(confirm('Reset this chapter?')){ progress[chapterKey(state.section,state.chapter)] = {answers:{}}; saveProg(progress); renderQuiz(); }
+});
+
+// Lang toggle
+document.getElementById('langToggle').addEventListener('click', ()=>{
+  if(window.I18n) window.I18n.toggle();
+});
+document.addEventListener('langchange', ()=>{
+  if(!document.getElementById('quizView').classList.contains('hidden')) renderQuiz();
+  else renderHome();
+});
+
+// Init
+showHome();
+</script>
+</body></html>

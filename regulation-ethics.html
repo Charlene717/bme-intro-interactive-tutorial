@@ -1,0 +1,388 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>E4: 法規、倫理與品質系統 — BME Intro</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+</head><body>
+<nav class="top-nav"><div class="top-nav-inner">
+  <a href="index.html" class="top-nav-brand"><span>⚕️</span> <span data-zh="生醫工程概論" data-en="BME Introduction">生醫工程概論</span></a>
+  <ul class="top-nav-links">
+    <li><a href="intro-bme.html">A1</a></li><li><a href="human-physiology.html">A2</a></li><li><a href="engineering-math.html">A3</a></li><li><a href="biomaterials.html">A4</a></li>
+    <li><a href="biosignals.html">B1</a></li><li><a href="signal-processing.html">B2</a></li><li><a href="medical-imaging.html">B3</a></li><li><a href="image-processing.html">B4</a></li>
+    <li><a href="biomechanics.html">C1</a></li><li><a href="biofluid-mechanics.html">C2</a></li><li><a href="tissue-engineering.html">C3</a></li><li><a href="drug-delivery.html">C4</a></li>
+    <li><a href="medical-devices.html">D1</a></li><li><a href="biosensors.html">D2</a></li><li><a href="wearable-digital-health.html">D3</a></li><li><a href="biophotonics.html">D4</a></li>
+    <li><a href="neural-engineering.html">E1</a></li><li><a href="gene-cell-therapy-eng.html">E2</a></li><li><a href="surgical-robotics-ai.html">E3</a></li><li><a href="regulation-ethics.html" class="active">E4</a></li>
+    <li><a href="references/index.html" data-zh="📚 參考資料" data-en="📚 References">📚 參考資料</a></li>
+  </ul>
+</div></nav>
+<div class="progress-bar-container"><div class="progress-bar" id="progressBar"></div></div>
+<header class="page-hero"><div class="step-badge">CHAPTER E4 · BLOCK E EMERGING &amp; REGULATION</div>
+<h1 data-zh="法規、倫理與品質系統" data-en="Regulation, Ethics &amp; Quality Systems">法規、倫理與品質系統</h1>
+<p class="subtitle" data-lang="zh">從 FDA QMSR、EU MDR、ISO 13485、ISO 14971，到 IEC 62304 Ed.2、GMLP、PCCP、EU AI Act、HIPAA、GDPR——本章把 BME 工程師必須一輩子記得的法規地圖一次串起。</p>
+<p class="subtitle" data-lang="en">From FDA QMSR, EU MDR, ISO 13485, and ISO 14971 to IEC 62304 Ed.2, GMLP, PCCP, the EU AI Act, HIPAA, and GDPR — this chapter links the regulatory map a BME engineer carries for life.</p>
+</header>
+<main class="content-wrap">
+
+<section class="section">
+<div class="section-label" data-zh="全球法規圖" data-en="GLOBAL MAP">全球法規圖</div>
+<h2 data-zh="一、全球主要醫療器材法規體系" data-en="I. Global Medical-Device Regulators">一、全球法規地圖</h2>
+<table class="comp-table"><thead><tr><th data-zh="地區" data-en="Region">地區</th><th data-zh="主管機關" data-en="Authority">主管機關</th><th data-zh="主要法源" data-en="Main law">主要法源</th><th data-zh="重點" data-en="Key">重點</th></tr></thead><tbody>
+<tr><td>🇺🇸</td><td>FDA CDRH</td><td>FD&amp;C Act、21 CFR 800–1299</td><td data-zh="510(k)、PMA、De Novo、HDE、EUA；QMSR 2026/2/2 生效" data-en="510(k), PMA, De Novo, HDE, EUA; QMSR effective 2026-02-02">五大路徑 + QMSR</td></tr>
+<tr><td>🇪🇺</td><td data-zh="各國 Notified Bodies + EMA + EC" data-en="National NBs + EMA + EC">Notified Bodies + EMA</td><td>EU MDR 2017/745、IVDR 2017/746</td><td data-zh="CE marking、UDI、PMS、PMCF、Eudamed；嚴格 NB 稽核" data-en="CE marking, UDI, PMS, PMCF, Eudamed; strict NB audits">CE / Eudamed</td></tr>
+<tr><td>🇯🇵</td><td>PMDA / MHLW</td><td data-zh="藥機法（PMD Act）" data-en="PMD Act">藥機法</td><td data-zh="Class I/II/III/IV；再生醫療條件期限承認快速通道" data-en="Class I–IV; conditional approval pathway for regenerative medicine">再生條件期限</td></tr>
+<tr><td>🇨🇳</td><td>NMPA</td><td data-zh="《醫療器材監督管理條例》" data-en="Medical Device Supervision Regs">監督管理條例</td><td data-zh="三級；本土創新通道；2024 起接受 RWE" data-en="Three classes; domestic innovation pathway; RWE accepted from 2024">本土創新通道</td></tr>
+<tr><td>🇹🇼</td><td>TFDA</td><td data-zh="《醫療器材管理法》2021/5/1 施行" data-en="Medical Device Act, effective 2021-05-01">醫療器材管理法</td><td data-zh="三級；reliance / 對應認可（FDA/CE/PMDA）；ISO 13485 作為 GMP" data-en="Three classes; reliance on FDA/CE/PMDA; ISO 13485 as GMP">reliance 路徑</td></tr>
+<tr><td>🇨🇦</td><td>Health Canada</td><td>MDR SOR/98-282</td><td data-zh="四級；II–IV 需 MDL + MDSAP" data-en="Four classes; II–IV need MDL + MDSAP">MDSAP</td></tr>
+<tr><td>🇦🇺</td><td>TGA</td><td>Therapeutic Goods Act 1989</td><td data-zh="採 EU CE / MDSAP；2024 AI/ML SaMD 新指引" data-en="Accepts EU CE / MDSAP; 2024 AI/ML SaMD guidance">AI/ML SaMD 指引</td></tr>
+<tr><td>🌐</td><td>MDSAP</td><td data-zh="多國互認稽核" data-en="Multinational mutual-audit">多國互認稽核</td><td data-zh="加 + 美 + 巴 + 澳 + 日；一次稽核覆蓋五國" data-en="CA + US + BR + AU + JP; single audit covers all five">五國互認</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="ISO &amp; IEC" data-en="ISO &amp; IEC">ISO &amp; IEC</div>
+<h2 data-zh="二、ISO / IEC 必懂標準（2025–2026 版）" data-en="II. Must-Know ISO / IEC Standards (2025–2026)">二、ISO / IEC 必懂標準</h2>
+<div class="card-grid cols-2">
+<div class="card"><h4>ISO 13485:2016</h4>
+<div data-lang="zh"><p>全球醫療器材品質管理系統標準。<strong>2025/3 確認、無修改</strong>；下次預計 2026 檢視，可能採用 ISO 高階結構（HSS）、加入氣候變遷條款。FDA QMSR 透過「by reference」整段引用此標準。</p></div>
+<div data-lang="en"><p>Global QMS standard for medical devices. <strong>Reconfirmed Mar 2025 with no changes</strong>; next review due 2026, possibly adopting ISO's harmonized structure (HSS) and climate clause. FDA QMSR incorporates this entirely by reference.</p></div></div>
+
+<div class="card"><h4>ISO 14971:2019</h4>
+<div data-lang="zh"><p>醫療器材風險管理。<strong>2025/3 再次確認、未修訂</strong>。核心：hazard 識別 → 風險估算 → 風險控制 → 殘餘風險 → benefit-risk → PMS 回饋。TR 24971:2020 為補充技術報告。</p></div>
+<div data-lang="en"><p>Risk management for medical devices. <strong>Reconfirmed Mar 2025, no revision</strong>. Core: hazard ID → risk analysis → control → residual risk → benefit-risk → PMS feedback. TR 24971:2020 is the supporting technical report.</p></div></div>
+
+<div class="card"><h4>IEC 62304 Edition 2（2026/9 發表）</h4>
+<div data-lang="zh"><p>醫療器材軟體生命週期。<strong>Ed.2 預定 2026/9 發表</strong>，重大變更：(1) 引入「<strong>process rigour levels</strong>」取代舊 Class A/B/C 安全分級——以開發程序的嚴謹度區分；(2) 新增 <strong>5.1.15 AI Plan</strong> 條款，要求 AI/ML 元件做專屬計畫；(3) 與 ISO 13485、14971、IEC 62366-1 整合更緊密。</p></div>
+<div data-lang="en"><p>Medical-device software lifecycle. <strong>Ed.2 publishes Sep 2026</strong>. Major changes: (1) introduces <strong>process rigour levels</strong> replacing the old A/B/C safety classes (now based on process rigor instead); (2) new <strong>clause 5.1.15 (AI Plan)</strong> requires a dedicated plan for AI/ML components; (3) tighter integration with ISO 13485, 14971, IEC 62366-1.</p></div></div>
+
+<div class="card"><h4>IEC 62366-1 + IEC 60601-1-6</h4>
+<div data-lang="zh"><p>人因 / 可用性工程。需完成 use specification、user interface specification、formative usability evaluation、summative usability evaluation；FDA 對 use-error 容忍度逐年下降。</p></div>
+<div data-lang="en"><p>Usability engineering. Must perform use specification, UI specification, formative + summative usability evaluations; FDA's tolerance for use-errors keeps tightening.</p></div></div>
+
+<div class="card"><h4>IEC 60601-1 + Collaterals</h4>
+<div data-lang="zh"><p>醫用電氣設備安全。-1-2 EMC（Ed. 4.1 2020）、-1-6 可用性、-1-8 警報、-1-9 環境設計、-1-10 PSP（生理閉迴路）、-1-11 家用環境、-1-12 緊急應變、-2-X 各裝置子標準。</p></div>
+<div data-lang="en"><p>Electrical safety for medical equipment. -1-2 EMC (Ed. 4.1 2020), -1-6 usability, -1-8 alarms, -1-9 eco design, -1-10 PSP (physiologic closed-loop), -1-11 home, -1-12 emergency, plus device-specific -2-X.</p></div></div>
+
+<div class="card"><h4>ISO 10993 Series</h4>
+<div data-lang="zh"><p>生物相容性。系列 18+ 部分覆蓋 cytotoxicity、sensitization、irritation、systemic toxicity、genotoxicity、implantation、hemocompatibility、chemical characterization、material identification。依「接觸時間 × 接觸部位」決定測試矩陣。</p></div>
+<div data-lang="en"><p>Biocompatibility. 18+ parts cover cytotoxicity, sensitization, irritation, systemic toxicity, genotoxicity, implantation, hemocompatibility, chemical characterization, material identification. Test matrix is selected by "contact duration × site."</p></div></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="GxP" data-en="GxP">GxP 體系</div>
+<h2 data-zh="三、GxP 體系：GCP / GMP / GLP" data-en="III. GxP Framework: GCP / GMP / GLP">三、GxP 體系</h2>
+<table class="comp-table"><thead><tr><th data-zh="體系" data-en="System">體系</th><th data-zh="範疇" data-en="Scope">範疇</th><th data-zh="代表法源" data-en="Key references">法源</th><th data-zh="關鍵點" data-en="Key points">重點</th></tr></thead><tbody>
+<tr><td><strong>GCP</strong></td><td data-zh="臨床試驗" data-en="Clinical trials">臨床試驗</td><td>ICH E6 R3 (2023)</td><td data-zh="2023 R3 革新；focus on risk-based monitoring、decentralized trials、data integrity (ALCOA+)" data-en="2023 R3 modernization; risk-based monitoring, decentralized trials, ALCOA+ data integrity">R3：DCT + ALCOA+</td></tr>
+<tr><td><strong>GMP（藥）</strong></td><td data-zh="製造" data-en="Manufacturing">藥品製造</td><td>21 CFR 210/211、EU GMP Annex 1 (2022/2023)</td><td data-zh="Annex 1 重視 contamination control strategy (CCS)、CCIT" data-en="Annex 1 emphasizes Contamination Control Strategy (CCS), CCIT">CCS + CCIT</td></tr>
+<tr><td><strong>GMP（器材）</strong></td><td data-zh="器材製造" data-en="Device manufacturing">器材製造</td><td>21 CFR 820 → QMSR (2026/2/2)、ISO 13485</td><td data-zh="QMSR 整段 ISO 13485 by reference + FDA 特殊條款" data-en="QMSR incorporates ISO 13485 by reference + FDA-specific clauses">QMSR by reference</td></tr>
+<tr><td><strong>GLP</strong></td><td data-zh="非臨床安全研究" data-en="Nonclinical safety">非臨床安全</td><td>21 CFR 58、OECD GLP</td><td data-zh="毒理、藥動、生物相容性，需在符合 GLP 的設施完成" data-en="Toxicology, PK, biocompat — must be done in GLP-compliant facility">毒理 + 生物相容</td></tr>
+<tr><td><strong>GVP</strong></td><td data-zh="藥物安全監測" data-en="Pharmacovigilance">藥物安全監測</td><td>EU GVP Modules</td><td data-zh="signal management、PSUR、RMP" data-en="Signal management, PSUR, RMP">signal / RMP</td></tr>
+<tr><td><strong>GDP</strong></td><td data-zh="運銷規範" data-en="Distribution">藥品運銷</td><td>EU GDP 2013/C 343/01</td><td data-zh="冷鏈、防偽、追溯（CGT 必備）" data-en="Cold chain, anti-counterfeit, traceability (essential for CGT)">冷鏈 / 追溯</td></tr>
+</tbody></table>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="臨床研究倫理" data-en="RESEARCH ETHICS">臨床研究倫理</div>
+<h2 data-zh="四、臨床研究倫理：從紐倫堡到 IRB" data-en="IV. Clinical Research Ethics: Nuremberg to IRB">四、臨床研究倫理</h2>
+<div data-lang="zh">
+<p>現代臨床研究倫理建立於三份歷史文件之上：</p>
+<ol class="numbered">
+<li><strong>紐倫堡公約 Nuremberg Code（1947）</strong>——回應納粹人體實驗，提出「<strong>自願知情同意是絕對必要</strong>」等十點原則。</li>
+<li><strong>赫爾辛基宣言 Declaration of Helsinki（1964，最新 2024 第 9 修訂）</strong>——世界醫學會（WMA）的醫學研究倫理原則，是全球臨床試驗的倫理北極星。</li>
+<li><strong>貝爾蒙特報告 Belmont Report（1979）</strong>——美國國家委員會回應 Tuskegee 梅毒研究醜聞，提出三大原則：<strong>尊重人 Respect for Persons、行善 Beneficence、正義 Justice</strong>，是 IRB 審查 framework 的根基。</li>
+</ol>
+<p>實務上，每個涉及人類受試者的臨床研究都需經 <strong>IRB（Institutional Review Board）/ EC（Ethics Committee）</strong>事前審查；知情同意 informed consent 必含 21 CFR 50.25 列出的 8+5 必要元素（研究目的、程序、風險、利益、替代方案、保密、賠償、聯絡、撤回權……）。<strong>弱勢族群（vulnerable populations）</strong>——兒童、孕婦、囚犯、認知障礙者——需額外保護機制（21 CFR 50 Subparts B/C/D）。</p>
+</div>
+<div data-lang="en">
+<p>Modern clinical-research ethics rests on three historical documents:</p>
+<ol class="numbered">
+<li><strong>Nuremberg Code (1947)</strong> — response to Nazi experimentation; "<strong>voluntary informed consent is absolutely essential</strong>" + 10 principles.</li>
+<li><strong>Declaration of Helsinki (WMA, 1964; latest 2024 9th revision)</strong> — global north star for clinical-trial ethics.</li>
+<li><strong>Belmont Report (1979)</strong> — US National Commission response to Tuskegee; three principles: <strong>Respect for Persons, Beneficence, Justice</strong> — the foundation of IRB review.</li>
+</ol>
+<p>In practice, every human-subjects study needs prior <strong>IRB / Ethics Committee</strong> review; informed consent must contain the 8+5 elements per 21 CFR 50.25 (purpose, procedures, risks, benefits, alternatives, confidentiality, compensation, contacts, voluntary withdrawal…). <strong>Vulnerable populations</strong> — children, pregnant women, prisoners, cognitively impaired — require extra protections (21 CFR 50 Subparts B/C/D).</p>
+</div>
+<div class="callout warn"><span class="callout-icon">⚠️</span><div>
+<span data-lang="zh"><strong>利益衝突（COI）：</strong>研究者持股、顧問費、講課酬勞需揭露；許多期刊要求 ICMJE COI form。BME 工程師常同時為發明人 + 公司股東 + 臨床試驗 PI，COI 管理是學術倫理基本功。</span>
+<span data-lang="en"><strong>Conflict of interest (COI):</strong> Researcher equity, consulting fees, speaker honoraria must be disclosed; many journals require an ICMJE COI form. BME engineers are often simultaneously inventor + shareholder + trial PI — managing COI is a core academic-ethics skill.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="病人隱私" data-en="PRIVACY">病人隱私</div>
+<h2 data-zh="五、病人隱私：HIPAA / GDPR / 個資法" data-en="V. Patient Privacy: HIPAA / GDPR / PDPA">五、病人隱私</h2>
+<div class="card-grid cols-2">
+<div class="card"><h4>🇺🇸 HIPAA</h4>
+<div data-lang="zh"><p>1996 Health Insurance Portability and Accountability Act。Privacy Rule (2003) 規範 PHI（受保護健康資訊）使用；Security Rule (2005) 規範電子 PHI 之 administrative / physical / technical safeguards。<strong>去識別化</strong>兩條路徑：Safe Harbor（移除 18 個 identifier）、Expert Determination（統計專家認證再識別風險極低）。違規最高罰 $1.5M/年 × 違規類別。</p></div>
+<div data-lang="en"><p>1996 Health Insurance Portability and Accountability Act. Privacy Rule (2003) governs use of PHI; Security Rule (2005) administrative/physical/technical safeguards for ePHI. <strong>De-identification</strong>: Safe Harbor (remove 18 identifiers) or Expert Determination (statistician certifies negligible re-id risk). Max penalty $1.5M/yr per category.</p></div></div>
+
+<div class="card"><h4>🇪🇺 GDPR</h4>
+<div data-lang="zh"><p>2016 通過、2018/5/25 生效。健康資料屬「特殊類別」需明示同意 / 立法授權；違規最高 €20M 或全球年營業額 4%（取高）。重要概念：<strong>data minimization、purpose limitation、right to erasure、data portability、DPO（Data Protection Officer）</strong>、跨境傳輸需 SCC / adequacy decision。</p></div>
+<div data-lang="en"><p>Passed 2016, effective 2018-05-25. Health data is "special category" needing explicit consent or legal basis; max penalty €20M or 4% global revenue. Key concepts: <strong>data minimization, purpose limitation, right to erasure, portability, DPO</strong>; cross-border transfers need SCCs or adequacy decision.</p></div></div>
+
+<div class="card"><h4>🇨🇦 PIPEDA</h4>
+<div data-lang="zh"><p>Personal Information Protection and Electronic Documents Act（聯邦），健康資料許多由省級法管轄（Quebec Law 25、Ontario PHIPA）。要求合理 purpose、有限收集、明示同意（健康為敏感資料）。</p></div>
+<div data-lang="en"><p>Personal Information Protection and Electronic Documents Act (federal); health data largely under provincial law (Quebec Law 25, Ontario PHIPA). Requires reasonable purpose, limited collection, explicit consent (health data is sensitive).</p></div></div>
+
+<div class="card"><h4>🇹🇼 個人資料保護法（PDPA）</h4>
+<div data-lang="zh"><p>2012 修訂，醫療資料屬第 6 條特種資料，原則禁止蒐集除非具備同意 / 法令依據。2023/8 通過修正案成立<strong>個人資料保護委員會</strong>（2025 上路），與 GDPR 漸接軌。</p></div>
+<div data-lang="en"><p>2012 amended; medical data falls under Article 6 special category — collection generally prohibited absent consent or statutory basis. 2023-08 amendment established a <strong>Personal Data Protection Commission</strong> (live 2025), aligning toward GDPR.</p></div></div>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>k-匿名性、l-多樣性、t-接近性：</strong>去識別化後的資料集中，每組 quasi-identifier 至少有 k 筆紀錄（k-anonymity）、每組敏感屬性至少有 l 種值（l-diversity）、敏感屬性分布與整體分布相近（t-closeness）。研究發布資料時的必修概念。</span>
+<span data-lang="en"><strong>k-anonymity, l-diversity, t-closeness:</strong> A released dataset is k-anonymous if every quasi-identifier group has ≥k records; l-diverse if each group has ≥l distinct sensitive values; t-close if sensitive distributions resemble the global. Required reading before releasing research data.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="AI 法規" data-en="AI REGULATION">AI 法規</div>
+<h2 data-zh="六、AI 醫療專屬法規：GMLP / PCCP / EU AI Act" data-en="VI. AI-Specific Regulations: GMLP / PCCP / EU AI Act">六、AI 醫療專屬法規</h2>
+<div data-lang="zh">
+<ol class="numbered">
+<li><strong>FDA GMLP（Good Machine Learning Practice，2021/10 共 10 條原則）</strong>——FDA + Health Canada + UK MHRA 共同發布。10 原則：多學科團隊、軟體工程最佳實務、代表性資料集、訓練/測試獨立、選擇參考標準、模型描述清晰、人在迴路、效能監測、清晰使用者溝通、上市後監測。</li>
+<li><strong>PCCP（Predetermined Change Control Plan，2024/12 終版指南）</strong>——允許廠商預先描述未來模型更新範圍、流程、影響評估；同意後免再送 510(k)。</li>
+<li><strong>EU AI Act（Regulation (EU) 2024/1689，2024/8/1 生效）</strong>——全球首部全面 AI 法。風險分四級：<strong>不可接受、高、有限、最小</strong>。醫療器材 AI 自動屬「高風險」（與 MDR/IVDR 重疊）。階段性執行：
+<ul>
+<li>2025/2：禁止「不可接受風險」AI（操控行為、生物特徵分類）。</li>
+<li>2025/8：通用 AI 模型（GPAI）規範生效；training compute &gt; 10²⁵ FLOPs 視為 systemic risk。</li>
+<li>2026/8：高風險 AI（含醫療）全面適用。</li>
+<li>2027/8：完整生效。</li>
+</ul></li>
+<li><strong>TPLC（Total Product Life Cycle）</strong>——FDA 對 AI/ML SaMD 的整體治理思維：上市前 + 上市後資料 + 更新管理需協調為單一生命週期。</li>
+</ol>
+</div>
+<div data-lang="en">
+<ol class="numbered">
+<li><strong>FDA GMLP (Good Machine Learning Practice, Oct 2021, 10 principles)</strong> — co-published with Health Canada and UK MHRA. The 10 principles: multidisciplinary teams, software-engineering best practices, representative datasets, independent training/test, reference standards, clear model description, human-in-the-loop, performance monitoring, transparent user communication, post-market monitoring.</li>
+<li><strong>PCCP (Predetermined Change Control Plan, final guidance Dec 2024)</strong> — sponsors describe future modification scope, process, and impact assessment up front; approved updates need no new 510(k).</li>
+<li><strong>EU AI Act (Regulation (EU) 2024/1689, in force 2024-08-01)</strong> — the world's first comprehensive AI law. Four risk tiers: <strong>unacceptable, high, limited, minimal</strong>. Medical-device AI is automatically "high-risk" (overlaps with MDR/IVDR). Phased enforcement:
+<ul>
+<li>Feb 2025: unacceptable-risk AI banned.</li>
+<li>Aug 2025: general-purpose AI (GPAI) rules apply; training compute &gt; 10²⁵ FLOPs = systemic risk.</li>
+<li>Aug 2026: high-risk AI (incl. medical) fully applies.</li>
+<li>Aug 2027: full applicability.</li>
+</ul></li>
+<li><strong>TPLC (Total Product Life Cycle)</strong> — FDA's governance frame for AI/ML SaMD: premarket + postmarket data + update management as a single lifecycle.</li>
+</ol>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="召回管理" data-en="RECALL">召回管理</div>
+<h2 data-zh="七、召回分級與案例" data-en="VII. Recall Classification &amp; Cases">七、召回分級與案例</h2>
+<div data-lang="zh">
+<p>FDA 把醫療器材召回分三級：</p>
+<ul>
+<li><strong>Class I 召回</strong>——可能致死或不可逆重大傷害（最嚴重）。</li>
+<li><strong>Class II</strong>——可能造成暫時或可逆健康問題。</li>
+<li><strong>Class III</strong>——違反法規但不太可能造成傷害。</li>
+</ul>
+<p>EU MDR 用「<strong>Field Safety Corrective Action (FSCA)</strong>」與「Field Safety Notice (FSN)」管理；廠商需主動通報主管機關 + 顧客 + 透過 Eudamed 公開。</p>
+</div>
+<div data-lang="en">
+<p>FDA classifies recalls into three:</p>
+<ul>
+<li><strong>Class I recall</strong>: may cause death or serious injury (most severe).</li>
+<li><strong>Class II</strong>: may cause temporary or reversible health problems.</li>
+<li><strong>Class III</strong>: violations unlikely to cause harm.</li>
+</ul>
+<p>EU MDR uses "<strong>Field Safety Corrective Action (FSCA)</strong>" + "Field Safety Notice (FSN)"; manufacturers must notify competent authorities + customers + Eudamed publicly.</p>
+</div>
+<div class="callout danger"><span class="callout-icon">🚨</span><div>
+<span data-lang="zh"><strong>個案：Philips Respironics CPAP（2021）</strong> — 史上最大規模 Class I 召回之一。2021/6 召回 1,700 萬+ 台 CPAP / BiPAP / 呼吸器含 PE-PUR 消音泡棉，泡棉可能降解釋出有毒微粒/化學物。Philips 後與美國司法部簽署 consent decree、賠償超過 11 億美元；Respironics 2024 暫停美國銷售。教訓：(1) 材料生物相容性（ISO 10993）+ 加速老化試驗應更嚴；(2) PMS 系統應更早偵測信號；(3) 顧客通報透明度。</span>
+<span data-lang="en"><strong>Case: Philips Respironics CPAP (2021)</strong> — one of the largest Class I recalls ever. June 2021 recall of 17M+ CPAP/BiPAP/ventilators with PE-PUR foam that could degrade into toxic particles/chemicals. Philips signed a DOJ consent decree, paid &gt;$1.1B settlement; Respironics paused US sales in 2024. Lessons: (1) tighter ISO 10993 biocompat + accelerated aging; (2) earlier PMS signal detection; (3) transparent customer notification.</span>
+</div></div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="決策樹" data-en="DECISION TREE">決策樹</div>
+<h2 data-zh="八、我的器材該套用哪些標準？" data-en="VIII. Which Standards Apply to My Device?">八、標準適用決策樹</h2>
+<div class="decision-tree"><h4>🌳 <span data-zh="標準適用決策樹" data-en="Standard Selection Decision Tree">標準適用決策樹</span></h4>
+<div class="dt-node"><span class="dt-q">Q1.</span><span data-lang="zh">器材是否屬<strong>醫療器材</strong>？<span class="dt-arrow">→</span> Yes：開始套用 ISO 13485 + ISO 14971 + 國家對應 GMP（QMSR / EU MDR）。</span><span data-lang="en">Is it a <strong>medical device</strong>? <span class="dt-arrow">→</span> Yes: apply ISO 13485 + ISO 14971 + country GMP (QMSR / EU MDR).</span></div>
+<div class="dt-node"><span class="dt-q">Q2.</span><span data-lang="zh">是否含<strong>電氣或電池</strong>？<span class="dt-arrow">→</span> 適用 IEC 60601-1 + 全套 collaterals（-1-2 EMC、-1-6 可用性、-1-8 警報…）+ 對應 -2-X 子標準。</span><span data-lang="en">Does it have <strong>electricity or a battery</strong>? <span class="dt-arrow">→</span> Apply IEC 60601-1 + collaterals (-1-2 EMC, -1-6 usability, -1-8 alarms…) + -2-X subspecific.</span></div>
+<div class="dt-node"><span class="dt-q">Q3.</span><span data-lang="zh">是否含<strong>軟體</strong>？<span class="dt-arrow">→</span> 適用 IEC 62304（2026/9 起為 Ed.2，含 AI Plan 條款）。</span><span data-lang="en">Does it contain <strong>software</strong>? <span class="dt-arrow">→</span> Apply IEC 62304 (Ed.2 from Sep 2026, with AI Plan clause).</span></div>
+<div class="dt-node"><span class="dt-q">Q4.</span><span data-lang="zh">是否接觸<strong>人體</strong>（皮膚、黏膜、植入）？<span class="dt-arrow">→</span> 套用 ISO 10993 系列（依接觸時間 × 部位選測試）。</span><span data-lang="en">Does it contact <strong>the body</strong> (skin, mucosa, implant)? <span class="dt-arrow">→</span> Apply ISO 10993 (test matrix by duration × site).</span></div>
+<div class="dt-node"><span class="dt-q">Q5.</span><span data-lang="zh">是否含<strong>AI/ML 元件</strong>？<span class="dt-arrow">→</span> 套用 FDA GMLP + 評估 PCCP；EU 上市另查 AI Act 高風險義務（2026/8 起）。</span><span data-lang="en">Does it include <strong>AI/ML components</strong>? <span class="dt-arrow">→</span> Apply FDA GMLP + consider PCCP; for EU also EU AI Act high-risk obligations (from Aug 2026).</span></div>
+<div class="dt-node"><span class="dt-q">Q6.</span><span data-lang="zh">是否處理<strong>個人健康資料</strong>？<span class="dt-arrow">→</span> 美國 HIPAA、歐盟 GDPR、台灣個資法；考慮 ISO 27001 / ISO 27799 資安控制。</span><span data-lang="en">Does it handle <strong>personal health data</strong>? <span class="dt-arrow">→</span> US HIPAA, EU GDPR, Taiwan PDPA; consider ISO 27001 / ISO 27799 security controls.</span></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="互動圖" data-en="INTERACTIVE">互動圖</div>
+<h2 data-zh="九、互動：標準與法規時間線（2024–2027）" data-en="IX. Interactive: Standards &amp; Regulation Timeline (2024–2027)">九、標準時間線</h2>
+<div data-lang="zh"><p>下圖顯示主要醫療器材標準與 AI 法規 2024–2027 的關鍵里程碑。切換視角可看到「年份」或「子領域」分組。</p></div>
+<div data-lang="en"><p>The chart shows major medical-device standards + AI-regulation milestones across 2024–2027. Toggle views for "by year" vs "by domain."</p></div>
+<div class="interactive-panel">
+<div class="toggle-row">
+  <button class="toggle-btn active" data-view="year" data-zh="依年份" data-en="By year">依年份</button>
+  <button class="toggle-btn" data-view="domain" data-zh="依領域" data-en="By domain">依領域</button>
+</div>
+<div class="chart-container"><canvas id="timelineChart"></canvas></div>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="zh">點數高度 = 該年內生效/發布的關鍵事件數。</p>
+<p style="font-size:.82rem;color:var(--c-ink-muted);text-align:center;" data-lang="en">Marker height = key events effective/issued in that year.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="程式示例" data-en="CODE">程式示例</div>
+<h2 data-zh="十、風險矩陣計算器（ISO 14971 風格）" data-en="X. Risk Matrix Calculator (ISO 14971 style)">十、風險矩陣計算器</h2>
+<div data-lang="zh"><p>ISO 14971 的風險分析 = 估算每個 hazardous situation 的「<strong>嚴重度 severity × 發生頻率 probability</strong>」。下例以 5×5 矩陣回傳 risk class（acceptable / ALARP / unacceptable）。實務中「ALARP」(as low as reasonably practicable) 區的風險需文件化證明<strong>進一步降低不合理</strong>，否則仍須再控制。</p></div>
+<div data-lang="en"><p>ISO 14971 risk analysis = "<strong>severity × probability</strong>" of each hazardous situation. The example below returns a risk class (acceptable / ALARP / unacceptable) using a 5×5 matrix. ALARP-region risks must be documented as "further reduction is unreasonable"; otherwise additional control is required.</p></div>
+<div class="code-tabs">
+  <div class="code-tab-btns"><button class="code-tab-btn active" data-tab="py">Python</button><button class="code-tab-btn" data-tab="mat">MATLAB</button></div>
+  <div class="code-tab-content active" data-tab="py"><pre><span class="comment"># ISO 14971-style 5x5 risk matrix</span>
+<span class="kw">def</span> <span class="func">risk_class</span>(severity, probability):
+    <span class="str">"""
+    severity:    1=Negligible, 2=Minor, 3=Serious, 4=Critical, 5=Catastrophic
+    probability: 1=Improbable, 2=Remote, 3=Occasional, 4=Probable, 5=Frequent
+    Returns: 'Acceptable' | 'ALARP' | 'Unacceptable'
+    """</span>
+    score = severity * probability
+    <span class="kw">if</span> score &lt;= <span class="num">4</span>:    <span class="kw">return</span> <span class="str">"Acceptable"</span>
+    <span class="kw">elif</span> score &lt;= <span class="num">12</span>:  <span class="kw">return</span> <span class="str">"ALARP"</span>
+    <span class="kw">else</span>:              <span class="kw">return</span> <span class="str">"Unacceptable"</span>
+
+hazards = [
+    (<span class="str">"Electrical shock"</span>,    <span class="num">5</span>, <span class="num">2</span>),    <span class="comment"># Catastrophic, Remote</span>
+    (<span class="str">"Software false-neg"</span>,  <span class="num">4</span>, <span class="num">3</span>),    <span class="comment"># Critical, Occasional</span>
+    (<span class="str">"Skin irritation"</span>,     <span class="num">2</span>, <span class="num">4</span>),    <span class="comment"># Minor, Probable</span>
+]
+<span class="kw">for</span> name, s, p <span class="kw">in</span> hazards:
+    <span class="func">print</span>(<span class="str">f"{name:25s}  S={s}  P={p}  → {risk_class(s,p)}"</span>)</pre></div>
+  <div class="code-tab-content" data-tab="mat"><pre><span class="comment">% ISO 14971-style 5x5 risk matrix</span>
+<span class="kw">function</span> rc = risk_class(severity, probability)
+    score = severity * probability;
+    <span class="kw">if</span>     score &lt;= <span class="num">4</span>,  rc = <span class="str">'Acceptable'</span>;
+    <span class="kw">elseif</span> score &lt;= <span class="num">12</span>, rc = <span class="str">'ALARP'</span>;
+    <span class="kw">else</span>,             rc = <span class="str">'Unacceptable'</span>;
+    <span class="kw">end</span>
+<span class="kw">end</span>
+
+hazards = {<span class="str">'Electrical shock'</span>,   <span class="num">5</span>, <span class="num">2</span>; ...
+           <span class="str">'Software false-neg'</span>, <span class="num">4</span>, <span class="num">3</span>; ...
+           <span class="str">'Skin irritation'</span>,    <span class="num">2</span>, <span class="num">4</span>};
+<span class="kw">for</span> k = <span class="num">1</span>:<span class="func">size</span>(hazards,<span class="num">1</span>)
+    name = hazards{k,<span class="num">1</span>}; s = hazards{k,<span class="num">2</span>}; p = hazards{k,<span class="num">3</span>};
+    <span class="func">fprintf</span>(<span class="str">'%-22s  S=%d  P=%d  -&gt; %s\n'</span>, name, s, p, risk_class(s,p));
+<span class="kw">end</span></pre></div>
+</div>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="關鍵術語" data-en="GLOSSARY">關鍵術語</div>
+<h2 data-zh="十一、本章關鍵術語" data-en="XI. Key Terms">十一、關鍵術語</h2>
+<p><span class="term">QMSR<span class="term-tip">Quality Management System Regulation — 取代 21 CFR 820 QSR、整合 ISO 13485；2026/2/2 生效。</span></span> &nbsp;
+<span class="term">EU MDR<span class="term-tip">Regulation (EU) 2017/745，2021/5/26 生效；歐盟醫療器材法規。</span></span> &nbsp;
+<span class="term">ISO 13485:2016<span class="term-tip">全球醫療器材 QMS 標準；2025/3 確認、預計 2026 檢視。</span></span> &nbsp;
+<span class="term">ISO 14971:2019<span class="term-tip">醫療器材風險管理；2025/3 再次確認、未修訂。</span></span> &nbsp;
+<span class="term">IEC 62304 Ed.2<span class="term-tip">醫療器材軟體生命週期；2026/9 發表，含 5.1.15 AI Plan 條款。</span></span> &nbsp;
+<span class="term">ISO 10993<span class="term-tip">生物相容性系列標準，依接觸時間 × 部位決定測試項目。</span></span> &nbsp;
+<span class="term">IRB<span class="term-tip">Institutional Review Board — 機構審查委員會；負責人類受試者研究倫理審查。</span></span> &nbsp;
+<span class="term">Belmont 三原則<span class="term-tip">尊重人、行善、正義；現代臨床研究倫理的基石。</span></span> &nbsp;
+<span class="term">HIPAA<span class="term-tip">1996 美國健康資訊隱私與保險可攜法；Privacy Rule + Security Rule。</span></span> &nbsp;
+<span class="term">GDPR<span class="term-tip">EU 2016/679，2018/5/25 生效；健康資料屬特殊類別。</span></span> &nbsp;
+<span class="term">GMLP<span class="term-tip">Good Machine Learning Practice — FDA + Health Canada + UK MHRA 2021 共同發布的 AI/ML 10 條原則。</span></span> &nbsp;
+<span class="term">PCCP<span class="term-tip">Predetermined Change Control Plan — 2024/12 FDA 終版指南，允許 AI 模型預核可後合法更新。</span></span> &nbsp;
+<span class="term">EU AI Act<span class="term-tip">Regulation (EU) 2024/1689；2024/8/1 生效；醫療 AI 自動為高風險。</span></span> &nbsp;
+<span class="term">ALARP<span class="term-tip">As Low As Reasonably Practicable — 風險已降到「進一步降低不合理」的層級。</span></span></p>
+</section>
+
+<section class="section">
+<div class="section-label" data-zh="結語" data-en="CLOSING">結語</div>
+<h2 data-zh="十二、結語：BME 工程師的長路" data-en="XII. Closing: The Long Road of a BME Engineer">十二、結語</h2>
+<div data-lang="zh">
+<p>恭喜你走到全本生醫工程概論的最後一章。這 20 章覆蓋了從<strong>解剖生理</strong>、<strong>訊號與影像</strong>、<strong>力學與材料</strong>、<strong>裝置與感測</strong>到<strong>神經、細胞基因、AI、法規倫理</strong>的全圖。但 BME 真正的學習才剛開始——這個領域以「<strong>每三年翻新一次</strong>」的速度演進：新療法（CRISPR、CAR-T、基因編輯體內遞送）、新模態（柔性腦機介面、Apple Vision Pro 整合 AR 手術）、新法規（QMSR、IEC 62304 Ed.2、EU AI Act 階段執行）、新工具（醫療 LLM、MCPmed、基礎模型）——你會發現本章的時間戳幾年後就過時。</p>
+<p>但有些東西不會過時：<strong>把工程做到對病人負責、做到對法規透明、做到對未來可重現</strong>。當你設計一個植入物，請假設它要陪一個人活 30 年；當你訓練一個診斷模型，請假設它會被部署在你最不熟悉的人口；當你寫一份 DHF，請假設未來會有檢視員、稽核員、自己的下一代工程師看到它。<strong>BME 工程不是寫程式 / 做硬體 / 跑試驗——是用工程語言對「健康」這件事負責。</strong></p>
+<p>下一步：把這本教材作為地圖，跟你最感興趣的章節深入；找一個臨床合作者，跟著他們去醫院看一台真正的器材如何被使用；讀一篇 PMA summary、一份 510(k) decision letter、一份 EU MDR Notified Body audit report。當你看懂這些「現實文件」，你就真的進入了 BME。</p>
+<p>祝你長路順利。</p>
+</div>
+<div data-lang="en">
+<p>Congratulations — you've reached the final chapter of this BME introduction. These 20 chapters span the field from <strong>anatomy &amp; physiology</strong>, <strong>signals &amp; imaging</strong>, <strong>mechanics &amp; materials</strong>, <strong>devices &amp; sensors</strong>, to <strong>neural, cell &amp; gene, AI, and regulation/ethics</strong>. But your real BME learning begins now — this field renews <strong>every three years</strong>: new therapies (CRISPR, CAR-T, in-vivo gene editing), new modalities (flexible BCIs, Apple Vision Pro + AR surgery), new regulations (QMSR, IEC 62304 Ed.2, phased EU AI Act), new tools (medical LLMs, MCPmed, foundation models). The timestamps in this chapter will go stale in a few years.</p>
+<p>What won't go stale: <strong>doing engineering that is accountable to patients, transparent to regulators, and reproducible for the future</strong>. When you design an implant, assume it must accompany someone for 30 years. When you train a diagnostic model, assume it will be deployed in the populations you know least. When you write a DHF, assume future reviewers, auditors, and the next generation of engineers will read it. <strong>BME isn't coding, hardware, or running trials — it's using engineering language to take responsibility for "health."</strong></p>
+<p>Next step: treat this textbook as a map, dive deeply into the chapters that excite you, find a clinical collaborator and watch a real device get used in a hospital, read a PMA summary, a 510(k) decision letter, and an EU MDR Notified Body audit report. When you can parse these "real documents," you've truly entered BME.</p>
+<p>Wishing you the long road ahead.</p>
+</div>
+<div class="callout tip"><span class="callout-icon">💡</span><div>
+<span data-lang="zh"><strong>學長學姐的話：</strong>BME 是一個既學科又跨域的領域。如果你以後做<strong>R&amp;D 工程師</strong>，本書 A–D 區是日常；做<strong>QA/RA</strong>，D 區與本章 E4 是日常；做<strong>臨床應用 / clinical specialist</strong>，A 區與 D 區是橋樑；做<strong>醫療 AI / SaMD</strong>，B + E3 + E4 是核心；做<strong>細胞基因治療</strong>，E2 + 製程工程是核心。哪一條路都會回到「對病人負責」這件事。</span>
+<span data-lang="en"><strong>Senior advice:</strong> BME is both disciplinary and interdisciplinary. If you become an <strong>R&amp;D engineer</strong>, Blocks A–D are daily; <strong>QA/RA</strong>, Block D and this chapter E4; <strong>clinical applications</strong>, A + D as bridges; <strong>medical AI / SaMD</strong>, B + E3 + E4 as core; <strong>cell &amp; gene therapy</strong>, E2 + process engineering. Every path circles back to "accountability to the patient."</span>
+</div></div>
+</section>
+
+<section class="quiz-section">
+<h3 data-zh="📝 本章自測（3 題）" data-en="📝 Self-Check">📝 本章自測</h3>
+<div class="quiz-q" data-correct="1"><p><span data-lang="zh">Q1. 關於 IEC 62304 Edition 2（2026/9 發表），下列何者正確？</span><span data-lang="en">Q1. About IEC 62304 Edition 2 (Sep 2026):</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 取消所有軟體開發要求</span><span data-lang="en">A. Removes all software development requirements</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 引入 process rigour levels 取代舊 A/B/C 安全分級；新增 5.1.15 AI Plan 條款</span><span data-lang="en">B. Introduces process rigour levels replacing A/B/C; adds clause 5.1.15 (AI Plan)</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 僅適用於 Class III 裝置</span><span data-lang="en">C. Applies only to Class III devices</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 取代 ISO 13485</span><span data-lang="en">D. Replaces ISO 13485</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="2"><p><span data-lang="zh">Q2. Belmont Report 提出的三大臨床研究倫理原則為？</span><span data-lang="en">Q2. The three principles of the Belmont Report are:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 安全、效率、創新</span><span data-lang="en">A. Safety, efficiency, innovation</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 私密性、可重現性、可移植性</span><span data-lang="en">B. Privacy, reproducibility, portability</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 尊重人 (Respect for Persons)、行善 (Beneficence)、正義 (Justice)</span><span data-lang="en">C. Respect for Persons, Beneficence, Justice</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 自主、效益、平等</span><span data-lang="en">D. Autonomy, utility, equality</span></div></div><div class="quiz-feedback"></div></div>
+<div class="quiz-q" data-correct="0"><p><span data-lang="zh">Q3. EU AI Act（2024/1689，2024/8/1 生效）對「醫療器材 AI」的定位為？</span><span data-lang="en">Q3. Under the EU AI Act (2024/1689, in force 2024-08-01), medical-device AI is:</span></p>
+<div class="quiz-options"><div class="quiz-opt" data-opt="0"><span data-lang="zh">A. 自動歸為「高風險 AI」；2026/8 起完整適用，與 MDR/IVDR 並行</span><span data-lang="en">A. Automatically high-risk; fully applicable from Aug 2026, in parallel with MDR/IVDR</span></div><div class="quiz-opt" data-opt="1"><span data-lang="zh">B. 屬「不可接受風險」全面禁止</span><span data-lang="en">B. "Unacceptable risk" — banned entirely</span></div><div class="quiz-opt" data-opt="2"><span data-lang="zh">C. 屬「最小風險」幾乎無義務</span><span data-lang="en">C. "Minimal risk" — essentially no obligations</span></div><div class="quiz-opt" data-opt="3"><span data-lang="zh">D. 與 MDR 互斥，二選一</span><span data-lang="en">D. Mutually exclusive with MDR — choose one</span></div></div><div class="quiz-feedback"></div></div>
+</section>
+
+<div class="page-nav">
+<a href="surgical-robotics-ai.html"><span class="nav-dir" data-zh="← 上一章" data-en="← Previous">← 上一章</span><span class="nav-title" data-zh="E3 · 手術機器人與 AI 醫療" data-en="E3 · Surgical Robotics &amp; AI">E3 · 手術機器人與 AI 醫療</span></a>
+<a href="index.html"><span class="nav-dir" data-zh="完成 → 課程首頁" data-en="Done → Hub">完成 → 課程首頁</span><span class="nav-title" data-zh="回到首頁" data-en="Back to Index">回到首頁</span></a>
+</div>
+
+</main>
+<footer class="site-footer">© Charlene — 生醫工程概論 · E4 Regulation, Ethics &amp; Quality Systems</footer>
+<script src="i18n.js"></script>
+<script>
+document.querySelectorAll('.quiz-q').forEach(q=>{const c=q.dataset.correct;q.querySelectorAll('.quiz-opt').forEach(o=>o.addEventListener('click',()=>{if(q.dataset.done)return;q.dataset.done='1';const fb=q.querySelector('.quiz-feedback');if(o.dataset.opt===c){o.classList.add('correct');fb.classList.add('show','correct-fb');fb.textContent=I18n.get()==='zh'?'✓ 正確！':'✓ Correct!';}else{o.classList.add('wrong');q.querySelector(`[data-opt="${c}"]`).classList.add('correct');fb.classList.add('show','wrong-fb');fb.textContent=I18n.get()==='zh'?'✗ 不正確。':'✗ Incorrect.';}}))});
+document.querySelectorAll('.code-tabs').forEach(b=>b.querySelectorAll('.code-tab-btn').forEach(t=>t.addEventListener('click',()=>{const k=t.dataset.tab;b.querySelectorAll('.code-tab-btn').forEach(x=>x.classList.toggle('active',x.dataset.tab===k));b.querySelectorAll('.code-tab-content').forEach(c=>c.classList.toggle('active',c.dataset.tab===k))})));
+
+// Standards & Regulation timeline chart
+const tlData = {
+  // event = {year, label_zh, label_en, domain}
+  events: [
+    {year:2024, zh:'EU AI Act 2024/8 生效', en:'EU AI Act effective Aug 2024', domain:'AI'},
+    {year:2024, zh:'FDA PCCP 終版指南 (12/04)', en:'FDA PCCP final guidance (Dec)', domain:'AI'},
+    {year:2024, zh:'EU GMP Annex 1 強制 (CCS)', en:'EU GMP Annex 1 effective (CCS)', domain:'GMP'},
+    {year:2024, zh:'WMA Helsinki 9th 修訂', en:'WMA Helsinki 9th revision', domain:'Ethics'},
+    {year:2025, zh:'EU AI Act 不可接受風險生效 (2/2)', en:'EU AI Act unacceptable-risk ban (Feb)', domain:'AI'},
+    {year:2025, zh:'ISO 13485 / ISO 14971 確認', en:'ISO 13485 / ISO 14971 reconfirmed', domain:'QMS'},
+    {year:2025, zh:'EU AI Act GPAI 規範 (8/2)', en:'EU AI Act GPAI rules apply (Aug)', domain:'AI'},
+    {year:2025, zh:'FDA 取消 CAR-T REMS', en:'FDA removes CAR-T REMS', domain:'CGT'},
+    {year:2026, zh:'FDA QMSR 生效 (2/2)', en:'FDA QMSR effective (Feb 2)', domain:'QMS'},
+    {year:2026, zh:'EU AI Act 高風險 AI 全面適用 (8月)', en:'EU AI Act high-risk fully applies (Aug)', domain:'AI'},
+    {year:2026, zh:'IEC 62304 Ed.2 發表 (9月)', en:'IEC 62304 Ed.2 published (Sep)', domain:'Software'},
+    {year:2026, zh:'ISO 13485 下次檢視', en:'ISO 13485 next review', domain:'QMS'},
+    {year:2027, zh:'EU AI Act 完整適用 (8月)', en:'EU AI Act fully applicable (Aug)', domain:'AI'}
+  ]
+};
+let tlChart=null;
+function drawTL(view){
+  if(tlChart) tlChart.destroy();
+  const lang=I18n.get();
+  const ctx=document.getElementById('timelineChart').getContext('2d');
+  if(view==='year'){
+    const counts={2024:0,2025:0,2026:0,2027:0};
+    tlData.events.forEach(e=>counts[e.year]++);
+    tlChart=new Chart(ctx,{type:'bar',
+      data:{labels:Object.keys(counts),
+        datasets:[{label:lang==='zh'?'關鍵事件數':'Key events',
+          data:Object.values(counts),
+          backgroundColor:'rgba(131,24,67,.8)',borderColor:'#500724',borderWidth:1}]},
+      options:{plugins:{legend:{display:true}},
+        scales:{y:{beginAtZero:true,title:{display:true,text:lang==='zh'?'事件數':'event count'}}}}});
+  } else {
+    const domains={};
+    tlData.events.forEach(e=>{domains[e.domain]=(domains[e.domain]||0)+1;});
+    tlChart=new Chart(ctx,{type:'bar',
+      data:{labels:Object.keys(domains),
+        datasets:[{label:lang==='zh'?'事件數':'Events',
+          data:Object.values(domains),
+          backgroundColor:['rgba(131,24,67,.8)','rgba(13,148,136,.8)','rgba(245,158,11,.8)','rgba(99,102,241,.8)','rgba(120,120,120,.7)','rgba(220,38,38,.7)']}]},
+      options:{indexAxis:'y',plugins:{legend:{display:false}},
+        scales:{x:{beginAtZero:true,title:{display:true,text:lang==='zh'?'事件數':'event count'}}}}});
+  }
+}
+drawTL('year');
+document.querySelectorAll('.toggle-btn[data-view]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.toggle-btn[data-view]').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); drawTL(b.dataset.view);
+}));
+document.addEventListener('langchange',()=>{
+  const cur=document.querySelector('.toggle-btn[data-view].active').dataset.view;
+  drawTL(cur);
+});
+</script>
+</body></html>
